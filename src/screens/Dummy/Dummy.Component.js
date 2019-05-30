@@ -1,12 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Platform, StyleSheet, Text, View,
 } from 'react-native';
@@ -37,10 +30,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default () => (
+const Dummy = ({ greeting }) => (
   <View style={styles.container}>
-    <Text style={styles.welcome}>Welcome to React Native!</Text>
+    <Text style={styles.welcome}>{greeting}</Text>
     <Text style={styles.instructions}>To get started, edit App.js</Text>
     <Text style={styles.instructions}>{instructions}</Text>
   </View>
 );
+
+Dummy.propTypes = {
+  greeting: PropTypes.string.isRequired,
+};
+
+export default Dummy;
