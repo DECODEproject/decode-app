@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Component from './Dummy.Component';
-import { getGreeting } from '../../redux/reducers/index';
+import { getGreeting, getTotal, refreshStats } from '../../redux/reducers/index';
 
 const mapStateToProps = createStructuredSelector({
   greeting: getGreeting,
+  total: getTotal,
 });
 
-export default connect(mapStateToProps)(Component);
+const mapDispatchToProps = {
+  refreshStats,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Platform, StyleSheet, Text, View,
+  Platform, StyleSheet, Text, View, Button,
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -30,16 +30,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const Dummy = ({ greeting }) => (
+const Dummy = ({ greeting, total, refreshStats }) => (
   <View style={styles.container}>
     <Text style={styles.welcome}>{greeting}</Text>
     <Text style={styles.instructions}>To get started, edit App.js</Text>
     <Text style={styles.instructions}>{instructions}</Text>
+    <Button title="Refresh stats from credential issuer" onPress={refreshStats} />
+    <Text style={styles.instructions}>{total}</Text>
   </View>
 );
 
 Dummy.propTypes = {
   greeting: PropTypes.string.isRequired,
+  total: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+  refreshStats: PropTypes.func.isRequired,
 };
 
 export default Dummy;
