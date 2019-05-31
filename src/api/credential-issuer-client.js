@@ -7,7 +7,7 @@ const throwError = async (response) => {
 };
 
 const makeApiCall = async (url) => {
-  await delay(2000); // Delay to make waiting more visible
+  await delay(1000); // Delay to make waiting more visible
   const response = await fetch(url);
   if (response.ok) return response.json();
   return throwError(response);

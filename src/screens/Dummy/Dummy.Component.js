@@ -1,15 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Platform, StyleSheet, Text, View, Button,
+  StyleSheet, Text, View, Button,
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\nCmd+D or shake for dev menu',
-  android:
-  'Double tap R on your keyboard to reload,\n'
-  + 'Shake or press menu button for dev menu',
-});
 
 const styles = StyleSheet.create({
   container: {
@@ -26,27 +19,33 @@ const styles = StyleSheet.create({
   instructions: {
     textAlign: 'center',
     color: '#333333',
-    marginBottom: 5,
+    margin: 5,
   },
 });
 
-const Dummy = ({ greeting, total, refreshStats }) => (
+const Dummy = ({
+  total, refresh, t, date,
+}) => (
   <View style={styles.container}>
-    <Text style={styles.welcome}>{greeting}</Text>
-    <Text style={styles.instructions}>To get started, edit App.js</Text>
-    <Text style={styles.instructions}>{instructions}</Text>
-    <Button title="Refresh stats from credential issuer" onPress={refreshStats} />
-    <Text style={styles.instructions}>{total}</Text>
+    <Text style={styles.welcome}>{t('greeting')}</Text>
+    <Text style={styles.instructions}>{t('refreshStats')}</Text>
+    <Button title={t('refresh')} onPress={refresh} />
+    <Text style={styles.instructions}>{t('total', { total })}</Text>
+    <Text style={styles.instructions}>{t('refreshDate', { date })}</Text>
   </View>
 );
 
 Dummy.propTypes = {
-  greeting: PropTypes.string.isRequired,
   total: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
-  refreshStats: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+  date: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+  ]).isRequired,
 };
 
 export default Dummy;

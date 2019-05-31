@@ -2,14 +2,15 @@ import { prop } from 'ramda';
 import { getStats } from '../../api/credential-issuer-client';
 
 const initialState = {
-  greeting: 'This is the DECODE app v2',
   total: '---',
+  date: '---',
 };
 
 const ACTIONS = {
   REFRESH_STATS_REQUEST: 'REFRESH_STATS_REQUEST',
   REFRESH_STATS_SUCCESS: 'REFRESH_STATS_SUCCESS',
   REFRESH_STATS_FAILURE: 'REFRESH_STATS_FAILURE',
+  REFRESH_DATE: 'REFRESH_DATE',
 };
 
 export const refreshStats = () => async (dispatch) => {
@@ -30,9 +31,14 @@ export const refreshStats = () => async (dispatch) => {
   }
 };
 
-export const getGreeting = prop('greeting');
+export const refreshDate = () => ({
+  type: ACTIONS.REFRESH_DATE,
+  date: new Date(),
+});
 
 export const getTotal = prop('total');
+
+export const getDate = prop('date');
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -53,6 +59,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         total: 'XXX',
+      };
+    }
+    case ACTIONS.REFRESH_DATE: {
+      const { date } = action;
+      return {
+        ...state,
+        date,
       };
     }
     default:
