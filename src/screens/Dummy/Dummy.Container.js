@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'ramda';
 import Component from './Dummy.Component';
 import {
   getTotal, getDate, refreshStats, refreshDate,
@@ -19,7 +17,8 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default compose(
-  withTranslation('dummy'),
-  connect(mapStateToProps, mapDispatchToProps),
-)(Component);
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
+
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;
