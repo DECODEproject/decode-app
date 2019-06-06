@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Component from './Dummy.Component';
 import {
-  getTotal, getDate, refreshStats, refreshDate,
-} from '../../redux/reducers/index';
+  getTotal, getDate, getLoading, refreshStats, refreshDate,
+} from '../../redux/reducers';
 
 const mapStateToProps = createStructuredSelector({
   total: getTotal,
+  loading: getLoading,
   date: getDate,
 });
 

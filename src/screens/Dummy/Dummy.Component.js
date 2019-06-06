@@ -4,6 +4,7 @@ import {
   StyleSheet, Text, View, Button,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 const Dummy = ({
-  total, refresh, date, navigation,
+  total, refresh, date, navigation, loading,
 }) => {
   const { t } = useTranslation();
   return (
@@ -33,7 +34,10 @@ const Dummy = ({
       <Text style={styles.welcome}>{t('greeting')}</Text>
       <Text style={styles.instructions}>{t('refreshStats')}</Text>
       <Button title={t('refresh')} onPress={refresh} />
-      <Text style={styles.instructions}>{t('total', { total })}</Text>
+      <Text style={styles.instructions}>
+        <Text>{`${t('total')}: `}</Text>
+        {loading ? <Icon name="spinner" /> : <Text>{total}</Text>}
+      </Text>
       <Text style={styles.instructions}>{t('refreshDate', { date })}</Text>
       <Button
         title={t('next')}
@@ -52,6 +56,7 @@ Dummy.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]).isRequired,
+  loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   date: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),

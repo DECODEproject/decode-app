@@ -3,6 +3,7 @@ import { getStats } from '../../api/credential-issuer-client';
 
 const initialState = {
   total: '---',
+  loading: false,
   date: '---',
 };
 
@@ -40,12 +41,14 @@ export const getTotal = prop('total');
 
 export const getDate = prop('date');
 
+export const getLoading = prop('loading');
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.REFRESH_STATS_REQUEST: {
       return {
         ...state,
-        total: '...',
+        loading: true,
       };
     }
     case ACTIONS.REFRESH_STATS_SUCCESS: {
@@ -53,12 +56,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         total,
+        loading: false,
       };
     }
     case ACTIONS.REFRESH_STATS_FAILURE: {
       return {
         ...state,
         total: 'XXX',
+        loading: false,
       };
     }
     case ACTIONS.REFRESH_DATE: {

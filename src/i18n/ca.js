@@ -6,7 +6,7 @@ export default {
     next: 'Següent',
     refreshStats: 'Actualitzar estadístiques del credential issuer',
     refresh: 'Actualitzar',
-    total: 'Total: {{total}}',
+    total: 'Total',
     refreshDate: 'Actualitzat el {{date, llll}}',
     second: 'Una altra pantalla',
   },

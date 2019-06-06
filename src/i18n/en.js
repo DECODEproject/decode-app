@@ -6,7 +6,7 @@ export default {
     next: 'Next',
     refreshStats: 'Refresh stats from credential issuer',
     refresh: 'Refresh',
-    total: 'Total: {{total}}',
+    total: 'Total',
     refreshDate: 'Updated on {{date, llll}}',
     second: 'A second screen',
   },
