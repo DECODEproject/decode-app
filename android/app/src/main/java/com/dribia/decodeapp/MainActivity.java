@@ -1,4 +1,4 @@
-package com.decodev2;
+package com.dribia.decodeapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
 
     @Override
     protected String getMainComponentName() {
-        return "decodev2";
+        return "decode-app";
     }
 
     @Override

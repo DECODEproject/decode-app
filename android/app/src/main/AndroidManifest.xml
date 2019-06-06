@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.decodev2">
+  package="com.dribia.decodeapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

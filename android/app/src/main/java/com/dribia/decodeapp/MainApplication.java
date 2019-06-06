@@ -1,4 +1,4 @@
-package com.decodev2;
+package com.dribia.decodeapp;
 
 import android.app.Application;
 
