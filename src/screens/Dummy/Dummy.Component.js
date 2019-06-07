@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { View as AnimatedView } from 'react-native-animatable';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,10 +35,18 @@ const Dummy = ({
       <Text style={styles.welcome}>{t('greeting')}</Text>
       <Text style={styles.instructions}>{t('refreshStats')}</Text>
       <Button title={t('refresh')} onPress={refresh} />
-      <Text style={styles.instructions}>
-        <Text>{`${t('total')}: `}</Text>
-        {loading ? <Icon name="spinner" /> : <Text>{total}</Text>}
-      </Text>
+      <View style={styles.instructions}>
+        {loading ? (
+          <AnimatedView
+            animation="rotate"
+            easing="linear"
+            iterationCount="infinite"
+            useNativeDriver
+          >
+            <Icon name="spinner" />
+          </AnimatedView>
+        ) : <Text>{total}</Text>}
+      </View>
       <Text style={styles.instructions}>{t('refreshDate', { date })}</Text>
       <Button
         title={t('next')}
