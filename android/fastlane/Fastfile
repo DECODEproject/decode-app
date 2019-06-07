@@ -1,0 +1,65 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Increase the version code"
+  lane :bump_version_code do
+     path = '../app/build.gradle'
+     re = /versionCode\s+(\d+)/
+
+     s = File.read(path)
+     versionCode = s[re, 1].to_i
+     s[re, 1] = (versionCode + 1).to_s
+
+     f = File.new(path, 'w')
+     f.write(s)
+     f.close
+   end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Create an apk"
+  lane :build do
+    gradle(
+      task: "clean assembleRelease",
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_FILE"],
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASSWORD"],
+      }
+    )
+  end
+
+  desc "Submit a new build to internal testing track"
+  lane :beta do
+    bump_version_code
+    build
+    upload_to_play_store(track: 'internal')
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end
