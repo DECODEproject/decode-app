@@ -1,41 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  StyleSheet, Text, View, Button,
-} from 'react-native';
+import { View, Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    margin: 5,
-  },
-});
+import { Container, Greeting, Line } from './Dummy.Styles';
 
 const Dummy = ({
   total, refresh, date, navigation, loading,
 }) => {
   const { t } = useTranslation();
   return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>{t('greeting')}</Text>
-      <Text style={styles.instructions}>{t('refreshStats')}</Text>
+    <Container>
+      <Greeting>{t('greeting')}</Greeting>
+      <Line>{t('refreshStats')}</Line>
       <Button title={t('refresh')} onPress={refresh} />
-      <View style={styles.instructions}>
+      <View>
         {loading ? (
           <AnimatedView
             animation="rotate"
@@ -45,14 +25,14 @@ const Dummy = ({
           >
             <Icon name="spinner" />
           </AnimatedView>
-        ) : <Text>{total}</Text>}
+        ) : <Line>{total}</Line>}
       </View>
-      <Text style={styles.instructions}>{t('refreshDate', { date })}</Text>
+      <Line>{t('refreshDate', { date })}</Line>
       <Button
         title={t('next')}
         onPress={() => navigation.navigate('DummyNext')}
       />
-    </View>
+    </Container>
   );
 };
 

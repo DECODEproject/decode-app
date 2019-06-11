@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider, withTranslation } from 'react-i18next';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { ThemeProvider } from 'styled-components';
+import i18n from './i18n';
 import store from './redux/store';
+import theme from './lib/theme';
 import Dummy from './screens/Dummy';
 import DummyNext from './screens/DummyNext';
-import i18n from './i18n';
 
 const RootStack = createStackNavigator({
   Dummy,
@@ -22,9 +24,11 @@ const Navigation = createAppContainer(RootStack);
 
 const App = ({ t }) => (
   <I18nextProvider i18n={i18n}>
-    <Provider store={store}>
-      <Navigation screenProps={{ t }} />
-    </Provider>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <Navigation screenProps={{ t }} />
+      </ThemeProvider>
+    </ReduxProvider>
   </I18nextProvider>
 );
 
