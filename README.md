@@ -1,1 +1,82 @@
-# decodev2
+## The DECODE App
+This app provides a platform where people can control their personal data, choosing where and how to share it. It allows users to input their data and keep it saved on their phone for future use. It is part of the [DECODE project](https://decodeproject.eu)
+
+The DECODE App is developed in React Native, with the following side technologies:
+
+- Redux for state management
+- Reselect for cacheable (memoized) access to the state
+- Redux Thunk for asynchronous action dispatching
+- Plain Fetch API for communication with services
+- React Navigation for navigation between screens and menus
+- React Native Vector Icons as icon library set
+- Styled Components for styling and theming
+- Ramda for utilities
+- moment for date & time handling
+- react-i18next for multilanguage
+- react-native-sentry for sending crash logs (requires a Sentry server)
+
+Development dependencies:
+- yarn for dependency management
+- babel for code transpiling
+- eslint for code style
+- jest for unit testing
+- fastlane for store deployment automation
+
+
+## Directory structure
+
+- android: Native Android source code and build folder
+- ios: Native iOS source code and build folder
+- src: JavaScript source code, having the following structure:
+    - api: The clients for the external services and APIs
+    - i18n: Configuration of the i18n library and language files
+    - lib: Commonly used functions and constants
+    - lib/components: Reusable presentational components
+    - redux: The Redux store setup and the reducers
+    - screens: The UI components
+    - App.js: The entry point, where the high level building blocks are combined
+
+UI Components are developed following the stateless functional component approach. Each component is a pure function returning something to render based solely on its received props.
+Each component is spread over 3 files:
+- A Component file with the presentational features
+- A Container file with the connection to the Redux store
+- A Styles file with the CSS information
+
+## Starting a development environment
+
+You need to have git and yarn installed.
+You will also need XCode and Android Studio. 
+
+Clone the project and `yarn install`. Then link the native libraries with `react-native link`. After that you can follow to the next section.
+
+You need Ruby if you want to deploy to the test stores using fastlane, which is the recommended way. Use `rbenv` to install the Ruby version specified in .ruby-version.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `yarn start`
+
+Starts the Metro bundler to serve the Javascript code in the development environment.
+
+### `yarn run-ios`
+
+Compile a native iOS app, start an iOS emulator and deploy the app. The Javascript code will be served by the Metro bundler.
+
+### `yarn run-android`
+
+Compile a native Android app, and deploy it to an emulator or a physical phone connected via USB. The Javascript code will be served by the Metro bundler.
+
+### `yarn test`
+
+This script does actually two things:
+- First it executes the ESLint linter to ensure the code follows the configured rules.
+- If there are no linting errors, it executes the tests with the jest test runner.
+
+### `cd ios && bundle exec fastlane beta`
+
+Deploys the app to the Apple Store as a new build downloadable with the TestFlight testing tool.
+
+### `cd android && bundle exec fastlane beta`
+
+Deploys the app to the Google Play store, to an internal test track.
