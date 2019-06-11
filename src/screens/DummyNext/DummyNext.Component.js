@@ -20,14 +20,23 @@
  */
 
 import React from 'react';
+import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Container, Title } from './DummyNext.Styles';
+
+const pleaseCrash = () => {
+  throw new Error('This is a crash test');
+};
 
 const DummyNext = () => {
   const { t } = useTranslation();
   return (
     <Container>
       <Title>{t('second')}</Title>
+      <Button
+        title="Crash, please"
+        onPress={pleaseCrash}
+      />
     </Container>
   );
 };
