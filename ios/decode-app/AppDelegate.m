@@ -15,6 +15,7 @@
 #else
 #import "RNSentry.h" // This is used for versions of react < 0.40
 #endif
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -33,6 +34,7 @@ RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNSplashScreen show];
   return YES;
 }
 

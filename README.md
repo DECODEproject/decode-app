@@ -14,6 +14,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - moment for date & time handling
 - react-i18next for multilanguage
 - react-native-sentry for sending crash logs (requires a Sentry server)
+- react-native-splash-screen to maintain the splash screen while JS is loading
 
 Development dependencies:
 - yarn for dependency management
@@ -80,3 +81,10 @@ Deploys the app to the Apple Store as a new build downloadable with the TestFlig
 ### `cd android && bundle exec fastlane beta`
 
 Deploys the app to the Google Play store, to an internal test track.
+
+## Implementation notes
+
+### Splash screen
+The splash screen has been developed following mostly [this awesome article from Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
+
+The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml. 

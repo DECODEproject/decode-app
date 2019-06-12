@@ -1,6 +1,6 @@
 /*
  * DECODE App – A mobile app to control your personal data
- * 	
+ *
  * Copyright (C) 2019 – DRIBIA Data Research S.L.
  *
  * DECODE App is free software: you can redistribute it and/or modify
