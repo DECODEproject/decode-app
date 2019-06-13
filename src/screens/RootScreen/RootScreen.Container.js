@@ -19,26 +19,17 @@
  * email: info@dribia.com
  */
 
-export default {
-  translation: {
-    back: 'Atrás',
-    greeting: 'Esta es la app DECODE v2',
-    home: 'Inicio',
-    next: 'Siguiente',
-    refreshStats: 'Actualizar estadísticas del credential issuer',
-    refresh: 'Actualizar',
-    total: 'Total',
-    refreshDate: 'Actualizado el {{date, llll}}',
-    second: 'Otra pantalla',
-  },
-  carousel: {
-    title: 'DECODE',
-    txt1: 'tu gestor de datos personales',
-    txt2: 'Tus datos tienen un valor. Es importante que los controles',
-    txt3: 'Con DECODE, tú decides qué datos quieres compartir y cómo son utilizados',
-    txt4: 'Guarda tus datos personales con alta seguridad',
-    done: 'Hecho',
-    skip: 'Saltar',
-    next: 'Siguiente',
-  },
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import Component from './RootScreen.Component';
+import { getFirstRun, firstRunDone } from '../../redux/reducers';
+
+const mapStateToProps = createStructuredSelector({
+  firstRun: getFirstRun,
+});
+
+const mapDispatchToProps = {
+  firstRunDone,
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

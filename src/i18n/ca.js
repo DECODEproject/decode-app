@@ -31,4 +31,14 @@ export default {
     refreshDate: 'Actualitzat el {{date, llll}}',
     second: 'Una altra pantalla',
   },
+  carousel: {
+    title: 'DECODE',
+    txt1: 'el teu gestor de dades personals',
+    txt2: 'Les teves dades tenen un valor. És important que les controlis',
+    txt3: 'Amb DECODE, tu decideixes quines dades vols compartir i com seran utilitzades',
+    txt4: 'Guarda les teves dades amb alta seguretat',
+    done: 'Fet',
+    skip: 'Saltar',
+    next: 'Següent',
+  },
 };

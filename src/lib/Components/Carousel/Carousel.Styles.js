@@ -19,26 +19,24 @@
  * email: info@dribia.com
  */
 
-export default {
-  translation: {
-    back: 'Atrás',
-    greeting: 'Esta es la app DECODE v2',
-    home: 'Inicio',
-    next: 'Siguiente',
-    refreshStats: 'Actualizar estadísticas del credential issuer',
-    refresh: 'Actualizar',
-    total: 'Total',
-    refreshDate: 'Actualizado el {{date, llll}}',
-    second: 'Otra pantalla',
-  },
-  carousel: {
-    title: 'DECODE',
-    txt1: 'tu gestor de datos personales',
-    txt2: 'Tus datos tienen un valor. Es importante que los controles',
-    txt3: 'Con DECODE, tú decides qué datos quieres compartir y cómo son utilizados',
-    txt4: 'Guarda tus datos personales con alta seguridad',
-    done: 'Hecho',
-    skip: 'Saltar',
-    next: 'Siguiente',
-  },
-};
+import styled from 'styled-components/native';
+
+export const Title = styled.Text({
+  textAlign: 'center',
+  fontSize: 40,
+  color: '#fff',
+  paddingBottom: 15,
+});
+
+export const Subtitle = styled.Text({
+  textAlign: 'center',
+  fontSize: 24,
+  paddingHorizontal: 10,
+  color: '#fff',
+  marginBottom: 60,
+});
+
+export const CarouselImage = styled.Image({
+  width: '95%',
+  height: 400,
+})

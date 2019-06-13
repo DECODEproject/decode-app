@@ -15,6 +15,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-i18next for multilanguage
 - react-native-sentry for sending crash logs (requires a Sentry server)
 - react-native-splash-screen to maintain the splash screen while JS is loading
+- react-native-onboarding-swiper for the app intro caroussel
 
 Development dependencies:
 - yarn for dependency management

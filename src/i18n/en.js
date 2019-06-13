@@ -31,4 +31,14 @@ export default {
     refreshDate: 'Updated on {{date, llll}}',
     second: 'A second screen',
   },
+  carousel: {
+    title: 'DECODE',
+    txt1: 'your personal data manager',
+    txt2: 'Your data has value. It\'s important you have control over it',
+    txt3: 'With DECODE, you choose which personal data to share and how it is used',
+    txt4: 'Store your personal data with high security standards',
+    done: 'Done',
+    skip: 'Skip',
+    next: 'Next',
+  },
 };

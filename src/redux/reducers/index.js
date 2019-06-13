@@ -23,17 +23,23 @@ import { prop } from 'ramda';
 import { getStats } from '../../api/credential-issuer-client';
 
 const initialState = {
+  firstRun: true,
   total: '---',
   loading: false,
   date: '---',
 };
 
 const ACTIONS = {
+  FIRST_RUN_DONE: 'FIRST_RUN_DONE',
   REFRESH_STATS_REQUEST: 'REFRESH_STATS_REQUEST',
   REFRESH_STATS_SUCCESS: 'REFRESH_STATS_SUCCESS',
   REFRESH_STATS_FAILURE: 'REFRESH_STATS_FAILURE',
   REFRESH_DATE: 'REFRESH_DATE',
 };
+
+export const firstRunDone = () => ({
+  type: ACTIONS.FIRST_RUN_DONE,
+});
 
 export const refreshStats = () => async (dispatch) => {
   dispatch({
@@ -64,8 +70,16 @@ export const getDate = prop('date');
 
 export const getLoading = prop('loading');
 
+export const getFirstRun = prop('firstRun');
+
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ACTIONS.FIRST_RUN_DONE: {
+      return {
+        ...state,
+        firstRun: false,
+      };
+    }
     case ACTIONS.REFRESH_STATS_REQUEST: {
       return {
         ...state,
