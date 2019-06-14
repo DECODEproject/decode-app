@@ -23,10 +23,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Onboarding from 'react-native-onboarding-swiper';
 import { useTranslation } from 'react-i18next';
-import {
-  img1, img2, img3, img4,
-} from './images/index';
 import { Title, Subtitle, CarouselImage } from './Carousel.Styles';
+
+const img1 = require('./images/image01.png');
+const img2 = require('./images/image02.png');
+const img3 = require('./images/image03.png');
+const img4 = require('./images/image04.png');
 
 const Carousel = ({ onDone }) => {
   const { t } = useTranslation('carousel');

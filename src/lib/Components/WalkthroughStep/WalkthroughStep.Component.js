@@ -20,32 +20,36 @@
  */
 
 import React from 'react';
-import { Button } from 'react-native';
+import { Text } from 'react-native';
+import PropTypes from 'prop-types';
+import Tooltip from 'react-native-walkthrough-tooltip';
 import { useTranslation } from 'react-i18next';
-import { Container, Title } from './DummyNext.Styles';
-import WalkthroughStep from '../../lib/Components/WalkthroughStep';
 
-const pleaseCrash = () => {
-  throw new Error('This is a crash test');
-};
-
-const DummyNext = () => {
+const WalkthroughStep = ({
+  screen, id, children, showTooltip, onTooltipClose,
+}) => {
   const { t } = useTranslation();
   return (
-    <Container>
-      <Title>{t('second')}</Title>
-      <WalkthroughStep screen="dummyNext" id="crash">
-        <Button
-          title="Crash, please"
-          onPress={pleaseCrash}
-        />
-      </WalkthroughStep>
-    </Container>
+    <Tooltip
+      isVisible={showTooltip === id}
+      content={<Text>{t(`walkthrough.${id}`)}</Text>}
+      onClose={() => onTooltipClose(screen, id)}
+      onChildPress={() => onTooltipClose(screen, id)}
+    >
+      { children }
+    </Tooltip>
   );
 };
 
-DummyNext.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('next'),
-});
+WalkthroughStep.propTypes = {
+  screen: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  showTooltip: PropTypes.string.isRequired,
+  onTooltipClose: PropTypes.func.isRequired,
+};
 
-export default DummyNext;
+export default WalkthroughStep;

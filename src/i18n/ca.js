@@ -30,6 +30,11 @@ export default {
     total: 'Total',
     refreshDate: 'Actualitzat el {{date, llll}}',
     second: 'Una altra pantalla',
+    walkthrough: {
+      refresh: 'Es cridarà l\'API del credential issuer',
+      next: 'Clicar aquí per anar a una altra pantalla',
+      crash: 'Clicar aquí per a provocar un casque',
+    },
   },
   carousel: {
     title: 'DECODE',

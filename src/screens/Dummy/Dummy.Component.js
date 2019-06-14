@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
 import { Container, Greeting, Line } from './Dummy.Styles';
+import WalkthroughStep from '../../lib/Components/WalkthroughStep';
 
 const Dummy = ({
   total, refresh, date, navigation, loading,
@@ -35,7 +36,9 @@ const Dummy = ({
     <Container>
       <Greeting>{t('greeting')}</Greeting>
       <Line>{t('refreshStats')}</Line>
-      <Button title={t('refresh')} onPress={refresh} />
+      <WalkthroughStep screen="dummy" id="refresh">
+        <Button title={t('refresh')} onPress={refresh} />
+      </WalkthroughStep>
       <View>
         {loading ? (
           <AnimatedView
@@ -49,10 +52,12 @@ const Dummy = ({
         ) : <Line>{total}</Line>}
       </View>
       <Line>{t('refreshDate', { date })}</Line>
-      <Button
-        title={t('next')}
-        onPress={() => navigation.navigate('DummyNext')}
-      />
+      <WalkthroughStep screen="dummy" id="next">
+        <Button
+          title={t('next')}
+          onPress={() => navigation.navigate('DummyNext')}
+        />
+      </WalkthroughStep>
     </Container>
   );
 };

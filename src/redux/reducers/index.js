@@ -19,18 +19,26 @@
  * email: info@dribia.com
  */
 
-import { prop } from 'ramda';
+import { createSelector } from 'reselect';
+import {
+  prop, findIndex, equals, add, compose,
+} from 'ramda';
 import { getStats } from '../../api/credential-issuer-client';
 
 const initialState = {
   firstRun: true,
+  showTooltip: {
+    dummy: 'refresh',
+    dummyNext: 'crash',
+  },
   total: '---',
   loading: false,
   date: '---',
 };
 
-const ACTIONS = {
+export const ACTIONS = {
   FIRST_RUN_DONE: 'FIRST_RUN_DONE',
+  TOOLTIP_SHOWN: 'TOOLTIP_SHOWN',
   REFRESH_STATS_REQUEST: 'REFRESH_STATS_REQUEST',
   REFRESH_STATS_SUCCESS: 'REFRESH_STATS_SUCCESS',
   REFRESH_STATS_FAILURE: 'REFRESH_STATS_FAILURE',
@@ -39,6 +47,12 @@ const ACTIONS = {
 
 export const firstRunDone = () => ({
   type: ACTIONS.FIRST_RUN_DONE,
+});
+
+export const tooltipShown = (screen, id) => ({
+  type: ACTIONS.TOOLTIP_SHOWN,
+  screen,
+  id,
 });
 
 export const refreshStats = () => async (dispatch) => {
@@ -72,12 +86,43 @@ export const getLoading = prop('loading');
 
 export const getFirstRun = prop('firstRun');
 
+const getBaseShowTooltip = prop('showTooltip');
+
+export const getShowTooltip = screen => createSelector(
+  getBaseShowTooltip,
+  prop(screen),
+);
+
+const tooltips = {
+  dummy: ['refresh', 'next'],
+  dummyNext: ['crash'],
+};
+
+const nextTooltip = (screen, id) => {
+  const nextIndex = compose(
+    add(1),
+    findIndex(equals(id)),
+  )(tooltips[screen]);
+  return tooltips[screen][nextIndex] || 'none';
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.FIRST_RUN_DONE: {
       return {
         ...state,
         firstRun: false,
+      };
+    }
+    case ACTIONS.TOOLTIP_SHOWN: {
+      const { screen, id } = action;
+      const { showTooltip } = state;
+      return {
+        ...state,
+        showTooltip: {
+          ...showTooltip,
+          [screen]: nextTooltip(screen, id),
+        },
       };
     }
     case ACTIONS.REFRESH_STATS_REQUEST: {

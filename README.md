@@ -16,6 +16,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-native-sentry for sending crash logs (requires a Sentry server)
 - react-native-splash-screen to maintain the splash screen while JS is loading
 - react-native-onboarding-swiper for the app intro caroussel
+- react-native-walkthrough-tooltip for the screen tooltips walkthrough
 
 Development dependencies:
 - yarn for dependency management
@@ -88,4 +89,11 @@ Deploys the app to the Google Play store, to an internal test track.
 ### Splash screen
 The splash screen has been developed following mostly [this awesome article from Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
 
-The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml. 
+The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml.
+
+### Walkthrough 
+A generic component WalktroughStep has been developed. It wraps the Tooltip component from the React Native Walkthrough Tooltip library, setting common props and simplifying its use.
+
+The WalkthroughStep just needs to wrap the component over which the tooltip has to be shown, and it requires just 2 props: the id of the screen and the id of the tooltip.  
+
+The order of the tooltips to be shown en each screen is specified as a const in the reducer. If a screen has multiple tooltips, they will be shown in that order. When the last tooltip has been shown, 'none' will be stored as the tooltip id and it will never match again, so it won't be shown again.

@@ -41,7 +41,11 @@ const Navigation = createAppContainer(RootStack);
 
 const RootScreen = ({ firstRun, firstRunDone }) => {
   const { t } = useTranslation();
-  return (firstRun ? <Carousel onDone={() => firstRunDone()} /> : <Navigation screenProps={{ t }} />);
+  return (
+    firstRun
+      ? <Carousel onDone={() => firstRunDone()} />
+      : <Navigation screenProps={{ t }} />
+  );
 };
 
 RootScreen.propTypes = {

@@ -19,33 +19,20 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import { Button } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { Container, Title } from './DummyNext.Styles';
-import WalkthroughStep from '../../lib/Components/WalkthroughStep';
+import { connect } from 'react-redux';
+import Component from './WalkthroughStep.Component';
+import {
+  getShowTooltip, tooltipShown,
+} from '../../../redux/reducers';
 
-const pleaseCrash = () => {
-  throw new Error('This is a crash test');
-};
-
-const DummyNext = () => {
-  const { t } = useTranslation();
-  return (
-    <Container>
-      <Title>{t('second')}</Title>
-      <WalkthroughStep screen="dummyNext" id="crash">
-        <Button
-          title="Crash, please"
-          onPress={pleaseCrash}
-        />
-      </WalkthroughStep>
-    </Container>
-  );
-};
-
-DummyNext.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('next'),
+const mapStateToProps = (state, props) => ({
+  showTooltip: getShowTooltip(props.screen)(state),
 });
 
-export default DummyNext;
+const mapDispatchToProps = dispatch => ({
+  onTooltipClose: (screen, id) => dispatch(tooltipShown(screen, id)),
+});
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
+
+export default ConnectedComponent;

@@ -39,4 +39,4 @@ export const Subtitle = styled.Text({
 export const CarouselImage = styled.Image({
   width: '95%',
   height: 400,
-})
+});
