@@ -87,7 +87,7 @@ Deploys the app to the Google Play store, to an internal test track.
 ## Implementation notes
 
 ### Splash screen
-The splash screen has been developed following mostly [this awesome article from Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
+The splash screen has been developed following mostly [this awesome article by Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
 
 The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml.
 
