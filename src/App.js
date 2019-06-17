@@ -24,8 +24,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { I18nextProvider, withTranslation } from 'react-i18next';
 import { ThemeProvider } from 'styled-components';
 import SplashScreen from 'react-native-splash-screen';
+import { PersistGate } from 'redux-persist/integration/react';
 import i18n from './i18n';
-import store from './redux/store';
+import store, { persistor } from './redux/store';
 import theme from './lib/theme';
 import RootScreen from './screens/RootScreen';
 
@@ -34,9 +35,11 @@ const App = () => {
   return (
     <I18nextProvider i18n={i18n}>
       <ReduxProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <RootScreen />
-        </ThemeProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <RootScreen />
+          </ThemeProvider>
+        </PersistGate>
       </ReduxProvider>
     </I18nextProvider>
   );

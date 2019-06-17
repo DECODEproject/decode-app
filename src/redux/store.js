@@ -23,12 +23,23 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore, persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
 if (process.env.NODE_ENV !== 'production' && module.hot) {
   module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
 }
+
+export const persistor = persistStore(store);
 
 export default store;

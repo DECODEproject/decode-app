@@ -6,6 +6,8 @@ The DECODE App is developed in React Native, with the following side technologie
 - Redux for state management
 - Reselect for cacheable (memoized) access to the state
 - Redux Thunk for asynchronous action dispatching
+- Redux Persist for saving state to permanent storage
+- AsyncStorage from React Native Community for native key-value permanent storage
 - Plain Fetch API for communication with services
 - React Navigation for navigation between screens and menus
 - React Native Vector Icons as icon library set
