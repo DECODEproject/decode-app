@@ -65,4 +65,27 @@ describe('Walkthrough tests', () => {
       date: '---',
     });
   });
+  test('Reset tooltips', () => {
+    expect(reducer({
+      firstRun: false,
+      showTooltip: {
+        dummy: 'none',
+        dummyNext: 'none',
+      },
+      total: '---',
+      loading: false,
+      date: '---',
+    }, {
+      type: ACTIONS.REVIEW_WALKTHROUGH,
+    })).toEqual({
+      firstRun: true,
+      showTooltip: {
+        dummy: 'refresh',
+        dummyNext: 'crash',
+      },
+      total: '---',
+      loading: false,
+      date: '---',
+    });
+  });
 });

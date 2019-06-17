@@ -23,14 +23,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Component from './Dummy.Component';
 import {
-  getTotal, getDate, getLoading, getShowTooltip, refreshStats, refreshDate, tooltipShown,
+  getTotal, getDate, getLoading, refreshStats, refreshDate, reviewWalkthrough,
 } from '../../redux/reducers';
 
 const mapStateToProps = createStructuredSelector({
   total: getTotal,
   loading: getLoading,
   date: getDate,
-  showTooltip: getShowTooltip('dummy'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(refreshStats());
     dispatch(refreshDate());
   },
-  onTooltipClose: id => dispatch(tooltipShown('dummy', id)),
+  onReviewWalkthrough: () => dispatch(reviewWalkthrough()),
 });
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);

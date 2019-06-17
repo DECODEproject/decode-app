@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, findIndex, equals, add, compose,
+  prop, findIndex, equals, add, compose, head, map,
 } from 'ramda';
 import { getStats } from '../../api/credential-issuer-client';
 
@@ -39,6 +39,7 @@ const initialState = {
 export const ACTIONS = {
   FIRST_RUN_DONE: 'FIRST_RUN_DONE',
   TOOLTIP_SHOWN: 'TOOLTIP_SHOWN',
+  REVIEW_WALKTHROUGH: 'REVIEW_WALKTHROUGH',
   REFRESH_STATS_REQUEST: 'REFRESH_STATS_REQUEST',
   REFRESH_STATS_SUCCESS: 'REFRESH_STATS_SUCCESS',
   REFRESH_STATS_FAILURE: 'REFRESH_STATS_FAILURE',
@@ -53,6 +54,10 @@ export const tooltipShown = (screen, id) => ({
   type: ACTIONS.TOOLTIP_SHOWN,
   screen,
   id,
+});
+
+export const reviewWalkthrough = () => ({
+  type: ACTIONS.REVIEW_WALKTHROUGH,
 });
 
 export const refreshStats = () => async (dispatch) => {
@@ -106,6 +111,8 @@ const nextTooltip = (screen, id) => {
   return tooltips[screen][nextIndex] || 'none';
 };
 
+const resetTooltips = () => map(head, tooltips);
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.FIRST_RUN_DONE: {
@@ -123,6 +130,13 @@ export default (state = initialState, action) => {
           ...showTooltip,
           [screen]: nextTooltip(screen, id),
         },
+      };
+    }
+    case ACTIONS.REVIEW_WALKTHROUGH: {
+      return {
+        ...state,
+        showTooltip: resetTooltips(),
+        firstRun: true,
       };
     }
     case ACTIONS.REFRESH_STATS_REQUEST: {
