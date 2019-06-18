@@ -22,8 +22,8 @@
 import React from 'react';
 import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import WalkthroughStep from 'lib/Components/WalkthroughStep';
 import { Container, Title } from './DummyNext.Styles';
-import WalkthroughStep from '../../lib/Components/WalkthroughStep';
 
 const pleaseCrash = () => {
   throw new Error('This is a crash test');

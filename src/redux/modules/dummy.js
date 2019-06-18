@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import { prop } from 'ramda';
-import { getStats } from '../../api/credential-issuer-client';
+import { getStats } from 'api/credential-issuer-client';
 
 const initialState = {
   total: '---',

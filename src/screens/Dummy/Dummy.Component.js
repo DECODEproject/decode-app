@@ -25,8 +25,8 @@ import { View, Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
+import WalkthroughStep from 'lib/Components/WalkthroughStep';
 import { Container, Greeting, Line } from './Dummy.Styles';
-import WalkthroughStep from '../../lib/Components/WalkthroughStep';
 
 const Dummy = ({
   total, refresh, date, navigation, loading, onReviewWalkthrough,

@@ -19,8 +19,8 @@
  * email: info@dribia.com
  */
 
-import { CREDENTIAL_ISSUER_URL } from '../lib/constants';
-import { delay } from '../lib/utils';
+import { CREDENTIAL_ISSUER_URL } from 'lib/constants';
+import { delay } from 'lib/utils';
 
 const throwError = async (response) => {
   const text = await response.text();

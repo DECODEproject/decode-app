@@ -23,9 +23,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
-import Carousel from '../../lib/Components/Carousel';
-import Dummy from '../Dummy';
-import DummyNext from '../DummyNext';
+import Carousel from 'lib/Components/Carousel';
+import Dummy from 'screens/Dummy';
+import DummyNext from 'screens/DummyNext';
 
 const RootStack = createStackNavigator({
   Dummy,

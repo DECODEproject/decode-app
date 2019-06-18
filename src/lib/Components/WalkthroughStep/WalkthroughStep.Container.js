@@ -20,10 +20,10 @@
  */
 
 import { connect } from 'react-redux';
-import Component from './WalkthroughStep.Component';
 import {
   getShowTooltip, tooltipShown,
-} from '../../../redux/modules/walkthrough';
+} from 'redux/modules/walkthrough';
+import Component from './WalkthroughStep.Component';
 
 const mapStateToProps = (state, props) => ({
   showTooltip: getShowTooltip(props.screen)(state),

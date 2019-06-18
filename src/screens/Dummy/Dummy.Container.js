@@ -21,11 +21,11 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Component from './Dummy.Component';
 import {
   getTotal, getDate, getLoading, refreshStats, refreshDate,
-} from '../../redux/modules/dummy';
-import { reviewWalkthrough } from '../../redux/modules/walkthrough';
+} from 'redux/modules/dummy';
+import { reviewWalkthrough } from 'redux/modules/walkthrough';
+import Component from './Dummy.Component';
 
 const mapStateToProps = createStructuredSelector({
   total: getTotal,

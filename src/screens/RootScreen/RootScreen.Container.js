@@ -21,8 +21,8 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { getFirstRun, firstRunDone } from 'redux/modules/walkthrough';
 import Component from './RootScreen.Component';
-import { getFirstRun, firstRunDone } from '../../redux/modules/walkthrough';
 
 const mapStateToProps = createStructuredSelector({
   firstRun: getFirstRun,

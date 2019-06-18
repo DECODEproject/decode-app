@@ -25,10 +25,10 @@ import { I18nextProvider, withTranslation } from 'react-i18next';
 import { ThemeProvider } from 'styled-components';
 import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
-import i18n from './i18n';
-import store, { persistor } from './redux/store';
-import theme from './lib/theme';
-import RootScreen from './screens/RootScreen';
+import i18n from 'i18n';
+import store, { persistor } from 'redux/store';
+import theme from 'lib/theme';
+import RootScreen from 'screens/RootScreen';
 
 const App = () => {
   useEffect(() => SplashScreen.hide());
