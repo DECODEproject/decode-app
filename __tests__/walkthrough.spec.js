@@ -18,7 +18,7 @@
  *
  * email: info@dribia.com
  */
-import reducer, { ACTIONS } from './index';
+import reducer, { ACTIONS } from '../src/redux/reducers/index';
 
 describe('Walkthrough tests', () => {
   test('Default state', () => {
