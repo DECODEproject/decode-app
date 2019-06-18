@@ -23,7 +23,7 @@ import { connect } from 'react-redux';
 import Component from './WalkthroughStep.Component';
 import {
   getShowTooltip, tooltipShown,
-} from '../../../redux/reducers';
+} from '../../../redux/modules/walkthrough';
 
 const mapStateToProps = (state, props) => ({
   showTooltip: getShowTooltip(props.screen)(state),

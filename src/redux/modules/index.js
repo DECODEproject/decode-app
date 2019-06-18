@@ -19,17 +19,5 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import Component from './RootScreen.Component';
-import { getFirstRun, firstRunDone } from '../../redux/modules/walkthrough';
-
-const mapStateToProps = createStructuredSelector({
-  firstRun: getFirstRun,
-});
-
-const mapDispatchToProps = {
-  firstRunDone,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export * as walkthrough from './walkthrough';
+export * as dummy from './dummy';

@@ -18,7 +18,7 @@
  *
  * email: info@dribia.com
  */
-import reducer, { ACTIONS } from '../src/redux/reducers/index';
+import reducer, { ACTIONS } from '../src/redux/modules/walkthrough';
 
 describe('Walkthrough tests', () => {
   test('Default state', () => {
@@ -28,9 +28,6 @@ describe('Walkthrough tests', () => {
         dummy: 'refresh',
         dummyNext: 'crash',
       },
-      total: '---',
-      loading: false,
-      date: '---',
     });
   });
   test('Close first tooltip', () => {
@@ -44,9 +41,6 @@ describe('Walkthrough tests', () => {
         dummy: 'next',
         dummyNext: 'crash',
       },
-      total: '---',
-      loading: false,
-      date: '---',
     });
   });
   test('Close last tooltip', () => {
@@ -60,9 +54,6 @@ describe('Walkthrough tests', () => {
         dummy: 'none',
         dummyNext: 'crash',
       },
-      total: '---',
-      loading: false,
-      date: '---',
     });
   });
   test('Reset tooltips', () => {
@@ -72,9 +63,6 @@ describe('Walkthrough tests', () => {
         dummy: 'none',
         dummyNext: 'none',
       },
-      total: '---',
-      loading: false,
-      date: '---',
     }, {
       type: ACTIONS.REVIEW_WALKTHROUGH,
     })).toEqual({
@@ -83,9 +71,6 @@ describe('Walkthrough tests', () => {
         dummy: 'refresh',
         dummyNext: 'crash',
       },
-      total: '---',
-      loading: false,
-      date: '---',
     });
   });
 });

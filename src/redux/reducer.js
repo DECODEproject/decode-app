@@ -19,17 +19,13 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import Component from './RootScreen.Component';
-import { getFirstRun, firstRunDone } from '../../redux/modules/walkthrough';
+import {
+  map, compose, prop,
+} from 'ramda';
+import { combineReducers } from 'redux';
+import * as reducers from './modules';
 
-const mapStateToProps = createStructuredSelector({
-  firstRun: getFirstRun,
-});
-
-const mapDispatchToProps = {
-  firstRunDone,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default compose(
+  combineReducers,
+  map(prop('default')),
+)(reducers);
