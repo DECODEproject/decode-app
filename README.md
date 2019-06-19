@@ -52,9 +52,9 @@ Each component is spread over 3 files:
 You need to have git and yarn installed.
 You will also need XCode and Android Studio. 
 
-Clone the project and `yarn install`. Then link the native libraries with `react-native link`. After that you can follow to the next section.
+Clone the project and `yarn install`. After that you can follow to the next section.
 
-You need Ruby if you want to deploy to the test stores using fastlane, which is the recommended way. Use `rbenv` to install the Ruby version specified in .ruby-version.
+If you want to deploy to the test stores using fastlane, which is the recommended way, you need Ruby. Use `rbenv` to install the Ruby version specified in .ruby-version.
 
 ## Available Scripts
 
