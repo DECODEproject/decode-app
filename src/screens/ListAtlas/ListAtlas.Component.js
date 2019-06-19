@@ -20,39 +20,16 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Carousel from 'lib/Components/Carousel';
-import Dummy from 'screens/Dummy';
-import DummyNext from 'screens/DummyNext';
-import ListAtlas from 'screens/ListAtlas';
 
-const RootStack = createStackNavigator({
-  Dummy,
-  DummyNext,
-  ListAtlas,
-}, {
-  initialRouteName: 'Dummy',
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
-});
-
-const Navigation = createAppContainer(RootStack);
-
-const RootScreen = ({ firstRun, firstRunDone }) => {
-  const { t } = useTranslation();
+const ListAtlas = () => {
+  const { t } = useTranslation('attributes');
   return (
-    firstRun
-      ? <Carousel onDone={() => firstRunDone()} />
-      : <Navigation screenProps={{ t }} />
+    <Text>{t('Atlas attributes go here')}</Text>
   );
 };
 
-RootScreen.propTypes = {
-  firstRun: PropTypes.bool.isRequired,
-  firstRunDone: PropTypes.func.isRequired,
-};
+ListAtlas.displayName = 'ListAtlas';
 
-export default RootScreen;
+export default ListAtlas;

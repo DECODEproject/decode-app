@@ -47,4 +47,7 @@ export default {
     skip: 'Saltar',
     next: 'Siguiente',
   },
+  attributes: {
+    add: 'Añadir atributo',
+  },
 };
