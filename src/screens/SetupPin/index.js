@@ -19,6 +19,4 @@
  * email: info@dribia.com
  */
 
-export * as walkthrough from './walkthrough';
-export * as dummy from './dummy';
-export * as pin from './pin';
+export default from './SetupPin.Container';

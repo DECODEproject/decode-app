@@ -21,11 +21,14 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { not, isNil, compose } from 'ramda';
 import { getFirstRun, firstRunDone } from 'redux/modules/walkthrough';
+import { getPin } from 'redux/modules/pin';
 import Component from './RootScreen.Component';
 
 const mapStateToProps = createStructuredSelector({
   firstRun: getFirstRun,
+  hasPin: compose(not, isNil, getPin),
 });
 
 const mapDispatchToProps = {

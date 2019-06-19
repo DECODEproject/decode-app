@@ -19,6 +19,23 @@
  * email: info@dribia.com
  */
 
-export * as walkthrough from './walkthrough';
-export * as dummy from './dummy';
-export * as pin from './pin';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import {
+  getPin1, getPin2, changePin1, changePin2, validatePin, getValidationError,
+} from 'redux/modules/pin';
+import Component from './SetupPin.Component';
+
+const mapStateToProps = createStructuredSelector({
+  pin1: getPin1,
+  pin2: getPin2,
+  validationError: getValidationError,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onPin1Changed: pin => dispatch(changePin1(pin)),
+  onPin2Changed: pin => dispatch(changePin2(pin)),
+  onSetupDone: () => dispatch(validatePin()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Component);

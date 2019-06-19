@@ -25,6 +25,7 @@ import {
   getTotal, getDate, getLoading, refreshStats, refreshDate,
 } from 'redux/modules/dummy';
 import { reviewWalkthrough } from 'redux/modules/walkthrough';
+import { resetPin } from 'redux/modules/pin';
 import Component from './Dummy.Component';
 
 const mapStateToProps = createStructuredSelector({
@@ -39,6 +40,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(refreshDate());
   },
   onReviewWalkthrough: () => dispatch(reviewWalkthrough()),
+  onResetPin: () => dispatch(resetPin()),
 });
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);

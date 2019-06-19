@@ -1,3 +1,4 @@
+
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -18,7 +19,20 @@
  *
  * email: info@dribia.com
  */
+import { Platform } from 'react-native';
+import styled from 'styled-components/native';
 
-export * as walkthrough from './walkthrough';
-export * as dummy from './dummy';
-export * as pin from './pin';
+export const Container = styled.View(({ theme: { backgroundColor } }) => ({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor,
+}));
+
+export const PinInput = styled.TextInput(() => ({
+  marginVertical: 10,
+  paddingHorizontal: 10,
+  borderWidth: 1,
+  height: Platform.OS === 'ios' ? 35 : 40,
+  width: 190,
+}));

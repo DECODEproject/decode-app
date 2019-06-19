@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import Carousel from 'lib/Components/Carousel';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
+import SetupPin from 'screens/SetupPin';
 
 const RootStack = createStackNavigator({
   Dummy,
@@ -39,18 +40,26 @@ const RootStack = createStackNavigator({
 
 const Navigation = createAppContainer(RootStack);
 
-const RootScreen = ({ firstRun, firstRunDone }) => {
+const RootScreen = ({ firstRun, firstRunDone, hasPin }) => {
   const { t } = useTranslation();
-  return (
-    firstRun
-      ? <Carousel onDone={() => firstRunDone()} />
-      : <Navigation screenProps={{ t }} />
-  );
+  if (firstRun) {
+    return (
+      <Carousel onDone={() => firstRunDone()} />
+    );
+  }
+  return (hasPin ? <Navigation screenProps={{ t }} /> : <SetupPin />);
 };
 
 RootScreen.propTypes = {
   firstRun: PropTypes.bool.isRequired,
   firstRunDone: PropTypes.func.isRequired,
+  hasPin: PropTypes.bool,
 };
+
+RootScreen.defaultProps = {
+  hasPin: false,
+};
+
+RootScreen.displayName = 'RootScreen';
 
 export default RootScreen;

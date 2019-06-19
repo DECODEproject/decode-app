@@ -47,4 +47,10 @@ export default {
     skip: 'Saltar',
     next: 'Següent',
   },
+  pin: {
+    pin1: 'PIN',
+    pin2: 'Confirmació PIN',
+    setupPin: 'Desar',
+    resetPin: 'Restablir PIN',
+  },
 };

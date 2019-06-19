@@ -29,7 +29,7 @@ import WalkthroughStep from 'lib/Components/WalkthroughStep';
 import { Container, Greeting, Line } from './Dummy.Styles';
 
 const Dummy = ({
-  total, refresh, date, navigation, loading, onReviewWalkthrough,
+  total, refresh, date, navigation, loading, onReviewWalkthrough, onResetPin,
 }) => {
   const { t } = useTranslation();
   return (
@@ -53,6 +53,7 @@ const Dummy = ({
       </View>
       <Line>{t('refreshDate', { date })}</Line>
       <Button title={t('review')} onPress={onReviewWalkthrough} />
+      <Button title={t('pin:resetPin')} onPress={onResetPin} />
       <WalkthroughStep screen="dummy" id="next">
         <Button
           title={t('next')}
@@ -75,6 +76,7 @@ Dummy.propTypes = {
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   onReviewWalkthrough: PropTypes.func.isRequired,
+  onResetPin: PropTypes.func.isRequired,
   date: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),
     PropTypes.string,
