@@ -21,33 +21,30 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { listAttributes } from 'api/atlas-client';
-import { Container, Title, ListContainer } from './ListAtlas.Styles';
-import AtlasItem, { AtlasItemPropType } from './AtlasItem/AtlasItem.Component';
+import { RectButton } from 'react-native-gesture-handler';
+import { Container, Name, Description } from './AtlasItem.Styles';
 
-const ListAtlas = ({ attributes }) => {
-  const { t } = useTranslation('attributes');
-  return (
+const AtlasItem = ({ t, item: { name, description } }) => (
+  <RectButton
+    key={name}
+    onPress={Function.prototype}
+  >
     <Container>
-      <Title>{t('available')}</Title>
-      <ListContainer
-        data={attributes}
-        renderItem={({ item }) => <AtlasItem item={item} t={t} />}
-        keyExtractor={item => item.name}
-      />
+      <Name>{t(name)}</Name>
+      <Description>{t(description)}</Description>
     </Container>
-  );
+  </RectButton>
+);
+
+export const AtlasItemPropType = PropTypes.shape({
+  name: PropTypes.string,
+  type: PropTypes.string,
+  description: PropTypes.string,
+});
+
+AtlasItem.propTypes = {
+  item: AtlasItemPropType.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-ListAtlas.displayName = 'ListAtlas';
-
-ListAtlas.propTypes = {
-  attributes: PropTypes.arrayOf(AtlasItemPropType),
-};
-
-ListAtlas.defaultProps = {
-  attributes: listAttributes(),
-};
-
-export default ListAtlas;
+export default AtlasItem;

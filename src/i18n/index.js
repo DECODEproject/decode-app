@@ -25,9 +25,13 @@ import DeviceInfo from 'react-native-device-info';
 import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/ca';
+import { mapObjIndexed } from 'ramda';
+import { getTranslations } from 'api/atlas-client';
 import en from './en';
 import es from './es';
 import ca from './ca';
+
+const translations = getTranslations();
 
 const languageDetector = {
   type: 'languageDetector',
@@ -59,5 +63,10 @@ i18n
       ca,
     },
   });
+
+mapObjIndexed(
+  (resourceBundle, lang) => i18n.addResourceBundle(lang, 'attributes', resourceBundle, true, true),
+  translations,
+);
 
 export default i18n;

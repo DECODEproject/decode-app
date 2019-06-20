@@ -49,5 +49,6 @@ export default {
   },
   attributes: {
     add: 'Añadir atributo',
+    available: 'Atributos disponibles',
   },
 };

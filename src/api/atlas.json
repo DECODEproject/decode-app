@@ -1,0 +1,48 @@
+{
+  "attributes": [
+    {
+      "name": "gender",
+      "type": "string",
+      "description": "genderDesc"
+    },
+    {
+      "name": "birthDate",
+      "type": "string",
+      "description": "birthDateDesc"
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "description": "addressDesc"
+    }
+  ],
+  "translations": {
+    "ca": {
+      "gender": "Gènere",
+      "genderDesc": "Tria el teu gènere d'una llista",
+      "birthDate": "Data de naixement",
+      "birthDateDesc": "Tria el dia, mes i any que vas néixer",
+      "address": "Adreça",
+      "addressDesc": "Troba la teva adreça en un mapa",
+      "string": "Text"
+    },
+    "es": {
+      "gender": "Género",
+      "genderDesc": "Escoge tu género de una lista",
+      "birthDate": "Fecha de nacimiento",
+      "birthDateDesc": "Escoge el día, mes y año en que naciste",
+      "address": "Dirección",
+      "addressDesc": "Encuentra tu dirección en un mapa",
+      "string": "Texto"
+    },
+    "en": {
+      "gender": "Gender",
+      "genderDesc": "Choose your gender from a list",
+      "birthDate": "Birth date",
+      "birthDateDesc": "Choose the day, month and year you were born",
+      "address": "Address",
+      "addressDesc": "Find your address in a map",
+      "string": "Text"
+    }
+  }
+}
