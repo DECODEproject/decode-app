@@ -23,14 +23,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { listAttributes } from 'api/atlas-client';
-import { Container, Title, ListContainer } from './ListAtlas.Styles';
+import { Container, ListContainer } from './AtlasList.Styles';
 import AtlasItem, { AtlasItemPropType } from './AtlasItem/AtlasItem.Component';
 
-const ListAtlas = ({ attributes }) => {
+const AtlasList = ({ attributes }) => {
   const { t } = useTranslation('attributes');
   return (
     <Container>
-      <Title>{t('available')}</Title>
       <ListContainer
         data={attributes}
         renderItem={({ item }) => <AtlasItem item={item} t={t} />}
@@ -40,14 +39,19 @@ const ListAtlas = ({ attributes }) => {
   );
 };
 
-ListAtlas.displayName = 'ListAtlas';
+AtlasList.displayName = 'AtlasList';
 
-ListAtlas.propTypes = {
+AtlasList.propTypes = {
   attributes: PropTypes.arrayOf(AtlasItemPropType),
 };
 
-ListAtlas.defaultProps = {
+AtlasList.defaultProps = {
   attributes: listAttributes(),
 };
 
-export default ListAtlas;
+AtlasList.navigationOptions = ({ screenProps: { t } }) => ({
+  title: t('attributes:available'),
+});
+
+
+export default AtlasList;

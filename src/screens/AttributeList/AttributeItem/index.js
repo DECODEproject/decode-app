@@ -19,4 +19,4 @@
  * email: info@dribia.com
  */
 
-export default from './ListAtlas.Component';
+export default from './AttributeItem.Component';

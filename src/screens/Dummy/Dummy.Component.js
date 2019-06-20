@@ -59,10 +59,6 @@ const Dummy = ({
           onPress={() => navigation.navigate('DummyNext')}
         />
       </WalkthroughStep>
-      <Button
-        title={t('attributes:add')}
-        onPress={() => navigation.navigate('ListAtlas')}
-      />
     </Container>
   );
 };

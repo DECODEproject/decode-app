@@ -1,3 +1,4 @@
+
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -21,20 +22,16 @@
 
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  backgroundColor,
-}));
-
-export const Title = styled.Text({
-  fontSize: 20,
-  fontWeight: 'bold',
-  textAlign: 'center',
-  marginVertical: 20,
+export const Container = styled.View({
+  borderBottomColor: '#ddd',
+  borderBottomWidth: 1,
+  padding: 16,
 });
 
-export const ListContainer = styled.FlatList({
-  borderTopColor: '#ddd',
-  borderTopWidth: 1,
+export const Name = styled.Text({
+  fontSize: 18,
+  fontWeight: 'bold',
+});
+
+export const Value = styled.Text({
 });

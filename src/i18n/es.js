@@ -50,5 +50,7 @@ export default {
   attributes: {
     add: 'Añadir atributo',
     available: 'Atributos disponibles',
+    my: 'Mis atributos',
+    empty: 'Empecemos por añadir algunos datos.\nHaz click en el botón inferior para empezar',
   },
 };

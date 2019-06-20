@@ -26,14 +26,16 @@ import { useTranslation } from 'react-i18next';
 import Carousel from 'lib/Components/Carousel';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
-import ListAtlas from 'screens/ListAtlas';
+import AtlasList from 'screens/AtlasList';
+import AttributeList from 'screens/AttributeList';
 
 const RootStack = createStackNavigator({
+  AttributeList,
+  AtlasList,
   Dummy,
   DummyNext,
-  ListAtlas,
 }, {
-  initialRouteName: 'Dummy',
+  initialRouteName: 'AttributeList',
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),
   }),
