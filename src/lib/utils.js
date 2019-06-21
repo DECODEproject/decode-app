@@ -19,4 +19,11 @@
  * email: info@dribia.com
  */
 
+import PropTypes from 'prop-types';
+
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+export const childrenPropTypes = PropTypes.oneOfType([
+  PropTypes.arrayOf(PropTypes.node),
+  PropTypes.node,
+]);

@@ -19,21 +19,43 @@
  * email: info@dribia.com
  */
 
+import React from 'react';
+import { childrenPropTypes } from 'lib/utils';
 import styled from 'styled-components/native';
 
-export const Title = styled.Text({
+const StyledTitle = styled.Text({
   textAlign: 'center',
   fontSize: 40,
   color: '#fff',
   paddingBottom: 15,
 });
 
-export const Subtitle = styled.Text({
+const StyledSubtitle = styled.Text({
   textAlign: 'center',
   fontSize: 24,
   paddingHorizontal: 10,
   color: '#fff',
   marginBottom: 60,
+});
+
+export const Title = ({ children }) => (
+  <StyledTitle allowFontScaling={false}>
+    {children}
+  </StyledTitle>
+);
+
+Title.propTypes = ({
+  children: childrenPropTypes.isRequired,
+});
+
+export const Subtitle = ({ children }) => (
+  <StyledSubtitle allowFontScaling={false}>
+    {children}
+  </StyledSubtitle>
+);
+
+Subtitle.propTypes = ({
+  children: childrenPropTypes.isRequired,
 });
 
 export const CarouselImage = styled.Image({
