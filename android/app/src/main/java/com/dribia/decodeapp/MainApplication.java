@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSentryPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
-            new RNDeviceInfo()
+            new RNDeviceInfo(true)
       );
     }
 
