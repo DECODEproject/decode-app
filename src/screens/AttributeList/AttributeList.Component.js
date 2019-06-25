@@ -48,10 +48,6 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
           title={t('add')}
           onPress={() => navigate('AtlasList')}
         />
-        <Button
-          title="Test dummy screen"
-          onPress={() => navigate('Dummy')}
-        />
       </ButtonsContainer>
     </Container>
   );

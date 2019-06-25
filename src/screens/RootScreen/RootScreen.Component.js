@@ -21,29 +21,145 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'lib/Components/Carousel';
+import MenuIcon from 'lib/Components/MenuIcon';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
 import AtlasList from 'screens/AtlasList';
 import AttributeList from 'screens/AttributeList';
 import EditAttribute from 'screens/EditAttribute';
+import Applications from 'screens/Applications';
+import Settings from 'screens/Settings';
+import About from 'screens/About';
+import Scanner from 'screens/Scanner';
 
-const RootStack = createStackNavigator({
-  AttributeList,
+const AttributeStack = createStackNavigator({
+  AttributeList: {
+    screen: AttributeList,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
   AtlasList,
   EditAttribute,
-  Dummy,
-  DummyNext,
 }, {
-  initialRouteName: 'AttributeList',
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),
   }),
 });
 
-const Navigation = createAppContainer(RootStack);
+const ApplicationStack = createStackNavigator({
+  Applications: {
+    screen: Applications,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
+});
+
+const SettingsStack = createStackNavigator({
+  Settings: {
+    screen: Settings,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
+});
+
+const ScannerStack = createStackNavigator({
+  Scanner: {
+    screen: Scanner,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
+});
+
+const AboutStack = createStackNavigator({
+  About: {
+    screen: About,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
+});
+
+const DummyStack = createStackNavigator({
+  Dummy: {
+    screen: Dummy,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+  DummyNext,
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
+});
+
+const DrawerNavigator = createDrawerNavigator({
+  AttributeStack: {
+    screen: AttributeStack,
+    navigationOptions: ({ screenProps: { t } }) => ({
+      drawerLabel: t('attributes:my'),
+    }),
+  },
+  ApplicationStack: {
+    screen: ApplicationStack,
+    navigationOptions: ({ screenProps: { t } }) => ({
+      drawerLabel: t('applications:available'),
+    }),
+  },
+  SettingsStack: {
+    screen: SettingsStack,
+    navigationOptions: ({ screenProps: { t } }) => ({
+      drawerLabel: t('settings:title'),
+    }),
+  },
+  AboutStack: {
+    screen: AboutStack,
+    navigationOptions: ({ screenProps: { t } }) => ({
+      drawerLabel: t('about:title'),
+    }),
+  },
+  ScannerStack: {
+    screen: ScannerStack,
+    navigationOptions: ({ screenProps: { t } }) => ({
+      drawerLabel: t('scanner:title'),
+    }),
+  },
+  DummyStack: {
+    screen: DummyStack,
+    navigationOptions: () => ({
+      drawerLabel: 'Test Dummy Screen',
+    }),
+  },
+}, {
+  defaultNavigationOptions: () => ({
+    drawerLockMode: 'locked-closed',
+  }),
+});
+
+const Navigation = createAppContainer(DrawerNavigator);
 
 const RootScreen = ({ firstRun, firstRunDone }) => {
   const { t } = useTranslation();

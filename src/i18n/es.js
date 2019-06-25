@@ -55,4 +55,16 @@ export default {
     enterValue: 'Introduce un valor',
     save: 'Guardar',
   },
+  applications: {
+    available: 'Aplicaciones disponibles',
+  },
+  settings: {
+    title: 'Preferencias',
+  },
+  about: {
+    title: 'Información',
+  },
+  scanner: {
+    title: 'Escáner QR',
+  },
 };

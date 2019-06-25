@@ -55,4 +55,16 @@ export default {
     enterValue: 'Enter a value',
     save: 'Save',
   },
+  applications: {
+    available: 'Available applications',
+  },
+  settings: {
+    title: 'Settings',
+  },
+  about: {
+    title: 'Information',
+  },
+  scanner: {
+    title: 'QR scanner',
+  },
 };
