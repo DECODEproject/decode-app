@@ -52,5 +52,7 @@ export default {
     available: 'Atributos disponibles',
     my: 'Mis atributos',
     empty: 'Empecemos por añadir algunos datos.\nHaz click en el botón inferior para empezar',
+    enterValue: 'Introduce un valor',
+    save: 'Guardar',
   },
 };

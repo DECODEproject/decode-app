@@ -19,33 +19,4 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { RectButton } from 'react-native-gesture-handler';
-import { Container, Name, Value } from './AttributeItem.Styles';
-
-const AttributeItem = ({ t, navigate, item: { name, value } }) => (
-  <RectButton
-    key={name}
-    onPress={() => navigate('EditAttribute', { name, value })}
-  >
-    <Container>
-      <Name>{t(name)}</Name>
-      <Value>{value}</Value>
-    </Container>
-  </RectButton>
-);
-
-export const AttributeItemPropType = PropTypes.shape({
-  name: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-});
-
-AttributeItem.propTypes = {
-  item: AttributeItemPropType.isRequired,
-  t: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
-};
-
-export default AttributeItem;
+export default from './EditAttribute.Component';

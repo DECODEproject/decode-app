@@ -26,13 +26,13 @@ import { listAttributes } from 'api/atlas-client';
 import { Container, ListContainer } from './AtlasList.Styles';
 import AtlasItem, { AtlasItemPropType } from './AtlasItem/AtlasItem.Component';
 
-const AtlasList = ({ attributes }) => {
+const AtlasList = ({ attributes, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
     <Container>
       <ListContainer
         data={attributes}
-        renderItem={({ item }) => <AtlasItem item={item} t={t} />}
+        renderItem={({ item }) => <AtlasItem item={item} t={t} navigate={navigate} />}
         keyExtractor={item => item.name}
       />
     </Container>
@@ -43,6 +43,9 @@ AtlasList.displayName = 'AtlasList';
 
 AtlasList.propTypes = {
   attributes: PropTypes.arrayOf(AtlasItemPropType),
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 AtlasList.defaultProps = {

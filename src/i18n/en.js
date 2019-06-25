@@ -52,5 +52,7 @@ export default {
     available: 'Available attributes',
     my: 'My attributes',
     empty: 'Get started by adding some data.\nTap the button below to begin.',
+    enterValue: 'Enter a value',
+    save: 'Save',
   },
 };

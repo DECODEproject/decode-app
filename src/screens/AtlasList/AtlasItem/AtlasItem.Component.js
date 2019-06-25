@@ -24,10 +24,10 @@ import PropTypes from 'prop-types';
 import { RectButton } from 'react-native-gesture-handler';
 import { Container, Name, Description } from './AtlasItem.Styles';
 
-const AtlasItem = ({ t, item: { name, description } }) => (
+const AtlasItem = ({ t, item: { name, description }, navigate }) => (
   <RectButton
     key={name}
-    onPress={Function.prototype}
+    onPress={() => navigate('EditAttribute', { name })}
   >
     <Container>
       <Name>{t(name)}</Name>
@@ -35,6 +35,10 @@ const AtlasItem = ({ t, item: { name, description } }) => (
     </Container>
   </RectButton>
 );
+
+AtlasItem.navigationOptions = ({ screenProps: { t } }) => ({
+  title: t('chooseAttribute'),
+});
 
 export const AtlasItemPropType = PropTypes.shape({
   name: PropTypes.string,
@@ -45,6 +49,7 @@ export const AtlasItemPropType = PropTypes.shape({
 AtlasItem.propTypes = {
   item: AtlasItemPropType.isRequired,
   t: PropTypes.func.isRequired,
+  navigate: PropTypes.func.isRequired,
 };
 
 export default AtlasItem;

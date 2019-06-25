@@ -52,5 +52,7 @@ export default {
     available: 'Atributs disponibles',
     my: 'Els meus atributs',
     empty: 'Comencem per afegir algunes dades.\nFes click en el botó per començar.',
+    enterValue: 'Introdueix un valor',
+    save: 'Desar',
   },
 };

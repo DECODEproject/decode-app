@@ -37,7 +37,7 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
           : (
             <FlatList
               data={attributes}
-              renderItem={({ item }) => <AttributeItem item={item} t={t} />}
+              renderItem={({ item }) => <AttributeItem item={item} t={t} navigate={navigate} />}
               keyExtractor={item => item.name}
             />
           )

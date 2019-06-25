@@ -28,10 +28,12 @@ import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
 import AtlasList from 'screens/AtlasList';
 import AttributeList from 'screens/AttributeList';
+import EditAttribute from 'screens/EditAttribute';
 
 const RootStack = createStackNavigator({
   AttributeList,
   AtlasList,
+  EditAttribute,
   Dummy,
   DummyNext,
 }, {
