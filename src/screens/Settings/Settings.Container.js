@@ -19,27 +19,18 @@
  * email: info@dribia.com
  */
 
-import {
-  map, compose, prop,
-} from 'ramda';
-import { combineReducers } from 'redux';
-import * as reducers from './modules';
+import { connect } from 'react-redux';
+import { reviewWalkthrough } from 'redux/modules/walkthrough';
+import { reset } from 'redux/reducer';
+import Component from './Settings.Component';
 
-const rootReducer = compose(
-  combineReducers,
-  map(prop('default')),
-)(reducers);
-
-export const ACTIONS = {
-  RESET: 'RESET',
+const mapDispatchToProps = {
+  onReviewWalkthrough: reviewWalkthrough,
+  onReset: reset,
 };
 
-export const reset = () => ({
-  type: ACTIONS.RESET,
-});
+const ConnectedComponent = connect(null, mapDispatchToProps)(Component);
 
-export default (state, action) => (
-  action.type === ACTIONS.RESET
-    ? rootReducer(undefined, action)
-    : rootReducer(state, action)
-);
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;

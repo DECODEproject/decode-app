@@ -20,13 +20,25 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Button } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
+import { Container } from './Settings.Styles';
 
-const Settings = () => (
-  <View>
-    <Text>Settings go here</Text>
-  </View>
-);
+const Settings = ({ onReviewWalkthrough, onReset }) => {
+  const { t } = useTranslation('settings');
+  return (
+    <Container>
+      <Button title={t('review')} onPress={onReviewWalkthrough} />
+      <Button title={t('reset')} onPress={onReset} />
+    </Container>
+  );
+};
+
+Settings.propTypes = {
+  onReviewWalkthrough: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+};
 
 Settings.navigationOptions = ({ screenProps: { t } }) => ({
   title: t('Settings'),

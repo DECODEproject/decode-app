@@ -19,27 +19,4 @@
  * email: info@dribia.com
  */
 
-import {
-  map, compose, prop,
-} from 'ramda';
-import { combineReducers } from 'redux';
-import * as reducers from './modules';
-
-const rootReducer = compose(
-  combineReducers,
-  map(prop('default')),
-)(reducers);
-
-export const ACTIONS = {
-  RESET: 'RESET',
-};
-
-export const reset = () => ({
-  type: ACTIONS.RESET,
-});
-
-export default (state, action) => (
-  action.type === ACTIONS.RESET
-    ? rootReducer(undefined, action)
-    : rootReducer(state, action)
-);
+export default from './Settings.Container';

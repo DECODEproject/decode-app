@@ -29,7 +29,6 @@ export default {
     refresh: 'Actualitzar',
     total: 'Total',
     refreshDate: 'Actualitzat el {{date, llll}}',
-    review: 'Revisar walkthrough',
     second: 'Una altra pantalla',
     walkthrough: {
       refresh: 'Es cridarà l\'API del credential issuer',
@@ -60,6 +59,8 @@ export default {
   },
   settings: {
     title: 'Preferències',
+    review: 'Revisar ajudes',
+    reset: 'Esborrar tot',
   },
   about: {
     title: 'Informació',

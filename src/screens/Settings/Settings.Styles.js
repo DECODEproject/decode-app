@@ -19,27 +19,11 @@
  * email: info@dribia.com
  */
 
-import {
-  map, compose, prop,
-} from 'ramda';
-import { combineReducers } from 'redux';
-import * as reducers from './modules';
+import styled from 'styled-components/native';
 
-const rootReducer = compose(
-  combineReducers,
-  map(prop('default')),
-)(reducers);
-
-export const ACTIONS = {
-  RESET: 'RESET',
-};
-
-export const reset = () => ({
-  type: ACTIONS.RESET,
-});
-
-export default (state, action) => (
-  action.type === ACTIONS.RESET
-    ? rootReducer(undefined, action)
-    : rootReducer(state, action)
-);
+export const Container = styled.View(({ theme: { backgroundColor } }) => ({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor,
+}));
