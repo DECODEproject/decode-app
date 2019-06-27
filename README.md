@@ -99,3 +99,17 @@ A generic component WalktroughStep has been developed. It wraps the Tooltip comp
 The WalkthroughStep just needs to wrap the component over which the tooltip has to be shown, and it requires just 2 props: the id of the screen and the id of the tooltip.  
 
 The order of the tooltips to be shown en each screen is specified as a const in the reducer. If a screen has multiple tooltips, they will be shown in that order. When the last tooltip has been shown, 'none' will be stored as the tooltip id and it will never match again, so it won't be shown again.
+
+### Navigation
+The navigation between screens is based on the React Navigation library. Its API is a little cumbersome so I explain here how it is organized.
+
+The App.js entry point renders the RootScreen component, where all the navigators are defined.
+
+RootScreen renders either the Carousel or the AppContainer, depending on the firstRun flag in the store.
+
+The AppContainer wraps the RootNavigation, which displays either the Main screen or a Modal screen. This is for managing Modal interactions with the user.
+
+The Main screen is a DrawerNavigator, which defines all the menu items accessible from the left header button.
+
+Each screen in the drawer is a StackNavigator, with screens that can go either forwards via links in the screen, or backwards via the back button. Some stacks have a single screen so the only way to get out of them is via the menu. The first screen in a stack always has the menu button at the header top left, while the other screens have the back button.
+ 

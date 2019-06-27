@@ -34,6 +34,7 @@ import Applications from 'screens/Applications';
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
+import Warning from 'lib/Components/Warning';
 
 const AttributeStack = createStackNavigator({
   AttributeList: {
@@ -159,14 +160,28 @@ const DrawerNavigator = createDrawerNavigator({
   }),
 });
 
-const Navigation = createAppContainer(DrawerNavigator);
+const RootNavigation = createStackNavigator({
+  Main: {
+    screen: DrawerNavigator,
+  },
+  Warning: {
+    screen: Warning,
+  },
+},
+{
+  initialRouteName: 'Main',
+  mode: 'modal',
+  headerMode: 'none',
+});
+
+const AppContainer = createAppContainer(RootNavigation);
 
 const RootScreen = ({ firstRun, firstRunDone }) => {
   const { t } = useTranslation();
   return (
     firstRun
       ? <Carousel onDone={() => firstRunDone()} />
-      : <Navigation screenProps={{ t }} />
+      : <AppContainer screenProps={{ t }} />
   );
 };
 

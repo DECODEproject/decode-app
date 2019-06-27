@@ -22,6 +22,8 @@
 export default {
   translation: {
     back: 'Back',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
     greeting: 'This is the DECODE App v2',
     home: 'Home',
     next: 'Next',
@@ -61,6 +63,9 @@ export default {
     title: 'Settings',
     review: 'Review help',
     reset: 'Erase all data',
+    warning: 'You are going to erase all the app\'s memory (data, certificates,...)\n\n'
+    + 'This step has no turning back.\n\n'
+    + 'Do you want to continue?\n',
   },
   about: {
     title: 'Information',

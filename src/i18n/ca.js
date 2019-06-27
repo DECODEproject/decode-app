@@ -22,6 +22,8 @@
 export default {
   translation: {
     back: 'Enrere',
+    cancel: 'Cancel·lar',
+    confirm: 'Confirmar',
     greeting: 'Aquesta és l\'app DECODE v2',
     home: 'Inici',
     next: 'Següent',
@@ -61,6 +63,9 @@ export default {
     title: 'Preferències',
     review: 'Revisar ajudes',
     reset: 'Esborrar tot',
+    warning: 'Ets a punt d\'esborrar tota la memòria de l\'app (dades, certificats,...)\n\n'
+    + 'Aquesta passa no té marxa enrere.\n\n'
+    + 'Desitges continuar?\n',
   },
   about: {
     title: 'Informació',

@@ -20,37 +20,35 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import { Container } from './Settings.Styles';
+import {
+  Container, Buttons, Message, MessageContainer,
+} from './Warning.Styles';
 
-const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
-  const { t } = useTranslation('settings');
+const Warning = ({ navigation: { goBack, getParam } }) => {
+  const { t } = useTranslation();
+  const message = getParam('message');
+  const onConfirm = getParam('onConfirm');
   return (
     <Container>
-      <Button title={t('review')} onPress={onReviewWalkthrough} />
-      <Button
-        title={t('reset')}
-        onPress={() => navigate('Warning', {
-          message: t('warning'),
-          onConfirm: onReset,
-        })}
-      />
+      <MessageContainer>
+        <Message>{message}</Message>
+      </MessageContainer>
+      <Buttons>
+        <Button title={t('confirm')} onPress={() => onConfirm()} />
+        <Button title={t('cancel')} onPress={() => goBack()} />
+      </Buttons>
     </Container>
   );
 };
 
-Settings.propTypes = {
-  onReviewWalkthrough: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
+Warning.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
+    getParam: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-Settings.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('Settings'),
-});
-
-export default Settings;
+export default Warning;
