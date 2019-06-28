@@ -19,4 +19,17 @@
  * email: info@dribia.com
  */
 
-export default from './AttributeList.Container';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { getAllAttributes } from 'redux/modules/attributes';
+import Component from './AttributeList.Component';
+
+const mapStateToProps = createStructuredSelector({
+  attributes: getAllAttributes,
+});
+
+const ConnectedComponent = connect(mapStateToProps)(Component);
+
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;

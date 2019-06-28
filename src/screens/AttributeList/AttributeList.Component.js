@@ -56,24 +56,10 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
 AttributeList.displayName = 'AttributeList';
 
 AttributeList.propTypes = {
-  attributes: PropTypes.arrayOf(AttributeItemPropType),
+  attributes: PropTypes.arrayOf(AttributeItemPropType).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-AttributeList.defaultProps = {
-  // attributes: [],
-  attributes: [
-    {
-      name: 'gender',
-      value: 'male',
-    },
-    {
-      name: 'birthDate',
-      value: '20/3/2003',
-    },
-  ],
 };
 
 AttributeList.navigationOptions = ({ screenProps: { t } }) => ({

@@ -26,9 +26,10 @@ import { useTranslation } from 'react-i18next';
 import { AttributeInput, Container } from './EditAttribute.Styles';
 
 const EditAttribute = ({
-  navigation: { navigate, getParam }, validationError,
+  navigation: { navigate, getParam }, validationError, onSave,
 }) => {
   const { t } = useTranslation('attributes');
+  const name = getParam('name');
   const valueParam = getParam('value');
   const [value, setValue] = useState(valueParam);
   return (
@@ -43,7 +44,16 @@ const EditAttribute = ({
         value={value}
         onChangeText={text => setValue(text)}
       />
-      <Button disabled={value === valueParam} title={t('save')} onPress={() => navigate('AttributeList')} />
+      <Button
+        disabled={value === valueParam}
+        title={t('save')}
+        onPress={
+        () => {
+          onSave(name, value);
+          navigate('AttributeList');
+        }
+      }
+      />
       {
         validationError ? <Text>{validationError}</Text> : null
       }
@@ -66,7 +76,7 @@ EditAttribute.defaultProps = {
 
 EditAttribute.propTypes = {
   validationError: PropTypes.string,
-  // onEditDone: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

@@ -88,6 +88,12 @@ Deploys the app to the Google Play store, to an internal test track.
 
 ## Implementation notes
 
+### Redux store structure
+The store has the current state of the app.
+It contains as less information as possible, normalized for efficient access.
+
+The container components connect the store to the presentational components. It makes use of memoized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
+
 ### Splash screen
 The splash screen has been developed following mostly [this awesome article by Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
 

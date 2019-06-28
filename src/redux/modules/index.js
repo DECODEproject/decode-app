@@ -19,5 +19,6 @@
  * email: info@dribia.com
  */
 
+export * as attributes from './attributes';
 export * as walkthrough from './walkthrough';
 export * as dummy from './dummy';

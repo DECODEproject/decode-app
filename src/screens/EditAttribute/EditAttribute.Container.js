@@ -1,3 +1,4 @@
+
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -19,4 +20,16 @@
  * email: info@dribia.com
  */
 
-export default from './AttributeList.Container';
+import { connect } from 'react-redux';
+import { saveAttribute } from 'redux/modules/attributes';
+import Component from './EditAttribute.Component';
+
+const mapDispatchToProps = {
+  onSave: (name, value) => saveAttribute(name, value),
+};
+
+const ConnectedComponent = connect(null, mapDispatchToProps)(Component);
+
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;

@@ -19,4 +19,4 @@
  * email: info@dribia.com
  */
 
-export default from './EditAttribute.Component';
+export default from './EditAttribute.Container';
