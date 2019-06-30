@@ -22,6 +22,7 @@
 import reducer, {
   getAttribute, saveAttribute, getAllAttributes,
 } from 'redux/modules/attributes';
+import { encrypt, decrypt } from 'lib/utils';
 
 describe('Attribute tests', () => {
   test('Default state', () => {
@@ -29,32 +30,63 @@ describe('Attribute tests', () => {
   });
 
   test('Add attribute', () => {
-    expect(reducer({}, saveAttribute('gender', 'male'))).toEqual({
-      gender: 'male',
-    });
+    expect(
+      getAttribute('gender')({
+        attributes: reducer({}, saveAttribute('gender', 'male')),
+      }),
+    ).toEqual('male');
+  });
+
+  test('Encrypt', () => {
+    expect(decrypt(encrypt('asdlkjasdiutsajhkhasfhafyioasuhfkasbkvasbkvbaskfbv'))).toEqual('asdlkjasdiutsajhkhasfhafyioasuhfkasbkvasbkvbaskfbv');
+    expect(decrypt(encrypt(''))).toEqual('');
+    expect(decrypt(encrypt('a'))).toEqual('a');
+    expect(decrypt(encrypt('13/12/1999'))).toEqual('13/12/1999');
+    expect(decrypt(encrypt('Sants-Montjuïc'))).toEqual('Sants-Montjuïc');
   });
 
   test('Change attribute', () => {
-    expect(reducer({
-      gender: 'male',
-    }, saveAttribute('gender', 'female'))).toEqual({
-      gender: 'female',
-    });
+    expect(
+      getAttribute('gender')({
+        attributes: reducer({
+          gender: encrypt('male'),
+        }, saveAttribute('gender', 'female')),
+      }),
+    ).toEqual('female');
+  });
+
+
+  test('Change attribute and getAllAttributes', () => {
+    expect(
+      getAllAttributes({
+        attributes: reducer({
+          gender: encrypt('male'),
+        }, saveAttribute('gender', 'female')),
+      }),
+    ).toEqual([{ name: 'gender', value: 'female' }]);
   });
 
   test('Add another attribute', () => {
-    expect(reducer({
-      gender: 'male',
-    }, saveAttribute('birthDate', '23/3/99'))).toEqual({
-      gender: 'male',
-      birthDate: '23/3/99',
-    });
+    expect(
+      getAllAttributes({
+        attributes: reducer({
+          gender: encrypt('male'),
+        }, saveAttribute('birthDate', '23/3/99')),
+      }),
+    ).toEqual([
+      {
+        name: 'gender',
+        value: 'male',
+      }, {
+        name: 'birthDate',
+        value: '23/3/99',
+      }]);
   });
 
   test('Attribute selector', () => {
     expect(getAttribute('gender')({
       attributes: {
-        gender: 'male',
+        gender: encrypt('male'),
       },
     })).toEqual('male');
   });
@@ -62,8 +94,8 @@ describe('Attribute tests', () => {
   test('All attributes selector', () => {
     expect(getAllAttributes({
       attributes: {
-        gender: 'male',
-        birthDate: '23/3/99',
+        gender: encrypt('male'),
+        birthDate: encrypt('23/3/99'),
       },
     })).toEqual([
       {

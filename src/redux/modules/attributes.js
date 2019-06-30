@@ -23,6 +23,7 @@ import { createSelector } from 'reselect';
 import {
   prop, mapObjIndexed, values, compose,
 } from 'ramda';
+import { encrypt, decrypt } from 'lib/utils';
 
 const initialState = {};
 
@@ -40,7 +41,10 @@ const getStoreBranch = prop('attributes');
 
 export const getAttribute = id => createSelector(
   getStoreBranch,
-  prop(id),
+  compose(
+    decrypt,
+    prop(id),
+  ),
 );
 
 export const getAllAttributes = createSelector(
@@ -49,7 +53,7 @@ export const getAllAttributes = createSelector(
     values,
     mapObjIndexed((value, name) => ({
       name,
-      value,
+      value: decrypt(value),
     })),
   ),
 );
@@ -60,7 +64,7 @@ export default (state = initialState, action) => {
       const { id, value } = action;
       return {
         ...state,
-        [id]: value,
+        [id]: encrypt(value),
       };
     }
     default:

@@ -20,6 +20,9 @@
  */
 
 import PropTypes from 'prop-types';
+import aesjs from 'aes-js';
+import uuid from 'uuid/v4';
+import { STORAGE_KEY } from 'react-native-dotenv';
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -27,3 +30,26 @@ export const childrenPropTypes = PropTypes.oneOfType([
   PropTypes.arrayOf(PropTypes.node),
   PropTypes.node,
 ]);
+
+export const encrypt = (text) => {
+  const key = aesjs.utils.hex.toBytes(STORAGE_KEY);
+  const textBytes = aesjs.utils.utf8.toBytes(text);
+  const paddedBytes = aesjs.padding.pkcs7.pad(textBytes);
+  const buffer = [];
+  const iv = uuid(null, buffer);
+  const aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+  const encryptedBytes = aesCbc.encrypt(paddedBytes);
+  const encryptedHex = aesjs.utils.hex.fromBytes([...iv, ...encryptedBytes]);
+  return encryptedHex;
+};
+
+export const decrypt = (encryptedHex) => {
+  const key = aesjs.utils.hex.toBytes(STORAGE_KEY);
+  const encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
+  const iv = encryptedBytes.slice(0, 16);
+  const aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+  const decryptedBytes = aesCbc.decrypt(encryptedBytes.slice(16));
+  const decryptedStripped = aesjs.padding.pkcs7.strip(decryptedBytes);
+  const decryptedText = aesjs.utils.utf8.fromBytes(decryptedStripped);
+  return decryptedText;
+};

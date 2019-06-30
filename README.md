@@ -94,6 +94,18 @@ It contains as less information as possible, normalized for efficient access.
 
 The container components connect the store to the presentational components. It makes use of memoized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
 
+### Persistence of the store
+The store is persisted to permanent storage using Redux Persist.
+
+Only strictly needed parts of the store are persisted by configuring blacklists in the persist config object. 
+
+### Encryption of sensitive data
+Sensitive data is encrypted when saved to the store, and decrypted when retrieved, using functions in lib/utils.js.
+
+AES with 128-bit key and CBC mode is used. The initialization vector is generated on every encrypt operation using UUID v4 and stored in front of the encrypted text. 
+
+The encryption key is in a .env file outside of the source code, only accessible in a build environment.
+
 ### Splash screen
 The splash screen has been developed following mostly [this awesome article by Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
 

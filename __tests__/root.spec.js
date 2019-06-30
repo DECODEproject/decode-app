@@ -21,6 +21,7 @@
 import reducer, { ACTIONS } from 'redux/reducer';
 
 const initialState = {
+  attributes: {},
   walkthrough: {
     firstRun: true,
     showTooltip: {
@@ -36,6 +37,7 @@ const initialState = {
 };
 
 const differentState = {
+  attributes: {},
   walkthrough: {
     firstRun: false,
     showTooltip: {
