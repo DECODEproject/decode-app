@@ -95,7 +95,9 @@ It contains as less information as possible, normalized for efficient access.
 The container components connect the store to the presentational components. It makes use of memoized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
 
 ### Persistence of the store
-The store is persisted to permanent storage using Redux Persist.
+The store is persisted to permanent storage using Redux Persist and the AsyncStorage engine, which leaves the information in the following locations:
+- iOS: The private Documents directory of the app
+- Android: The private SQLite database of the app
 
 Only strictly needed parts of the store are persisted by configuring blacklists in the persist config object. 
 
