@@ -21,9 +21,10 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, mapObjIndexed, values, compose,
+  prop, mapObjIndexed, values, compose, reject, keys, contains,
 } from 'ramda';
 import { encrypt, decrypt } from 'lib/utils';
+import { listAttributes } from 'api/atlas-client';
 
 const initialState = {};
 
@@ -55,6 +56,19 @@ export const getAllAttributes = createSelector(
       name,
       value: decrypt(value),
     })),
+  ),
+);
+
+export const getAllAttributeNames = createSelector(
+  getStoreBranch,
+  keys,
+);
+
+export const getFilteredAtlasAttributes = createSelector(
+  getAllAttributeNames,
+  allAttributeNames => reject(
+    ({ name }) => contains(name, allAttributeNames),
+    listAttributes(),
   ),
 );
 

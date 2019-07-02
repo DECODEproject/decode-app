@@ -20,21 +20,22 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Image } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import image from './empty.png';
 import { Container, Text } from './EmptyList.Styles';
 
-const EmptyList = () => {
-  const { t } = useTranslation('attributes');
-  return (
-    <Container>
-      <Image source={image} />
-      <Text>{t('empty')}</Text>
-    </Container>
-  );
-};
+const EmptyList = ({ text }) => (
+  <Container>
+    <Image source={image} />
+    <Text>{text}</Text>
+  </Container>
+);
 
 EmptyList.displayName = 'EmptyList';
+
+EmptyList.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 export default EmptyList;

@@ -19,4 +19,17 @@
  * email: info@dribia.com
  */
 
-export default from './AtlasList.Container';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { getFilteredAtlasAttributes } from 'redux/modules/attributes';
+import Component from './AtlasList.Component';
+
+const mapStateToProps = createStructuredSelector({
+  attributes: getFilteredAtlasAttributes,
+});
+
+const ConnectedComponent = connect(mapStateToProps)(Component);
+
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;

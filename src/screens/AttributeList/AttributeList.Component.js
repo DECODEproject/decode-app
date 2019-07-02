@@ -24,7 +24,7 @@ import PropTypes from 'prop-types';
 import { Button, FlatList } from 'react-native';
 import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
-import EmptyList from './EmptyList';
+import EmptyList from 'lib/Components/EmptyList';
 import { Container, ListContainer, ButtonsContainer } from './AttributeList.Styles';
 import AttributeItem, { AttributeItemPropType } from './AttributeItem/AttributeItem.Component';
 
@@ -33,7 +33,7 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
   return (
     <Container>
       <ListContainer>
-        {isEmpty(attributes) ? (<EmptyList />)
+        {isEmpty(attributes) ? (<EmptyList text={t('empty')} />)
           : (
             <FlatList
               data={attributes}

@@ -19,8 +19,9 @@
  * email: info@dribia.com
  */
 
+import { pluck } from 'ramda';
 import reducer, {
-  getAttribute, saveAttribute, getAllAttributes,
+  getAttribute, saveAttribute, getAllAttributes, getFilteredAtlasAttributes, getAllAttributeNames,
 } from 'redux/modules/attributes';
 import { encrypt, decrypt } from 'lib/utils';
 
@@ -111,5 +112,39 @@ describe('Attribute tests', () => {
     expect(getAllAttributes({
       attributes: {},
     })).toEqual([]);
+  });
+
+  test('All attribute names', () => {
+    expect((getAllAttributeNames({
+      attributes: {
+        gender: encrypt('male'),
+        birthDate: encrypt('23/3/99'),
+      },
+    }))).toEqual(['gender', 'birthDate']);
+  });
+
+  test('Filter atlas attributes', () => {
+    expect(pluck('name')(getFilteredAtlasAttributes({
+      attributes: {
+        gender: encrypt('male'),
+        birthDate: encrypt('23/3/99'),
+      },
+    }))).toEqual(['address']);
+  });
+
+  test('Filter atlas attributes - all', () => {
+    expect(pluck('name')(getFilteredAtlasAttributes({
+      attributes: {
+        gender: encrypt('male'),
+        birthDate: encrypt('23/3/99'),
+        address: encrypt('981 Hardman Road'),
+      },
+    }))).toEqual([]);
+  });
+
+  test('Filter atlas attributes - none', () => {
+    expect(pluck('name')(getFilteredAtlasAttributes({
+      attributes: {},
+    }))).toEqual(['gender', 'birthDate', 'address']);
   });
 });

@@ -53,6 +53,7 @@ export default {
     available: 'Atributos disponibles',
     my: 'Mis atributos',
     empty: 'Empecemos por añadir algunos datos.\nHaz click en el botón inferior para empezar',
+    emptyAtlas: 'Ya tienes un valor para todos los datos posibles.',
     enterValue: 'Introduce un valor',
     save: 'Guardar',
   },

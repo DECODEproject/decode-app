@@ -22,7 +22,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { listAttributes } from 'api/atlas-client';
+import { isEmpty } from 'ramda';
+import EmptyList from 'lib/Components/EmptyList';
 import { Container, ListContainer } from './AtlasList.Styles';
 import AtlasItem, { AtlasItemPropType } from './AtlasItem/AtlasItem.Component';
 
@@ -30,11 +31,13 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
     <Container>
-      <ListContainer
-        data={attributes}
-        renderItem={({ item }) => <AtlasItem item={item} t={t} navigate={navigate} />}
-        keyExtractor={item => item.name}
-      />
+      {isEmpty(attributes) ? (<EmptyList text={t('emptyAtlas')} />) : (
+        <ListContainer
+          data={attributes}
+          renderItem={({ item }) => <AtlasItem item={item} t={t} navigate={navigate} />}
+          keyExtractor={item => item.name}
+        />
+      )}
     </Container>
   );
 };
@@ -42,14 +45,10 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
 AtlasList.displayName = 'AtlasList';
 
 AtlasList.propTypes = {
-  attributes: PropTypes.arrayOf(AtlasItemPropType),
+  attributes: PropTypes.arrayOf(AtlasItemPropType).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-};
-
-AtlasList.defaultProps = {
-  attributes: listAttributes(),
 };
 
 AtlasList.navigationOptions = ({ screenProps: { t } }) => ({
