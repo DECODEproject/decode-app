@@ -21,7 +21,7 @@
 
 import React, { useEffect } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import { I18nextProvider, withTranslation } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
 import { ThemeProvider } from 'styled-components';
 import SplashScreen from 'react-native-splash-screen';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -45,4 +45,4 @@ const App = () => {
   );
 };
 
-export default withTranslation()(App);
+export default App;

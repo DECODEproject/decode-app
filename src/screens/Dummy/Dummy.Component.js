@@ -21,7 +21,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Button, Dimensions, PixelRatio } from 'react-native';
+import {
+  View, Button, Dimensions, PixelRatio,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
