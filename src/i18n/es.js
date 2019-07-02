@@ -51,6 +51,7 @@ export default {
   attributes: {
     add: 'Añadir atributo',
     available: 'Atributos disponibles',
+    confirmDelete: '¿Seguro que quieres borrar {{ name }}?',
     my: 'Mis atributos',
     empty: 'Empecemos por añadir algunos datos.\nHaz click en el botón inferior para empezar',
     emptyAtlas: 'Ya tienes un valor para todos los datos posibles.',

@@ -21,31 +21,31 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RectButton } from 'react-native-gesture-handler';
-import { Container, Name, Value } from './AttributeItem.Styles';
+import { TouchableOpacity as Button } from 'react-native';
+import {
+  Container, Info, Buttons, Name, Value, Icon,
+} from './AttributeItem.Styles';
 
-const AttributeItem = ({ t, navigate, item: { name, value } }) => (
-  <RectButton
-    key={name}
-    onPress={() => navigate('EditAttribute', { name, value })}
-  >
-    <Container>
-      <Name>{t(name)}</Name>
+const AttributeItem = ({
+  name, value, onEdit, onDelete,
+}) => (
+  <Container>
+    <Info>
+      <Name>{name}</Name>
       <Value>{value}</Value>
-    </Container>
-  </RectButton>
+    </Info>
+    <Buttons>
+      <Button onPress={onEdit}><Icon name="pencil" /></Button>
+      <Button onPress={onDelete}><Icon name="trash-o" /></Button>
+    </Buttons>
+  </Container>
 );
 
-export const AttributeItemPropType = PropTypes.shape({
-  name: PropTypes.string,
-  type: PropTypes.string,
-  value: PropTypes.string,
-});
-
 AttributeItem.propTypes = {
-  item: AttributeItemPropType.isRequired,
-  t: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default AttributeItem;

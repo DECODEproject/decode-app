@@ -29,6 +29,7 @@ export const Container = styled.View(({ theme: { backgroundColor } }) => ({
 
 export const ListContainer = styled.View({
   flex: 9,
+  flexDirection: 'column',
 });
 
 export const ButtonsContainer = styled.View({

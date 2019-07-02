@@ -21,14 +21,18 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getAllAttributes } from 'redux/modules/attributes';
+import { getAllAttributes, deleteAttribute } from 'redux/modules/attributes';
 import Component from './AttributeList.Component';
 
 const mapStateToProps = createStructuredSelector({
   attributes: getAllAttributes,
 });
 
-const ConnectedComponent = connect(mapStateToProps)(Component);
+const mapDispatchToProps = {
+  onDelete: name => deleteAttribute(name),
+};
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 ConnectedComponent.navigationOptions = Component.navigationOptions;
 

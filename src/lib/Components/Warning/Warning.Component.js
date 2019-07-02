@@ -37,7 +37,13 @@ const Warning = ({ navigation: { goBack, getParam } }) => {
         <Message>{message}</Message>
       </MessageContainer>
       <Buttons>
-        <Button title={t('confirm')} onPress={() => onConfirm()} />
+        <Button
+          title={t('confirm')}
+          onPress={() => {
+            onConfirm();
+            goBack();
+          }}
+        />
         <Button title={t('cancel')} onPress={() => goBack()} />
       </Buttons>
     </Container>

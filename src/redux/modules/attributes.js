@@ -30,12 +30,18 @@ const initialState = {};
 
 export const ACTIONS = {
   SAVE_ATTRIBUTE: 'SAVE_ATTRIBUTE',
+  DELETE_ATTRIBUTE: 'DELETE_ATTRIBUTE',
 };
 
 export const saveAttribute = (id, value) => ({
   type: ACTIONS.SAVE_ATTRIBUTE,
   id,
   value,
+});
+
+export const deleteAttribute = id => ({
+  type: ACTIONS.DELETE_ATTRIBUTE,
+  id,
 });
 
 const getStoreBranch = prop('attributes');
@@ -79,6 +85,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [id]: encrypt(value),
+      };
+    }
+    case ACTIONS.DELETE_ATTRIBUTE: {
+      const { id } = action;
+      const { [id]: filteredOut, ...rest } = state;
+      return {
+        ...rest,
       };
     }
     default:

@@ -26,9 +26,9 @@ import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import EmptyList from 'lib/Components/EmptyList';
 import { Container, ListContainer, ButtonsContainer } from './AttributeList.Styles';
-import AttributeItem, { AttributeItemPropType } from './AttributeItem/AttributeItem.Component';
+import AttributeItem from './AttributeItem';
 
-const AttributeList = ({ attributes, navigation: { navigate } }) => {
+const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
     <Container>
@@ -37,8 +37,20 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
           : (
             <FlatList
               data={attributes}
-              renderItem={({ item }) => <AttributeItem item={item} t={t} navigate={navigate} />}
               keyExtractor={item => item.name}
+              renderItem={
+                ({ item: { name, value } }) => (
+                  <AttributeItem
+                    name={t(name)}
+                    value={value}
+                    onEdit={() => navigate('EditAttribute', { name, value })}
+                    onDelete={() => navigate('Warning', {
+                      message: t('confirmDelete', { name: t(name) }),
+                      onConfirm: () => onDelete(name),
+                    })}
+                  />
+                )
+              }
             />
           )
       }
@@ -56,7 +68,11 @@ const AttributeList = ({ attributes, navigation: { navigate } }) => {
 AttributeList.displayName = 'AttributeList';
 
 AttributeList.propTypes = {
-  attributes: PropTypes.arrayOf(AttributeItemPropType).isRequired,
+  attributes: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+  })).isRequired,
+  onDelete: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

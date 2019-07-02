@@ -21,7 +21,12 @@
 
 import { pluck } from 'ramda';
 import reducer, {
-  getAttribute, saveAttribute, getAllAttributes, getFilteredAtlasAttributes, getAllAttributeNames,
+  getAttribute,
+  saveAttribute,
+  deleteAttribute,
+  getAllAttributes,
+  getFilteredAtlasAttributes,
+  getAllAttributeNames,
 } from 'redux/modules/attributes';
 import { encrypt, decrypt } from 'lib/utils';
 
@@ -146,5 +151,30 @@ describe('Attribute tests', () => {
     expect(pluck('name')(getFilteredAtlasAttributes({
       attributes: {},
     }))).toEqual(['gender', 'birthDate', 'address']);
+  });
+
+  test('Delete attribute', () => {
+    expect(
+      getAllAttributes({
+        attributes: reducer({
+          gender: encrypt('male'),
+          birthDate: encrypt('23/3/99'),
+        }, deleteAttribute('birthDate')),
+      }),
+    ).toEqual([
+      {
+        name: 'gender',
+        value: 'male',
+      }]);
+  });
+
+  test('Delete attribute - empty', () => {
+    expect(
+      getAllAttributes({
+        attributes: reducer({
+          birthDate: encrypt('23/3/99'),
+        }, deleteAttribute('birthDate')),
+      }),
+    ).toEqual([]);
   });
 });
