@@ -20,6 +20,7 @@
  */
 
 import React from 'react';
+import { Dimensions } from 'react-native';
 import { childrenPropTypes } from 'lib/utils';
 import styled from 'styled-components/native';
 
@@ -60,5 +61,5 @@ Subtitle.propTypes = ({
 
 export const CarouselImage = styled.Image({
   width: '95%',
-  height: 400,
+  height: Dimensions.get('window').height / 2,
 });

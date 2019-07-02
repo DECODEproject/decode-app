@@ -21,7 +21,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Button } from 'react-native';
+import { View, Button, Dimensions, PixelRatio } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
@@ -32,9 +32,15 @@ const Dummy = ({
   total, refresh, date, navigation, loading,
 }) => {
   const { t } = useTranslation();
+  const { width: ww, height: wh } = Dimensions.get('window');
+  const { width: sw, height: sh } = Dimensions.get('screen');
   return (
     <Container>
       <Greeting>{t('greeting')}</Greeting>
+      <Line>{`Window dimensions: ${ww} x ${wh}`}</Line>
+      <Line>{`Screen dimensions: ${sw} x ${sh}`}</Line>
+      <Line>{`Pixel ratio: ${PixelRatio.get()}`}</Line>
+      <Line>{`Font scale: ${PixelRatio.getFontScale()}`}</Line>
       <Line>{t('refreshStats')}</Line>
       <WalkthroughStep screen="dummy" id="refresh">
         <Button title={t('refresh')} onPress={refresh} />
