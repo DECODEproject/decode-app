@@ -23,7 +23,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { AttributeInput, Container } from './EditAttribute.Styles';
+import { Screen } from 'lib/styles';
+import { AttributeInput } from './EditAttribute.Styles';
 
 const EditAttribute = ({
   navigation: { navigate, getParam }, validationError, onSave,
@@ -33,7 +34,7 @@ const EditAttribute = ({
   const valueParam = getParam('value');
   const [value, setValue] = useState(valueParam);
   return (
-    <Container>
+    <Screen centerAligned>
       <AttributeInput
         placeholder={t('enterValue')}
         autoCapitalize="none"
@@ -57,7 +58,7 @@ const EditAttribute = ({
       {
         validationError ? <Text>{validationError}</Text> : null
       }
-    </Container>
+    </Screen>
   );
 };
 

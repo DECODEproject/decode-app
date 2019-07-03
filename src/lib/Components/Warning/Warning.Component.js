@@ -23,18 +23,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import {
-  Container, Buttons, Message, MessageContainer,
-} from './Warning.Styles';
+import { Screen, Heading } from 'lib/styles';
+import { Buttons, MessageContainer } from './Warning.Styles';
 
 const Warning = ({ navigation: { goBack, getParam } }) => {
   const { t } = useTranslation();
   const message = getParam('message');
   const onConfirm = getParam('onConfirm');
   return (
-    <Container>
+    <Screen>
       <MessageContainer>
-        <Message>{message}</Message>
+        <Heading>{message}</Heading>
       </MessageContainer>
       <Buttons>
         <Button
@@ -46,7 +45,7 @@ const Warning = ({ navigation: { goBack, getParam } }) => {
         />
         <Button title={t('cancel')} onPress={() => goBack()} />
       </Buttons>
-    </Container>
+    </Screen>
   );
 };
 

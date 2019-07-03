@@ -20,17 +20,9 @@
  */
 
 import styled from 'styled-components/native';
+import { Heading as CommonHeading } from 'lib/styles';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor,
-}));
-
-export const Greeting = styled.Text({
-  fontSize: 20,
-  textAlign: 'center',
+export const Heading = styled(CommonHeading)({
   margin: 10,
 });
 

@@ -22,14 +22,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
+import { Screen } from 'lib/styles';
 import image from './empty.png';
-import { Container, Text } from './EmptyList.Styles';
+import { Text } from './EmptyList.Styles';
 
 const EmptyList = ({ text }) => (
-  <Container>
-    <Image source={image} />
+  <Screen centerAligned>
+    <Image source={image} style={{ color: 'red' }} />
     <Text>{text}</Text>
-  </Container>
+  </Screen>
 );
 
 EmptyList.displayName = 'EmptyList';

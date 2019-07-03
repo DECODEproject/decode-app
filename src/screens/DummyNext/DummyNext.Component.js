@@ -23,7 +23,7 @@ import React from 'react';
 import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
-import { Container, Title } from './DummyNext.Styles';
+import { Screen, Heading } from 'lib/styles';
 
 const pleaseCrash = () => {
   throw new Error('This is a crash test');
@@ -32,15 +32,15 @@ const pleaseCrash = () => {
 const DummyNext = () => {
   const { t } = useTranslation();
   return (
-    <Container>
-      <Title>{t('second')}</Title>
+    <Screen centerAligned>
+      <Heading>{t('second')}</Heading>
       <WalkthroughStep screen="dummyNext" id="crash">
         <Button
           title="Crash, please"
           onPress={pleaseCrash}
         />
       </WalkthroughStep>
-    </Container>
+    </Screen>
   );
 };
 

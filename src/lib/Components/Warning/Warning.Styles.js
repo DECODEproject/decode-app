@@ -21,19 +21,11 @@
 
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  backgroundColor,
-}));
-
 export const MessageContainer = styled.View({
   flex: 0.5,
   justifyContent: 'flex-end',
   alignItems: 'center',
-});
-
-export const Message = styled.Text({
-  textAlign: 'center',
+  padding: 20,
 });
 
 export const Buttons = styled.View({

@@ -20,17 +20,18 @@
  */
 
 import React from 'react';
+import { FlatList as ListContainer } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty } from 'ramda';
 import EmptyList from 'lib/Components/EmptyList';
-import { Container, ListContainer } from './AtlasList.Styles';
+import { Screen } from 'lib/styles';
 import AtlasItem, { AtlasItemPropType } from './AtlasItem/AtlasItem.Component';
 
 const AtlasList = ({ attributes, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
-    <Container>
+    <Screen>
       {isEmpty(attributes) ? (<EmptyList text={t('emptyAtlas')} />) : (
         <ListContainer
           data={attributes}
@@ -38,7 +39,7 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
           keyExtractor={item => item.name}
         />
       )}
-    </Container>
+    </Screen>
   );
 };
 

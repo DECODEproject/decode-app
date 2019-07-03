@@ -20,17 +20,8 @@
  */
 
 import styled from 'styled-components/native';
+import { Heading } from 'lib/styles';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor,
-}));
-
-export const Text = styled.Text({
-  color: '#888',
-  fontSize: 18,
+export const Text = styled(Heading)({
   marginTop: 25,
-  textAlign: 'center',
 });

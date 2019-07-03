@@ -25,13 +25,14 @@ import { Button, FlatList } from 'react-native';
 import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import EmptyList from 'lib/Components/EmptyList';
-import { Container, ListContainer, ButtonsContainer } from './AttributeList.Styles';
+import { Screen } from 'lib/styles';
+import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
 import AttributeItem from './AttributeItem';
 
 const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
-    <Container>
+    <Screen>
       <ListContainer>
         {isEmpty(attributes) ? (<EmptyList text={t('empty')} />)
           : (
@@ -61,7 +62,7 @@ const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
           onPress={() => navigate('AtlasList')}
         />
       </ButtonsContainer>
-    </Container>
+    </Screen>
   );
 };
 

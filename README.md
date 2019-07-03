@@ -133,3 +133,7 @@ The Main screen is a DrawerNavigator, which defines all the menu items accessibl
 
 Each screen in the drawer is a StackNavigator, with screens that can go either forwards via links in the screen, or backwards via the back button. Some stacks have a single screen so the only way to get out of them is via the menu. The first screen in a stack always has the menu button at the header top left, while the other screens have the back button.
  
+### Theme and common styles
+The lib/theme.js file contain common style variables as a centralized place for declaring colors, sizes, fonts, etc
+
+The lib/styles.js file contains common styles, based on the theme variables, that are reused in any part of the app, perhaps slightly modified. Examples of styles are Heading or Screen (so that every screen uses the same heading style or layout)

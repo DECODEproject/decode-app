@@ -21,12 +21,6 @@
 
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  backgroundColor,
-}));
-
 export const ListContainer = styled.View({
   flex: 9,
   flexDirection: 'column',
@@ -35,5 +29,4 @@ export const ListContainer = styled.View({
 export const ButtonsContainer = styled.View({
   flex: 1,
   justifyContent: 'flex-end',
-  paddingBottom: 10,
 });

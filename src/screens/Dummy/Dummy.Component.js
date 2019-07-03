@@ -28,7 +28,8 @@ import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
-import { Container, Greeting, Line } from './Dummy.Styles';
+import { Screen } from 'lib/styles';
+import { Heading, Line } from './Dummy.Styles';
 
 const Dummy = ({
   total, refresh, date, navigation, loading,
@@ -37,8 +38,8 @@ const Dummy = ({
   const { width: ww, height: wh } = Dimensions.get('window');
   const { width: sw, height: sh } = Dimensions.get('screen');
   return (
-    <Container>
-      <Greeting>{t('greeting')}</Greeting>
+    <Screen centerAligned>
+      <Heading>{t('greeting')}</Heading>
       <Line>{`Window dimensions: ${ww} x ${wh}`}</Line>
       <Line>{`Screen dimensions: ${sw} x ${sh}`}</Line>
       <Line>{`Pixel ratio: ${PixelRatio.get()}`}</Line>
@@ -66,7 +67,7 @@ const Dummy = ({
           onPress={() => navigation.navigate('DummyNext')}
         />
       </WalkthroughStep>
-    </Container>
+    </Screen>
   );
 };
 

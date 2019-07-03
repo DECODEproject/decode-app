@@ -43,14 +43,17 @@ export const Buttons = styled.View({
   alignItems: 'center',
 });
 
-export const Icon = styled(IconFontAwesome)({
+export const Icon = styled(IconFontAwesome)(({ theme: { primaryColor } }) => ({
+  color: primaryColor,
   fontSize: 20,
-});
+}));
 
-export const Name = styled.Text({
+export const Name = styled.Text(({ theme: { primaryColor } }) => ({
+  color: primaryColor,
   fontSize: 18,
   fontWeight: 'bold',
-});
+}));
 
-export const Value = styled.Text({
-});
+export const Value = styled.Text(({ theme: { primaryColor } }) => ({
+  color: primaryColor,
+}));

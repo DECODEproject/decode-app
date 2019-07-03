@@ -18,17 +18,19 @@
  *
  * email: info@dribia.com
  */
-
 import styled from 'styled-components/native';
 
-export const Container = styled.View(({ theme: { backgroundColor } }) => ({
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor,
-}));
+export const Screen = styled.SafeAreaView(
+  ({ theme: { backgroundColor }, centerAligned = false }) => ({
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: centerAligned ? 'center' : 'stretch',
+    backgroundColor,
+  }),
+);
 
-export const Title = styled.Text({
+export const Heading = styled.Text(({ theme: { primaryColor } }) => ({
+  color: primaryColor,
   fontSize: 20,
   textAlign: 'center',
-});
+}));

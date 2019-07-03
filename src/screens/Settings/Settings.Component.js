@@ -23,12 +23,12 @@ import React from 'react';
 import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { Container } from './Settings.Styles';
+import { Screen } from 'lib/styles';
 
 const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
   const { t } = useTranslation('settings');
   return (
-    <Container>
+    <Screen centerAligned>
       <Button title={t('review')} onPress={onReviewWalkthrough} />
       <Button
         title={t('reset')}
@@ -37,7 +37,7 @@ const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) =>
           onConfirm: onReset,
         })}
       />
-    </Container>
+    </Screen>
   );
 };
 
