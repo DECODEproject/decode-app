@@ -21,6 +21,7 @@
 
 const theme = {
   primaryColor: '#333',
+  disabledTextColor: '#666',
   backgroundColor: '#F5FCFF',
 };
 

@@ -19,24 +19,4 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image } from 'react-native';
-import { Screen } from 'lib/styles';
-import image from './empty.png';
-import { Text } from './EmptyList.Styles';
-
-const EmptyList = ({ text }) => (
-  <Screen centerAligned>
-    <Image source={image} />
-    <Text>{text}</Text>
-  </Screen>
-);
-
-EmptyList.displayName = 'EmptyList';
-
-EmptyList.propTypes = {
-  text: PropTypes.string.isRequired,
-};
-
-export default EmptyList;
+export default from './ListItem.Component';

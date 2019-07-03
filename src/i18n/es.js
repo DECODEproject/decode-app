@@ -60,6 +60,7 @@ export default {
   },
   applications: {
     available: 'Aplicaciones disponibles',
+    empty: 'No hay aplicaciones disponibles',
   },
   settings: {
     title: 'Preferencias',

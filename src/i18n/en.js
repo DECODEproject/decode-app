@@ -60,6 +60,7 @@ export default {
   },
   applications: {
     available: 'Available applications',
+    empty: 'There are no applications available',
   },
   settings: {
     title: 'Settings',

@@ -30,7 +30,8 @@ import DummyNext from 'screens/DummyNext';
 import AtlasList from 'screens/AttributeList/AtlasList';
 import AttributeList from 'screens/AttributeList';
 import EditAttribute from 'screens/AttributeList/EditAttribute';
-import Applications from 'screens/Applications';
+import ApplicationList from 'screens/ApplicationList';
+import ApplicationDetails from 'screens/ApplicationDetails';
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
@@ -52,12 +53,13 @@ const AttributeStack = createStackNavigator({
 });
 
 const ApplicationStack = createStackNavigator({
-  Applications: {
-    screen: Applications,
+  ApplicationList: {
+    screen: ApplicationList,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),
   },
+  ApplicationDetails,
 }, {
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),
@@ -154,10 +156,12 @@ const DrawerNavigator = createDrawerNavigator({
       drawerLabel: 'Test Dummy Screen',
     }),
   },
-}, {
+},
+{
   defaultNavigationOptions: () => ({
     drawerLockMode: 'locked-closed',
   }),
+  initialRouteName: 'ApplicationStack',
 });
 
 const RootNavigation = createStackNavigator({

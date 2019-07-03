@@ -22,34 +22,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RectButton } from 'react-native-gesture-handler';
-import { Container, Name, Description } from './AtlasItem.Styles';
+import { Container, Name, Description } from './ListItem.Styles';
 
-const AtlasItem = ({ t, item: { name, description }, navigate }) => (
-  <RectButton
-    key={name}
-    onPress={() => navigate('EditAttribute', { name })}
-  >
+const ListItem = ({
+  name, description, onPress, disabled,
+}) => (
+  <RectButton onPress={onPress}>
     <Container>
-      <Name>{t(name)}</Name>
-      <Description>{t(description)}</Description>
+      <Name disabled={disabled}>{name}</Name>
+      <Description disabled={disabled}>{description}</Description>
     </Container>
   </RectButton>
 );
 
-AtlasItem.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('chooseAttribute'),
-});
-
-export const AtlasItemPropType = PropTypes.shape({
-  name: PropTypes.string,
-  type: PropTypes.string,
-  description: PropTypes.string,
-});
-
-AtlasItem.propTypes = {
-  item: AtlasItemPropType.isRequired,
-  t: PropTypes.func.isRequired,
-  navigate: PropTypes.func.isRequired,
+ListItem.defaultProps = {
+  disabled: false,
 };
 
-export default AtlasItem;
+ListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+};
+
+export default ListItem;

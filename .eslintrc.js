@@ -33,6 +33,14 @@ module.exports = {
         'devDependencies': true,
       }
     ],
+    'object-curly-newline': [
+      'error',
+      {
+        'consistent': true,
+        'multiline': true,
+        "minProperties": 10,
+      }
+    ],
   },
   "settings": {
     'import/resolver': {

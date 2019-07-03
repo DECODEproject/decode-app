@@ -28,20 +28,21 @@ import EmptyList from 'lib/Components/EmptyList';
 import { Screen } from 'lib/styles';
 import ListItem from 'lib/Components/ListItem';
 
-const AtlasList = ({ attributes, navigation: { navigate } }) => {
-  const { t } = useTranslation('attributes');
+const ApplicationList = ({ applications, navigation: { navigate } }) => {
+  const { t } = useTranslation('applications');
   return (
     <Screen>
-      {isEmpty(attributes) ? (<EmptyList text={t('emptyAtlas')} />) : (
+      {isEmpty(applications) ? (<EmptyList text={t('empty')} />) : (
         <ListContainer
-          data={attributes}
+          data={applications}
           renderItem={
-            ({ item: { name, description } }) => (
+            ({ item: { name, title, uses, certificates } }) => (
               <ListItem
+                disabled={uses === 0}
                 id={name}
-                name={t(name)}
-                description={t(description)}
-                onPress={() => navigate('EditAttribute', { name })}
+                name={t(title)}
+                description={`uses: ${uses}, certificates: ${certificates}`}
+                onPress={() => navigate('ApplicationDetails', { name })}
               />
             )
           }
@@ -52,21 +53,22 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
   );
 };
 
-AtlasList.displayName = 'AtlasList';
+ApplicationList.displayName = 'ApplicationList';
 
-AtlasList.propTypes = {
-  attributes: PropTypes.arrayOf(PropTypes.shape({
+ApplicationList.propTypes = {
+  applications: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    uses: PropTypes.number.isRequired,
+    certificates: PropTypes.number.isRequired,
   })).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-AtlasList.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('attributes:available'),
+ApplicationList.navigationOptions = ({ screenProps: { t } }) => ({
+  title: t('applications:available'),
 });
 
-
-export default AtlasList;
+export default ApplicationList;

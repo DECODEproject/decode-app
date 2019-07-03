@@ -19,24 +19,17 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image } from 'react-native';
-import { Screen } from 'lib/styles';
-import image from './empty.png';
-import { Text } from './EmptyList.Styles';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { getApplicationStats } from 'redux/modules/applications';
+import Component from './ApplicationList.Component';
 
-const EmptyList = ({ text }) => (
-  <Screen centerAligned>
-    <Image source={image} />
-    <Text>{text}</Text>
-  </Screen>
-);
+const mapStateToProps = createStructuredSelector({
+  applications: getApplicationStats,
+});
 
-EmptyList.displayName = 'EmptyList';
+const ConnectedComponent = connect(mapStateToProps, null)(Component);
 
-EmptyList.propTypes = {
-  text: PropTypes.string.isRequired,
-};
+ConnectedComponent.navigationOptions = Component.navigationOptions;
 
-export default EmptyList;
+export default ConnectedComponent;

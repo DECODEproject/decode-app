@@ -1,4 +1,3 @@
-
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -20,18 +19,37 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
+import { createSelector } from 'reselect';
+import { prop, map, merge } from 'ramda';
+import { listApplications } from 'api/atlas-client';
 
-export const Container = styled.View({
-  borderBottomColor: '#ddd',
-  borderBottomWidth: 1,
-  padding: 16,
-});
+export const initialState = {
+  dddc: {
+    uses: 2,
+    certificates: 1,
+  },
+  bcnnow: {
+    uses: 0,
+    certificates: 0,
+  },
+};
 
-export const Name = styled.Text({
-  fontSize: 18,
-  fontWeight: 'bold',
-});
+const defaultStats = {
+  uses: 0,
+  certificates: 0,
+};
 
-export const Description = styled.Text({
-});
+const getStoreBranch = prop('applications');
+
+const getAtlasApplications = () => listApplications();
+
+export const getApplicationStats = createSelector(
+  getStoreBranch,
+  getAtlasApplications,
+  (userApplications, atlasApplications) => map(
+    atlasApp => merge(atlasApp, userApplications[atlasApp.name] || defaultStats),
+    atlasApplications,
+  ),
+);
+
+export default () => initialState;

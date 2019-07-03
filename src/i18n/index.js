@@ -65,7 +65,10 @@ i18n
   });
 
 mapObjIndexed(
-  (resourceBundle, lang) => i18n.addResourceBundle(lang, 'attributes', resourceBundle, true, true),
+  (resourceBundleGroup, groupKey) => mapObjIndexed(
+    (resourceBundle, lang) => i18n.addResourceBundle(lang, groupKey, resourceBundle, true, true),
+    resourceBundleGroup,
+  ),
   translations,
 );
 

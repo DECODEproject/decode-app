@@ -20,5 +20,6 @@
  */
 
 export * as attributes from './attributes';
+export * as applications from './applications';
 export * as walkthrough from './walkthrough';
 export * as dummy from './dummy';

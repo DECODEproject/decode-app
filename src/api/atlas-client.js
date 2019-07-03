@@ -24,3 +24,5 @@ import atlas from './atlas.json';
 export const getTranslations = () => atlas.translations;
 
 export const listAttributes = () => atlas.attributes;
+
+export const listApplications = () => atlas.applications;

@@ -19,9 +19,11 @@
  * email: info@dribia.com
  */
 import reducer, { ACTIONS } from 'redux/reducer';
+import { initialState as initialApplications } from 'redux/modules/applications';
 
 const initialState = {
   attributes: {},
+  applications: initialApplications,
   walkthrough: {
     firstRun: true,
     showTooltip: {
@@ -38,6 +40,7 @@ const initialState = {
 
 const differentState = {
   attributes: {},
+  applications: initialApplications,
   walkthrough: {
     firstRun: false,
     showTooltip: {

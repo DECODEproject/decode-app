@@ -19,4 +19,22 @@
  * email: info@dribia.com
  */
 
-export default from './AtlasItem.Component';
+import styled from 'styled-components/native';
+
+export const Container = styled.View({
+  borderBottomColor: '#ddd',
+  borderBottomWidth: 1,
+  padding: 16,
+});
+
+export const Name = styled.Text(({ disabled, theme: { primaryColor, disabledTextColor } }) => ({
+  fontSize: 18,
+  fontWeight: 'bold',
+  color: disabled ? disabledTextColor : primaryColor,
+}));
+
+export const Description = styled.Text(
+  ({ disabled, theme: { primaryColor, disabledTextColor } }) => ({
+    color: disabled ? disabledTextColor : primaryColor,
+  }),
+);
