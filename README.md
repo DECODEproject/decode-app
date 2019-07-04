@@ -1,3 +1,10 @@
+## Table of contents
+- [The DECODE App](#the-decode-app)
+- [Directory structure](#directory-structure)
+- [Starting a development environment](#starting-a-development-environment)
+- [Available scripts](#available-scripts)
+- [Implementation notes](#implementation-notes)
+
 ## The DECODE App
 This app provides a platform where people can control their personal data, choosing where and how to share it. It allows users to input their data and keep it saved on their phone for future use. It is part of the [DECODE project](https://decodeproject.eu)
 
