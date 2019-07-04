@@ -59,8 +59,11 @@ export default {
     save: 'Desar',
   },
   applications: {
+    activate: 'Activar servei via QR',
     available: 'Aplicacions disponibles',
     empty: 'No hi ha aplicacions disponibles',
+    history: 'Historial d\'ús',
+    more: '+ informació',
   },
   settings: {
     title: 'Preferències',

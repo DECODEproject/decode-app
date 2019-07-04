@@ -19,10 +19,13 @@
  * email: info@dribia.com
  */
 
-import atlas from './atlas.json';
+import atlas from './atlas/atlas.json';
+import images from './atlas/images';
 
 export const getTranslations = () => atlas.translations;
 
 export const listAttributes = () => atlas.attributes;
 
 export const listApplications = () => atlas.applications;
+
+export const getImage = id => images[id];

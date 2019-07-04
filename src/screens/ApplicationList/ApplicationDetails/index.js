@@ -18,19 +18,5 @@
  *
  * email: info@dribia.com
  */
-import styled from 'styled-components/native';
 
-export const Screen = styled.SafeAreaView(
-  ({ theme: { backgroundColor }, topJustified = false, centerAligned = false }) => ({
-    flex: 1,
-    justifyContent: topJustified ? 'flex-start' : 'center',
-    alignItems: centerAligned ? 'center' : 'stretch',
-    backgroundColor,
-  }),
-);
-
-export const Heading = styled.Text(({ theme: { primaryColor } }) => ({
-  color: primaryColor,
-  fontSize: 20,
-  textAlign: 'center',
-}));
+export default from './ApplicationDetails.Component';

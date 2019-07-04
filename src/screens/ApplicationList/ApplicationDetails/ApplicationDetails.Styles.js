@@ -18,19 +18,25 @@
  *
  * email: info@dribia.com
  */
+
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Screen = styled.SafeAreaView(
-  ({ theme: { backgroundColor }, topJustified = false, centerAligned = false }) => ({
-    flex: 1,
-    justifyContent: topJustified ? 'flex-start' : 'center',
-    alignItems: centerAligned ? 'center' : 'stretch',
-    backgroundColor,
-  }),
-);
+export const ApplicationImage = styled.Image({
+  marginVertical: 10,
+  maxWidth: '95%',
+  maxHeight: Dimensions.get('window').height / 4,
+});
 
-export const Heading = styled.Text(({ theme: { primaryColor } }) => ({
-  color: primaryColor,
-  fontSize: 20,
+export const Description = styled.View({
+  padding: 40,
+});
+
+export const Line = styled.Text({
   textAlign: 'center',
-}));
+  padding: 5,
+});
+
+export const More = styled(Line)({
+  fontWeight: 'bold',
+});

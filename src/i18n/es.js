@@ -59,8 +59,11 @@ export default {
     save: 'Guardar',
   },
   applications: {
+    activate: 'Activar servicio vía QR',
     available: 'Aplicaciones disponibles',
     empty: 'No hay aplicaciones disponibles',
+    history: 'Historial de uso',
+    more: '+ información',
   },
   settings: {
     title: 'Preferencias',

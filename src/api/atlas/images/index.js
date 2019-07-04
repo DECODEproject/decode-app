@@ -19,24 +19,7 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import people from './people.jpg';
+import city from './city.png';
 
-const ApplicationDetails = ({ navigation: { getParam } }) => (
-  <View>
-    <Text>{`ApplicationDetails for ${getParam('name')} go here`}</Text>
-  </View>
-);
-
-ApplicationDetails.navigationOptions = ({ navigation: { getParam } }) => ({
-  title: getParam('name'),
-});
-
-ApplicationDetails.propTypes = {
-  navigation: PropTypes.shape({
-    getParam: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
-export default ApplicationDetails;
+export default { people, city };

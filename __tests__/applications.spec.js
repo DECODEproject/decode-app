@@ -20,6 +20,29 @@
  */
 
 import reducer, { initialState, getApplicationStats } from 'redux/modules/applications';
+import { getImage } from 'api/atlas-client';
+
+const baseFinalState = [{
+  id: 'dddc',
+  name: 'dddcName',
+  title: 'dddcTitle',
+  image: 'people',
+  link: 'https://dddc.decodeproject.eu',
+  description: 'dddcDesc',
+  uses: 0,
+  certificates: 0,
+},
+{
+  id: 'bcnnow',
+  name: 'bcnnowName',
+  title: 'bcnnowTitle',
+  image: 'city',
+  link: 'http://bcnnow.decodeproject.eu',
+  description: 'bcnnowDesc',
+  uses: 0,
+  certificates: 0,
+},
+];
 
 describe('Application tests', () => {
   test('Default state', () => {
@@ -33,17 +56,11 @@ describe('Application tests', () => {
       }),
     ).toEqual([
       {
-        name: 'dddc',
-        title: 'dddcTitle',
+        ...baseFinalState[0],
         uses: 2,
         certificates: 1,
       },
-      {
-        name: 'bcnnow',
-        title: 'bcnnowTitle',
-        uses: 0,
-        certificates: 0,
-      },
+      baseFinalState[1],
     ]);
   });
 
@@ -52,20 +69,7 @@ describe('Application tests', () => {
       getApplicationStats({
         applications: {},
       }),
-    ).toEqual([
-      {
-        name: 'dddc',
-        title: 'dddcTitle',
-        uses: 0,
-        certificates: 0,
-      },
-      {
-        name: 'bcnnow',
-        title: 'bcnnowTitle',
-        uses: 0,
-        certificates: 0,
-      },
-    ]);
+    ).toEqual(baseFinalState);
   });
 
   test('Application stats - extra user apps', () => {
@@ -78,19 +82,11 @@ describe('Application tests', () => {
           },
         },
       }),
-    ).toEqual([
-      {
-        name: 'dddc',
-        title: 'dddcTitle',
-        uses: 0,
-        certificates: 0,
-      },
-      {
-        name: 'bcnnow',
-        title: 'bcnnowTitle',
-        uses: 0,
-        certificates: 0,
-      },
-    ]);
+    ).toEqual(baseFinalState);
+  });
+
+  test('getImage', () => {
+    expect(getImage('people')).toBeDefined();
+    expect(getImage('notExist')).toBeUndefined();
   });
 });

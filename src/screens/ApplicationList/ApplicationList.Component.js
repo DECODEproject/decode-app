@@ -36,17 +36,27 @@ const ApplicationList = ({ applications, navigation: { navigate } }) => {
         <ListContainer
           data={applications}
           renderItem={
-            ({ item: { name, title, uses, certificates } }) => (
+            ({ item: { id, name, title, description, link, image, uses, certificates } }) => (
               <ListItem
                 disabled={uses === 0}
-                id={name}
+                id={id}
                 name={t(title)}
                 description={`uses: ${uses}, certificates: ${certificates}`}
-                onPress={() => navigate('ApplicationDetails', { name })}
+                onPress={
+                  () => navigate(
+                    'ApplicationDetails', {
+                      id,
+                      name: t(name),
+                      image,
+                      description: t(description),
+                      link,
+                      showHistory: (uses > 0),
+                    },
+                  )}
               />
             )
           }
-          keyExtractor={prop('name')}
+          keyExtractor={prop('id')}
         />
       )}
     </Screen>
@@ -57,8 +67,10 @@ ApplicationList.displayName = 'ApplicationList';
 
 ApplicationList.propTypes = {
   applications: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
     uses: PropTypes.number.isRequired,
     certificates: PropTypes.number.isRequired,
   })).isRequired,

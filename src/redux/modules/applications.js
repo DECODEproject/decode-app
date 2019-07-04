@@ -47,7 +47,7 @@ export const getApplicationStats = createSelector(
   getStoreBranch,
   getAtlasApplications,
   (userApplications, atlasApplications) => map(
-    atlasApp => merge(atlasApp, userApplications[atlasApp.name] || defaultStats),
+    atlasApp => merge(atlasApp, userApplications[atlasApp.id] || defaultStats),
     atlasApplications,
   ),
 );

@@ -59,8 +59,11 @@ export default {
     save: 'Save',
   },
   applications: {
+    activate: 'Activate service via QR',
     available: 'Available applications',
     empty: 'There are no applications available',
+    history: 'Usage history',
+    more: '+ information',
   },
   settings: {
     title: 'Settings',

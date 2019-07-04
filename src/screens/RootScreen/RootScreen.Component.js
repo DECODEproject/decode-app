@@ -31,7 +31,7 @@ import AtlasList from 'screens/AttributeList/AtlasList';
 import AttributeList from 'screens/AttributeList';
 import EditAttribute from 'screens/AttributeList/EditAttribute';
 import ApplicationList from 'screens/ApplicationList';
-import ApplicationDetails from 'screens/ApplicationDetails';
+import ApplicationDetails from 'screens/ApplicationList/ApplicationDetails';
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
@@ -60,6 +60,7 @@ const ApplicationStack = createStackNavigator({
     }),
   },
   ApplicationDetails,
+  Scanner,
 }, {
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),

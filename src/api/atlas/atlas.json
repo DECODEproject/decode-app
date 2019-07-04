@@ -18,12 +18,20 @@
   ],
   "applications": [
     {
-      "name": "dddc",
-      "title": "dddcTitle"
+      "id": "dddc",
+      "name": "dddcName",
+      "title": "dddcTitle",
+      "image": "people",
+      "link": "https://dddc.decodeproject.eu",
+      "description": "dddcDesc"
     },
     {
-      "name": "bcnnow",
-      "title": "bcnnowTitle"
+      "id": "bcnnow",
+      "name": "bcnnowName",
+      "title": "bcnnowTitle",
+      "image": "city",
+      "link": "http://bcnnow.decodeproject.eu",
+      "description": "bcnnowDesc"
     }
   ],
   "translations": {
@@ -58,16 +66,28 @@
     },
     "applications": {
       "ca": {
+        "dddcName": "DDDC",
         "dddcTitle": "Signar una petició a DDDC",
-        "bcnnowTitle": "Entrar a BCNNow"
+        "dddcDesc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura y auditable.",
+        "bcnnowName": "BCNNow",
+        "bcnnowTitle": "Entrar a BCNNow",
+        "bcnnowDesc": "BCNNow permet entrar a la plataforma de manera anonimitzada, pero compartint algunes dades per a obtenir visualitzacions personalitzades."
       },
       "es": {
+        "dddcName": "DDDC",
         "dddcTitle": "Firmar una petición en DDDC",
-        "bcnnowTitle": "Entrar en BCNNow"
+        "dddcDesc": "DECODE permite firmar peticiones de la plataforma DDDC de manera anonimizada, segura y auditable.",
+        "bcnnowName": "BCNNow",
+        "bcnnowTitle": "Entrar en BCNNow",
+        "bcnnowDesc": "BCNNow permite entrar en la plataforma de manera anonimizada, pero compartiendo algunos datos para obtener visualizaciones personalizadas."
       },
       "en": {
+        "dddcName": "DDDC",
         "dddcTitle": "Sign a petition in DDDC",
-        "bcnnowTitle": "Enter BCNNow"
+        "dddcDesc": "DECODE allows to sign petitions of the DDDC platform in an anonymous, safe and auditable way.",
+        "bcnnowName": "BCNNow",
+        "bcnnowTitle": "Enter BCNNow",
+        "bcnnowDesc": "BCNNow allows to enter the platform in an anonymous way, but sharing some data to obtain personalized visualizations."
       }
     }
   }
