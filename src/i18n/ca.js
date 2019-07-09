@@ -81,6 +81,9 @@ export default {
   },
   about: {
     title: 'Informació',
+    text1: 'L\'app de DECODE forma part d\'un projecte per a retornar la <b>sobirania de dades</b> als ciutadans i ciutadanes',
+    text2: 'Amb l\'app de DECODE pots <b>compartir les teves dades</b> amb les <b>aplicacions compatibles</b> mitjançant <b>certificats criptogràfics</b> de darrera generació',
+    more: 'Vull més informació!',
   },
   scanner: {
     title: 'Escàner QR',

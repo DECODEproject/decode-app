@@ -81,6 +81,9 @@ export default {
   },
   about: {
     title: 'Information',
+    text1: 'The DECODE app is part of a project to return <b>data sovereignty</b> to citizens',
+    text2: 'With the DECODE app you can <b>share your data</b> with <b>compatible applications</b> using last generation <b>cryptographic certificates</b>',
+    more: 'I want more information!',
   },
   scanner: {
     title: 'QR scanner',

@@ -18,18 +18,11 @@
  *
  * email: info@dribia.com
  */
+import styled from 'styled-components/native';
 
-import React from 'react';
-import { View, Text } from 'react-native';
-
-const About = () => (
-  <View>
-    <Text>About goes here</Text>
-  </View>
-);
-
-About.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('About'),
-});
-
-export default About;
+export const Paragraph = styled.Text(({ bold }) => ({
+  textAlign: 'center',
+  fontSize: 16,
+  fontWeight: bold ? 'bold' : 'normal',
+  padding: 10,
+}));
