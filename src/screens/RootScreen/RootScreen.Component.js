@@ -32,6 +32,7 @@ import AttributeList from 'screens/AttributeList';
 import EditAttribute from 'screens/AttributeList/EditAttribute';
 import ApplicationList from 'screens/ApplicationList';
 import ApplicationDetails from 'screens/ApplicationList/ApplicationDetails';
+import ActivityHistory from 'screens/ApplicationList/ApplicationDetails/ActivityHistory';
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
@@ -60,6 +61,7 @@ const ApplicationStack = createStackNavigator({
     }),
   },
   ApplicationDetails,
+  ActivityHistory,
   Scanner,
 }, {
   defaultNavigationOptions: ({ screenProps: { t } }) => ({

@@ -38,7 +38,14 @@ const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
       </Description>
       <Button title={t('activate')} onPress={() => navigate('Scanner')} />
       { getParam('showHistory')
-        ? <Button title={t('history')} onPress={Function.prototype} />
+        ? (
+          <Button
+            title={t('history')}
+            onPress={() => navigate('ActivityHistory', {
+              stats: getParam('stats'),
+            })}
+          />
+        )
         : null}
     </Screen>
   );

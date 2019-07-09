@@ -20,34 +20,82 @@
  */
 
 import { createSelector } from 'reselect';
-import { prop, map, merge } from 'ramda';
-import { listApplications } from 'api/atlas-client';
+import {
+  prop, map, merge, reduce, min, max, union, length, contains,
+} from 'ramda';
+import moment from 'moment';
+import { listApplications, listAttributes } from 'api/atlas-client';
 
 export const initialState = {
   dddc: {
-    uses: 2,
+    uses: [
+      {
+        date: +moment('2019-02-11'),
+        sharedData: ['gender'],
+      },
+      {
+        date: +moment('2019-04-21'),
+        sharedData: ['address'],
+      },
+    ],
     certificates: 1,
   },
   bcnnow: {
-    uses: 0,
+    uses: [],
     certificates: 0,
   },
 };
 
 const defaultStats = {
-  uses: 0,
-  certificates: 0,
+  usageCount: 0,
+  numCertificates: 0,
 };
 
 const getStoreBranch = prop('applications');
 
 const getAtlasApplications = () => listApplications();
 
-export const getApplicationStats = createSelector(
+const getAtlasAttributes = () => listAttributes();
+
+const reduceUsageStats = reduce(
+  (acc, current) => ({
+    firstUse: min(current.date, acc.firstUse),
+    lastUse: max(current.date, acc.lastUse),
+    allAttributes: union(current.sharedData, acc.allAttributes),
+  }),
+  {},
+);
+
+const calculateAppUsageStats = (uses) => {
+  const reducedStats = reduceUsageStats(uses);
+  const { firstUse, lastUse, allAttributes = [] } = reducedStats;
+  return ({
+    usageCount: length(uses),
+    firstUse,
+    lastUse,
+    sharedData: map(({ name }) => ({
+      id: name,
+      shared: contains(name, allAttributes),
+    }))(getAtlasAttributes()),
+    averageUse: firstUse
+      ? Math.round(moment.duration((moment() - firstUse) / length(uses)).asWeeks())
+      : undefined,
+  });
+};
+
+const getUsageStats = createSelector(
   getStoreBranch,
+  map(({ uses, certificates }) => ({
+    ...calculateAppUsageStats(uses),
+    numCertificates: certificates,
+  })),
+);
+
+export const getApplicationStats = createSelector(
+  getUsageStats,
   getAtlasApplications,
-  (userApplications, atlasApplications) => map(
-    atlasApp => merge(atlasApp, userApplications[atlasApp.id] || defaultStats),
+  (usageStats, atlasApplications) => map(
+    atlasApp => merge(atlasApp, usageStats[atlasApp.id] || defaultStats),
     atlasApplications,
   ),
 );

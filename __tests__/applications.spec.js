@@ -19,6 +19,7 @@
  * email: info@dribia.com
  */
 
+import moment from 'moment';
 import reducer, { initialState, getApplicationStats } from 'redux/modules/applications';
 import { getImage } from 'api/atlas-client';
 
@@ -29,8 +30,8 @@ const baseFinalState = [{
   image: 'people',
   link: 'https://dddc.decodeproject.eu',
   description: 'dddcDesc',
-  uses: 0,
-  certificates: 0,
+  usageCount: 0,
+  numCertificates: 0,
 },
 {
   id: 'bcnnow',
@@ -39,8 +40,9 @@ const baseFinalState = [{
   image: 'city',
   link: 'http://bcnnow.decodeproject.eu',
   description: 'bcnnowDesc',
-  uses: 0,
-  certificates: 0,
+  usageCount: 0,
+  numCertificates: 0,
+  averageUse: undefined,
 },
 ];
 
@@ -50,6 +52,8 @@ describe('Application tests', () => {
   });
 
   test('Application stats', () => {
+    const nowForTest = moment('2019-04-30');
+    moment.now = () => nowForTest;
     expect(
       getApplicationStats({
         applications: initialState,
@@ -57,10 +61,27 @@ describe('Application tests', () => {
     ).toEqual([
       {
         ...baseFinalState[0],
-        uses: 2,
-        certificates: 1,
+        usageCount: 2,
+        firstUse: +moment('2019-02-11'),
+        lastUse: +moment('2019-04-21'),
+        sharedData: [
+          { id: 'gender', shared: true },
+          { id: 'birthDate', shared: false },
+          { id: 'address', shared: true },
+        ],
+        averageUse: 6,
+        numCertificates: 1,
       },
-      baseFinalState[1],
+      {
+        ...baseFinalState[1],
+        firstUse: undefined,
+        lastUse: undefined,
+        sharedData: [
+          { id: 'gender', shared: false },
+          { id: 'birthDate', shared: false },
+          { id: 'address', shared: false },
+        ],
+      },
     ]);
   });
 
@@ -77,8 +98,17 @@ describe('Application tests', () => {
       getApplicationStats({
         applications: {
           notSupportedAnymoreApp: {
-            uses: 6,
-            certificates: 3,
+            uses: [
+              {
+                date: +moment('2019-03-21'),
+                sharedData: ['gender', 'birthDate'],
+              },
+              {
+                date: +moment('2019-04-21'),
+                sharedData: ['gender', 'birthDate'],
+              },
+            ],
+            numCertificates: 2,
           },
         },
       }),

@@ -64,6 +64,12 @@ export default {
     empty: 'There are no applications available',
     history: 'Usage history',
     more: '+ information',
+    usageCount: 'Usage count',
+    firstUse: 'First use',
+    lastUse: 'Last use',
+    averageUse: 'Average',
+    every: 'Every {{ weeks }} weeks',
+    sharedData: 'Shared data',
   },
   settings: {
     title: 'Settings',

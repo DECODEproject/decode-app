@@ -23,14 +23,17 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, createMigrate } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import rootReducer from './reducer';
+import migrations from './migrations';
 
 const persistConfig = {
   key: 'root',
+  version: 0,
   storage: AsyncStorage,
   blacklist: ['dummy'],
+  migrate: createMigrate(migrations),
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

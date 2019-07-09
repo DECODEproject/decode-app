@@ -36,12 +36,18 @@ const ApplicationList = ({ applications, navigation: { navigate } }) => {
         <ListContainer
           data={applications}
           renderItem={
-            ({ item: { id, name, title, description, link, image, uses, certificates } }) => (
+            ({
+              item:
+              {
+                id, name, title, description, link, image, usageCount, numCertificates,
+                firstUse, lastUse, averageUse, sharedData,
+              },
+            }) => (
               <ListItem
-                disabled={uses === 0}
+                disabled={usageCount === 0}
                 id={id}
                 name={t(title)}
-                description={`uses: ${uses}, certificates: ${certificates}`}
+                description={`uses: ${usageCount}, certificates: ${numCertificates}`}
                 onPress={
                   () => navigate(
                     'ApplicationDetails', {
@@ -50,7 +56,8 @@ const ApplicationList = ({ applications, navigation: { navigate } }) => {
                       image,
                       description: t(description),
                       link,
-                      showHistory: (uses > 0),
+                      showHistory: (usageCount > 0),
+                      stats: { usageCount, firstUse, lastUse, averageUse, sharedData },
                     },
                   )}
               />
@@ -71,8 +78,15 @@ ApplicationList.propTypes = {
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    uses: PropTypes.number.isRequired,
-    certificates: PropTypes.number.isRequired,
+    usageCount: PropTypes.number.isRequired,
+    firstUse: PropTypes.number,
+    lastUse: PropTypes.number,
+    averageUse: PropTypes.number,
+    sharedData: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      shared: PropTypes.bool.isRequired,
+    })),
+    numCertificates: PropTypes.number.isRequired,
   })).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,

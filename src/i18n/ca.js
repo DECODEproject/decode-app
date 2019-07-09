@@ -64,6 +64,12 @@ export default {
     empty: 'No hi ha aplicacions disponibles',
     history: 'Historial d\'ús',
     more: '+ informació',
+    usageCount: 'Usos',
+    firstUse: 'Primer ús',
+    lastUse: 'Darrer ús',
+    averageUse: 'Promig',
+    every: 'Cada {{ weeks }} setmanes',
+    sharedData: 'Dades compartides',
   },
   settings: {
     title: 'Preferències',
