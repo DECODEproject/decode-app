@@ -76,5 +76,7 @@
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+  <string>Scan QR codes to activate compatible applications</string>
 </dict>
 </plist>

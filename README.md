@@ -26,6 +26,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-native-splash-screen to maintain the splash screen while JS is loading
 - react-native-onboarding-swiper for the app intro caroussel
 - react-native-walkthrough-tooltip for the screen tooltips walkthrough
+- react-native-camera for QR scanning
 
 Development dependencies:
 - yarn for dependency management

@@ -75,7 +75,6 @@ const reduceUsageStats = reduce(
 const frequencyByUnit = (count, interval, unit) => {
   const frequency = delta => Math.round(count / delta);
   const momentFunction = `as${upperFirst(unit)}s`;
-  console.log('*', momentFunction, interval[momentFunction](), [frequency(interval[momentFunction]()), unit]);
   return [frequency(interval[momentFunction]()), unit];
 };
 
@@ -87,9 +86,7 @@ const frequencyByUnit = (count, interval, unit) => {
  */
 
 export const calculateAverage = (firstUse, count) => {
-  console.log('first use & count: ', +firstUse, count);
   const interval = moment.duration((moment() - firstUse));
-  console.log('interval: ', +moment(), +interval);
   const units = ['year', 'month', 'week', 'day'];
   return compose(
     last,

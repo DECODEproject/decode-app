@@ -104,6 +104,7 @@ android {
 
     defaultConfig {
         applicationId "com.dribia.decodeapp"
+        missingDimensionStrategy 'react-native-camera', 'general'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 37
@@ -139,6 +140,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-camera')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-sentry')

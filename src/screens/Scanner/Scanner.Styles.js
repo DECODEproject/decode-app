@@ -18,18 +18,9 @@
  *
  * email: info@dribia.com
  */
+import { RNCamera } from 'react-native-camera';
+import styled from 'styled-components/native';
 
-import React from 'react';
-import { View, Text } from 'react-native';
-
-const Scanner = () => (
-  <View>
-    <Text>Scanner goes here</Text>
-  </View>
-);
-
-Scanner.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('Scanner'),
+export const Camera = styled(RNCamera)({
+  flex: 1,
 });
-
-export default Scanner;
