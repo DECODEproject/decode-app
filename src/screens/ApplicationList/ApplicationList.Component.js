@@ -81,7 +81,10 @@ ApplicationList.propTypes = {
     usageCount: PropTypes.number.isRequired,
     firstUse: PropTypes.number,
     lastUse: PropTypes.number,
-    averageUse: PropTypes.number,
+    averageUse: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+    ])).isRequired,
     sharedData: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       shared: PropTypes.bool.isRequired,

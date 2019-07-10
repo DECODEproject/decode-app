@@ -26,6 +26,11 @@ import { STORAGE_KEY } from 'react-native-dotenv';
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+export const upperFirst = str => str.replace(
+  /^(.)/g,
+  (match, ch) => (ch ? ch.toUpperCase() : ''),
+);
+
 export const childrenPropTypes = PropTypes.oneOfType([
   PropTypes.arrayOf(PropTypes.node),
   PropTypes.node,

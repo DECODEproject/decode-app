@@ -26,6 +26,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import 'moment/locale/ca';
 import { mapObjIndexed } from 'ramda';
+import intervalPluralPostprocessor from 'i18next-intervalplural-postprocessor';
 import { getTranslations } from 'api/atlas-client';
 import en from './en';
 import es from './es';
@@ -48,6 +49,7 @@ const languageDetector = {
 i18n
   .use(languageDetector)
   .use(initReactI18next)
+  .use(intervalPluralPostprocessor)
   .init({
     fallbackLng: 'en',
     interpolation: {

@@ -47,7 +47,13 @@ const ActivityHistory = ({ navigation: { getParam } }) => {
         </Label>
         <Label>
           {`${t('averageUse')}: `}
-          <Value>{t('every', { weeks: averageUse })}</Value>
+          <Value>
+            {t('times_interval', {
+              postProcess: 'interval',
+              count: averageUse[0],
+              unit: t(averageUse[1]),
+            })}
+          </Value>
         </Label>
       </Section>
       <Section>

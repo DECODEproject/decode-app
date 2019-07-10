@@ -20,7 +20,8 @@
  */
 
 import moment from 'moment';
-import reducer, { initialState, getApplicationStats } from 'redux/modules/applications';
+import i18n from 'i18n';
+import reducer, { initialState, getApplicationStats, calculateAverage } from 'redux/modules/applications';
 import { getImage } from 'api/atlas-client';
 
 const baseFinalState = [{
@@ -42,7 +43,6 @@ const baseFinalState = [{
   description: 'bcnnowDesc',
   usageCount: 0,
   numCertificates: 0,
-  averageUse: undefined,
 },
 ];
 
@@ -69,11 +69,12 @@ describe('Application tests', () => {
           { id: 'birthDate', shared: false },
           { id: 'address', shared: true },
         ],
-        averageUse: 6,
+        averageUse: [1, 'month'],
         numCertificates: 1,
       },
       {
         ...baseFinalState[1],
+        averageUse: [0, 'year'],
         firstUse: undefined,
         lastUse: undefined,
         sharedData: [
@@ -118,5 +119,97 @@ describe('Application tests', () => {
   test('getImage', () => {
     expect(getImage('people')).toBeDefined();
     expect(getImage('notExist')).toBeUndefined();
+  });
+
+  test('Calculate Average', () => {
+    const nowForTest = moment('2019-12-31T23:59:59+01:00');
+    moment.now = () => nowForTest;
+    expect(calculateAverage(moment('2019-01-01'), 5)).toEqual([5, 'year']);
+    expect(calculateAverage(moment('2019-01-01'), 12)).toEqual([1, 'month']);
+    expect(calculateAverage(moment('2019-01-01'), 24)).toEqual([2, 'month']);
+    expect(calculateAverage(moment('2019-01-01'), 60)).toEqual([1, 'week']);
+    expect(calculateAverage(moment('2019-01-01'), 120)).toEqual([2, 'week']);
+    expect(calculateAverage(moment('2019-12-31'), 2)).toEqual([2, 'day']);
+    expect(calculateAverage(moment('2018-01-01'), 1)).toEqual([1, 'year']);
+    expect(calculateAverage(moment('2017-12-31'), 1)).toEqual([0, 'year']);
+  });
+
+  test.only('Calculate more averages', () => {
+    const nowForTest = moment('2019-07-10T11:08:59.000Z');
+    moment.now = () => nowForTest;
+    expect(calculateAverage(moment('2019-02-11'), 2)).toEqual([5, 'year']);
+  });
+
+
+  test('Translations by interval', () => {
+    expect(i18n.t('applications:activate')).toEqual('Activate service via QR');
+    expect(i18n.t('applications:times_interval', {
+      postProcess: 'interval',
+      count: 3,
+      unit: 'week',
+    })).toEqual('3 times a week');
+    expect(i18n.t('applications:times_interval', {
+      postProcess: 'interval',
+      count: 1,
+      unit: 'week',
+    })).toEqual('Once a week');
+    expect(i18n.t('applications:times_interval', {
+      postProcess: 'interval',
+      count: 2,
+      unit: 'week',
+    })).toEqual('Twice a week');
+    expect(i18n.t('applications:times_interval', {
+      postProcess: 'interval',
+      count: 0,
+      unit: 'year',
+    })).toEqual('Less than once a year');
+    i18n.changeLanguage('ca', (err, t) => {
+      if (err) throw err;
+      expect(t('applications:activate')).toEqual('Activar servei via QR');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 3,
+        unit: 'setmana',
+      })).toEqual('3 cops per setmana');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 1,
+        unit: 'setmana',
+      })).toEqual('1 cop per setmana');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 2,
+        unit: 'setmana',
+      })).toEqual('2 cops per setmana');
+      expect(i18n.t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 0,
+        unit: 'any',
+      })).toEqual('Menys d\'un cop per any');
+    });
+    i18n.changeLanguage('es', (err, t) => {
+      if (err) throw err;
+      expect(t('applications:activate')).toEqual('Activar servicio vía QR');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 3,
+        unit: 'semana',
+      })).toEqual('3 veces por semana');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 1,
+        unit: 'semana',
+      })).toEqual('1 vez por semana');
+      expect(t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 2,
+        unit: 'semana',
+      })).toEqual('2 veces por semana');
+      expect(i18n.t('applications:times_interval', {
+        postProcess: 'interval',
+        count: 0,
+        unit: 'año',
+      })).toEqual('Menos de una vez por año');
+    });
   });
 });
