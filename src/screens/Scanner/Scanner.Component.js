@@ -20,9 +20,11 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavigationEvents } from 'react-navigation';
 import { Text } from 'react-native';
 import { Screen } from 'lib/styles';
+import { parseQRCode } from 'lib/utils';
 import { Camera } from './Scanner.Styles';
 
 class Scanner extends React.Component {
@@ -50,6 +52,7 @@ class Scanner extends React.Component {
 
   render() {
     const { isFocused, qrcode } = this.state;
+    const { navigation } = this.props;
     return (
       <Screen>
         <NavigationEvents
@@ -62,10 +65,14 @@ class Scanner extends React.Component {
             ? (qrcode === '' ? (
               <Camera
                 captureAudio={false}
-                onBarCodeRead={ev => this.setState(prevState => ({
-                  ...prevState,
-                  qrcode: ev.data,
-                }))}
+                onBarCodeRead={(ev) => {
+                  const { application, ...rest } = parseQRCode(ev.data);
+                  if (application) navigation.navigate(application, { ...rest });
+                  this.setState(prevState => ({
+                    ...prevState,
+                    qrcode: ev.data,
+                  }));
+                }}
               />
             ) : <Text>{qrcode}</Text>)
             : <Text>Camera not in use</Text>
@@ -78,5 +85,11 @@ class Scanner extends React.Component {
 Scanner.navigationOptions = ({ screenProps: { t } }) => ({
   title: t('Scanner'),
 });
+
+Scanner.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Scanner;

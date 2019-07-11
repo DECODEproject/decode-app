@@ -25,6 +25,7 @@ import { createStackNavigator, createDrawerNavigator, createAppContainer } from 
 import { useTranslation } from 'react-i18next';
 import Carousel from 'lib/Components/Carousel';
 import MenuIcon from 'lib/Components/MenuIcon';
+import Warning from 'lib/Components/Warning';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
 import AtlasList from 'screens/AttributeList/AtlasList';
@@ -36,7 +37,8 @@ import ActivityHistory from 'screens/ApplicationList/ApplicationDetails/Activity
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
-import Warning from 'lib/Components/Warning';
+import DDDC from 'screens/applications/DDDC';
+import BCNNow from 'screens/applications/BCNNow';
 
 const AttributeStack = createStackNavigator({
   AttributeList: {
@@ -63,7 +65,14 @@ const ApplicationStack = createStackNavigator({
   ApplicationDetails,
   ActivityHistory,
   Scanner,
+  dddc: {
+    screen: DDDC,
+  },
+  bcnnow: {
+    screen: BCNNow,
+  },
 }, {
+  initialRouteName: 'ApplicationList',
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),
   }),
@@ -88,6 +97,12 @@ const ScannerStack = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),
+  },
+  dddc: {
+    screen: DDDC,
+  },
+  bcnnow: {
+    screen: BCNNow,
   },
 }, {
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
