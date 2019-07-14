@@ -24,27 +24,48 @@ import PropTypes from 'prop-types';
 import { Button, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Screen } from 'lib/styles';
-import { AttributeInput } from './EditAttribute.Styles';
+import { AttributeInput, EnumPicker, EnumPickerItem } from './EditAttribute.Styles';
+
+const getEditor = (type, value, setValue, getParam) => {
+  const { t } = useTranslation('attributes');
+  const enumValues = getParam('values');
+  if (type === 'enum') return (
+    <EnumPicker
+      selectedValue={value}
+      onValueChange={newValue => setValue(newValue)}
+    >
+      {enumValues.map(enumValue => (
+        <EnumPickerItem label={t(enumValue)} value={enumValue} key={enumValue} />
+      ))}
+    </EnumPicker>
+  );
+  return (
+    <AttributeInput
+      placeholder={t('enterValue')}
+      autoCapitalize="none"
+      autoCorrect={false}
+      autoCompleteType="off"
+      autoFocus
+      underlineColorAndroid="transparent"
+      value={value}
+      onChangeText={text => setValue(text)}
+    />
+  );
+};
 
 const EditAttribute = ({
   navigation: { navigate, getParam }, validationError, onSave,
 }) => {
   const { t } = useTranslation('attributes');
+  const type = getParam('type');
   const name = getParam('name');
   const valueParam = getParam('value');
   const [value, setValue] = useState(valueParam);
   return (
     <Screen centerAligned>
-      <AttributeInput
-        placeholder={t('enterValue')}
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoCompleteType="off"
-        autoFocus
-        underlineColorAndroid="transparent"
-        value={value}
-        onChangeText={text => setValue(text)}
-      />
+      {
+        getEditor(type, value, setValue, getParam)
+      }
       <Button
         disabled={value === valueParam}
         title={t('save')}

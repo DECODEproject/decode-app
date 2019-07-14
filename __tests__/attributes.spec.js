@@ -19,7 +19,7 @@
  * email: info@dribia.com
  */
 
-import { pluck } from 'ramda';
+import { pluck, map, pick } from 'ramda';
 import reducer, {
   getAttribute,
   saveAttribute,
@@ -63,23 +63,21 @@ describe('Attribute tests', () => {
 
 
   test('Change attribute and getAllAttributes', () => {
-    expect(
-      getAllAttributes({
-        attributes: reducer({
-          gender: encrypt('male'),
-        }, saveAttribute('gender', 'female')),
-      }),
-    ).toEqual([{ name: 'gender', value: 'female' }]);
+    const allAttributes = getAllAttributes({
+      attributes: reducer({
+        gender: encrypt('male'),
+      }, saveAttribute('gender', 'female')),
+    });
+    expect(map(pick(['name', 'value']), allAttributes)).toEqual([{ name: 'gender', value: 'female' }]);
   });
 
   test('Add another attribute', () => {
-    expect(
-      getAllAttributes({
-        attributes: reducer({
-          gender: encrypt('male'),
-        }, saveAttribute('birthDate', '23/3/99')),
-      }),
-    ).toEqual([
+    const allAttributes = getAllAttributes({
+      attributes: reducer({
+        gender: encrypt('male'),
+      }, saveAttribute('birthDate', '23/3/99')),
+    });
+    expect(map(pick(['name', 'value']), allAttributes)).toEqual([
       {
         name: 'gender',
         value: 'male',
@@ -98,12 +96,13 @@ describe('Attribute tests', () => {
   });
 
   test('All attributes selector', () => {
-    expect(getAllAttributes({
+    const allAttributes = getAllAttributes({
       attributes: {
         gender: encrypt('male'),
         birthDate: encrypt('23/3/99'),
       },
-    })).toEqual([
+    });
+    expect(map(pick(['name', 'value']), allAttributes)).toEqual([
       {
         name: 'gender',
         value: 'male',
@@ -154,14 +153,13 @@ describe('Attribute tests', () => {
   });
 
   test('Delete attribute', () => {
-    expect(
-      getAllAttributes({
-        attributes: reducer({
-          gender: encrypt('male'),
-          birthDate: encrypt('23/3/99'),
-        }, deleteAttribute('birthDate')),
-      }),
-    ).toEqual([
+    const allAttributes = getAllAttributes({
+      attributes: reducer({
+        gender: encrypt('male'),
+        birthDate: encrypt('23/3/99'),
+      }, deleteAttribute('birthDate')),
+    });
+    expect(map(pick(['name', 'value']), allAttributes)).toEqual([
       {
         name: 'gender',
         value: 'male',

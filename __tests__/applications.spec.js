@@ -134,7 +134,7 @@ describe('Application tests', () => {
     expect(calculateAverage(moment('2017-12-31'), 1)).toEqual([0, 'year']);
   });
 
-  test.only('Calculate more averages', () => {
+  test('Calculate more averages', () => {
     const nowForTest = moment('2019-07-10T11:08:59.000Z');
     moment.now = () => nowForTest;
     expect(calculateAverage(moment('2019-02-11'), 2)).toEqual([5, 'year']);

@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, map, merge, reduce, min, max, union, length, contains, compose, filter, last,
+  prop, map, merge, reduce, min, max, union, length, contains, compose, filter, last, keys,
 } from 'ramda';
 import moment from 'moment';
 import { listApplications, listAttributes } from 'api/atlas-client';
@@ -56,7 +56,7 @@ const getStoreBranch = prop('applications');
 
 const getAtlasApplications = () => listApplications();
 
-const getAtlasAttributes = () => listAttributes();
+const getAtlasAttributes = () => keys(listAttributes());
 
 // Convert persisted raw data into aggregated values
 const reduceUsageStats = reduce(
@@ -103,7 +103,7 @@ const calculateAppUsageStats = (uses) => {
     usageCount: count,
     firstUse,
     lastUse,
-    sharedData: map(({ name }) => ({
+    sharedData: map(name => ({
       id: name,
       shared: contains(name, sharedData),
     }))(getAtlasAttributes()),

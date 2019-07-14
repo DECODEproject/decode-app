@@ -40,9 +40,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
-if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
-}
+if (process.env.NODE_ENV !== 'production' && module.hot) module.hot.accept('./reducers', () => store.replaceReducer(rootReducer));
 
 export const persistor = persistStore(store);
 

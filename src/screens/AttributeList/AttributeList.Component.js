@@ -29,6 +29,11 @@ import { Screen } from 'lib/styles';
 import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
 import AttributeItem from './AttributeItem';
 
+const getDisplayValue = (type, value, t) => {
+  if (type === 'enum') return t(value);
+  return value;
+};
+
 const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
@@ -40,11 +45,11 @@ const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
               data={attributes}
               keyExtractor={item => item.name}
               renderItem={
-                ({ item: { name, value } }) => (
+                ({ item: { name, type, value, ...rest } }) => (
                   <AttributeItem
                     name={t(name)}
-                    value={value}
-                    onEdit={() => navigate('EditAttribute', { name, value })}
+                    value={getDisplayValue(type, value, t)}
+                    onEdit={() => navigate('EditAttribute', { name, type, value, ...rest })}
                     onDelete={() => navigate('Warning', {
                       message: t('confirmDelete', { name: t(name) }),
                       onConfirm: () => onDelete(name),

@@ -1,21 +1,22 @@
 {
-  "attributes": [
-    {
+  "attributes": {
+    "gender": {
       "name": "gender",
-      "type": "string",
-      "description": "genderDesc"
+      "type": "enum",
+      "description": "genderDesc",
+      "values": ["female", "male", "other"]
     },
-    {
+    "birthDate": {
       "name": "birthDate",
       "type": "string",
       "description": "birthDateDesc"
     },
-    {
+    "address": {
       "name": "address",
       "type": "string",
       "description": "addressDesc"
     }
-  ],
+  },
   "applications": [
     {
       "id": "dddc",
@@ -39,6 +40,9 @@
       "ca": {
         "gender": "Gènere",
         "genderDesc": "Tria el teu gènere d'una llista",
+        "female": "Dona",
+        "male": "Home",
+        "other": "Altre",
         "birthDate": "Data de naixement",
         "birthDateDesc": "Tria el dia, mes i any que vas néixer",
         "address": "Adreça",
@@ -48,6 +52,9 @@
       "es": {
         "gender": "Género",
         "genderDesc": "Escoge tu género de una lista",
+        "female": "Mujer",
+        "male": "Hombre",
+        "other": "Otro",
         "birthDate": "Fecha de nacimiento",
         "birthDateDesc": "Escoge el día, mes y año en que naciste",
         "address": "Dirección",
@@ -57,6 +64,9 @@
       "en": {
         "gender": "Gender",
         "genderDesc": "Choose your gender from a list",
+        "female": "Female",
+        "male": "Male",
+        "other": "Other",
         "birthDate": "Birth date",
         "birthDateDesc": "Choose the day, month and year you were born",
         "address": "Address",

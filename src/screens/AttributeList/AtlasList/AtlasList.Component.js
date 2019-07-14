@@ -36,12 +36,12 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
         <ListContainer
           data={attributes}
           renderItem={
-            ({ item: { name, description } }) => (
+            ({ item: { name, description, ...rest } }) => (
               <ListItem
                 id={name}
                 name={t(name)}
                 description={t(description)}
-                onPress={() => navigate('EditAttribute', { name })}
+                onPress={() => navigate('EditAttribute', { name, ...rest })}
               />
             )
           }

@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, mapObjIndexed, values, compose, reject, keys, contains,
+  prop, mapObjIndexed, values, compose, omit, keys, merge, map,
 } from 'ramda';
 import { encrypt, decrypt } from 'lib/utils';
 import { listAttributes } from 'api/atlas-client';
@@ -54,10 +54,13 @@ export const getAttribute = id => createSelector(
   ),
 );
 
+const addAtlasInfo = attr => merge(attr, listAttributes()[attr.name]);
+
 export const getAllAttributes = createSelector(
   getStoreBranch,
   compose(
     values,
+    map(addAtlasInfo),
     mapObjIndexed((value, name) => ({
       name,
       value: decrypt(value),
@@ -72,9 +75,9 @@ export const getAllAttributeNames = createSelector(
 
 export const getFilteredAtlasAttributes = createSelector(
   getAllAttributeNames,
-  allAttributeNames => reject(
-    ({ name }) => contains(name, allAttributeNames),
-    listAttributes(),
+  compose(
+    values,
+    allAttributeNames => omit(allAttributeNames, listAttributes()),
   ),
 );
 

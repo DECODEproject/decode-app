@@ -20,8 +20,9 @@
  */
 
 import styled from 'styled-components/native';
+import { TextInput, Picker } from 'react-native';
 
-export const AttributeInput = styled.TextInput({
+export const AttributeInput = styled(TextInput)({
   marginVertical: 10,
   paddingHorizontal: 10,
   paddingVertical: 0,
@@ -29,3 +30,10 @@ export const AttributeInput = styled.TextInput({
   height: 35,
   width: 190,
 });
+
+export const EnumPicker = styled(Picker)({
+  height: 200,
+  width: 200,
+});
+
+export const EnumPickerItem = Picker.Item;

@@ -41,6 +41,7 @@ module.exports = {
         "minProperties": 10,
       }
     ],
+    'curly': ["error", "multi"],
   },
   "settings": {
     'import/resolver': {
