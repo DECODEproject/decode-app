@@ -4765,7 +4765,7 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment@^2.24.0:
+moment@^2.22.1, moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
@@ -5628,6 +5628,13 @@ react-native-camera@^2.11.1:
   integrity sha512-ZmPZHcY7UXEf7Z8PoJX/WhFtmLFtdRPBGDwemOLlPRVwTVyu/OXVINDUWCug4daBqV8Fs3X1O6V927+K2u2GfA==
   dependencies:
     prop-types "^15.6.2"
+
+react-native-date-picker@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.5.0.tgz#6dc89e9c7fdf61de708fc444594dcc16a20a7070"
+  integrity sha512-l7nzA6J2q45mmBZE2CgsO+YGm8ZaFiAuXdXIxFx/M0J9wWH2Th0RMnBssDx4nbHrk020bl5lzeCZKQHtiS58wA==
+  dependencies:
+    moment "^2.22.1"
 
 react-native-device-info@^2.0.3:
   version "2.1.2"

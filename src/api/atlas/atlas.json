@@ -8,7 +8,7 @@
     },
     "birthDate": {
       "name": "birthDate",
-      "type": "string",
+      "type": "date",
       "description": "birthDateDesc"
     },
     "address": {

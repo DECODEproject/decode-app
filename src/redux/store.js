@@ -30,7 +30,7 @@ import migrations from './migrations';
 
 const persistConfig = {
   key: 'root',
-  version: 0,
+  version: 1,
   storage: AsyncStorage,
   blacklist: ['dummy'],
   migrate: createMigrate(migrations),

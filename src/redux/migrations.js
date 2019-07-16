@@ -18,11 +18,11 @@
  *
  * email: info@dribia.com
  */
+import { omit } from 'ramda';
 
 const migrations = {
-  0: ({ applications, ...rest }) => ({
-    ...rest,
-  }),
+  0: omit(['applications']),
+  1: omit(['attributes']),
 };
 
 export default migrations;

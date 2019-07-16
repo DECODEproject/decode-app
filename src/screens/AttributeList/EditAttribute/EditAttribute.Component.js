@@ -23,7 +23,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-native-date-picker';
+import i18n from 'i18n';
 import { Screen } from 'lib/styles';
+import { backgroundColor } from 'lib/theme';
 import { AttributeInput, EnumPicker, EnumPickerItem } from './EditAttribute.Styles';
 
 const getEditor = (type, value, setValue, getParam) => {
@@ -38,6 +41,17 @@ const getEditor = (type, value, setValue, getParam) => {
         <EnumPickerItem label={t(enumValue)} value={enumValue} key={enumValue} />
       ))}
     </EnumPicker>
+  );
+  if (type === 'date') return (
+    <DatePicker
+      mode="date"
+      locale={i18n.language}
+      date={value ? new Date(+value) : new Date()}
+      minimumDate={new Date('1900-01-01')}
+      maximumDate={new Date()}
+      onDateChange={date => setValue(+date)}
+      fadeToColor="none"
+    />
   );
   return (
     <AttributeInput

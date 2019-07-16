@@ -27,6 +27,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-native-onboarding-swiper for the app intro caroussel
 - react-native-walkthrough-tooltip for the screen tooltips walkthrough
 - react-native-camera for QR scanning
+- react-native-date-picker as cross platform component for date selection
 
 Development dependencies:
 - yarn for dependency management
@@ -109,7 +110,9 @@ The store is persisted to permanent storage using Redux Persist and the AsyncSto
 - iOS: The private Documents directory of the app
 - Android: The private SQLite database of the app
 
-Only strictly needed parts of the store are persisted by configuring blacklists in the persist config object. 
+Only strictly needed parts of the store are persisted by configuring blacklists in the persist config object.
+
+The redux/migrations.js file contains the required migration operations every time a persisted data item changes its format. The current version is configured in redux/store.js. See Redux Persist documentation. 
 
 ### Encryption of sensitive data
 Sensitive data is encrypted when saved to the store, and decrypted when retrieved, using functions in lib/utils.js.
