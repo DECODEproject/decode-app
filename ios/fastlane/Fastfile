@@ -30,3 +30,10 @@ platform :ios do
     build_app(scheme: "decode-app")
   end
 end
+
+platform :ios do
+  desc "Just upload the app to TestFlight"
+  lane :upload do
+    upload_to_testflight
+  end
+end
