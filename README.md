@@ -62,6 +62,8 @@ You will also need XCode and Android Studio.
 
 Clone the project and `yarn install`. After that you can follow to the next section.
 
+You need to have a .env file with configuration data that must be kept out of the source code like the encryption key. Use the .env.sample file as a guide. 
+
 If you want to deploy to the test stores using fastlane, which is the recommended way, you need Ruby. Use `rbenv` to install the Ruby version specified in .ruby-version.
 
 ## Available Scripts
