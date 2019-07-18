@@ -66,8 +66,8 @@ describe('Application tests', () => {
         lastUse: +moment('2019-04-21'),
         sharedData: [
           { id: 'gender', shared: true },
-          { id: 'birthDate', shared: false },
-          { id: 'address', shared: true },
+          { id: 'age', shared: true },
+          { id: 'address', shared: false },
         ],
         averageUse: [1, 'month'],
         numCertificates: 1,

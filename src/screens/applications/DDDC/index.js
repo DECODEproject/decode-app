@@ -19,31 +19,4 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import { Text } from 'react-native';
-import PropTypes from 'prop-types';
-import { Screen, Heading } from 'lib/styles';
-
-const DDDC = ({ navigation: { getParam } }) => {
-  const dddcUrl = getParam('dddcUrl');
-  const petitionId = getParam('petitionId');
-  return (
-    <Screen>
-      <Heading>DDDC petition signing starts here</Heading>
-      <Text>{`DDDC URL: ${dddcUrl}`}</Text>
-      <Text>{`Petition id: ${petitionId}`}</Text>
-    </Screen>
-  );
-};
-
-DDDC.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:dddcName'),
-});
-
-DDDC.propTypes = {
-  navigation: PropTypes.shape({
-    getParam: PropTypes.func.isRequired,
-  }).isRequired,
-};
-
-export default DDDC;
+export default from './DDDC.Container';

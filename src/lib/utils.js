@@ -24,6 +24,7 @@ import aesjs from 'aes-js';
 import uuid from 'uuid/v4';
 import { STORAGE_KEY } from 'react-native-dotenv';
 import parseUrl from 'url-parse';
+import moment from 'moment';
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -82,4 +83,10 @@ export const parseQRCode = (url) => {
   return {
     error: `Unknown data in QR code: ${url}`,
   };
+};
+
+export const getDisplayValue = (type, value, t) => {
+  if (type === 'enum') return t(value);
+  if (type === 'date') return moment(+value).format('L');
+  return value;
 };

@@ -67,7 +67,7 @@ class Scanner extends React.Component {
                 captureAudio={false}
                 onBarCodeRead={(ev) => {
                   const { application, ...rest } = parseQRCode(ev.data);
-                  if (application) navigation.navigate(application, { ...rest });
+                  if (application) navigation.navigate(application, { application, ...rest });
                   this.setState(prevState => ({
                     ...prevState,
                     qrcode: ev.data,

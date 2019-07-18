@@ -47,7 +47,9 @@ Development dependencies:
     - lib: Commonly used functions and constants
     - lib/components: Reusable presentational components
     - redux: The Redux store setup and the reducers
+    - redux/transformers: Functions for calculating derived attributes
     - screens: The UI components
+    - screens/applications: The UI components for each application
     - App.js: The entry point, where the high level building blocks are combined
 
 UI Components are developed following the stateless functional component approach. Each component is a pure function returning something to render based solely on its received props.
@@ -96,6 +98,28 @@ Deploys the app to the Apple Store as a new build downloadable with the TestFlig
 ### `cd android && bundle exec fastlane beta`
 
 Deploys the app to the Google Play store, to an internal test track.
+
+## Supported attributes and applications
+
+Attributes (names, types, conversion functions) and applications (description, link, image, shared attributes) are conteptually defined in an artifact we call the Atlas. They can be retrieved using the listAttributes() and listApplications() functions of atlas-client.
+As a first basic implementation, a simple atlas.json file serves as the main repository for the Atlas.
+It contains 3 objects: attributes, applications and translations.
+Every translatable data item in both attributes and applications is a key into the translations object.
+
+### Applications
+Applications is an aggregate object with an application object for every supported application, indexed by its name. Among the data belonging to an application there is a list of the attributes that a user can share when using it.
+
+### Attributes
+Attributes can be defined directly or based on an existing attribute.
+
+For instance, the 'age' attribute is based on the 'birthDate'. A given applcation can share the 'age' attribute, but a user will just enter her birth date. A different application could share an age range instead, and that would be a different derived attribute, based on the same birthDate attribute.
+
+New derived attributes require a 'converter' module exporting a default function accepting the base attribute as its first argument, and other configuration arguments.
+Converter modules are kept in the redux/converters folder.
+
+For instance, the age attribute uses the age converter, which calculates the age based on the birth date. No other arguments are required.
+
+On the other hand, the ageRange attribute still uses the same birthDate base attribute, and a configuration object with an array of age ranges.
 
 ## Implementation notes
 

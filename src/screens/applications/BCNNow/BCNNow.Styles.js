@@ -1,3 +1,4 @@
+
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -19,15 +20,15 @@
  * email: info@dribia.com
  */
 
-import atlas from './atlas/atlas.json';
-import images from './atlas/images';
+import styled from 'styled-components/native';
+import { Heading as CommonHeading } from 'lib/styles';
 
-export const getTranslations = () => atlas.translations;
+export const Heading = styled(CommonHeading)({
+  margin: 10,
+});
 
-export const listAttributes = () => atlas.attributes;
-
-export const listApplications = () => atlas.applications;
-
-export const getApplication = id => atlas.applications[id];
-
-export const getImage = id => images[id];
+export const Line = styled.Text(({ theme: { primaryColor } }) => ({
+  textAlign: 'center',
+  color: primaryColor,
+  margin: 5,
+}));

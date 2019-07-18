@@ -23,18 +23,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, FlatList } from 'react-native';
 import { isEmpty } from 'ramda';
-import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import EmptyList from 'lib/Components/EmptyList';
 import { Screen } from 'lib/styles';
+import { getDisplayValue } from 'lib/utils';
 import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
 import AttributeItem from './AttributeItem';
-
-const getDisplayValue = (type, value, t) => {
-  if (type === 'enum') return t(value);
-  if (type === 'date') return moment(+value).format('L');
-  return value;
-};
 
 const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');

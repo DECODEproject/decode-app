@@ -19,31 +19,17 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import { Text } from 'react-native';
-import PropTypes from 'prop-types';
-import { Screen, Heading } from 'lib/styles';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { getSharedAttributes } from 'redux/modules/attributes';
+import Component from './BCNNow.Component';
 
-const BCNNow = ({ navigation: { getParam } }) => {
-  const bcnnowUrl = getParam('bcnnowUrl');
-  const sessionId = getParam('sessionId');
-  return (
-    <Screen>
-      <Heading>BCNNow login starts here</Heading>
-      <Text>{`BCNNow URL: ${bcnnowUrl}`}</Text>
-      <Text>{`Session id: ${sessionId}`}</Text>
-    </Screen>
-  );
-};
-
-BCNNow.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:bcnnowName'),
+const mapStateToProps = createStructuredSelector({
+  sharedAttributes: getSharedAttributes('bcnnow'),
 });
 
-BCNNow.propTypes = {
-  navigation: PropTypes.shape({
-    getParam: PropTypes.func.isRequired,
-  }).isRequired,
-};
+const ConnectedComponent = connect(mapStateToProps, null)(Component);
 
-export default BCNNow;
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;

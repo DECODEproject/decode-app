@@ -21,10 +21,23 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, map, merge, reduce, min, max, union, length, contains, compose, filter, last, keys,
+  prop,
+  map,
+  merge,
+  reduce,
+  min,
+  max,
+  union,
+  length,
+  contains,
+  compose,
+  filter,
+  last,
+  values,
+  mapObjIndexed,
 } from 'ramda';
 import moment from 'moment';
-import { listApplications, listAttributes } from 'api/atlas-client';
+import { listApplications } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
 
 export const initialState = {
@@ -36,7 +49,7 @@ export const initialState = {
       },
       {
         date: +moment('2019-04-21'),
-        sharedData: ['address'],
+        sharedData: ['age'],
       },
     ],
     certificates: 1,
@@ -54,9 +67,7 @@ const defaultStats = {
 
 const getStoreBranch = prop('applications');
 
-const getAtlasApplications = () => listApplications();
-
-const getAtlasAttributes = () => keys(listAttributes());
+const atlasApplications = listApplications();
 
 // Convert persisted raw data into aggregated values
 const reduceUsageStats = reduce(
@@ -95,10 +106,11 @@ export const calculateAverage = (firstUse, count) => {
   )(units) || [0, 'year'];
 };
 
-const calculateAppUsageStats = (uses) => {
+const calculateAppUsageStats = (id, uses) => {
   const reducedStats = reduceUsageStats(uses);
   const { firstUse, lastUse, sharedData = [] } = reducedStats;
   const count = length(uses);
+  const { sharedAttributes: applicationSharedAttributes = [] } = atlasApplications[id] || {};
   return ({
     usageCount: count,
     firstUse,
@@ -106,25 +118,25 @@ const calculateAppUsageStats = (uses) => {
     sharedData: map(name => ({
       id: name,
       shared: contains(name, sharedData),
-    }))(getAtlasAttributes()),
+    }))(applicationSharedAttributes),
     averageUse: calculateAverage(firstUse, count),
   });
 };
 
 const getUsageStats = createSelector(
   getStoreBranch,
-  map(({ uses, certificates }) => ({
-    ...calculateAppUsageStats(uses),
+  mapObjIndexed(({ uses, certificates }, id) => ({
+    id,
+    ...calculateAppUsageStats(id, uses),
     numCertificates: certificates,
   })),
 );
 
 export const getApplicationStats = createSelector(
   getUsageStats,
-  getAtlasApplications,
-  (usageStats, atlasApplications) => map(
-    atlasApp => merge(atlasApp, usageStats[atlasApp.id] || defaultStats),
-    atlasApplications,
+  usageStats => map(
+    ({ id, sharedAttributes, ...rest }) => merge({ id, ...rest }, usageStats[id] || defaultStats),
+    values(atlasApplications),
   ),
 );
 

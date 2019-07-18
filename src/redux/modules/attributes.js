@@ -21,10 +21,23 @@
 
 import { createSelector } from 'reselect';
 import {
-  prop, mapObjIndexed, values, compose, omit, keys, merge, map,
+  prop,
+  mapObjIndexed,
+  values,
+  compose,
+  omit,
+  keys,
+  merge,
+  map,
+  pick,
+  contains,
+  filter,
+  isNil,
+  apply,
 } from 'ramda';
 import { encrypt, decrypt } from 'lib/utils';
-import { listAttributes } from 'api/atlas-client';
+import { listAttributes, getApplication } from 'api/atlas-client';
+import converters from '../converters';
 
 const initialState = {};
 
@@ -54,7 +67,13 @@ export const getAttribute = id => createSelector(
   ),
 );
 
-const addAtlasInfo = attr => merge(attr, listAttributes()[attr.name]);
+const allAtlasAttributes = listAttributes();
+
+const isBaseAttribute = compose(isNil, prop('derivedFrom'));
+
+const baseAttributes = filter(isBaseAttribute, allAtlasAttributes);
+
+const addAtlasInfo = attr => merge(attr, allAtlasAttributes[attr.name]);
 
 export const getAllAttributes = createSelector(
   getStoreBranch,
@@ -77,7 +96,53 @@ export const getFilteredAtlasAttributes = createSelector(
   getAllAttributeNames,
   compose(
     values,
-    allAttributeNames => omit(allAttributeNames, listAttributes()),
+    allAttributeNames => omit(allAttributeNames, baseAttributes),
+  ),
+);
+
+const addDerivedAttributes = applicationId => (userAttributes) => {
+  const userAttributeNames = keys(userAttributes);
+  const { sharedAttributes: applicationSharedAttributeNames } = getApplication(applicationId);
+  const applicationSharedAttributes = pick(applicationSharedAttributeNames, allAtlasAttributes);
+  const filtered = filter(
+    ({
+      name,
+      derivedFrom,
+    }) => contains(name, userAttributeNames) || contains(derivedFrom, userAttributeNames),
+  )(applicationSharedAttributes);
+  const filteredWithValues = map(
+    (attr) => {
+      const { name, derivedFrom } = attr;
+      if (derivedFrom) {
+        const converter = prop(name, converters);
+        if (converter) return {
+          value: apply(converter, [+prop('value')(userAttributes[derivedFrom])]),
+          ...attr,
+        };
+        return {
+          value: 'could not calculate',
+          ...attr,
+        };
+      }
+      return {
+        value: prop('value')(userAttributes[name]),
+        ...attr,
+      };
+    },
+  )(filtered);
+  return filteredWithValues;
+};
+
+export const getSharedAttributes = applicationId => createSelector(
+  getStoreBranch,
+  compose(
+    values,
+    addDerivedAttributes(applicationId),
+    map(addAtlasInfo),
+    mapObjIndexed((value, name) => ({
+      name,
+      value: decrypt(value),
+    })),
   ),
 );
 

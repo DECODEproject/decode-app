@@ -20,6 +20,7 @@
  */
 
 import { pluck, map, pick } from 'ramda';
+import moment from 'moment';
 import reducer, {
   getAttribute,
   saveAttribute,
@@ -27,7 +28,9 @@ import reducer, {
   getAllAttributes,
   getFilteredAtlasAttributes,
   getAllAttributeNames,
+  getSharedAttributes,
 } from 'redux/modules/attributes';
+import getAge from 'redux/converters/age';
 import { encrypt, decrypt } from 'lib/utils';
 
 describe('Attribute tests', () => {
@@ -174,5 +177,35 @@ describe('Attribute tests', () => {
         }, deleteAttribute('birthDate')),
       }),
     ).toEqual([]);
+  });
+
+  test('Calculate age', () => {
+    const nowForTest = moment('2019-04-29');
+    moment.now = () => nowForTest;
+    expect(getAge(+moment('2009-07-10'))).toEqual('9');
+    expect(getAge(+moment('2009-04-30'))).toEqual('9');
+    expect(getAge(+moment('2009-04-29'))).toEqual('10');
+    expect(getAge(+moment('2009-04-28'))).toEqual('10');
+  });
+
+  test('Get application shared attributes', () => {
+    const nowForTest = moment('2019-04-29');
+    moment.now = () => nowForTest;
+    const sharedAttributes = getSharedAttributes('dddc')({
+      attributes: {
+        gender: encrypt('male'),
+        birthDate: encrypt(+moment('1969-07-20')),
+      },
+    });
+    expect(map(pick(['name', 'value']), sharedAttributes)).toEqual([
+      {
+        name: 'gender',
+        value: 'male',
+      },
+      {
+        name: 'age',
+        value: '49',
+      },
+    ]);
   });
 });

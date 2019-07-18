@@ -15,26 +15,33 @@
       "name": "address",
       "type": "string",
       "description": "addressDesc"
+    },
+    "age": {
+      "name": "age",
+      "type": "number",
+      "derivedFrom": "birthDate"
     }
   },
-  "applications": [
-    {
+  "applications": {
+    "dddc": {
       "id": "dddc",
       "name": "dddcName",
       "title": "dddcTitle",
       "image": "people",
       "link": "https://dddc.decodeproject.eu",
-      "description": "dddcDesc"
+      "description": "dddcDesc",
+      "sharedAttributes": ["gender", "age", "address"]
     },
-    {
+    "bcnnow": {
       "id": "bcnnow",
       "name": "bcnnowName",
       "title": "bcnnowTitle",
       "image": "city",
       "link": "http://bcnnow.decodeproject.eu",
-      "description": "bcnnowDesc"
+      "description": "bcnnowDesc",
+      "sharedAttributes": ["gender", "birthDate", "address"]
     }
-  ],
+  },
   "translations": {
     "attributes": {
       "ca": {
@@ -47,7 +54,8 @@
         "birthDateDesc": "Tria el dia, mes i any que vas néixer",
         "address": "Adreça",
         "addressDesc": "Troba la teva adreça en un mapa",
-        "string": "Text"
+        "string": "Text",
+        "age": "Edat"
       },
       "es": {
         "gender": "Género",
@@ -59,7 +67,8 @@
         "birthDateDesc": "Escoge el día, mes y año en que naciste",
         "address": "Dirección",
         "addressDesc": "Encuentra tu dirección en un mapa",
-        "string": "Texto"
+        "string": "Texto",
+        "age": "Edad"
       },
       "en": {
         "gender": "Gender",
@@ -71,7 +80,8 @@
         "birthDateDesc": "Choose the day, month and year you were born",
         "address": "Address",
         "addressDesc": "Find your address in a map",
-        "string": "Text"
+        "string": "Text",
+        "age": "Age"
       }
     },
     "applications": {

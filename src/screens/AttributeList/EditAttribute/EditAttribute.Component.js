@@ -26,7 +26,6 @@ import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
 import i18n from 'i18n';
 import { Screen } from 'lib/styles';
-import { backgroundColor } from 'lib/theme';
 import { AttributeInput, EnumPicker, EnumPickerItem } from './EditAttribute.Styles';
 
 const getEditor = (type, value, setValue, getParam) => {
