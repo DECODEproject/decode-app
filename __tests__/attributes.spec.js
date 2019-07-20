@@ -31,6 +31,7 @@ import reducer, {
   getSharedAttributes,
 } from 'redux/modules/attributes';
 import getAge from 'redux/converters/age';
+import getAgeRange from 'redux/converters/ageRange';
 import { encrypt, decrypt } from 'lib/utils';
 
 describe('Attribute tests', () => {
@@ -182,13 +183,13 @@ describe('Attribute tests', () => {
   test('Calculate age', () => {
     const nowForTest = moment('2019-04-29');
     moment.now = () => nowForTest;
-    expect(getAge(+moment('2009-07-10'))).toEqual('9');
-    expect(getAge(+moment('2009-04-30'))).toEqual('9');
-    expect(getAge(+moment('2009-04-29'))).toEqual('10');
-    expect(getAge(+moment('2009-04-28'))).toEqual('10');
+    expect(getAge(+moment('2009-07-10'))).toEqual(9);
+    expect(getAge(+moment('2009-04-30'))).toEqual(9);
+    expect(getAge(+moment('2009-04-29'))).toEqual(10);
+    expect(getAge(+moment('2009-04-28'))).toEqual(10);
   });
 
-  test('Get application shared attributes', () => {
+  test('Get application shared attributes - age', () => {
     const nowForTest = moment('2019-04-29');
     moment.now = () => nowForTest;
     const sharedAttributes = getSharedAttributes('dddc')({
@@ -205,6 +206,45 @@ describe('Attribute tests', () => {
       {
         name: 'age',
         value: '49',
+      },
+    ]);
+  });
+
+  test('Calculate age range', () => {
+    const nowForTest = moment('2019-04-29');
+    moment.now = () => nowForTest;
+    const ranges = [[0, 18], [18, 25], [25, 35], [35, 45], [45, 55], [55, 65], [65]];
+    const config = { ranges };
+    expect(getAgeRange(+moment('2019-04-29'), config)).toEqual([0, 18]);
+    expect(getAgeRange(+moment('2009-04-30'), config)).toEqual([0, 18]);
+    expect(getAgeRange(+moment('2001-04-30'), config)).toEqual([0, 18]);
+    expect(getAgeRange(+moment('2001-04-29'), config)).toEqual([18, 25]);
+    expect(getAgeRange(+moment('1954-04-30'), config)).toEqual([55, 65]);
+    expect(getAgeRange(+moment('1954-04-29'), config)).toEqual([65]);
+
+    expect(getAgeRange(+moment('1000-04-29'), config)).toEqual([65]);
+    expect(getAgeRange(+moment('2222-04-29'), config)).toBeUndefined();
+    expect(getAgeRange(+moment('2001-04-29'), {})).toBeUndefined();
+    expect(getAgeRange(+moment('2001-04-29'))).toBeUndefined();
+  });
+
+  test('Get application shared attributes - age range', () => {
+    const nowForTest = moment('2019-04-29');
+    moment.now = () => nowForTest;
+    const sharedAttributes = getSharedAttributes('bcnnow')({
+      attributes: {
+        gender: encrypt('male'),
+        birthDate: encrypt(+moment('1969-07-20')),
+      },
+    });
+    expect(map(pick(['name', 'value']), sharedAttributes)).toEqual([
+      {
+        name: 'gender',
+        value: 'male',
+      },
+      {
+        name: 'ageRange',
+        value: JSON.stringify([45, 55]),
       },
     ]);
   });

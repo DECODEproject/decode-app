@@ -112,11 +112,14 @@ const addDerivedAttributes = applicationId => (userAttributes) => {
   )(applicationSharedAttributes);
   const filteredWithValues = map(
     (attr) => {
-      const { name, derivedFrom } = attr;
+      const { name, derivedFrom, config } = attr;
       if (derivedFrom) {
         const converter = prop(name, converters);
         if (converter) return {
-          value: apply(converter, [+prop('value')(userAttributes[derivedFrom])]),
+          value: JSON.stringify(apply(converter, [
+            +prop('value')(userAttributes[derivedFrom]),
+            config,
+          ])),
           ...attr,
         };
         return {

@@ -79,7 +79,7 @@ describe('Application tests', () => {
         lastUse: undefined,
         sharedData: [
           { id: 'gender', shared: false },
-          { id: 'birthDate', shared: false },
+          { id: 'ageRange', shared: false },
           { id: 'address', shared: false },
         ],
       },

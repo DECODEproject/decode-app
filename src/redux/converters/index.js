@@ -20,5 +20,6 @@
  */
 
 import age from './age';
+import ageRange from './ageRange';
 
-export default { age };
+export default { age, ageRange };

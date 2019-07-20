@@ -20,6 +20,14 @@
       "name": "age",
       "type": "number",
       "derivedFrom": "birthDate"
+    },
+    "ageRange": {
+      "name": "ageRange",
+      "type": "range",
+      "derivedFrom": "birthDate",
+      "config": {
+        "ranges": [[0, 18], [18, 25], [25, 35], [35, 45], [45, 55], [55, 65], [65]]
+      }
     }
   },
   "applications": {
@@ -39,7 +47,7 @@
       "image": "city",
       "link": "http://bcnnow.decodeproject.eu",
       "description": "bcnnowDesc",
-      "sharedAttributes": ["gender", "birthDate", "address"]
+      "sharedAttributes": ["gender", "ageRange", "address"]
     }
   },
   "translations": {
