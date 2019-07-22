@@ -21,8 +21,15 @@
 
 import moment from 'moment';
 import i18n from 'i18n';
-import reducer, { initialState, getApplicationStats, calculateAverage } from 'redux/modules/applications';
+import reducer, { getApplicationStats, calculateAverage } from 'redux/modules/applications';
+import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
+import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
 import { getImage } from 'api/atlas-client';
+
+const initialState = {
+  dddc: dddcInitialState,
+  bcnnow: bcnnowInitialState,
+};
 
 const baseFinalState = [{
   id: 'dddc',

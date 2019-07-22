@@ -28,6 +28,8 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-native-walkthrough-tooltip for the screen tooltips walkthrough
 - react-native-camera for QR scanning
 - react-native-date-picker as cross platform component for date selection
+- react-native-render-html to support HTML coming from application description fields
+- react-native-loading-spinner-overlay as loading indicator
 
 Development dependencies:
 - yarn for dependency management
@@ -47,6 +49,8 @@ Development dependencies:
     - lib: Commonly used functions and constants
     - lib/components: Reusable presentational components
     - redux: The Redux store setup and the reducers
+    - redux/modules: Reducers are organized in modules
+    - redux/modules/applications: Applications add their reducers in this folder
     - redux/transformers: Functions for calculating derived attributes
     - screens: The UI components
     - screens/applications: The UI components for each application
@@ -108,6 +112,8 @@ Every translatable data item in both attributes and applications is a key into t
 
 ### Applications
 Applications is an aggregate object with an application object for every supported application, indexed by its name. Among the data belonging to an application there is a list of the attributes that a user can share when using it.
+
+Applications add its logic as reducers on the redux/modules/applications folder, and its screens on the screens/applications folder
 
 ### Attributes
 Attributes can be defined directly or based on an existing attribute.

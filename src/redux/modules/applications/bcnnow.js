@@ -1,4 +1,3 @@
-
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -20,20 +19,9 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
+export const initialState = {
+  uses: [],
+  certificates: 0,
+};
 
-export const Screen = styled.ScrollView(({ theme: { backgroundColor } }) => ({
-  paddingHorizontal: 16,
-  backgroundColor,
-}));
-
-export const Heading = styled(CommonHeading)({
-  margin: 10,
-});
-
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
-  textAlign: 'center',
-  color: primaryColor,
-  margin: 5,
-}));
+export default () => initialState;

@@ -19,28 +19,67 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { View, Linking, Dimensions, Button } from 'react-native';
 import PropTypes from 'prop-types';
+import { isNil } from 'ramda';
 import { useTranslation } from 'react-i18next';
-import { Screen } from 'lib/styles';
+import HTML from 'react-native-render-html';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { getDisplayValue } from 'lib/utils';
-import { Heading, Line as Text } from './DDDC.Styles';
+import { Screen, Heading, Line as Text } from './DDDC.Styles';
 
-const DDDC = ({ navigation: { getParam }, sharedAttributes }) => {
-  const dddcUrl = getParam('dddcUrl');
-  const petitionId = getParam('petitionId');
-  const { t } = useTranslation('attributes');
+const DDDC = ({
+  navigation: { getParam },
+  sharedAttributes,
+  fetchPetition,
+  petition,
+  certificate,
+  loading,
+  error,
+}) => {
+  const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
+  const petitionId = getParam('petitionId') || '2';
+  const { t } = useTranslation('applications');
+  const { t: attributesT } = useTranslation('attributes');
+  useEffect(
+    () => {
+      fetchPetition(dddcUrl, petitionId);
+    },
+    [petitionId],
+  );
   return (
     <Screen>
-      <Heading>DDDC petition signing starts here</Heading>
-      <Text>{`DDDC URL: ${dddcUrl}`}</Text>
-      <Text>{`Petition id: ${petitionId}`}</Text>
+      <Spinner visible={loading} />
+      <Heading>{t('activated')}</Heading>
+      {
+          petition ? (
+            <HTML
+              id="description-text"
+              html={petition.description}
+              imagesMaxWidth={Dimensions.get('window').width}
+              onLinkPress={(event, href) => { Linking.openURL(href); }}
+            />
+          ) : null
+        }
+      {
+          isNil(certificate) ? (
+            <View>
+              <Text>{t('certificateRequired')}</Text>
+              <Button title={t('more')} onPress={Function.prototype} />
+              <Button title={t('certificateRequestButton')} onPress={Function.prototype} />
+            </View>
+          ) : null
+        }
+      {
+          error ? <Text>{error}</Text> : null
+        }
       <Heading>Will share this data</Heading>
       {
-        sharedAttributes.map(({ name, value, type }) => (
-          <Text key={name}>{`${name}: ${getDisplayValue(type, value, t)}`}</Text>
-        ))
-      }
+          sharedAttributes.map(({ name, value, type }) => (
+            <Text key={name}>{`${name}: ${getDisplayValue(type, value, attributesT)}`}</Text>
+          ))
+        }
     </Screen>
   );
 };
@@ -48,6 +87,12 @@ const DDDC = ({ navigation: { getParam }, sharedAttributes }) => {
 DDDC.navigationOptions = ({ screenProps: { t } }) => ({
   title: t('applications:dddcName'),
 });
+
+DDDC.defaultProps = {
+  petition: null,
+  error: null,
+  certificate: null,
+};
 
 DDDC.propTypes = {
   sharedAttributes: PropTypes.arrayOf(PropTypes.shape({
@@ -57,6 +102,13 @@ DDDC.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
   }).isRequired,
+  fetchPetition: PropTypes.func.isRequired,
+  petition: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+  }),
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  certificate: PropTypes.string,
 };
 
 export default DDDC;

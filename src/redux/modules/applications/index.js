@@ -19,6 +19,7 @@
  * email: info@dribia.com
  */
 
+import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
 import {
   prop,
@@ -39,26 +40,8 @@ import {
 import moment from 'moment';
 import { listApplications } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
-
-export const initialState = {
-  dddc: {
-    uses: [
-      {
-        date: +moment('2019-02-11'),
-        sharedData: ['gender'],
-      },
-      {
-        date: +moment('2019-04-21'),
-        sharedData: ['age'],
-      },
-    ],
-    certificates: 1,
-  },
-  bcnnow: {
-    uses: [],
-    certificates: 0,
-  },
-};
+import dddc from './dddc';
+import bcnnow from './bcnnow';
 
 const defaultStats = {
   usageCount: 0,
@@ -140,4 +123,7 @@ export const getApplicationStats = createSelector(
   ),
 );
 
-export default () => initialState;
+export default combineReducers({
+  dddc,
+  bcnnow,
+});

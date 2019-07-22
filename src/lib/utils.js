@@ -19,12 +19,14 @@
  * email: info@dribia.com
  */
 
+import { take } from 'ramda';
 import PropTypes from 'prop-types';
 import aesjs from 'aes-js';
 import uuid from 'uuid/v4';
 import { STORAGE_KEY } from 'react-native-dotenv';
 import parseUrl from 'url-parse';
 import moment from 'moment';
+import i18n from 'i18n';
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -90,3 +92,5 @@ export const getDisplayValue = (type, value, t) => {
   if (type === 'date') return moment(+value).format('L');
   return value;
 };
+
+export const getLanguage = () => take(2, i18n.language);

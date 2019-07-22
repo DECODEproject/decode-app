@@ -60,7 +60,10 @@ export default {
   },
   applications: {
     activate: 'Activate service via QR',
+    activated: 'You have activated the DECODE app to sign a petition in DDDC',
     available: 'Available applications',
+    certificateRequired: 'You need to have been issued a certificate in order to sign',
+    certificateRequestButton: 'Get certificate',
     empty: 'There are no applications available',
     history: 'Usage history',
     more: '+ information',
