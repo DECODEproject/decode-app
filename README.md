@@ -3,6 +3,7 @@
 - [Directory structure](#directory-structure)
 - [Starting a development environment](#starting-a-development-environment)
 - [Available scripts](#available-scripts)
+- [Attributes and applications](#attributes-and-applications)
 - [Implementation notes](#implementation-notes)
 
 ## The DECODE App
@@ -103,7 +104,7 @@ Deploys the app to the Apple Store as a new build downloadable with the TestFlig
 
 Deploys the app to the Google Play store, to an internal test track.
 
-## Supported attributes and applications
+## Attributes and applications
 
 Attributes (names, types, conversion functions) and applications (description, link, image, shared attributes) are conteptually defined in an artifact we call the Atlas. They can be retrieved using the listAttributes() and listApplications() functions of atlas-client.
 As a first basic implementation, a simple atlas.json file serves as the main repository for the Atlas.
@@ -113,7 +114,7 @@ Every translatable data item in both attributes and applications is a key into t
 ### Applications
 Applications is an aggregate object with an application object for every supported application, indexed by its name. Among the data belonging to an application there is a list of the attributes that a user can share when using it.
 
-Applications add its logic as reducers on the redux/modules/applications folder, and its screens on the screens/applications folder
+Applications add their own logic as reducers on the redux/modules/applications folder. They also can add their screens under the screens/applications folder.
 
 ### Attributes
 Attributes can be defined directly or based on an existing attribute.
