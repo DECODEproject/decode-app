@@ -78,5 +78,14 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
   <string>Scan QR codes to activate compatible applications</string>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>decodeapp</string>
+      </array>
+    </dict>
+  </array>
 </dict>
 </plist>

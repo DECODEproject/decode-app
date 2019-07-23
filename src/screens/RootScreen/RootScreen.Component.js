@@ -19,7 +19,8 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
@@ -213,8 +214,19 @@ const RootNavigation = createStackNavigator({
 
 const AppContainer = createAppContainer(RootNavigation);
 
+const handleUrl = ({ url }) => console.log('URL: ', url);
+
+const removeUrlListener = () => {
+  Linking.removeEventListener('url', handleUrl);
+}
+
 const RootScreen = ({ firstRun, firstRunDone }) => {
   const { t } = useTranslation();
+  useEffect(() => {
+    Linking.addEventListener('url', handleUrl);
+    return removeUrlListener;
+  },
+  []);
   return (
     firstRun
       ? <Carousel onDone={() => firstRunDone()} />
