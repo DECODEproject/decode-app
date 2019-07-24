@@ -19,17 +19,38 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import { FlatList as ListContainer } from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList as ListContainer, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
-import EmptyList from 'lib/Components/EmptyList';
 import { Screen } from 'lib/styles';
+import { parseQRCode } from 'lib/utils';
+import EmptyList from 'lib/Components/EmptyList';
 import ListItem from 'lib/Components/ListItem';
 
 const ApplicationList = ({ applications, navigation: { navigate } }) => {
   const { t } = useTranslation('applications');
+  const handleUrl = ({ url }) => {
+    const { application, ...rest } = parseQRCode(url);
+    if (application) navigate(application, { application, ...rest });
+  };
+  const removeUrlListener = () => {
+    Linking.removeEventListener('url', handleUrl);
+  };
+  useEffect(() => {
+    const initialNavigation = async () => {
+      const initialUrl = await Linking.getInitialURL();
+      if (initialUrl) {
+        const { application, ...rest } = parseQRCode(initialUrl);
+        if (application) navigate(application, { application, ...rest });
+      }
+    };
+    Linking.addEventListener('url', handleUrl);
+    initialNavigation();
+    return removeUrlListener;
+  },
+  []);
   return (
     <Screen>
       {isEmpty(applications) ? (<EmptyList text={t('empty')} />) : (
