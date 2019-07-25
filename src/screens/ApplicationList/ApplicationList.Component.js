@@ -21,6 +21,7 @@
 
 import React, { useEffect } from 'react';
 import { FlatList as ListContainer, Linking } from 'react-native';
+import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
@@ -29,11 +30,23 @@ import { parseQRCode } from 'lib/utils';
 import EmptyList from 'lib/Components/EmptyList';
 import ListItem from 'lib/Components/ListItem';
 
-const ApplicationList = ({ applications, navigation: { navigate } }) => {
+const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {
   const { t } = useTranslation('applications');
   const handleUrl = ({ url }) => {
     const { application, ...rest } = parseQRCode(url);
-    if (application) navigate(application, { application, ...rest });
+    if (application) dispatch(StackActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'ApplicationList',
+        }),
+        NavigationActions.navigate({
+          routeName: application,
+          params: { application, ...rest },
+        }),
+      ],
+      key: 'ApplicationStack',
+    }));
   };
   const removeUrlListener = () => {
     Linking.removeEventListener('url', handleUrl);
@@ -114,6 +127,7 @@ ApplicationList.propTypes = {
   })).isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
   }).isRequired,
 };
 

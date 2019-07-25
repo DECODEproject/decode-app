@@ -176,6 +176,15 @@ The AppContainer wraps the RootNavigation, which displays either the Main screen
 The Main screen is a DrawerNavigator, which defines all the menu items accessible from the left header button.
 
 Each screen in the drawer is a StackNavigator, with screens that can go either forwards via links in the screen, or backwards via the back button. Some stacks have a single screen so the only way to get out of them is via the menu. The first screen in a stack always has the menu button at the header top left, while the other screens have the back button.
+
+### Initial Navigation
+When the app is first started, the RootNavigator navigates to the ApplicationStack, and then to the ApplicationList.
+
+The ApplicationList is the equivalent to the Home page in a web application. For this reason it has a couple of extra features to handle deep linking to specific screens from other apps:
+
+- An Effect hook that gets the Initial URL from the React Native Linking component, and navigates to the application initial screen. This covers the case when the application **is started from a decodeapp:// link** in a mobile browser, or when the QR code is scanned using the phone camera.
+- The hook also registers an event listener, and returns a function to deregister it as required by the React hooks specification.
+- The event listener will fire every time **a decodeapp:// link is followed while the app is open**, and it will reset the navigation from wherever it was to the ApplicationStack and to the first screen of the application found in the URL.
  
 ### Theme and common styles
 The lib/theme.js file contain common style variables as a centralized place for declaring colors, sizes, fonts, etc
