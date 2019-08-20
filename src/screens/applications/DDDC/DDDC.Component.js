@@ -20,14 +20,15 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, Linking, Dimensions, Button } from 'react-native';
+import { View, Linking, Dimensions, Button, FlatList, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
-import { isNil } from 'ramda';
+import { isNil, isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import HTML from 'react-native-render-html';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { getDisplayValue } from 'lib/utils';
 import { Screen, Heading, Line as Text } from './DDDC.Styles';
+import VerificationCode from './VerificationCode';
 
 const DDDC = ({
   navigation: { getParam },
@@ -49,10 +50,11 @@ const DDDC = ({
     [petitionId],
   );
   return (
-    <Screen>
-      <Spinner visible={loading} />
-      <Heading>{t('activated')}</Heading>
-      {
+    <KeyboardAvoidingView behavior="position">
+      <Screen>
+        <Spinner visible={loading} />
+        <Heading>{t('activated')}</Heading>
+        {
           petition ? (
             <HTML
               id="description-text"
@@ -62,25 +64,42 @@ const DDDC = ({
             />
           ) : null
         }
-      {
+        {
           isNil(certificate) ? (
             <View>
               <Text>{t('certificateRequired')}</Text>
               <Button title={t('more')} onPress={Function.prototype} />
+              {
+                isEmpty(petition.verificationCodes) ? null : (
+                  <FlatList
+                    data={petition.verificationCodes}
+                    keyExtractor={code => code.id}
+                    renderItem={
+                      ({ item: { id, name } }) => (
+                        <VerificationCode
+                          id={id}
+                          name={name}
+                        />
+                      )
+                    }
+                  />
+                )
+              }
               <Button title={t('certificateRequestButton')} onPress={Function.prototype} />
             </View>
           ) : null
         }
-      {
-          error ? <Text>{error}</Text> : null
-        }
-      <Heading>Will share this data</Heading>
-      {
+        {
+        error ? <Text>{error}</Text> : null
+      }
+        <Heading>Will share this data</Heading>
+        {
           sharedAttributes.map(({ name, value, type }) => (
             <Text key={name}>{`${name}: ${getDisplayValue(type, value, attributesT)}`}</Text>
           ))
         }
-    </Screen>
+      </Screen>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -89,7 +108,6 @@ DDDC.navigationOptions = ({ screenProps: { t } }) => ({
 });
 
 DDDC.defaultProps = {
-  petition: null,
   error: null,
   certificate: null,
 };
@@ -105,7 +123,7 @@ DDDC.propTypes = {
   fetchPetition: PropTypes.func.isRequired,
   petition: PropTypes.shape({
     description: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
   certificate: PropTypes.string,

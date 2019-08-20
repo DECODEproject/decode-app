@@ -24,6 +24,11 @@ import moment from 'moment';
 import { path, prop } from 'ramda';
 import { fetchPetition as fetchPetitionApi } from 'api/dddc-client';
 
+const emptyPetition = {
+  description: '<p>',
+  verificationCodes: {},
+};
+
 export const initialState = {
   loading: false,
   uses: [
@@ -37,12 +42,15 @@ export const initialState = {
     },
   ],
   certificates: 1,
+  verification: {},
+  petition: emptyPetition,
 };
 
 export const ACTIONS = {
   FETCH_PETITION_REQUEST: 'FETCH_PETITION_REQUEST',
   FETCH_PETITION_SUCCESS: 'FETCH_PETITION_SUCCESS',
   FETCH_PETITION_FAILURE: 'FETCH_PETITION_FAILURE',
+  UPDATE_VERIFICATION_CODE: 'UPDATE_VERIFICATION_CODE',
 };
 
 export const fetchPetition = (url, id) => async (dispatch) => {
@@ -65,6 +73,12 @@ export const fetchPetition = (url, id) => async (dispatch) => {
   }
 };
 
+export const updateVerificationCode = (id, value) => ({
+  type: ACTIONS.UPDATE_VERIFICATION_CODE,
+  id,
+  value,
+});
+
 const getBranch = path(['applications', 'dddc']);
 
 export const getPetition = createSelector(
@@ -82,13 +96,19 @@ export const getError = createSelector(
   prop('error'),
 );
 
+export const getVerification = createSelector(
+  getBranch,
+  prop('verification'),
+);
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.FETCH_PETITION_REQUEST: {
       return {
         ...state,
         loading: true,
-        petition: null,
+        petition: emptyPetition,
+        verification: {},
         error: null,
       };
     }
@@ -104,6 +124,16 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.error,
+      };
+    }
+    case ACTIONS.UPDATE_VERIFICATION_CODE: {
+      const { verification } = state;
+      return {
+        ...state,
+        verification: {
+          ...verification,
+          [action.id]: action.value,
+        },
       };
     }
     default:

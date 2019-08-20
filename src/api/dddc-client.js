@@ -19,6 +19,7 @@
  *
  * email: info@dribia.com
  */
+import { isEmpty, isNil, map } from 'ramda';
 import { getLanguage } from 'lib/utils';
 
 const throwError = async (response) => {
@@ -26,9 +27,25 @@ const throwError = async (response) => {
   throw new Error(text);
 };
 
-const parseResponse = ({ data: { petition: { description } } }) => ({
-  description: description[getLanguage()] || description.es,
-});
+const throwParseError = (details) => {
+  throw new Error(`Could not parse response from DDDC(${details})`);
+};
+
+const parseResponse = ({ data: { petition: { description, jsonSchema } } }) => {
+  const { mandatory } = jsonSchema;
+  if (isNil(mandatory) || isEmpty(mandatory)) throwParseError('mandatory');
+  const credentialSpec = mandatory[0];
+  const { verificationInput } = credentialSpec;
+  if (isNil(verificationInput) || isEmpty(verificationInput)) throwParseError('verificationInput');
+  return ({
+    description: description[getLanguage()] || description.es,
+    verificationCodes: map(({ id, name, type }) => ({
+      id,
+      type,
+      name: name[getLanguage()] || name.es,
+    }), verificationInput),
+  });
+};
 
 const makeApiCall = async (url, petitionId) => {
   const graphQlQuery = `{
@@ -36,7 +53,7 @@ const makeApiCall = async (url, petitionId) => {
         id
         title
         description
-        json_schema
+        jsonSchema: json_schema
         attribute_id
       }
     }`.replace(/\n/g, '');
