@@ -19,19 +19,103 @@
  * email: info@dribia.com
  */
 
-import { CREDENTIAL_ISSUER_URL } from 'lib/constants';
-import { delay } from 'lib/utils';
+import axios from 'axios';
+import CredentialIssuerError, { errors } from './errors/credential-issuer-error';
 
-const throwError = async (response) => {
-  const text = await response.text();
-  throw new Error(text);
-};
+class CredentialIssuerClient {
+  constructor(url) {
+    this.url = url;
+  }
 
-const makeApiCall = async (url) => {
-  await delay(1000); // Delay to make waiting more visible
-  const response = await fetch(url);
-  if (response.ok) return response.json();
-  return throwError(response);
-};
+  async getStats() {
+    try {
+      console.log('Going to call: ', `${this.url}/stats`);
+      const { data } = await axios.get(`${this.url}/stats/`);
+      console.log('Response from credential issuer: ', data);
+      return data;
+    } catch (error) {
+      throw new CredentialIssuerError(`Error getting credential issuer id: ${error}`);
+    }
+  }
 
-export const getStats = () => makeApiCall(`${CREDENTIAL_ISSUER_URL}/stats/`);
+  async getIssuerId() {
+    try {
+      console.log('Going to call: ', `${this.url}/uid`);
+      const { data } = await axios.get(`${this.url}/uid`);
+      console.log('Response from credential issuer: ', data);
+      const { credential_issuer_id: credentialIssuerId } = data;
+      if (credentialIssuerId) return credentialIssuerId;
+    } catch (error) {
+      throw new CredentialIssuerError(`Error getting credential issuer id: ${error}`);
+    }
+    throw new CredentialIssuerError('Error getting credential issuer id: No id returned');
+  }
+
+  async getIssuerVerifier(authorizableAttributeId) {
+    let message = '';
+    try {
+      console.log('Going to call: ', `${this.url}/authorizable_attribute/${authorizableAttributeId}`);
+      const { data, status } = await axios.get(`${this.url}/authorizable_attribute/${authorizableAttributeId}`);
+      console.log('Response from credential issuer: ', status, data);
+      if (status === 200) {
+        const { verification_key: verificationKey } = data;
+        if (verificationKey) return verificationKey;
+      } else {
+        const { detail } = data;
+        message = `Error getting credential issuer verifier: ${detail}`;
+      }
+    } catch (error) {
+      throw new CredentialIssuerError(`Error getting credential issuer verifier: ${error}`);
+    }
+    throw new CredentialIssuerError(message);
+  }
+
+  async issueCredential(authorizableAttributeId, blindSignRequest, verifyingData, optionalData) {
+    let response;
+    const values = [];
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const k in verifyingData) values.push({
+      name: k,
+      value: verifyingData[k],
+    });
+
+    const optionalValues = [];
+    // eslint-disable-next-line no-restricted-syntax, guard-for-in
+    for (const k in optionalData) optionalValues.push({
+      name: k,
+      value: optionalData[k],
+    });
+
+    const jsonBody = {
+      authorizable_attribute_id: authorizableAttributeId,
+      blind_sign_request: blindSignRequest,
+      values,
+      optional_values: optionalValues,
+    };
+    console.log('Going to call: ', `${this.url}/credential`);
+    console.log('JSON body: ', jsonBody);
+
+    try {
+      response = await axios.post(`${this.url}/credential/`, jsonBody);
+      const { data } = response;
+      console.log('Response from credential issuer: ', data);
+      return data;
+    } catch (error) {
+      const { response: { status, data: { detail } } } = error;
+      if (status === 412) if (detail === 'Credential already issued') {
+        throw new CredentialIssuerError(errors.ALREADY_ISSUED);
+      } else if (detail === 'Values mismatch not in Authorizable Attribute') {
+        throw new CredentialIssuerError(errors.NOT_VALID);
+      } else if (detail.indexOf('Missing mandatory value') === 0) {
+        throw new CredentialIssuerError(errors.MISSING_VALUE);
+      } else if (detail) {
+        throw new CredentialIssuerError(detail);
+      } else {
+        throw new CredentialIssuerError(`Error calling credential issuer: ${error}`);
+      }
+      else throw new CredentialIssuerError(`Error calling credential issuer: ${error} | ${JSON.stringify(detail)}`);
+    }
+  }
+}
+
+export default CredentialIssuerClient;

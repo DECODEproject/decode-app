@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import { prop } from 'ramda';
-import { getStats } from 'api/credential-issuer-client';
+import CredentialIssuerClient from 'api/credential-issuer-client';
 
 const initialState = {
   total: '---',
@@ -41,7 +41,8 @@ export const refreshStats = () => async (dispatch) => {
     type: ACTIONS.REFRESH_STATS_REQUEST,
   });
   try {
-    const { total } = await getStats();
+    const credentialIssuer = new CredentialIssuerClient('https://credentials.decodeproject.eu');
+    const { total } = await credentialIssuer.getStats();
     dispatch({
       type: ACTIONS.REFRESH_STATS_SUCCESS,
       total,

@@ -54,6 +54,8 @@
 		8D17EF7422D734CF002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7222D734CF002BAE7E /* InfoPlist.strings */; };
 		8D17EF7822D734FA002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7622D734FA002BAE7E /* InfoPlist.strings */; };
 		8D17EF7C22D73512002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7A22D73512002BAE7E /* InfoPlist.strings */; };
+		8DE2F5DF230C5F56003658B2 /* zenroom-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */; };
+		8DE2F5E0230C5F57003658B2 /* Zenroom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE2F5DE230C5F56003658B2 /* Zenroom.m */; };
 		A26D7896A8A248A2AC0E736D /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD147349EC6140D383473E22 /* libRNSentry.a */; };
 		A76372B75EE74C7CA915C39E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 882FA1E622F147DABDB36070 /* Octicons.ttf */; };
 		AAA905A4A72041AD8CDA96CF /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDEB6A873064A59809BD532 /* libRNCamera.a */; };
@@ -466,6 +468,10 @@
 		8D17EF7322D734CF002BAE7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		8D17EF7722D734FA002BAE7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = InfoPlist.strings; sourceTree = "<group>"; };
 		8D17EF7B22D73512002BAE7E /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = InfoPlist.strings; sourceTree = "<group>"; };
+		8DE2F5DB230C5F56003658B2 /* Zenroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zenroom.h; sourceTree = "<group>"; };
+		8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "zenroom-ios.a"; sourceTree = "<group>"; };
+		8DE2F5DD230C5F56003658B2 /* zenroomInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zenroomInternal.h; sourceTree = "<group>"; };
+		8DE2F5DE230C5F56003658B2 /* Zenroom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zenroom.m; sourceTree = "<group>"; };
 		8F6285B177364456B5481F26 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		96D0F5C5CE7340A6B4F309CF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		993B429360D44BC79D8C9DCD /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -517,6 +523,7 @@
 				43643800A03E49CDA9C008D8 /* libRNCAsyncStorage.a in Frameworks */,
 				AAA905A4A72041AD8CDA96CF /* libRNCamera.a in Frameworks */,
 				51D2C2E6C5A64D60BA9D4B98 /* libRNDatePicker.a in Frameworks */,
+				8DE2F5DF230C5F56003658B2 /* zenroom-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +623,10 @@
 		13B07FAE1A68108700A75B9A /* decode-app */ = {
 			isa = PBXGroup;
 			children = (
+				8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */,
+				8DE2F5DB230C5F56003658B2 /* Zenroom.h */,
+				8DE2F5DE230C5F56003658B2 /* Zenroom.m */,
+				8DE2F5DD230C5F56003658B2 /* zenroomInternal.h */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1513,6 +1524,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				8DE2F5E0230C5F57003658B2 /* Zenroom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1595,13 +1607,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1637,13 +1643,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",

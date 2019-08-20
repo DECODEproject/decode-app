@@ -36,6 +36,7 @@ import {
   last,
   values,
   mapObjIndexed,
+  keys,
 } from 'ramda';
 import moment from 'moment';
 import { listApplications } from 'api/atlas-client';
@@ -111,7 +112,7 @@ const getUsageStats = createSelector(
   mapObjIndexed(({ uses, certificates }, id) => ({
     id,
     ...calculateAppUsageStats(id, uses),
-    numCertificates: certificates,
+    numCertificates: length(keys(certificates)),
   })),
 );
 

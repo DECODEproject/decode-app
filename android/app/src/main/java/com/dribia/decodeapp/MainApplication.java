@@ -19,6 +19,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import decode.zenroom.ZenroomPackage;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -38,7 +40,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSentryPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
-            new RNDeviceInfo(true)
+            new RNDeviceInfo(true),
+            new ZenroomPackage()
       );
     }
 

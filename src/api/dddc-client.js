@@ -31,12 +31,15 @@ const throwParseError = (details) => {
   throw new Error(`Could not parse response from DDDC(${details})`);
 };
 
-const parseResponse = ({ data: { petition: { description, jsonSchema } } }) => {
+const parseResponse = ({ data: { petition: { description, jsonSchema, attributeId } } }) => {
   const { mandatory } = jsonSchema;
   if (isNil(mandatory) || isEmpty(mandatory)) throwParseError('mandatory');
   const credentialSpec = mandatory[0];
-  const { verificationInput } = credentialSpec;
+  const { verificationInput, provenance } = credentialSpec;
   if (isNil(verificationInput) || isEmpty(verificationInput)) throwParseError('verificationInput');
+  if (isNil(provenance) || isEmpty(provenance)) throwParseError('provenance');
+  const { url: credentialIssuerUrl } = provenance;
+  if (isNil(attributeId)) throwParseError('attributeId');
   return ({
     description: description[getLanguage()] || description.es,
     verificationCodes: map(({ id, name, type }) => ({
@@ -44,6 +47,8 @@ const parseResponse = ({ data: { petition: { description, jsonSchema } } }) => {
       type,
       name: name[getLanguage()] || name.es,
     }), verificationInput),
+    credentialIssuerUrl,
+    attributeId,
   });
 };
 
@@ -54,7 +59,7 @@ const makeApiCall = async (url, petitionId) => {
         title
         description
         jsonSchema: json_schema
-        attribute_id
+        attributeId: attribute_id
       }
     }`.replace(/\n/g, '');
 

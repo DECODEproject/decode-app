@@ -21,7 +21,7 @@
 
 export const initialState = {
   uses: [],
-  certificates: 0,
+  certificates: {},
 };
 
 export default () => initialState;
