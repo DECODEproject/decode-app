@@ -27,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Screen, Heading, Line as Text } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
+import CertificateList from './CertificateList';
 
 const DDDC = ({
   navigation: { getParam },
@@ -60,7 +61,7 @@ const DDDC = ({
             ) : null
           }
           {
-            isEmpty(certificates) ? (
+            isEmpty(certificates) || loading ? (
               <CertificateRequest
                 verificationCodes={petition.verificationCodes}
                 sharedAttributes={sharedAttributes}
@@ -69,9 +70,12 @@ const DDDC = ({
                   {},
                   petition.credentialIssuerUrl,
                   petition.attributeId,
+                  petition.credentialName,
                 )}
               />
-            ) : null
+            ) : (
+              <CertificateList certificates={certificates} />
+            )
           }
           {
             error ? <Text>{error}</Text> : null

@@ -35,9 +35,10 @@ const parseResponse = ({ data: { petition: { title, description, jsonSchema, att
   const { mandatory } = jsonSchema;
   if (isNil(mandatory) || isEmpty(mandatory)) throwParseError('mandatory');
   const credentialSpec = mandatory[0];
-  const { verificationInput, provenance } = credentialSpec;
+  const { verificationInput, provenance, name: credentialName } = credentialSpec;
   if (isNil(verificationInput) || isEmpty(verificationInput)) throwParseError('verificationInput');
   if (isNil(provenance) || isEmpty(provenance)) throwParseError('provenance');
+  if (isNil(credentialName) || isEmpty(credentialName)) throwParseError('name');
   const { url: credentialIssuerUrl } = provenance;
   if (isNil(attributeId)) throwParseError('attributeId');
   return ({
@@ -50,6 +51,7 @@ const parseResponse = ({ data: { petition: { title, description, jsonSchema, att
     }), verificationInput),
     credentialIssuerUrl,
     attributeId,
+    credentialName,
   });
 };
 

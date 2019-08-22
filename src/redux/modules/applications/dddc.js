@@ -92,7 +92,13 @@ export const updateVerificationCode = (id, value) => ({
   value,
 });
 
-export const callCredentialIssuer = (data, optionalData, url, attributeId) => async (dispatch) => {
+export const callCredentialIssuer = (
+  data,
+  optionalData,
+  url,
+  attributeId,
+  credentialName,
+) => async (dispatch) => {
   dispatch({
     type: ACTIONS.ISSUE_CREDENTIAL_REQUEST,
   });
@@ -164,6 +170,7 @@ export const callCredentialIssuer = (data, optionalData, url, attributeId) => as
 
     dispatch({
       type: ACTIONS.ISSUE_CREDENTIAL_SUCCESS,
+      credentialName,
       attributeId,
       issuerId,
       issuerVerifyKeypair,
@@ -255,6 +262,7 @@ export default (state = initialState, action) => {
         issuerVerifyKeypair,
         credential,
         blindProofCredential,
+        credentialName,
       } = action;
       const { certificates } = state;
       return {
@@ -262,10 +270,15 @@ export default (state = initialState, action) => {
         loading: false,
         certificates: {
           ...certificates,
-          [attributeId]: { issuerId, issuerVerifyKeypair, credential, blindProofCredential },
+          [attributeId]: {
+            issuerId,
+            issuerVerifyKeypair,
+            credential,
+            blindProofCredential,
+            credentialName,
+            attributeId,
+          },
         },
-        // TODO: delete this
-        error: 'OK',
       };
     }
     case ACTIONS.ISSUE_CREDENTIAL_FAILURE: {
