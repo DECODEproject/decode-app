@@ -34,8 +34,9 @@ import { fetchPetition as fetchPetitionApi } from 'api/dddc-client';
 import CredentialIssuerClient from 'api/credential-issuer-client';
 
 const emptyPetition = {
+  title: '',
   description: '<p>',
-  verificationCodes: {},
+  verificationCodes: [],
 };
 
 export const initialState = {

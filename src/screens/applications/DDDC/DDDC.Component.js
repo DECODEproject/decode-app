@@ -20,15 +20,13 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, Linking, Dimensions, Button, FlatList, KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
-import HTML from 'react-native-render-html';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { getDisplayValue } from 'lib/utils';
 import { Screen, Heading, Line as Text } from './DDDC.Styles';
-import VerificationCode from './VerificationCode';
+import CertificateRequest from './CertificateRequest';
 
 const DDDC = ({
   navigation: { getParam },
@@ -44,7 +42,6 @@ const DDDC = ({
   const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
   const petitionId = getParam('petitionId') || '2';
   const { t } = useTranslation('applications');
-  const { t: attributesT } = useTranslation('attributes');
   useEffect(
     () => {
       fetchPetition(dddcUrl, petitionId);
@@ -59,51 +56,21 @@ const DDDC = ({
           <Heading>{t('activated')}</Heading>
           {
             petition ? (
-              <HTML
-                id="description-text"
-                html={petition.description}
-                imagesMaxWidth={Dimensions.get('window').width}
-                onLinkPress={(event, href) => { Linking.openURL(href); }}
-              />
+              <Heading>{petition.title}</Heading>
             ) : null
           }
           {
             isEmpty(certificates) ? (
-              <View>
-                <Text>{t('certificateRequired')}</Text>
-                <Button title={t('more')} onPress={Function.prototype} />
-                {
-                  isEmpty(petition.verificationCodes) ? null : (
-                    <FlatList
-                      data={petition.verificationCodes}
-                      keyExtractor={code => code.id}
-                      renderItem={
-                        ({ item: { id, name } }) => (
-                          <VerificationCode
-                            id={id}
-                            name={name}
-                          />
-                        )
-                      }
-                    />
-                  )
-                }
-                <Heading>Will share this data</Heading>
-                {
-                  sharedAttributes.map(({ name, value, type }) => (
-                    <Text key={name}>{`${name}: ${getDisplayValue(type, value, attributesT)}`}</Text>
-                  ))
-                }
-                <Button
-                  title={t('certificateRequestButton')}
-                  onPress={() => callCredentialIssuer(
-                    verification,
-                    {},
-                    petition.credentialIssuerUrl,
-                    petition.attributeId,
-                  )}
-                />
-              </View>
+              <CertificateRequest
+                verificationCodes={petition.verificationCodes}
+                sharedAttributes={sharedAttributes}
+                onSubmit={() => callCredentialIssuer(
+                  verification,
+                  {},
+                  petition.credentialIssuerUrl,
+                  petition.attributeId,
+                )}
+              />
             ) : null
           }
           {
@@ -134,7 +101,7 @@ DDDC.propTypes = {
   fetchPetition: PropTypes.func.isRequired,
   callCredentialIssuer: PropTypes.func.isRequired,
   petition: PropTypes.shape({
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
