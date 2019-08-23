@@ -63,7 +63,22 @@ describe('Application tests', () => {
     moment.now = () => nowForTest;
     expect(
       getApplicationStats({
-        applications: initialState,
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+            uses: [
+              {
+                date: +moment('2019-02-11'),
+                sharedData: ['gender'],
+              },
+              {
+                date: +moment('2019-04-21'),
+                sharedData: ['age'],
+              },
+            ],
+          },
+          bcnnow: bcnnowInitialState,
+        },
       }),
     ).toEqual([
       {
@@ -111,15 +126,14 @@ describe('Application tests', () => {
     ).toEqual([
       {
         ...baseFinalState[0],
-        usageCount: 2,
-        firstUse: +moment('2019-02-11'),
-        lastUse: +moment('2019-04-21'),
+        averageUse: [0, 'year'],
+        firstUse: undefined,
+        lastUse: undefined,
         sharedData: [
-          { id: 'gender', shared: true },
-          { id: 'age', shared: true },
+          { id: 'gender', shared: false },
+          { id: 'age', shared: false },
           { id: 'address', shared: false },
         ],
-        averageUse: [1, 'month'],
         numCertificates: 2,
       },
       {

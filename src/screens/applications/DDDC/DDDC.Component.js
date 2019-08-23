@@ -20,7 +20,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, Button, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
@@ -34,9 +34,11 @@ const DDDC = ({
   sharedAttributes,
   fetchPetition,
   callCredentialIssuer,
+  signPetition,
   petition,
   certificates,
   loading,
+  signed,
   error,
   verification,
 }) => {
@@ -61,7 +63,7 @@ const DDDC = ({
             ) : null
           }
           {
-            isEmpty(certificates) || loading ? (
+            isEmpty(certificates) ? (
               <CertificateRequest
                 verificationCodes={petition.verificationCodes}
                 sharedAttributes={sharedAttributes}
@@ -69,17 +71,21 @@ const DDDC = ({
                 onSubmit={() => callCredentialIssuer(
                   verification,
                   {},
-                  petition.credentialIssuerUrl,
-                  petition.attributeId,
-                  petition.credentialName,
+                  petition,
                 )}
               />
             ) : (
-              <CertificateList certificates={certificates} />
+              <View>
+                <CertificateList certificates={certificates} />
+                <Button title={t('sign')} onPress={() => signPetition(petition, certificates[petition.id])} />
+              </View>
             )
           }
           {
             error ? <Text>{error}</Text> : null
+          }
+          {
+            signed ? <Text>Signed!</Text> : null
           }
         </Screen>
       </KeyboardAvoidingView>
@@ -105,10 +111,12 @@ DDDC.propTypes = {
   }).isRequired,
   fetchPetition: PropTypes.func.isRequired,
   callCredentialIssuer: PropTypes.func.isRequired,
+  signPetition: PropTypes.func.isRequired,
   petition: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
+  signed: PropTypes.bool.isRequired,
   error: PropTypes.string,
   certificates: PropTypes.object.isRequired,
   verification: PropTypes.object.isRequired,

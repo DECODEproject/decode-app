@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { path, prop } from 'ramda';
+import { path, prop, append } from 'ramda';
 import uuid from 'uuid/v4';
 import isJson from 'lib/is-json';
 import zenroom from 'api/zenroom-client';
@@ -29,9 +29,11 @@ import contract01 from 'api/zenroom/01-CITIZEN-credential-keygen.zencode';
 import contract02 from 'api/zenroom/02-CITIZEN-credential-request.zencode';
 import contract06 from 'api/zenroom/06-CITIZEN-aggregate-credential-signature.zencode';
 import contract07 from 'api/zenroom/07-CITIZEN-prove-credential.zencode';
+import contract11 from 'api/zenroom/11-CITIZEN-sign-petition.zencode';
 import contract50 from 'api/zenroom/50-MISC-hashing.zencode';
 import { fetchPetition as fetchPetitionApi } from 'api/dddc-client';
 import CredentialIssuerClient from 'api/credential-issuer-client';
+import PetitionsClient from 'api/petitions-client';
 
 const emptyPetition = {
   title: '',
@@ -41,16 +43,8 @@ const emptyPetition = {
 
 export const initialState = {
   loading: false,
-  uses: [
-    {
-      date: +moment('2019-02-11'),
-      sharedData: ['gender'],
-    },
-    {
-      date: +moment('2019-04-21'),
-      sharedData: ['age'],
-    },
-  ],
+  signed: false,
+  uses: [],
   certificates: {},
   verification: {},
   petition: emptyPetition,
@@ -64,6 +58,9 @@ export const ACTIONS = {
   ISSUE_CREDENTIAL_REQUEST: 'ISSUE_CREDENTIAL_REQUEST',
   ISSUE_CREDENTIAL_SUCCESS: 'ISSUE_CREDENTIAL_SUCCESS',
   ISSUE_CREDENTIAL_FAILURE: 'ISSUE_CREDENTIAL_FAILURE',
+  SIGN_REQUEST: 'SIGN_REQUEST',
+  SIGN_SUCCESS: 'SIGN_SUCCESS',
+  SIGN_FAILURE: 'SIGN_FAILURE',
 };
 
 export const fetchPetition = (url, id) => async (dispatch) => {
@@ -95,9 +92,7 @@ export const updateVerificationCode = (id, value) => ({
 export const callCredentialIssuer = (
   data,
   optionalData,
-  url,
-  attributeId,
-  credentialName,
+  { credentialIssuerUrl: url, attributeId, credentialName, id: petitionId },
 ) => async (dispatch) => {
   dispatch({
     type: ACTIONS.ISSUE_CREDENTIAL_REQUEST,
@@ -171,7 +166,9 @@ export const callCredentialIssuer = (
     dispatch({
       type: ACTIONS.ISSUE_CREDENTIAL_SUCCESS,
       credentialName,
+      petitionId,
       attributeId,
+      uniqueId,
       issuerId,
       issuerVerifyKeypair,
       credential,
@@ -181,6 +178,41 @@ export const callCredentialIssuer = (
     console.log('Error calling credential issuer: ', JSON.stringify(error));
     dispatch({
       type: ACTIONS.ISSUE_CREDENTIAL_FAILURE,
+      error: error.message,
+    });
+  }
+};
+
+export const signPetition = (
+  { petitionsUrl },
+  { uniqueId, issuerId, attributeId, credential, issuerVerifyKeypair },
+) => async (dispatch) => {
+  dispatch({
+    type: ACTIONS.SIGN_REQUEST,
+  });
+  try {
+    const c11 = contract11(uniqueId, issuerId, attributeId);
+    console.log('Going to execute contract11: ', c11);
+    console.log('Keys: ', credential);
+    console.log('Data: ', JSON.stringify(issuerVerifyKeypair));
+    const petitionSignature = await zenroom.execute(
+      c11,
+      JSON.stringify(issuerVerifyKeypair),
+      credential,
+    );
+    console.log('Response from contract11 (petitionSignature): ', petitionSignature);
+    if (!isJson(petitionSignature)) throw Error('Unexpected response from contract 11');
+
+    // CALL TO PETITIONS SERVICE
+    const petitionsClient = new PetitionsClient(petitionsUrl);
+    await petitionsClient.sign(attributeId, JSON.parse(petitionSignature));
+
+    dispatch({
+      type: ACTIONS.SIGN_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ACTIONS.SIGN_FAILURE,
       error: error.message,
     });
   }
@@ -196,6 +228,11 @@ export const getPetition = createSelector(
 export const getLoading = createSelector(
   getBranch,
   prop('loading'),
+);
+
+export const getSigned = createSelector(
+  getBranch,
+  prop('signed'),
 );
 
 export const getError = createSelector(
@@ -257,6 +294,8 @@ export default (state = initialState, action) => {
     }
     case ACTIONS.ISSUE_CREDENTIAL_SUCCESS: {
       const {
+        petitionId,
+        uniqueId,
         attributeId,
         issuerId,
         issuerVerifyKeypair,
@@ -270,7 +309,9 @@ export default (state = initialState, action) => {
         loading: false,
         certificates: {
           ...certificates,
-          [attributeId]: {
+          [petitionId]: {
+            petitionId,
+            uniqueId,
             issuerId,
             issuerVerifyKeypair,
             credential,
@@ -282,6 +323,34 @@ export default (state = initialState, action) => {
       };
     }
     case ACTIONS.ISSUE_CREDENTIAL_FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    }
+    case ACTIONS.SIGN_REQUEST: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        signed: false,
+      };
+    }
+    case ACTIONS.SIGN_SUCCESS: {
+      const { uses } = state;
+      return {
+        ...state,
+        loading: false,
+        signed: true,
+        uses: append({
+          date: +moment(),
+          sharedData: [],
+        },
+        uses),
+      };
+    }
+    case ACTIONS.SIGN_FAILURE: {
       return {
         ...state,
         loading: false,

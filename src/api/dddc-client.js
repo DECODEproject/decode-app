@@ -31,7 +31,13 @@ const throwParseError = (details) => {
   throw new Error(`Could not parse response from DDDC(${details})`);
 };
 
-const parseResponse = ({ data: { petition: { title, description, jsonSchema, attributeId } } }) => {
+const parseResponse = (
+  {
+    data: {
+      petition: { id: petitionId, title, description, jsonSchema, attributeId },
+    },
+  },
+) => {
   const { mandatory } = jsonSchema;
   if (isNil(mandatory) || isEmpty(mandatory)) throwParseError('mandatory');
   const credentialSpec = mandatory[0];
@@ -39,9 +45,10 @@ const parseResponse = ({ data: { petition: { title, description, jsonSchema, att
   if (isNil(verificationInput) || isEmpty(verificationInput)) throwParseError('verificationInput');
   if (isNil(provenance) || isEmpty(provenance)) throwParseError('provenance');
   if (isNil(credentialName) || isEmpty(credentialName)) throwParseError('name');
-  const { url: credentialIssuerUrl } = provenance;
+  const { url: credentialIssuerUrl, petitionsUrl } = provenance;
   if (isNil(attributeId)) throwParseError('attributeId');
   return ({
+    id: petitionId,
     title: title[getLanguage()] || title.es,
     description: description[getLanguage()] || description.es,
     verificationCodes: map(({ id, name, type }) => ({
@@ -50,6 +57,7 @@ const parseResponse = ({ data: { petition: { title, description, jsonSchema, att
       name: name[getLanguage()] || name.es,
     }), verificationInput),
     credentialIssuerUrl,
+    petitionsUrl,
     attributeId,
     credentialName,
   });
