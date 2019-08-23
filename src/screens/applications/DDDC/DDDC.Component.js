@@ -30,7 +30,7 @@ import CertificateRequest from './CertificateRequest';
 import CertificateList from './CertificateList';
 
 const DDDC = ({
-  navigation: { getParam },
+  navigation: { getParam, navigate },
   sharedAttributes,
   fetchPetition,
   callCredentialIssuer,
@@ -65,6 +65,7 @@ const DDDC = ({
               <CertificateRequest
                 verificationCodes={petition.verificationCodes}
                 sharedAttributes={sharedAttributes}
+                onManageAttributes={() => navigate('AttributeList')}
                 onSubmit={() => callCredentialIssuer(
                   verification,
                   {},

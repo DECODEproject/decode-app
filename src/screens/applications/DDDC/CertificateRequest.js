@@ -28,7 +28,14 @@ import { getDisplayValue } from 'lib/utils';
 import { Heading, Line as Text } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
 
-const CertificateRequest = ({ verificationCodes, sharedAttributes, onSubmit }) => {
+const CertificateRequest = (
+  {
+    verificationCodes,
+    sharedAttributes,
+    onManageAttributes,
+    onSubmit,
+  },
+) => {
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');
   return (
@@ -51,12 +58,13 @@ const CertificateRequest = ({ verificationCodes, sharedAttributes, onSubmit }) =
           />
         )
       }
-      <Heading>Will share this data</Heading>
+      <Heading>{t('sharedData')}</Heading>
       {
         sharedAttributes.map(({ name, value, type }) => (
           <Text key={name}>{`${name}: ${getDisplayValue(type, value, attributesT)}`}</Text>
         ))
       }
+      <Button title={t('manageData')} onPress={onManageAttributes} />
       <Button title={t('certificateRequestButton')} onPress={onSubmit} />
     </View>
   );
@@ -65,6 +73,7 @@ const CertificateRequest = ({ verificationCodes, sharedAttributes, onSubmit }) =
 CertificateRequest.propTypes = {
   verificationCodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   sharedAttributes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onManageAttributes: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

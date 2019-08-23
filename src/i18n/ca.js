@@ -66,6 +66,7 @@ export default {
     certificateRequestButton: 'Obtenir certificat',
     empty: 'No hi ha aplicacions disponibles',
     history: 'Historial d\'ús',
+    manageData: 'Gestionar les meves dades',
     more: '+ informació',
     usageCount: 'Usos',
     firstUse: 'Primer ús',

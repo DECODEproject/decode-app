@@ -18,11 +18,23 @@
  *
  * email: info@dribia.com
  */
-import { omit } from 'ramda';
+import { omit, map } from 'ramda';
+
+const migrateCertificatesToArray = applications => map(
+  application => ({
+    ...application,
+    certificates: {},
+  }),
+  applications,
+);
 
 const migrations = {
   0: omit(['applications']),
   1: omit(['attributes']),
+  2: ({ applications, ...rest }) => ({
+    applications: migrateCertificatesToArray(applications),
+    ...rest,
+  }),
 };
 
 export default migrations;

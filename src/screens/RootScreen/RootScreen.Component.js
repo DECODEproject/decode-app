@@ -50,6 +50,7 @@ const AttributeStack = createStackNavigator({
   AtlasList,
   EditAttribute,
 }, {
+  initialRouteName: 'AttributeList',
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
     headerBackTitle: t('back'),
   }),
@@ -71,6 +72,9 @@ const ApplicationStack = createStackNavigator({
   bcnnow: {
     screen: BCNNow,
   },
+  AttributeList,
+  AtlasList,
+  EditAttribute,
 }, {
   initialRouteName: 'ApplicationList',
   defaultNavigationOptions: ({ screenProps: { t } }) => ({
@@ -144,6 +148,9 @@ const DDDCTestStack = createStackNavigator({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),
   },
+  AttributeList,
+  AtlasList,
+  EditAttribute,
 });
 
 const DrawerNavigator = createDrawerNavigator({

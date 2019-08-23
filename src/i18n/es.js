@@ -67,6 +67,7 @@ export default {
     empty: 'No hay aplicaciones disponibles',
     history: 'Historial de uso',
     more: '+ información',
+    manageData: 'Gestionar mis datos',
     usageCount: 'Usos',
     firstUse: 'Primer uso',
     lastUse: 'Último uso',

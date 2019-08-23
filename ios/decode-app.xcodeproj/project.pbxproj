@@ -1591,6 +1591,7 @@
 				CURRENT_PROJECT_VERSION = 22;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = AQY54R9UJX;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
@@ -1627,6 +1628,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = AQY54R9UJX;
+				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
