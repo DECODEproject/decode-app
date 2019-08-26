@@ -20,7 +20,8 @@
  */
 
 import axios from 'axios';
-import PetitionsError from 'api/errors/petitions-error';
+import { debugLog } from 'lib/utils';
+import PetitionsError from './errors/petitions-error';
 
 class PetitionsClient {
   constructor(url = 'https://petitions.decodeproject.eu') {
@@ -29,17 +30,17 @@ class PetitionsClient {
 
   async sign(petitionId, petitionSignature) {
     try {
-      console.log('Going to call: ', `${this.url}/petitions/${petitionId}/sign`);
-      console.log('JSON body: ', JSON.stringify(petitionSignature));
+      debugLog('Going to call: ', `${this.url}/petitions/${petitionId}/sign`);
+      debugLog('JSON body: ', JSON.stringify(petitionSignature));
       const response = await axios.post(`${this.url}/petitions/${petitionId}/sign`, petitionSignature);
-      console.log('Response: ', response);
+      debugLog('Response: ', response);
       const { data } = response;
-      console.log('Response OK from petitions service');
-      console.log('Data: ', data);
+      debugLog('Response OK from petitions service');
+      debugLog('Data: ', data);
     } catch (error) {
-      console.log('Error: ', error);
+      debugLog('Error: ', error);
       const { response: { data: { detail } } } = error;
-      console.log('Error data: ', JSON.stringify(detail));
+      debugLog('Error data: ', JSON.stringify(detail));
       throw new PetitionsError(`Error signing petition: ${detail || error}`);
     }
   }

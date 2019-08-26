@@ -98,3 +98,6 @@ export const getLanguage = () => take(2, i18n.language);
 export const toggle = (item, list) => (includes(item, list)
   ? without(item, list)
   : append(item, list));
+
+// eslint-disable-next-line no-console
+export const debugLog = (...args) => console.log(...args);

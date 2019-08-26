@@ -20,6 +20,7 @@
  */
 
 import axios from 'axios';
+import { debugLog } from 'lib/utils';
 import CredentialIssuerError, { errors } from './errors/credential-issuer-error';
 
 class CredentialIssuerClient {
@@ -29,9 +30,9 @@ class CredentialIssuerClient {
 
   async getStats() {
     try {
-      console.log('Going to call: ', `${this.url}/stats`);
+      debugLog('Going to call: ', `${this.url}/stats`);
       const { data } = await axios.get(`${this.url}/stats/`);
-      console.log('Response from credential issuer: ', data);
+      debugLog('Response from credential issuer: ', data);
       return data;
     } catch (error) {
       throw new CredentialIssuerError(`Error getting credential issuer id: ${error}`);
@@ -40,9 +41,9 @@ class CredentialIssuerClient {
 
   async getIssuerId() {
     try {
-      console.log('Going to call: ', `${this.url}/uid`);
+      debugLog('Going to call: ', `${this.url}/uid`);
       const { data } = await axios.get(`${this.url}/uid`);
-      console.log('Response from credential issuer: ', data);
+      debugLog('Response from credential issuer: ', data);
       const { credential_issuer_id: credentialIssuerId } = data;
       if (credentialIssuerId) return credentialIssuerId;
     } catch (error) {
@@ -54,9 +55,9 @@ class CredentialIssuerClient {
   async getIssuerVerifier(authorizableAttributeId) {
     let message = '';
     try {
-      console.log('Going to call: ', `${this.url}/authorizable_attribute/${authorizableAttributeId}`);
+      debugLog('Going to call: ', `${this.url}/authorizable_attribute/${authorizableAttributeId}`);
       const { data, status } = await axios.get(`${this.url}/authorizable_attribute/${authorizableAttributeId}`);
-      console.log('Response from credential issuer: ', status, data);
+      debugLog('Response from credential issuer: ', status, data);
       if (status === 200) {
         const { verification_key: verificationKey } = data;
         if (verificationKey) return verificationKey;
@@ -92,13 +93,13 @@ class CredentialIssuerClient {
       values,
       optional_values: optionalValues,
     };
-    console.log('Going to call: ', `${this.url}/credential`);
-    console.log('JSON body: ', jsonBody);
+    debugLog('Going to call: ', `${this.url}/credential`);
+    debugLog('JSON body: ', jsonBody);
 
     try {
       response = await axios.post(`${this.url}/credential/`, jsonBody);
       const { data } = response;
-      console.log('Response from credential issuer: ', data);
+      debugLog('Response from credential issuer: ', data);
       return data;
     } catch (error) {
       const { response: { status, data: { detail } } } = error;
