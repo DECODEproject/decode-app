@@ -22,12 +22,18 @@
 import React, { useEffect } from 'react';
 import { KeyboardAvoidingView, SafeAreaView, Button, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { isEmpty } from 'ramda';
+import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Screen, Heading, Line as Text } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 import CertificateList from './CertificateList';
+
+const prepare = compose(
+  pluck('value'),
+  indexBy(prop('name')),
+  filter(attr => attr.selected === true),
+);
 
 const DDDC = ({
   navigation: { getParam, navigate },
@@ -41,6 +47,7 @@ const DDDC = ({
   signed,
   error,
   verification,
+  toggleSelectedAttribute,
 }) => {
   const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
   const petitionId = getParam('petitionId') || '2';
@@ -70,9 +77,11 @@ const DDDC = ({
                 onManageAttributes={() => navigate('AttributeList')}
                 onSubmit={() => callCredentialIssuer(
                   verification,
-                  {},
+                  prepare(sharedAttributes),
                   petition,
                 )}
+                toggleSelected={toggleSelectedAttribute}
+                empty={all(isEmpty)(values(verification))}
               />
             ) : (
               <View>
@@ -104,7 +113,6 @@ DDDC.defaultProps = {
 DDDC.propTypes = {
   sharedAttributes: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
   })).isRequired,
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
@@ -120,6 +128,7 @@ DDDC.propTypes = {
   error: PropTypes.string,
   certificates: PropTypes.object.isRequired,
   verification: PropTypes.object.isRequired,
+  toggleSelectedAttribute: PropTypes.func.isRequired,
 };
 
 export default DDDC;

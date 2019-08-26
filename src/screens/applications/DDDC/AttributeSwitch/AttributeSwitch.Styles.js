@@ -1,4 +1,3 @@
-
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -21,29 +20,12 @@
  */
 
 import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
-
-export const Screen = styled.ScrollView(({ theme: { backgroundColor } }) => ({
-  paddingHorizontal: 16,
-  backgroundColor,
-}));
-
-export const Heading = styled(CommonHeading)({
-  margin: 10,
-});
-
-export const Subheading = styled.Text(({ theme: { primaryColor } }) => ({
-  color: primaryColor,
-  fontSize: 18,
-  fontWeight: 'bold',
-}));
 
 export const Container = styled.View({
-  padding: 16,
+  height: 50,
+  paddingVertical: 10,
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
 });
-
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
-  textAlign: 'center',
-  color: primaryColor,
-  margin: 5,
-}));

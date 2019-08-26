@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getSharedAttributes } from 'redux/modules/attributes';
 import {
   fetchPetition,
   getPetition,
@@ -9,13 +8,15 @@ import {
   getError,
   getVerification,
   getCertificates,
+  getSharedAttributes,
   callCredentialIssuer,
   signPetition,
+  toggleSelectedAttribute,
 } from 'redux/modules/applications/dddc';
 import Component from './DDDC.Component';
 
 const mapStateToProps = createStructuredSelector({
-  sharedAttributes: getSharedAttributes('dddc'),
+  sharedAttributes: getSharedAttributes,
   petition: getPetition,
   loading: getLoading,
   signed: getSigned,
@@ -28,6 +29,7 @@ const mapDispatchToProps = {
   fetchPetition,
   callCredentialIssuer,
   signPetition,
+  toggleSelectedAttribute,
 };
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);

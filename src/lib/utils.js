@@ -19,7 +19,7 @@
  * email: info@dribia.com
  */
 
-import { take } from 'ramda';
+import { take, includes, without, append } from 'ramda';
 import PropTypes from 'prop-types';
 import aesjs from 'aes-js';
 import uuid from 'uuid/v4';
@@ -94,3 +94,7 @@ export const getDisplayValue = (type, value, t) => {
 };
 
 export const getLanguage = () => take(2, i18n.language);
+
+export const toggle = (item, list) => (includes(item, list)
+  ? without(item, list)
+  : append(item, list));

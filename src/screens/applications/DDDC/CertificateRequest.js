@@ -24,20 +24,21 @@ import PropTypes from 'prop-types';
 import { View, Button, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { isEmpty } from 'ramda';
-import { getDisplayValue } from 'lib/utils';
-import { Heading, Line as Text } from './DDDC.Styles';
+import { Subheading, Line as Text, Container } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
+import AttributeSwitch from './AttributeSwitch';
 
 const CertificateRequest = (
   {
+    empty,
     verificationCodes,
     sharedAttributes,
     onManageAttributes,
     onSubmit,
+    toggleSelected,
   },
 ) => {
   const { t } = useTranslation('applications');
-  const { t: attributesT } = useTranslation('attributes');
   return (
     <View>
       <Text>{t('certificateRequired')}</Text>
@@ -58,23 +59,35 @@ const CertificateRequest = (
           />
         )
       }
-      <Heading>{t('sharedData')}</Heading>
-      {
-        sharedAttributes.map(({ name, value, type }) => (
-          <Text key={name}>{`${name}: ${getDisplayValue(type, value, attributesT)}`}</Text>
-        ))
-      }
-      <Button title={t('manageData')} onPress={onManageAttributes} />
-      <Button title={t('certificateRequestButton')} onPress={onSubmit} />
+      <Container>
+        <Subheading>{t('sharedData')}</Subheading>
+        {
+          <FlatList
+            data={sharedAttributes}
+            keyExtractor={attr => attr.name}
+            renderItem={({ item }) => (
+              <AttributeSwitch
+                attribute={item}
+                onSwitch={() => toggleSelected(item.name)}
+              />
+            )
+            }
+          />
+        }
+        <Button title={t('manageData')} onPress={onManageAttributes} />
+        <Button title={t('certificateRequestButton')} onPress={onSubmit} disabled={empty} />
+      </Container>
     </View>
   );
 };
 
 CertificateRequest.propTypes = {
+  empty: PropTypes.bool.isRequired,
   verificationCodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   sharedAttributes: PropTypes.arrayOf(PropTypes.object).isRequired,
   onManageAttributes: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  toggleSelected: PropTypes.func.isRequired,
 };
 
 export default CertificateRequest;

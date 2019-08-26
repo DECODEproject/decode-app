@@ -21,9 +21,12 @@
 
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { path, prop, append } from 'ramda';
+import { path, prop, append, map, assoc, includes, indexBy, merge, values } from 'ramda';
 import uuid from 'uuid/v4';
+import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
+import { toggle } from 'lib/utils';
 import isJson from 'lib/is-json';
+import { getApplication } from 'api/atlas-client';
 import zenroom from 'api/zenroom-client';
 import contract01 from 'api/zenroom/01-CITIZEN-credential-keygen.zencode';
 import contract02 from 'api/zenroom/02-CITIZEN-credential-request.zencode';
@@ -44,6 +47,7 @@ const emptyPetition = {
 export const initialState = {
   loading: false,
   signed: false,
+  selectedAttributes: [],
   uses: [],
   certificates: {},
   verification: {},
@@ -61,6 +65,7 @@ export const ACTIONS = {
   SIGN_REQUEST: 'SIGN_REQUEST',
   SIGN_SUCCESS: 'SIGN_SUCCESS',
   SIGN_FAILURE: 'SIGN_FAILURE',
+  TOGGLE_SELECTED_ATTRIBUTE: 'TOGGLE_SELECTED_ATTRIBUTE',
 };
 
 export const fetchPetition = (url, id) => async (dispatch) => {
@@ -87,6 +92,11 @@ export const updateVerificationCode = (id, value) => ({
   type: ACTIONS.UPDATE_VERIFICATION_CODE,
   id,
   value,
+});
+
+export const toggleSelectedAttribute = id => ({
+  type: ACTIONS.TOGGLE_SELECTED_ATTRIBUTE,
+  id,
 });
 
 export const callCredentialIssuer = (
@@ -250,6 +260,25 @@ export const getCertificates = createSelector(
   prop('certificates'),
 );
 
+const getSelectedAttributes = createSelector(
+  getBranch,
+  prop('selectedAttributes'),
+);
+
+export const getSharedAttributes = createSelector(
+  [getSharedAttributesFromAtlas('dddc'), getSelectedAttributes],
+  (sharedAttributes, selectedAttributes) => {
+    const applicationAttributes = indexBy(prop('name'), map(item => ({ name: item }), getApplication('dddc').sharedAttributes));
+    const userAttributes = indexBy(prop('name'))(
+      map(
+        attr => (assoc('selected', includes(attr.name, selectedAttributes), attr)),
+        sharedAttributes,
+      ),
+    );
+    return values(merge(applicationAttributes, userAttributes));
+  },
+);
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.FETCH_PETITION_REQUEST: {
@@ -283,6 +312,13 @@ export default (state = initialState, action) => {
           ...verification,
           [action.id]: action.value,
         },
+      };
+    }
+    case ACTIONS.TOGGLE_SELECTED_ATTRIBUTE: {
+      const { selectedAttributes } = state;
+      return {
+        ...state,
+        selectedAttributes: toggle(action.id, selectedAttributes),
       };
     }
     case ACTIONS.ISSUE_CREDENTIAL_REQUEST: {
