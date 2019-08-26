@@ -374,14 +374,14 @@ export default (state = initialState, action) => {
       };
     }
     case ACTIONS.SIGN_SUCCESS: {
-      const { uses } = state;
+      const { uses, selectedAttributes } = state;
       return {
         ...state,
         loading: false,
         signed: true,
         uses: append({
           date: +moment(),
-          sharedData: [],
+          sharedData: selectedAttributes,
         },
         uses),
       };
