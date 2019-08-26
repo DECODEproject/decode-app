@@ -151,6 +151,10 @@ const DDDCTestStack = createStackNavigator({
   AttributeList,
   AtlasList,
   EditAttribute,
+}, {
+  defaultNavigationOptions: ({ screenProps: { t } }) => ({
+    headerBackTitle: t('back'),
+  }),
 });
 
 const DrawerNavigator = createDrawerNavigator({

@@ -81,7 +81,8 @@ const frequencyByUnit = (count, interval, unit) => {
  */
 
 export const calculateAverage = (firstUse, count) => {
-  const interval = moment.duration((moment() - firstUse));
+  let interval = moment.duration((moment() - firstUse));
+  if (interval.asDays() < 1) interval = moment.duration('P1D');
   const units = ['year', 'month', 'week', 'day'];
   return compose(
     last,
