@@ -29,8 +29,18 @@ export const Screen = styled.SafeAreaView(
   }),
 );
 
-export const Heading = styled.Text(({ theme: { primaryColor } }) => ({
+export const Heading = styled.Text(({ theme: { primaryColor, fontFamily } }) => ({
   color: primaryColor,
   fontSize: 20,
   textAlign: 'center',
+  fontFamily,
+  fontWeight: 'bold',
+}));
+
+export const Text = styled.Text(({ theme: { primaryColor, fontFamily } }) => ({
+  color: primaryColor,
+  fontSize: 16,
+  textAlign: 'left',
+  fontFamily,
+  fontWeight: 'normal',
 }));

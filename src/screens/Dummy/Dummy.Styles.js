@@ -20,14 +20,13 @@
  */
 
 import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
+import { Heading as CommonHeading, Text } from 'lib/styles';
 
 export const Heading = styled(CommonHeading)({
   margin: 10,
 });
 
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
+export const Line = styled(Text)({
   textAlign: 'center',
-  color: primaryColor,
   margin: 5,
-}));
+});
