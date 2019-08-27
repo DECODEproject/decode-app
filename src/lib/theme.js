@@ -19,10 +19,23 @@
  * email: info@dribia.com
  */
 
+const colors = {
+  lightGray: '#f6f6f6',
+  darkGray: '#666',
+  black: '#333',
+  white: '#fff',
+  yellow: '#fff16e',
+  blueGreen: '#00b1b0',
+  green: '#33e986',
+  orange: 'e4701e',
+};
+
 const theme = {
-  primaryColor: '#333',
-  disabledTextColor: '#666',
-  backgroundColor: '#F5FCFF',
+  colors,
+  fontFamily: 'Montserrat',
+  primaryColor: colors.black,
+  disabledTextColor: colors.darkGray,
+  backgroundColor: colors.lightGray,
 };
 
 export default theme;
