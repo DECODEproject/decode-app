@@ -5730,7 +5730,7 @@ react-native-camera@^2.11.1:
   dependencies:
     prop-types "^15.6.2"
 
-react-native-date-picker@^2.5.0:
+react-native-date-picker@^2.7.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.7.0.tgz#91c6cd85c45309763e58982c46fcf3dba2d1da55"
   integrity sha512-pevfIzZ2jnYZe3jrDsUN2EM0fGcal3lL2aqExDux7d01C4QWOJJdHbut2URjL/EzS1v2ByLQJNT0ErjniheRiw==

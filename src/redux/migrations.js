@@ -18,21 +18,20 @@
  *
  * email: info@dribia.com
  */
-import { omit, map } from 'ramda';
+import { omit } from 'ramda';
+import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
+import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
 
-const migrateCertificatesToArray = applications => map(
-  application => ({
-    ...application,
-    certificates: {},
-  }),
-  applications,
-);
+const migrateV2Applications = {
+  dddc: dddcInitialState,
+  bcnnow: bcnnowInitialState,
+};
 
 const migrations = {
   0: omit(['applications']),
   1: omit(['attributes']),
   2: ({ applications, ...rest }) => ({
-    applications: migrateCertificatesToArray(applications),
+    applications: migrateV2Applications,
     ...rest,
   }),
 };
