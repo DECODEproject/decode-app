@@ -20,37 +20,30 @@
  */
 
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Button from 'lib/Components/Button';
-import { Screen } from 'lib/styles';
+import { Touchable, Wrapper, Label, Icon } from './Button.Styles';
 
-const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
-  const { t } = useTranslation('settings');
-  return (
-    <Screen centerAligned>
-      <Button title={t('review')} onPress={onReviewWalkthrough} />
-      <Button
-        title={t('reset')}
-        onPress={() => navigate('Warning', {
-          message: t('warning'),
-          onConfirm: onReset,
-        })}
-      />
-    </Screen>
-  );
+const Button = ({ title, onPress, icon, featured }) => (
+  <Touchable onPress={onPress} featured={featured}>
+    <Wrapper>
+      {icon ? (
+        <Icon name={icon} featured={featured} />
+      ) : null}
+      <Label featured={featured}>{title}</Label>
+    </Wrapper>
+  </Touchable>
+);
+
+Button.propTypes = {
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired,
+  icon: PropTypes.string,
+  featured: PropTypes.bool,
 };
 
-Settings.propTypes = {
-  onReviewWalkthrough: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
+Button.defaultProps = {
+  icon: null,
+  featured: false,
 };
 
-Settings.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('Settings'),
-});
-
-export default Settings;
+export default Button;

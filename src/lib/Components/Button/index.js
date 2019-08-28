@@ -19,15 +19,4 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
-
-export const ListContainer = styled.View({
-  flex: 9,
-  flexDirection: 'column',
-});
-
-export const ButtonsContainer = styled.View({
-  flex: 1,
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-});
+export default from './Button.Component';

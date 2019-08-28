@@ -20,10 +20,10 @@
  */
 
 import React from 'react';
-import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { split, map, addIndex } from 'ramda';
 import { Screen } from 'lib/styles';
+import Button from 'lib/Components/Button';
 import { Paragraph } from './About.Styles';
 
 const formatText = (text) => {

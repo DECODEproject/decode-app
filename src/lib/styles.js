@@ -18,9 +18,12 @@
  *
  * email: info@dribia.com
  */
+
+import { SafeAreaView, Text as RNText } from 'react-native';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 
-export const Screen = styled.SafeAreaView(
+export const Screen = styled(SafeAreaView)(
   ({ theme: { backgroundColor }, topJustified = false, centerAligned = false }) => ({
     flex: 1,
     justifyContent: topJustified ? 'flex-start' : 'center',
@@ -29,7 +32,7 @@ export const Screen = styled.SafeAreaView(
   }),
 );
 
-export const Heading = styled.Text(({ theme: { primaryColor, fontFamily } }) => ({
+export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) => ({
   color: primaryColor,
   fontSize: 20,
   textAlign: 'center',
@@ -37,10 +40,15 @@ export const Heading = styled.Text(({ theme: { primaryColor, fontFamily } }) => 
   fontWeight: 'bold',
 }));
 
-export const Text = styled.Text(({ theme: { primaryColor, fontFamily } }) => ({
+export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSize } }) => ({
   color: primaryColor,
-  fontSize: 16,
   textAlign: 'left',
   fontFamily,
+  fontSize,
   fontWeight: 'normal',
+}));
+
+export const Icon = styled(FAIcon)(({ theme: { fontSize, primaryColor } }) => ({
+  fontSize,
+  color: primaryColor,
 }));

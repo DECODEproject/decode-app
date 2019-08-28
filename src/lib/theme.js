@@ -33,6 +33,7 @@ const colors = {
 const theme = {
   colors,
   fontFamily: 'Montserrat',
+  fontSize: 16,
   primaryColor: colors.black,
   disabledTextColor: colors.darkGray,
   backgroundColor: colors.lightGray,

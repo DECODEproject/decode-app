@@ -21,8 +21,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import Button from 'lib/Components/Button';
 import { Screen, Heading } from 'lib/styles';
 import { Buttons, MessageContainer } from './Warning.Styles';
 

@@ -20,9 +20,9 @@
  */
 
 import React from 'react';
-import { Button } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
+import Button from 'lib/Components/Button';
 import { Screen, Heading } from 'lib/styles';
 
 const pleaseCrash = () => {
@@ -36,6 +36,7 @@ const DummyNext = () => {
       <Heading>{t('second')}</Heading>
       <WalkthroughStep screen="dummyNext" id="crash">
         <Button
+          featured
           title="Crash, please"
           onPress={pleaseCrash}
         />

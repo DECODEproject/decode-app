@@ -20,14 +20,29 @@
  */
 
 import styled from 'styled-components/native';
+import { TouchableOpacity, View } from 'react-native';
+import { Icon as CommonIcon, Text } from 'lib/styles';
 
-export const ListContainer = styled.View({
-  flex: 9,
-  flexDirection: 'column',
-});
+export const Touchable = styled(TouchableOpacity)(({ featured, theme: { colors } }) => ({
+  backgroundColor: featured ? colors.blueGreen : colors.lightGray,
+  padding: 10,
+  borderWidth: 1,
+  borderColor: featured ? colors.black : colors.blueGreen,
+  margin: 10,
+}));
 
-export const ButtonsContainer = styled.View({
-  flex: 1,
-  justifyContent: 'flex-end',
+export const Wrapper = styled(View)({
+  flexDirection: 'row',
   alignItems: 'center',
 });
+
+export const Icon = styled(CommonIcon)(({ featured, theme: { colors, primaryColor } }) => ({
+  color: featured ? colors.white : primaryColor,
+  paddingHorizontal: 5,
+}));
+
+export const Label = styled(Text)(({ featured, theme: { colors, primaryColor } }) => ({
+  color: featured ? colors.white : primaryColor,
+  fontWeight: 'bold',
+  paddingHorizontal: 5,
+}));

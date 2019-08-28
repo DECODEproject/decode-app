@@ -19,10 +19,10 @@
  * email: info@dribia.com
  */
 import styled from 'styled-components/native';
+import { Text } from 'lib/styles';
 
-export const Paragraph = styled.Text(({ bold }) => ({
+export const Paragraph = styled(Text)(({ bold }) => ({
   textAlign: 'center',
-  fontSize: 16,
   fontWeight: bold ? 'bold' : 'normal',
   padding: 10,
 }));

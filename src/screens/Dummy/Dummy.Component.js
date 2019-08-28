@@ -22,12 +22,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  View, Button, Dimensions, PixelRatio,
+  View, Dimensions, PixelRatio,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
+import Button from 'lib/Components/Button';
 import { Screen } from 'lib/styles';
 import { Heading, Line } from './Dummy.Styles';
 
@@ -63,6 +64,8 @@ const Dummy = ({
       <Line>{t('refreshDate', { date })}</Line>
       <WalkthroughStep screen="dummy" id="next">
         <Button
+          featured
+          icon="check"
           title={t('next')}
           onPress={() => navigation.navigate('DummyNext')}
         />
