@@ -37,6 +37,8 @@ const theme = {
   primaryColor: colors.black,
   disabledTextColor: colors.darkGray,
   backgroundColor: colors.lightGray,
+  headerPrimary: colors.yellow,
+  headerSecondary: colors.black,
 };
 
 export default theme;

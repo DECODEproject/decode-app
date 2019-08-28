@@ -22,7 +22,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { getDisplayValue } from 'lib/utils';
 import { Heading, Line as Text } from './BCNNow.Styles';
 
@@ -47,7 +48,7 @@ const BCNNow = ({ navigation: { getParam }, sharedAttributes }) => {
 };
 
 BCNNow.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:bcnnowName'),
+  headerTitle: <Header title={t('applications:bcnnowName')} icon="th-large" />,
 });
 
 BCNNow.propTypes = {

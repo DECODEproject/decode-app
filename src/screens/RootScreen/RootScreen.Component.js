@@ -19,10 +19,11 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
+import { ThemeContext } from 'styled-components';
 import Carousel from 'lib/Components/Carousel';
 import MenuIcon from 'lib/Components/MenuIcon';
 import Warning from 'lib/Components/Warning';
@@ -40,6 +41,14 @@ import Scanner from 'screens/Scanner';
 import DDDC from 'screens/applications/DDDC';
 import BCNNow from 'screens/applications/BCNNow';
 
+const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
+  headerBackTitle: null,
+  headerTintColor: theme.headerPrimary,
+  headerStyle: {
+    backgroundColor: theme.headerSecondary,
+  },
+});
+
 const AttributeStack = createStackNavigator({
   AttributeList: {
     screen: AttributeList,
@@ -51,9 +60,7 @@ const AttributeStack = createStackNavigator({
   EditAttribute,
 }, {
   initialRouteName: 'AttributeList',
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const ApplicationStack = createStackNavigator({
@@ -77,9 +84,7 @@ const ApplicationStack = createStackNavigator({
   EditAttribute,
 }, {
   initialRouteName: 'ApplicationList',
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const SettingsStack = createStackNavigator({
@@ -90,9 +95,7 @@ const SettingsStack = createStackNavigator({
     }),
   },
 }, {
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const ScannerStack = createStackNavigator({
@@ -109,9 +112,7 @@ const ScannerStack = createStackNavigator({
     screen: BCNNow,
   },
 }, {
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const AboutStack = createStackNavigator({
@@ -122,9 +123,7 @@ const AboutStack = createStackNavigator({
     }),
   },
 }, {
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const DummyStack = createStackNavigator({
@@ -136,9 +135,7 @@ const DummyStack = createStackNavigator({
   },
   DummyNext,
 }, {
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const DDDCTestStack = createStackNavigator({
@@ -152,9 +149,7 @@ const DDDCTestStack = createStackNavigator({
   AtlasList,
   EditAttribute,
 }, {
-  defaultNavigationOptions: ({ screenProps: { t } }) => ({
-    headerBackTitle: t('back'),
-  }),
+  defaultNavigationOptions,
 });
 
 const DrawerNavigator = createDrawerNavigator({
@@ -226,10 +221,11 @@ const AppContainer = createAppContainer(RootNavigation);
 
 const RootScreen = ({ firstRun, firstRunDone }) => {
   const { t } = useTranslation();
+  const theme = useContext(ThemeContext);
   return (
     firstRun
       ? <Carousel onDone={() => firstRunDone()} />
-      : <AppContainer screenProps={{ t }} />
+      : <AppContainer screenProps={{ t, theme }} />
   );
 };
 

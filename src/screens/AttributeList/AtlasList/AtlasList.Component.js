@@ -25,8 +25,9 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
 import EmptyList from 'lib/Components/EmptyList';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
 import ListItem from 'lib/Components/ListItem';
+import Header from 'lib/Components/Header';
 
 const AtlasList = ({ attributes, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
@@ -65,7 +66,7 @@ AtlasList.propTypes = {
 };
 
 AtlasList.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('attributes:available'),
+  headerTitle: <Header title={t('attributes:available')} icon="user" />,
 });
 
 

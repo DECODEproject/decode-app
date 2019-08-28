@@ -23,7 +23,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
 import Button from 'lib/Components/Button';
-import { Screen, Heading } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
+import { Heading } from 'lib/styles';
 
 const pleaseCrash = () => {
   throw new Error('This is a crash test');
@@ -46,7 +48,7 @@ const DummyNext = () => {
 };
 
 DummyNext.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('next'),
+  headerTitle: <Header title={t('next')} />,
 });
 
 export default DummyNext;

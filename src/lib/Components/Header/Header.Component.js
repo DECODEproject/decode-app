@@ -19,19 +19,24 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { getVerification, updateVerificationCode } from 'redux/modules/applications/dddc';
-import Component from './VerificationCode.Component';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Title, Wrapper, Icon } from './Header.Styles';
 
-const mapStateToProps = createStructuredSelector({
-  verification: getVerification,
-});
+const Header = ({ title, icon }) => (
+  <Wrapper>
+    {icon ? <Icon name={icon} /> : null}
+    <Title>{title}</Title>
+  </Wrapper>
+);
 
-const mapDispatchToProps = dispatch => ({
-  updateVerification: (id, value) => dispatch(updateVerificationCode(id, value)),
-});
+Header.defaultProps = {
+  icon: null,
+};
 
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string,
+};
 
-export default ConnectedComponent;
+export default Header;

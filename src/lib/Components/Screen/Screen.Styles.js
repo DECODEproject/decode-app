@@ -19,19 +19,14 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { getVerification, updateVerificationCode } from 'redux/modules/applications/dddc';
-import Component from './VerificationCode.Component';
+import styled from 'styled-components/native';
+import { SafeAreaView as RNSafeAreaView } from 'react-native';
 
-const mapStateToProps = createStructuredSelector({
-  verification: getVerification,
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateVerification: (id, value) => dispatch(updateVerificationCode(id, value)),
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export default ConnectedComponent;
+export const SafeAreaView = styled(RNSafeAreaView)(
+  ({ theme: { backgroundColor }, topJustified = false, centerAligned = false }) => ({
+    flex: 1,
+    justifyContent: topJustified ? 'flex-start' : 'center',
+    alignItems: centerAligned ? 'center' : 'stretch',
+    backgroundColor,
+  }),
+);

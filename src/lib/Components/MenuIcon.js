@@ -28,9 +28,10 @@ const Button = styled.TouchableOpacity({
   paddingLeft: 20,
 });
 
-const StyledIcon = styled(Icon)({
+const StyledIcon = styled(Icon)(({ theme: { headerPrimary } }) => ({
+  color: headerPrimary,
   fontSize: 24,
-});
+}));
 
 const MenuIcon = ({ onPress }) => (
   <Button onPress={onPress}>

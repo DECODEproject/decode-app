@@ -26,7 +26,8 @@ import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import EmptyList from 'lib/Components/EmptyList';
 import Button from 'lib/Components/Button';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { getDisplayValue } from 'lib/utils';
 import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
 import AttributeItem from './AttributeItem';
@@ -82,7 +83,7 @@ AttributeList.propTypes = {
 };
 
 AttributeList.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('attributes:my'),
+  headerTitle: <Header title={t('attributes:my')} icon="user" />,
 });
 
 export default AttributeList;
