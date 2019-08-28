@@ -25,10 +25,11 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
-import { Screen } from 'lib/styles';
 import { parseQRCode } from 'lib/utils';
 import EmptyList from 'lib/Components/EmptyList';
 import ListItem from 'lib/Components/ListItem';
+import Header from 'lib/Components/Header';
+import Screen from 'lib/Components/Screen';
 
 const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {
   const { t } = useTranslation('applications');
@@ -132,7 +133,7 @@ ApplicationList.propTypes = {
 };
 
 ApplicationList.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:available'),
+  headerTitle: <Header title={t('applications:available')} icon="th-large" />,
 });
 
 export default ApplicationList;

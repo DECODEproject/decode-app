@@ -23,7 +23,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from 'lib/Components/Button';
-import { Screen, Heading } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import { Heading } from 'lib/styles';
 import { Buttons, MessageContainer } from './Warning.Styles';
 
 const Warning = ({ navigation: { goBack, getParam } }) => {

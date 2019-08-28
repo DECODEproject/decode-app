@@ -25,6 +25,7 @@ import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Header from 'lib/Components/Header';
 import { Screen, Heading, Line as Text } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 import CertificateList from './CertificateList';
@@ -103,7 +104,7 @@ const DDDC = ({
 };
 
 DDDC.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:dddcName'),
+  headerTitle: <Header title={t('applications:dddcName')} icon="th-large" />,
 });
 
 DDDC.defaultProps = {

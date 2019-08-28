@@ -23,7 +23,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavigationEvents } from 'react-navigation';
 import { Text } from 'react-native';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { parseQRCode } from 'lib/utils';
 import { Camera } from './Scanner.Styles';
 
@@ -83,7 +84,7 @@ class Scanner extends React.Component {
 }
 
 Scanner.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('Scanner'),
+  headerTitle: <Header title={t('scanner:title')} icon="qrcode" />,
 });
 
 Scanner.propTypes = {

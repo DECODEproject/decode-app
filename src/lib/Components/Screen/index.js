@@ -19,19 +19,4 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { getVerification, updateVerificationCode } from 'redux/modules/applications/dddc';
-import Component from './VerificationCode.Component';
-
-const mapStateToProps = createStructuredSelector({
-  verification: getVerification,
-});
-
-const mapDispatchToProps = dispatch => ({
-  updateVerification: (id, value) => dispatch(updateVerificationCode(id, value)),
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export default ConnectedComponent;
+export default from './Screen.Component';

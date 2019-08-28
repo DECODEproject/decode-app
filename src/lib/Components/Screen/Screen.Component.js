@@ -19,19 +19,23 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { getVerification, updateVerificationCode } from 'redux/modules/applications/dddc';
-import Component from './VerificationCode.Component';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { StatusBar } from 'react-native';
+import { SafeAreaView } from './Screen.Styles';
 
-const mapStateToProps = createStructuredSelector({
-  verification: getVerification,
-});
+const Screen = ({ children, ...props }) => (
+  <SafeAreaView {...props}>
+    <StatusBar barStyle="light-content" />
+    {children}
+  </SafeAreaView>
+);
 
-const mapDispatchToProps = dispatch => ({
-  updateVerification: (id, value) => dispatch(updateVerificationCode(id, value)),
-});
+Screen.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
 
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export default ConnectedComponent;
+export default Screen;

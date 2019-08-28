@@ -23,7 +23,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Button from 'lib/Components/Button';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 
 const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
   const { t } = useTranslation('settings');
@@ -50,7 +51,7 @@ Settings.propTypes = {
 };
 
 Settings.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('Settings'),
+  headerTitle: <Header title={t('settings:title')} icon="cog" />,
 });
 
 export default Settings;

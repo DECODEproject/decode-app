@@ -29,7 +29,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
 import WalkthroughStep from 'lib/Components/WalkthroughStep';
 import Button from 'lib/Components/Button';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { Heading, Line } from './Dummy.Styles';
 
 const Dummy = ({
@@ -75,7 +76,7 @@ const Dummy = ({
 };
 
 Dummy.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('home'),
+  headerTitle: <Header title={t('home')} />,
 });
 
 Dummy.propTypes = {

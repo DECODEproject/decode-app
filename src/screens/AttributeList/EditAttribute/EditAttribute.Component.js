@@ -25,7 +25,8 @@ import { Button, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
 import i18n from 'i18n';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { AttributeInput, EnumPicker, EnumPickerItem } from './EditAttribute.Styles';
 
 const getEditor = (type, value, setValue, getParam) => {
@@ -102,7 +103,7 @@ EditAttribute.navigationOptions = (
     navigation: { state: { params: { name } } },
   },
 ) => ({
-  title: t(`attributes:${name}`),
+  headerTitle: <Header title={t(`attributes:${name}`)} icon="user" />,
 });
 
 EditAttribute.defaultProps = {

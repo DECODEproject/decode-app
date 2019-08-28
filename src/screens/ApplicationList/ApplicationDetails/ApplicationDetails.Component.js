@@ -24,7 +24,8 @@ import PropTypes from 'prop-types';
 import { Button, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { getImage } from 'api/atlas-client';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { ApplicationImage, Description, Line, More } from './ApplicationDetails.Styles';
 
 const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
@@ -52,7 +53,7 @@ const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
 };
 
 ApplicationDetails.navigationOptions = ({ navigation: { getParam } }) => ({
-  title: getParam('name'),
+  headerTitle: <Header title={getParam('name')} icon="th-large" />,
 });
 
 ApplicationDetails.propTypes = {

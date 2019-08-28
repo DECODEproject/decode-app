@@ -24,7 +24,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { map, addIndex, length, dec } from 'ramda';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
+import Header from 'lib/Components/Header';
 import { Section, SharedData, Label, Value } from './ActivityHistory.Styles';
 
 const ActivityHistory = ({ navigation: { getParam } }) => {
@@ -71,7 +72,7 @@ const ActivityHistory = ({ navigation: { getParam } }) => {
 ActivityHistory.displayName = 'ActivityHistory';
 
 ActivityHistory.navigationOptions = ({ screenProps: { t } }) => ({
-  title: t('applications:history'),
+  headerTitle: <Header title={t('applications:history')} icon="th-large" />,
 });
 
 ActivityHistory.propTypes = {

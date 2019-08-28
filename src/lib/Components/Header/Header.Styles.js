@@ -19,19 +19,24 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { getVerification, updateVerificationCode } from 'redux/modules/applications/dddc';
-import Component from './VerificationCode.Component';
+import styled from 'styled-components/native';
+import { View } from 'react-native';
+import { Icon as CommonIcon, Text } from 'lib/styles';
 
-const mapStateToProps = createStructuredSelector({
-  verification: getVerification,
+export const Wrapper = styled(View)({
+  flexDirection: 'row',
+  alignItems: 'center',
+  backgroundColor: '#333',
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateVerification: (id, value) => dispatch(updateVerificationCode(id, value)),
-});
+export const Icon = styled(CommonIcon)(({ theme: { headerPrimary } }) => ({
+  color: headerPrimary,
+  paddingHorizontal: 5,
+}));
 
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-export default ConnectedComponent;
+export const Title = styled(Text)(({ theme: { headerPrimary } }) => ({
+  color: headerPrimary,
+  fontWeight: 'bold',
+  fontSize: 20,
+  paddingHorizontal: 5,
+}));
