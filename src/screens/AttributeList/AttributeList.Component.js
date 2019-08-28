@@ -21,10 +21,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { isEmpty } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import EmptyList from 'lib/Components/EmptyList';
+import Button from 'lib/Components/Button';
 import { Screen } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
