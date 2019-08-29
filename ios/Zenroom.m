@@ -1,6 +1,6 @@
 /**
  * DECODE App – A mobile app to control your personal data
- * Copyright (C) 2019 – Thoughtworks Ltd.
+ *
  * Copyright (C) 2019 – DRIBIA Data Research S.L.
  *
  * DECODE App is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * email: ula@dribia.com
+ * email: info@dribia.com
  */
 
 #import "Zenroom.h"
