@@ -20,7 +20,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { FlatList as ListContainer, Linking } from 'react-native';
+import { FlatList, Linking } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +30,8 @@ import EmptyList from 'lib/Components/EmptyList';
 import ListItem from 'lib/Components/ListItem';
 import Header from 'lib/Components/Header';
 import Screen from 'lib/Components/Screen';
+import Button from 'lib/Components/Button';
+import { Wrapper, Separator } from './ApplicationList.Styles';
 
 const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {
   const { t } = useTranslation('applications');
@@ -68,9 +70,11 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
   return (
     <Screen>
       {isEmpty(applications) ? (<EmptyList text={t('empty')} />) : (
-        <ListContainer
-          data={applications}
-          renderItem={
+        <Wrapper>
+          <FlatList
+            data={applications}
+            ItemSeparatorComponent={Separator}
+            renderItem={
             ({
               item:
               {
@@ -98,8 +102,15 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
               />
             )
           }
-          keyExtractor={prop('id')}
-        />
+            keyExtractor={prop('id')}
+          />
+          <Button
+            title={t('activate')}
+            featured
+            onPress={() => navigate('Scanner')}
+            icon="qrcode"
+          />
+        </Wrapper>
       )}
     </Screen>
   );
