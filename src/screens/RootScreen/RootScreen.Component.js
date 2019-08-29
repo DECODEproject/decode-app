@@ -27,6 +27,8 @@ import { ThemeContext } from 'styled-components';
 import Carousel from 'lib/Components/Carousel';
 import MenuIcon from 'lib/Components/MenuIcon';
 import Warning from 'lib/Components/Warning';
+import { Icon } from 'lib/styles';
+import commonTheme from 'lib/theme';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
 import AtlasList from 'screens/AttributeList/AtlasList';
@@ -157,30 +159,35 @@ const DrawerNavigator = createDrawerNavigator({
     screen: AttributeStack,
     navigationOptions: ({ screenProps: { t } }) => ({
       drawerLabel: t('attributes:my'),
+      drawerIcon: <Icon name="user" />,
     }),
   },
   ApplicationStack: {
     screen: ApplicationStack,
     navigationOptions: ({ screenProps: { t } }) => ({
       drawerLabel: t('applications:available'),
+      drawerIcon: <Icon name="th-large" />,
     }),
   },
   SettingsStack: {
     screen: SettingsStack,
     navigationOptions: ({ screenProps: { t } }) => ({
       drawerLabel: t('settings:title'),
+      drawerIcon: <Icon name="cog" />,
     }),
   },
   AboutStack: {
     screen: AboutStack,
     navigationOptions: ({ screenProps: { t } }) => ({
       drawerLabel: t('about:title'),
+      drawerIcon: <Icon name="info" />,
     }),
   },
   ScannerStack: {
     screen: ScannerStack,
     navigationOptions: ({ screenProps: { t } }) => ({
       drawerLabel: t('scanner:title'),
+      drawerIcon: <Icon name="qrcode" />,
     }),
   },
   DummyStack: {
@@ -201,6 +208,19 @@ const DrawerNavigator = createDrawerNavigator({
     drawerLockMode: 'locked-closed',
   }),
   initialRouteName: 'ApplicationStack',
+  hideStatusBar: true,
+  drawerBackgroundColor: commonTheme.headerPrimary,
+  contentOptions: {
+    activeTintColor: commonTheme.headerSecondary,
+    inactiveTintColor: commonTheme.headerSecondary,
+    itemStyle: {
+      borderBottomWidth: 1,
+      borderBottomColor: commonTheme.headerSecondary,
+    },
+    labelStyle: {
+      fontFamily: commonTheme.fontFamily,
+    },
+  },
 });
 
 const RootNavigation = createStackNavigator({
