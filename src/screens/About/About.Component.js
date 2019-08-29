@@ -22,7 +22,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { split, map, addIndex } from 'ramda';
-import { Screen } from 'lib/styles';
+import Screen from 'lib/Components/Screen';
 import Button from 'lib/Components/Button';
 import Header from 'lib/Components/Header';
 import { Paragraph } from './About.Styles';
