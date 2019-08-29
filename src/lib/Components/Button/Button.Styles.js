@@ -28,12 +28,13 @@ export const Touchable = styled(TouchableOpacity)(({ featured, theme: { colors }
   padding: 10,
   borderWidth: 1,
   borderColor: featured ? colors.black : colors.blueGreen,
-  margin: 10,
+  marginVertical: 10,
 }));
 
 export const Wrapper = styled(View)({
   flexDirection: 'row',
   alignItems: 'center',
+  overflow: 'hidden',
 });
 
 export const Icon = styled(CommonIcon)(({ featured, theme: { colors, primaryColor } }) => ({

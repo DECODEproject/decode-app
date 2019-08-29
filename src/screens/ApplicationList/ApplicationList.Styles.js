@@ -20,22 +20,15 @@
  */
 
 import styled from 'styled-components/native';
-import { Text } from 'lib/styles';
 
-export const Container = styled.View(({ theme: { colors } }) => ({
-  borderColor: colors.blueGreen,
-  borderWidth: 1,
-  padding: 16,
-}));
+export const Wrapper = styled.View({
+  flex: 1,
+  justifyContent: 'flex-start',
+  paddingHorizontal: 32,
+  paddingVertical: 16,
+});
 
-export const Name = styled(Text)(({ disabled, theme: { primaryColor, disabledTextColor } }) => ({
-  fontSize: 18,
-  fontWeight: 'bold',
-  color: disabled ? disabledTextColor : primaryColor,
-}));
-
-export const Description = styled(Text)(
-  ({ disabled, theme: { primaryColor, disabledTextColor } }) => ({
-    color: disabled ? disabledTextColor : primaryColor,
-  }),
-);
+export const Separator = styled.View({
+  height: 16,
+  color: 'transparent',
+});
