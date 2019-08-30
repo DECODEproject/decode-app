@@ -33,6 +33,7 @@ export const Touchable = styled(TouchableOpacity)(({ featured, theme: { colors }
 
 export const Wrapper = styled(View)({
   flexDirection: 'row',
+  justifyContent: 'center',
   alignItems: 'center',
   overflow: 'hidden',
 });

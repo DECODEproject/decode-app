@@ -20,14 +20,17 @@
  */
 
 import React, { useState } from 'react';
+import { Picker } from 'react-native';
 import PropTypes from 'prop-types';
-import { Button, Text } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
 import i18n from 'i18n';
 import Screen from 'lib/Components/Screen';
 import Header from 'lib/Components/Header';
-import { AttributeInput, EnumPicker, EnumPickerItem } from './EditAttribute.Styles';
+import Button from 'lib/Components/Button';
+import EnumPicker from 'lib/Components/Picker';
+import { Text, TextInput } from 'lib/styles';
+import { Wrapper } from './EditAttribute.Styles';
 
 const getEditor = (type, value, setValue, getParam) => {
   const { t } = useTranslation('attributes');
@@ -38,7 +41,7 @@ const getEditor = (type, value, setValue, getParam) => {
       onValueChange={newValue => setValue(newValue)}
     >
       {enumValues.map(enumValue => (
-        <EnumPickerItem label={t(enumValue)} value={enumValue} key={enumValue} />
+        <Picker.Item label={t(enumValue)} value={enumValue} key={enumValue} />
       ))}
     </EnumPicker>
   );
@@ -51,10 +54,11 @@ const getEditor = (type, value, setValue, getParam) => {
       maximumDate={new Date()}
       onDateChange={date => setValue(+date)}
       fadeToColor="none"
+      style={{ fontFamily: 'Montserrat' }}
     />
   );
   return (
-    <AttributeInput
+    <TextInput
       placeholder={t('enterValue')}
       autoCapitalize="none"
       autoCorrect={false}
@@ -76,23 +80,22 @@ const EditAttribute = ({
   const valueParam = getParam('value');
   const [value, setValue] = useState(valueParam);
   return (
-    <Screen centerAligned>
-      {
-        getEditor(type, value, setValue, getParam)
-      }
-      <Button
-        disabled={value === valueParam}
-        title={t('save')}
-        onPress={
-        () => {
-          onSave(name, value);
-          navigate('AttributeList');
+    <Screen>
+      <Wrapper>
+        { getEditor(type, value, setValue, getParam) }
+        <Button
+          featured
+          icon="check"
+          disabled={value === valueParam}
+          title={t('save')}
+          onPress={() => {
+            onSave(name, value);
+            navigate('AttributeList');
+          }
         }
-      }
-      />
-      {
-        validationError ? <Text>{validationError}</Text> : null
-      }
+        />
+        { validationError ? <Text>{validationError}</Text> : null }
+      </Wrapper>
     </Screen>
   );
 };

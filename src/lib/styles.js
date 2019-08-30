@@ -19,7 +19,7 @@
  * email: info@dribia.com
  */
 
-import { Text as RNText, Dimensions } from 'react-native';
+import { Text as RNText, TextInput as RNTextInput, Dimensions } from 'react-native';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 
@@ -51,3 +51,11 @@ export const ApplicationImage = styled.Image({
   maxWidth: '95%',
   maxHeight: Dimensions.get('window').height / 4,
 });
+
+export const TextInput = styled(RNTextInput)(({ theme: { colors, fontFamily, fontSize } }) => ({
+  fontFamily,
+  fontSize,
+  borderColor: colors.blueGreen,
+  borderWidth: 1,
+  padding: 10,
+}));

@@ -19,10 +19,4 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
-
-export const Wrapper = styled.View({
-  paddingHorizontal: 32,
-  paddingVertical: 16,
-  alignItems: 'center',
-});
+export default from './Picker.Component';
