@@ -18,16 +18,5 @@
  *
  * email: info@dribia.com
  */
-import styled from 'styled-components/native';
-import { Text } from 'lib/styles';
 
-export const Section = styled.View({
-  paddingHorizontal: 40,
-  paddingVertical: 16,
-});
-
-export const Label = styled(Text)({
-  fontWeight: 'bold',
-  fontSize: 16,
-  marginBottom: 10,
-});
+export default from './CheckList.Component';

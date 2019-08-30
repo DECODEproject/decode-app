@@ -19,15 +19,37 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FlatList } from 'react-native';
+import { prop } from 'ramda';
 import { Text } from 'lib/styles';
+import { Wrapper, Check, CheckWrapper, LabelWrapper } from './CheckList.Styles';
 
-export const Description = styled.View({
-  padding: 40,
-  alignItems: 'center',
-});
+const CheckList = ({ items }) => (
+  <FlatList
+    data={items}
+    keyExtractor={prop('label')}
+    renderItem={
+      ({ index, item: { label, checked } }) => (
+        <Wrapper first={index === 0}>
+          <LabelWrapper>
+            <Text>{label}</Text>
+          </LabelWrapper>
+          <CheckWrapper>
+            <Check name={checked ? 'check' : null} />
+          </CheckWrapper>
+        </Wrapper>
+      )
+    }
+  />
+);
 
-export const Line = styled(Text)({
-  textAlign: 'center',
-  padding: 5,
-});
+CheckList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    checked: PropTypes.bool,
+  })).isRequired,
+};
+
+export default CheckList;

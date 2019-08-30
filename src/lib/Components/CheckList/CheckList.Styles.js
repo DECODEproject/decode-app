@@ -19,35 +19,33 @@
  * email: info@dribia.com
  */
 
-import { Text as RNText, Dimensions } from 'react-native';
-import FAIcon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
+import { Icon } from 'lib/styles';
 
-export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) => ({
-  color: primaryColor,
-  fontSize: 20,
-  textAlign: 'center',
-  fontFamily,
-  fontWeight: 'bold',
+export const Wrapper = styled.View(({ first, theme }) => ({
+  borderWidth: 1,
+  borderTopWidth: first ? 1 : 0,
+  borderColor: theme.colors.blueGreen,
+  flex: 1,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'stretch',
 }));
 
-export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSize } }) => ({
-  color: primaryColor,
-  textAlign: 'left',
-  fontFamily,
-  fontSize,
-  fontWeight: 'normal',
-}));
-
-export const Icon = styled(FAIcon)((
-  { theme: { fontSize, primaryColor } },
-) => ({
-  fontSize,
-  color: primaryColor,
-}));
-
-export const ApplicationImage = styled.Image({
-  marginVertical: 10,
-  maxWidth: '95%',
-  maxHeight: Dimensions.get('window').height / 4,
+export const LabelWrapper = styled.View({
+  flex: 0.9,
+  padding: 10,
 });
+
+export const CheckWrapper = styled.View(({ theme }) => ({
+  flex: 0.1,
+  padding: 10,
+  borderLeftWidth: 1,
+  borderColor: theme.colors.blueGreen,
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
+
+export const Check = styled(Icon)(({ theme }) => ({
+  color: theme.colors.green,
+}));

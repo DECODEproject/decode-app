@@ -22,16 +22,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StatusBar } from 'react-native';
+import { ApplicationImage } from 'lib/styles';
+import { getImage } from 'api/atlas-client';
 import { SafeAreaView } from './Screen.Styles';
 
-const Screen = ({ children, ...props }) => (
-  <SafeAreaView {...props}>
+const Screen = ({ children, image, ...rest }) => (
+  <SafeAreaView {...rest}>
     <StatusBar barStyle="light-content" />
+    { image ? <ApplicationImage source={getImage(image)} resizeMode="contain" /> : null }
     {children}
   </SafeAreaView>
 );
 
+Screen.defaultProps = {
+  image: null,
+};
+
 Screen.propTypes = {
+  image: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

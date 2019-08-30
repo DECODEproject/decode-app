@@ -21,29 +21,30 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Linking } from 'react-native';
+import { Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { getImage } from 'api/atlas-client';
 import Screen from 'lib/Components/Screen';
 import Header from 'lib/Components/Header';
-import { ApplicationImage, Description, Line, More } from './ApplicationDetails.Styles';
+import Button from 'lib/Components/Button';
+import { Description, Line } from './ApplicationDetails.Styles';
 
 const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
   const { t } = useTranslation('applications');
   return (
-    <Screen topJustified centerAligned>
-      <ApplicationImage source={getImage(getParam('image'))} resizeMode="contain" />
+    <Screen topJustified centerAligned image={getParam('image')}>
       <Description>
         <Line>{getParam('description')}</Line>
-        <More onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</More>
+        <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
       </Description>
-      <Button title={t('activate')} onPress={() => navigate('Scanner')} />
+      <Button featured icon="qrcode" title={t('activate')} onPress={() => navigate('Scanner')} />
       { getParam('showHistory')
         ? (
           <Button
+            icon="history"
             title={t('history')}
             onPress={() => navigate('ActivityHistory', {
               stats: getParam('stats'),
+              image: getParam('image'),
             })}
           />
         )

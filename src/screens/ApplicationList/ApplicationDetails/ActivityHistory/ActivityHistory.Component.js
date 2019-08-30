@@ -23,47 +23,49 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import { map, addIndex, length, dec } from 'ramda';
+import { map } from 'ramda';
+import { Text } from 'lib/styles';
 import Screen from 'lib/Components/Screen';
 import Header from 'lib/Components/Header';
-import { Section, SharedData, Label, Value } from './ActivityHistory.Styles';
+import CheckList from 'lib/Components/CheckList';
+import { Section, Label } from './ActivityHistory.Styles';
 
 const ActivityHistory = ({ navigation: { getParam } }) => {
   const { usageCount, firstUse, lastUse, averageUse, sharedData } = getParam('stats');
   const { t } = useTranslation('applications');
   return (
-    <Screen>
+    <Screen topJustified image={getParam('image')}>
       <Section>
         <Label>
           {`${t('usageCount')}: `}
-          <Value>{usageCount}</Value>
+          <Text>{usageCount}</Text>
         </Label>
         <Label>
           {`${t('firstUse')}: `}
-          <Value>{moment(firstUse).format('L')}</Value>
+          <Text>{moment(firstUse).format('L')}</Text>
         </Label>
         <Label>
           {`${t('lastUse')}: `}
-          <Value>{moment(lastUse).format('L')}</Value>
+          <Text>{moment(lastUse).format('L')}</Text>
         </Label>
         <Label>
           {`${t('averageUse')}: `}
-          <Value>
+          <Text>
             {t('times_interval', {
               postProcess: 'interval',
               count: averageUse[0],
               unit: t(averageUse[1]),
             })}
-          </Value>
+          </Text>
         </Label>
       </Section>
       <Section>
         <Label>{`${t('sharedData')}: `}</Label>
-        <SharedData>
-          {(addIndex(map)(({ id, shared }, index) => (
-            <Value key={id} shared={shared}>{`${t(`attributes:${id}`)}${index < dec(length(sharedData)) ? ', ' : ''}`}</Value>
-          ))(sharedData))}
-        </SharedData>
+        <CheckList items={map(({ id, shared }) => ({
+          label: t(`attributes:${id}`),
+          checked: shared,
+        }), sharedData)}
+        />
       </Section>
     </Screen>
   );
