@@ -21,13 +21,13 @@
  */
 
 import styled from 'styled-components/native';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Text, Icon as CommonIcon } from 'lib/styles';
 
-export const Container = styled.View({
-  borderBottomColor: '#ddd',
-  borderBottomWidth: 1,
+export const Container = styled.View(({ theme: { colors } }) => ({
   flexDirection: 'row',
-});
+  borderColor: colors.blueGreen,
+  borderWidth: 1,
+}));
 
 export const Info = styled.View({
   padding: 16,
@@ -43,17 +43,17 @@ export const Buttons = styled.View({
   alignItems: 'center',
 });
 
-export const Icon = styled(IconFontAwesome)(({ theme: { primaryColor } }) => ({
+export const Icon = styled(CommonIcon)(({ theme: { primaryColor } }) => ({
   color: primaryColor,
   fontSize: 20,
 }));
 
-export const Name = styled.Text(({ theme: { primaryColor } }) => ({
+export const Name = styled(Text)(({ theme: { primaryColor } }) => ({
   color: primaryColor,
   fontSize: 18,
   fontWeight: 'bold',
 }));
 
-export const Value = styled.Text(({ theme: { primaryColor } }) => ({
+export const Value = styled(Text)(({ theme: { primaryColor } }) => ({
   color: primaryColor,
 }));

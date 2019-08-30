@@ -21,13 +21,14 @@
 
 import styled from 'styled-components/native';
 
-export const ListContainer = styled.View({
-  flex: 9,
-  flexDirection: 'column',
+export const Wrapper = styled.View({
+  flex: 1,
+  justifyContent: 'flex-start',
+  paddingHorizontal: 32,
+  paddingVertical: 16,
 });
 
-export const ButtonsContainer = styled.View({
-  flex: 1,
-  justifyContent: 'flex-end',
-  alignItems: 'center',
+export const Separator = styled.View({
+  height: 16,
+  color: 'transparent',
 });

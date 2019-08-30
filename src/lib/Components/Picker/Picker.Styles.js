@@ -19,10 +19,14 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
+import theme from 'lib/theme';
 
-export const Wrapper = styled.View({
-  paddingHorizontal: 32,
-  paddingVertical: 16,
-  alignItems: 'center',
-});
+export const pickerStyles = {
+  height: 200,
+  width: 200,
+};
+
+export const itemStyles = {
+  color: theme.primaryColor,
+  fontFamily: theme.fontFamily,
+};

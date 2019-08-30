@@ -29,20 +29,22 @@ import Button from 'lib/Components/Button';
 import Screen from 'lib/Components/Screen';
 import Header from 'lib/Components/Header';
 import { getDisplayValue } from 'lib/utils';
-import { ListContainer, ButtonsContainer } from './AttributeList.Styles';
+import { Wrapper, Separator } from './AttributeList.Styles';
 import AttributeItem from './AttributeItem';
 
 const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
     <Screen>
-      <ListContainer>
+      <Wrapper>
         {isEmpty(attributes) ? (<EmptyList text={t('empty')} />)
           : (
-            <FlatList
-              data={attributes}
-              keyExtractor={item => item.name}
-              renderItem={
+            <React.Fragment>
+              <FlatList
+                data={attributes}
+                ItemSeparatorComponent={Separator}
+                keyExtractor={item => item.name}
+                renderItem={
                 ({ item: { name, type, value, ...rest } }) => (
                   <AttributeItem
                     name={t(name)}
@@ -55,16 +57,17 @@ const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
                   />
                 )
               }
-            />
+              />
+              <Button
+                featured
+                icon="plus-circle"
+                title={t('add')}
+                onPress={() => navigate('AtlasList')}
+              />
+            </React.Fragment>
           )
       }
-      </ListContainer>
-      <ButtonsContainer>
-        <Button
-          title={t('add')}
-          onPress={() => navigate('AtlasList')}
-        />
-      </ButtonsContainer>
+      </Wrapper>
     </Screen>
   );
 };

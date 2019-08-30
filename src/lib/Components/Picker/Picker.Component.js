@@ -19,10 +19,22 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Picker as RNPicker } from 'react-native';
+import { pickerStyles, itemStyles } from './Picker.Styles';
 
-export const Wrapper = styled.View({
-  paddingHorizontal: 32,
-  paddingVertical: 16,
-  alignItems: 'center',
-});
+const Picker = ({ children, ...props }) => (
+  <RNPicker {...props} style={pickerStyles} itemStyle={itemStyles}>
+    {children}
+  </RNPicker>
+);
+
+Picker.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+};
+
+export default Picker;

@@ -20,7 +20,7 @@
  */
 
 import React from 'react';
-import { FlatList as ListContainer } from 'react-native';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
@@ -28,15 +28,18 @@ import EmptyList from 'lib/Components/EmptyList';
 import Screen from 'lib/Components/Screen';
 import ListItem from 'lib/Components/ListItem';
 import Header from 'lib/Components/Header';
+import { Wrapper, Separator } from '../AttributeList.Styles';
 
 const AtlasList = ({ attributes, navigation: { navigate } }) => {
   const { t } = useTranslation('attributes');
   return (
     <Screen>
-      {isEmpty(attributes) ? (<EmptyList text={t('emptyAtlas')} />) : (
-        <ListContainer
-          data={attributes}
-          renderItem={
+      <Wrapper>
+        {isEmpty(attributes) ? (<EmptyList text={t('emptyAtlas')} />) : (
+          <FlatList
+            data={attributes}
+            ItemSeparatorComponent={Separator}
+            renderItem={
             ({ item: { name, description, ...rest } }) => (
               <ListItem
                 id={name}
@@ -46,9 +49,10 @@ const AtlasList = ({ attributes, navigation: { navigate } }) => {
               />
             )
           }
-          keyExtractor={prop('name')}
-        />
-      )}
+            keyExtractor={prop('name')}
+          />
+        )}
+      </Wrapper>
     </Screen>
   );
 };

@@ -38,13 +38,15 @@ const Warning = ({ navigation: { goBack, getParam } }) => {
       </MessageContainer>
       <Buttons>
         <Button
+          featured
+          icon="check"
           title={t('confirm')}
           onPress={() => {
             onConfirm();
             goBack();
           }}
         />
-        <Button title={t('cancel')} onPress={() => goBack()} />
+        <Button icon="times" title={t('cancel')} onPress={() => goBack()} />
       </Buttons>
     </Screen>
   );
