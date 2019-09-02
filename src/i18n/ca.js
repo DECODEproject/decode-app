@@ -61,7 +61,7 @@ export default {
   applications: {
     activate: 'Activar servei via QR',
     activated: 'Has activat l\'app de DECODE per a signar una petició a DDDC',
-    available: 'Aplicacions disponibles',
+    available: 'Aplicacions',
     averageUse: 'Promig',
     cancel: 'Cancel·lar',
     certificateRequestButton: 'Obtenir certificat',
