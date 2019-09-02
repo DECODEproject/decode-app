@@ -58,4 +58,6 @@ export const TextInput = styled(RNTextInput)(({ theme: { colors, fontFamily, fon
   borderColor: colors.blueGreen,
   borderWidth: 1,
   padding: 10,
+  minWidth: Dimensions.get('window').width / 2,
+  maxHeight: 100,
 }));

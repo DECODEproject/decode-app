@@ -67,6 +67,7 @@ const getEditor = (type, value, setValue, getParam) => {
       underlineColorAndroid="transparent"
       value={value}
       onChangeText={text => setValue(text)}
+      multiline
     />
   );
 };

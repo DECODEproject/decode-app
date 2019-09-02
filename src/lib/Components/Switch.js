@@ -19,4 +19,14 @@
  * email: info@dribia.com
  */
 
-export default from './AttributeSwitch.Component';
+import React from 'react';
+import { Switch as RNSwitch } from 'react-native';
+
+const Switch = props => (
+  <RNSwitch
+    {...props}
+    style={{ transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] }}
+  />
+);
+
+export default Switch;

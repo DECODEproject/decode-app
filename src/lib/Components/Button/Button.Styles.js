@@ -38,13 +38,19 @@ export const Wrapper = styled(View)({
   overflow: 'hidden',
 });
 
-export const Icon = styled(CommonIcon)(({ featured, theme: { colors, primaryColor } }) => ({
+export const Icon = styled(CommonIcon)((
+  { featured, theme: { colors, primaryColor, fontSizeTitle } },
+) => ({
   color: featured ? colors.white : primaryColor,
   paddingHorizontal: 5,
+  fontSize: fontSizeTitle,
 }));
 
-export const Label = styled(Text)(({ featured, theme: { colors, primaryColor } }) => ({
+export const Label = styled(Text)((
+  { featured, theme: { colors, primaryColor, fontSizeText } },
+) => ({
   color: featured ? colors.white : primaryColor,
   fontWeight: 'bold',
   paddingHorizontal: 5,
+  fontSize: fontSizeText,
 }));

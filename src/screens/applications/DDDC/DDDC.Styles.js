@@ -21,18 +21,24 @@
  */
 
 import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
+import { Heading as CommonHeading, Text as CommonText } from 'lib/styles';
 
-export const Screen = styled.ScrollView(({ theme: { backgroundColor } }) => ({
+export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
   paddingHorizontal: 16,
   backgroundColor,
 }));
+
+export const Section = styled.View({
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+});
 
 export const Heading = styled(CommonHeading)({
   margin: 10,
 });
 
-export const Subheading = styled.Text(({ theme: { primaryColor, fontSizeTitle } }) => ({
+export const Subheading = styled(CommonText)(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,
   fontSize: fontSizeTitle,
   fontWeight: 'bold',
@@ -42,7 +48,7 @@ export const Container = styled.View({
   padding: 16,
 });
 
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
+export const Text = styled(CommonText)(({ theme: { primaryColor } }) => ({
   textAlign: 'center',
   color: primaryColor,
   margin: 5,

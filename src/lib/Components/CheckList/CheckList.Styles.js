@@ -22,7 +22,11 @@
 import styled from 'styled-components/native';
 import { Icon } from 'lib/styles';
 
-export const Wrapper = styled.View(({ first, theme }) => ({
+export const Wrapper = styled.View({
+  paddingVertical: 10,
+});
+
+export const RowWrapper = styled.View(({ first, theme }) => ({
   borderWidth: 1,
   borderTopWidth: first ? 1 : 0,
   borderColor: theme.colors.blueGreen,
@@ -35,7 +39,18 @@ export const Wrapper = styled.View(({ first, theme }) => ({
 export const LabelWrapper = styled.View({
   flex: 0.9,
   padding: 10,
+  justifyContent: 'center',
+  alignItems: 'stretch',
 });
+
+export const SwitchWrapper = styled.View(({ theme }) => ({
+  flex: 0.2,
+  paddingHorizontal: 5,
+  borderLeftWidth: 1,
+  borderColor: theme.colors.blueGreen,
+  justifyContent: 'center',
+  alignItems: 'center',
+}));
 
 export const CheckWrapper = styled.View(({ theme }) => ({
   flex: 0.1,
