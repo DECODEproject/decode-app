@@ -29,9 +29,10 @@ export const Wrapper = styled(View)({
   backgroundColor: '#333',
 });
 
-export const Icon = styled(CommonIcon)(({ theme: { headerPrimary } }) => ({
+export const Icon = styled(CommonIcon)(({ theme: { headerPrimary, fontSizeTitle } }) => ({
   color: headerPrimary,
   paddingHorizontal: 5,
+  fontSize: fontSizeTitle,
 }));
 
 export const Title = styled(Text)(({ theme: { headerPrimary, fontSizeTitle } }) => ({
