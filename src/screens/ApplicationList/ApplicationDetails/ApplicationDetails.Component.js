@@ -21,7 +21,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Linking } from 'react-native';
+import { Linking, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Screen from 'lib/Components/Screen';
 import Header from 'lib/Components/Header';
@@ -32,10 +32,12 @@ const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
   const { t } = useTranslation('applications');
   return (
     <Screen topJustified centerAligned image={getParam('image')}>
-      <Description>
-        <Line>{getParam('description')}</Line>
-        <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
-      </Description>
+      <ScrollView>
+        <Description>
+          <Line>{getParam('description')}</Line>
+          <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
+        </Description>
+      </ScrollView>
       <Button featured icon="qrcode" title={t('activate')} onPress={() => navigate('Scanner')} />
       { getParam('showHistory')
         ? (
