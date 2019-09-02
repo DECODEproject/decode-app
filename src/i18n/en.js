@@ -61,7 +61,7 @@ export default {
   applications: {
     activate: 'Activate service via QR',
     activated: 'You have activated the DECODE app to sign a petition in DDDC',
-    available: 'Available applications',
+    available: 'Applications',
     averageUse: 'Average',
     cancel: 'Cancel',
     certificateRequestButton: 'Get certificate',
