@@ -32,10 +32,10 @@ export const Name = styled(Text)(({
   disabled, theme: {
     primaryColor,
     disabledTextColor,
-    fontSizeTitle,
+    fontSizeText,
   },
 }) => ({
-  fontSize: fontSizeTitle,
+  fontSize: fontSizeText,
   fontWeight: 'bold',
   color: disabled ? disabledTextColor : primaryColor,
 }));

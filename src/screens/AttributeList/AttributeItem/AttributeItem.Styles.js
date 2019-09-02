@@ -48,9 +48,9 @@ export const Icon = styled(CommonIcon)(({ theme: { primaryColor } }) => ({
   fontSize: 20,
 }));
 
-export const Name = styled(Text)(({ theme: { primaryColor, fontSizeTitle } }) => ({
+export const Name = styled(Text)(({ theme: { primaryColor, fontSizeText } }) => ({
   color: primaryColor,
-  fontSize: fontSizeTitle,
+  fontSize: fontSizeText,
   fontWeight: 'bold',
 }));
 
