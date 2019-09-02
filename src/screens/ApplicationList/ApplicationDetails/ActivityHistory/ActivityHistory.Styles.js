@@ -26,8 +26,8 @@ export const Section = styled.View({
   paddingVertical: 16,
 });
 
-export const Label = styled(Text)({
+export const Label = styled(Text)(({ theme: { fontSizeText } }) => ({
   fontWeight: 'bold',
-  fontSize: 16,
+  fontSize: fontSizeText,
   marginBottom: 10,
-});
+}));

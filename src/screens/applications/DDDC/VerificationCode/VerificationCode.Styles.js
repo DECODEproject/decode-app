@@ -28,9 +28,9 @@ export const Container = styled.View({
   flexDirection: 'column',
 });
 
-export const Name = styled.Text(({ theme: { primaryColor } }) => ({
+export const Name = styled.Text(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,
-  fontSize: 18,
+  fontSize: fontSizeTitle,
   fontWeight: 'bold',
 }));
 

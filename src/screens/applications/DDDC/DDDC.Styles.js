@@ -32,9 +32,9 @@ export const Heading = styled(CommonHeading)({
   margin: 10,
 });
 
-export const Subheading = styled.Text(({ theme: { primaryColor } }) => ({
+export const Subheading = styled.Text(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,
-  fontSize: 18,
+  fontSize: fontSizeTitle,
   fontWeight: 'bold',
 }));
 
