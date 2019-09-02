@@ -58,15 +58,15 @@ const AttributeList = ({ attributes, onDelete, navigation: { navigate } }) => {
                 )
               }
               />
-              <Button
-                featured
-                icon="plus-circle"
-                title={t('add')}
-                onPress={() => navigate('AtlasList')}
-              />
             </React.Fragment>
           )
       }
+        <Button
+          featured
+          icon="plus-circle"
+          title={t('add')}
+          onPress={() => navigate('AtlasList')}
+        />
       </Wrapper>
     </Screen>
   );
