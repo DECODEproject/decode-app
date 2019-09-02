@@ -30,16 +30,18 @@ export const Container = styled.View(({ theme: { colors } }) => ({
 }));
 
 export const Info = styled.View({
-  padding: 16,
+  paddingVertical: 16,
+  paddingHorizontal: 8,
   flex: 0.8,
   flexDirection: 'column',
 });
 
 export const Buttons = styled.View({
-  padding: 16,
+  paddingVertical: 16,
+  paddingHorizontal: 8,
   flex: 0.2,
   flexDirection: 'row',
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
   alignItems: 'center',
 });
 
