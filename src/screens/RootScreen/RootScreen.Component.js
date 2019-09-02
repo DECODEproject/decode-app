@@ -208,7 +208,7 @@ const DrawerNavigator = createDrawerNavigator({
     drawerLockMode: 'locked-closed',
   }),
   initialRouteName: 'ApplicationStack',
-  hideStatusBar: true,
+  hideStatusBar: false,
   drawerBackgroundColor: commonTheme.headerPrimary,
   contentOptions: {
     activeTintColor: commonTheme.headerSecondary,
