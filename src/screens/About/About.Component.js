@@ -40,7 +40,7 @@ const About = () => {
     <Screen centerAligned>
       <Paragraph>{formatText(t('text1'))}</Paragraph>
       <Paragraph>{formatText(t('text2'))}</Paragraph>
-      <Button title={t('more')} onPress={Function.prototype} />
+      <Button icon="external-link" title={t('more')} onPress={Function.prototype} />
     </Screen>
   );
 };
