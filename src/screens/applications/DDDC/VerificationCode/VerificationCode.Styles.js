@@ -20,7 +20,7 @@
  */
 
 import styled from 'styled-components/native';
-import { TextInput } from 'react-native';
+import { Text, TextInput } from 'lib/styles';
 
 export const Container = styled.View({
   padding: 16,
@@ -28,7 +28,7 @@ export const Container = styled.View({
   flexDirection: 'column',
 });
 
-export const Name = styled.Text(({ theme: { primaryColor, fontSizeTitle } }) => ({
+export const Name = styled(Text)(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,
   fontSize: fontSizeTitle,
   fontWeight: 'bold',

@@ -22,33 +22,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
-import { prop } from 'ramda';
+import { prop, isNil } from 'ramda';
 import { Text } from 'lib/styles';
-import { Wrapper, Check, CheckWrapper, LabelWrapper } from './CheckList.Styles';
+import Switch from 'lib/Components/Switch';
+import { Wrapper, RowWrapper, Check, CheckWrapper, LabelWrapper, SwitchWrapper } from './CheckList.Styles';
 
 const CheckList = ({ items }) => (
-  <FlatList
-    data={items}
-    keyExtractor={prop('label')}
-    renderItem={
-      ({ index, item: { label, checked } }) => (
-        <Wrapper first={index === 0}>
-          <LabelWrapper>
-            <Text>{label}</Text>
-          </LabelWrapper>
-          <CheckWrapper>
-            <Check name={checked ? 'check' : null} />
-          </CheckWrapper>
-        </Wrapper>
-      )
-    }
-  />
+  <Wrapper>
+    <FlatList
+      data={items}
+      keyExtractor={prop('label')}
+      renderItem={
+        ({ index, item: { label, checked, onSwitch } }) => (
+          <RowWrapper first={index === 0}>
+            <LabelWrapper>
+              <Text>{label}</Text>
+            </LabelWrapper>
+            {onSwitch ? (
+              <SwitchWrapper>
+                {isNil(checked) ? (<Text> </Text>)
+                  : <Switch value={checked} onValueChange={onSwitch} />
+                }
+              </SwitchWrapper>
+            ) : (
+              <CheckWrapper>
+                <Check name={checked ? 'check' : null} />
+              </CheckWrapper>
+            )
+            }
+          </RowWrapper>
+        )
+      }
+    />
+  </Wrapper>
 );
 
 CheckList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     checked: PropTypes.bool,
+    onSwitch: PropTypes.func,
   })).isRequired,
 };
 

@@ -32,6 +32,7 @@ const VerificationCode = ({ id, name, verification, updateVerification }) => (
       autoCapitalize="none"
       autoCompleteType="off"
       autoCorrect={false}
+      returnKeyType="done"
     />
   </Container>
 );

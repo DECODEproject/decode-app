@@ -20,13 +20,16 @@
  */
 
 import React, { useEffect } from 'react';
-import { KeyboardAvoidingView, SafeAreaView, Button, View } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Header from 'lib/Components/Header';
-import { Screen, Heading, Line as Text } from './DDDC.Styles';
+import Button from 'lib/Components/Button';
+import { ApplicationImage } from 'lib/styles';
+import { getApplication, getImage } from 'api/atlas-client';
+import { Wrapper, Heading, Text, Section } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 import CertificateList from './CertificateList';
 
@@ -53,6 +56,7 @@ const DDDC = ({
   const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
   const petitionId = getParam('petitionId') || '2';
   const { t } = useTranslation('applications');
+  const { image } = getApplication('dddc');
   useEffect(
     () => {
       fetchPetition(dddcUrl, petitionId);
@@ -62,9 +66,10 @@ const DDDC = ({
   return (
     <SafeAreaView>
       <KeyboardAvoidingView behavior="position">
-        <Screen>
+        <Wrapper nestedScrollEnabled={false}>
           <Spinner visible={loading} />
-          <Heading>{t('activated')}</Heading>
+          <ApplicationImage source={getImage(image)} resizeMode="contain" />
+          <Text>{t('activated')}</Text>
           {
             petition ? (
               <Heading>{petition.title}</Heading>
@@ -85,10 +90,10 @@ const DDDC = ({
                 empty={all(isEmpty)(values(verification))}
               />
             ) : (
-              <View>
+              <Section>
                 <CertificateList certificates={certificates} />
-                <Button title={t('sign')} onPress={() => signPetition(petition, certificates[petition.id])} />
-              </View>
+                <Button featured icon="pencil-square-o" title={t('sign')} onPress={() => signPetition(petition, certificates[petition.id])} />
+              </Section>
             )
           }
           {
@@ -97,7 +102,7 @@ const DDDC = ({
           {
             signed ? <Text>Signed!</Text> : null
           }
-        </Screen>
+        </Wrapper>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

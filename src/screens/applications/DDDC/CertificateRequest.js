@@ -21,12 +21,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Button, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { isEmpty } from 'ramda';
-import { Subheading, Line as Text, Container } from './DDDC.Styles';
+import { isEmpty, map, isNil } from 'ramda';
+import Button from 'lib/Components/Button';
+import CheckList from 'lib/Components/CheckList';
+import { getDisplayValue } from 'lib/utils';
+import { Subheading, Text, Container, Section } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
-import AttributeSwitch from './AttributeSwitch';
 
 const CertificateRequest = (
   {
@@ -39,10 +41,13 @@ const CertificateRequest = (
   },
 ) => {
   const { t } = useTranslation('applications');
+  const { t: attributesT } = useTranslation('attributes');
   return (
     <View>
-      <Text>{t('certificateRequired')}</Text>
-      <Button title={t('more')} onPress={Function.prototype} />
+      <Section>
+        <Text>{t('certificateRequired')}</Text>
+        <Button icon="external-link" title={t('more')} onPress={Function.prototype} />
+      </Section>
       {
         isEmpty(verificationCodes) ? null : (
           <FlatList
@@ -62,20 +67,17 @@ const CertificateRequest = (
       <Container>
         <Subheading>{t('sharedData')}</Subheading>
         {
-          <FlatList
-            data={sharedAttributes}
-            keyExtractor={attr => attr.name}
-            renderItem={({ item }) => (
-              <AttributeSwitch
-                attribute={item}
-                onSwitch={() => toggleSelected(item.name)}
-              />
-            )
-            }
+          <CheckList items={map(({ name, type, value, selected }) => ({
+            label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
+            checked: selected,
+            onSwitch: () => toggleSelected(name),
+          }), sharedAttributes)}
           />
         }
-        <Button title={t('manageData')} onPress={onManageAttributes} />
-        <Button title={t('certificateRequestButton')} onPress={onSubmit} disabled={empty} />
+        <Section>
+          <Button title={t('manageData')} onPress={onManageAttributes} />
+          <Button featured title={t('certificateRequestButton')} onPress={onSubmit} disabled={empty} />
+        </Section>
       </Container>
     </View>
   );
