@@ -34,9 +34,9 @@ export const Icon = styled(CommonIcon)(({ theme: { headerPrimary } }) => ({
   paddingHorizontal: 5,
 }));
 
-export const Title = styled(Text)(({ theme: { headerPrimary } }) => ({
+export const Title = styled(Text)(({ theme: { headerPrimary, fontSizeTitle } }) => ({
   color: headerPrimary,
   fontWeight: 'bold',
-  fontSize: 20,
+  fontSize: fontSizeTitle,
   paddingHorizontal: 5,
 }));

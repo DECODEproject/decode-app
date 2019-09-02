@@ -48,12 +48,13 @@ export const Icon = styled(CommonIcon)(({ theme: { primaryColor } }) => ({
   fontSize: 20,
 }));
 
-export const Name = styled(Text)(({ theme: { primaryColor } }) => ({
+export const Name = styled(Text)(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,
-  fontSize: 18,
+  fontSize: fontSizeTitle,
   fontWeight: 'bold',
 }));
 
-export const Value = styled(Text)(({ theme: { primaryColor } }) => ({
+export const Value = styled(Text)(({ theme: { primaryColor, fontSizeText } }) => ({
   color: primaryColor,
+  fontSize: fontSizeText,
 }));

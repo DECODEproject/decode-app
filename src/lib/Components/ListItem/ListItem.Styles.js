@@ -28,8 +28,14 @@ export const Container = styled.View(({ theme: { colors } }) => ({
   padding: 16,
 }));
 
-export const Name = styled(Text)(({ disabled, theme: { primaryColor, disabledTextColor } }) => ({
-  fontSize: 18,
+export const Name = styled(Text)(({
+  disabled, theme: {
+    primaryColor,
+    disabledTextColor,
+    fontSizeTitle,
+  },
+}) => ({
+  fontSize: fontSizeTitle,
   fontWeight: 'bold',
   color: disabled ? disabledTextColor : primaryColor,
 }));

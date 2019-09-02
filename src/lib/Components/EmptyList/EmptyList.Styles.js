@@ -20,8 +20,8 @@
  */
 
 import styled from 'styled-components/native';
-import { Heading } from 'lib/styles';
+import { Text as CommonText } from 'lib/styles';
 
-export const Text = styled(Heading)({
+export const Text = styled(CommonText)({
   marginTop: 25,
 });
