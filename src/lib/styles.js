@@ -52,12 +52,14 @@ export const ApplicationImage = styled.Image({
   maxHeight: Dimensions.get('window').height / 4,
 });
 
-export const TextInput = styled(RNTextInput)(({ theme: { colors, fontFamily, fontSize } }) => ({
-  fontFamily,
-  fontSize,
-  borderColor: colors.blueGreen,
-  borderWidth: 1,
-  padding: 10,
-  minWidth: Dimensions.get('window').width / 2,
-  maxHeight: 100,
-}));
+export const TextInput = styled(RNTextInput)(
+  ({ theme: { secondaryColor, fontFamily, fontSize } }) => ({
+    fontFamily,
+    fontSize,
+    borderColor: secondaryColor,
+    borderWidth: 1,
+    padding: 10,
+    minWidth: Dimensions.get('window').width / 2,
+    maxHeight: 100,
+  }),
+);

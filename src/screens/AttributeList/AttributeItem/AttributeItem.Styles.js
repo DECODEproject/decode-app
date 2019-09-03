@@ -23,9 +23,9 @@
 import styled from 'styled-components/native';
 import { Text, Icon as CommonIcon } from 'lib/styles';
 
-export const Container = styled.View(({ theme: { colors } }) => ({
+export const Container = styled.View(({ theme: { secondaryColor } }) => ({
   flexDirection: 'row',
-  borderColor: colors.blueGreen,
+  borderColor: secondaryColor,
   borderWidth: 1,
 }));
 

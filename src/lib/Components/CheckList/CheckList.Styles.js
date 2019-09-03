@@ -29,7 +29,7 @@ export const Wrapper = styled.View({
 export const RowWrapper = styled.View(({ first, theme }) => ({
   borderWidth: 1,
   borderTopWidth: first ? 1 : 0,
-  borderColor: theme.colors.blueGreen,
+  borderColor: theme.secondaryColor,
   flex: 1,
   flexDirection: 'row',
   justifyContent: 'space-between',
@@ -47,7 +47,7 @@ export const SwitchWrapper = styled.View(({ theme }) => ({
   flex: 0.2,
   paddingHorizontal: 5,
   borderLeftWidth: 1,
-  borderColor: theme.colors.blueGreen,
+  borderColor: theme.secondaryColor,
   justifyContent: 'center',
   alignItems: 'center',
 }));
@@ -56,11 +56,11 @@ export const CheckWrapper = styled.View(({ theme }) => ({
   flex: 0.1,
   padding: 10,
   borderLeftWidth: 1,
-  borderColor: theme.colors.blueGreen,
+  borderColor: theme.secondaryColor,
   justifyContent: 'center',
   alignItems: 'center',
 }));
 
 export const Check = styled(Icon)(({ theme }) => ({
-  color: theme.colors.green,
+  color: theme.okColor,
 }));

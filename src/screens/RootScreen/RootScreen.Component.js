@@ -45,9 +45,9 @@ import BCNNow from 'screens/applications/BCNNow';
 
 const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
   headerBackTitle: null,
-  headerTintColor: theme.headerPrimary,
+  headerTintColor: theme.headerPrimaryColor,
   headerStyle: {
-    backgroundColor: theme.headerSecondary,
+    backgroundColor: theme.headerSecondaryColor,
   },
 });
 
@@ -209,13 +209,13 @@ const DrawerNavigator = createDrawerNavigator({
   }),
   initialRouteName: 'ApplicationStack',
   hideStatusBar: false,
-  drawerBackgroundColor: commonTheme.headerPrimary,
+  drawerBackgroundColor: commonTheme.menuBackgroundColor,
   contentOptions: {
-    activeTintColor: commonTheme.headerSecondary,
-    inactiveTintColor: commonTheme.headerSecondary,
+    activeTintColor: commonTheme.headerSecondaryColor,
+    inactiveTintColor: commonTheme.headerSecondaryColor,
     itemStyle: {
       borderBottomWidth: 1,
-      borderBottomColor: commonTheme.headerSecondary,
+      borderBottomColor: commonTheme.headerSecondaryColor,
     },
     labelStyle: {
       fontFamily: commonTheme.fontFamily,
