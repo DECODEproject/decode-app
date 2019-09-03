@@ -22,8 +22,8 @@
 import styled from 'styled-components/native';
 import { Text } from 'lib/styles';
 
-export const Container = styled.View(({ theme: { colors } }) => ({
-  borderColor: colors.blueGreen,
+export const Container = styled.View(({ theme: { secondaryColor } }) => ({
+  borderColor: secondaryColor,
   borderWidth: 1,
   padding: 16,
 }));

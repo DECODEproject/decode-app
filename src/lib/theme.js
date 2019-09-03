@@ -20,14 +20,15 @@
  */
 
 const colors = {
-  lightGray: '#f6f6f6',
+  lightGray: '#f2f2f2',
   darkGray: '#666',
-  black: '#333',
+  black: '#000',
   white: '#fff',
-  yellow: '#fff16e',
-  blueGreen: '#00b1b0',
+  lightYellow: '#fff063',
+  darkYellow: '#f6d820',
+  turquoise: '#00afab',
   green: '#33e986',
-  orange: 'e4701e',
+  orange: 'f05d00',
 };
 
 const theme = {
@@ -36,10 +37,13 @@ const theme = {
   fontSizeText: 14,
   fontSizeTitle: 18,
   primaryColor: colors.black,
+  secondaryColor: colors.turquoise,
   disabledTextColor: colors.darkGray,
   backgroundColor: colors.lightGray,
-  headerPrimary: colors.yellow,
-  headerSecondary: colors.black,
+  menuBackgroundColor: colors.lightYellow,
+  headerPrimaryColor: colors.darkYellow,
+  headerSecondaryColor: colors.black,
+  okColor: colors.green,
 };
 
 export default theme;

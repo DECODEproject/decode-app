@@ -28,8 +28,8 @@ const Button = styled.TouchableOpacity({
   paddingLeft: 20,
 });
 
-const StyledIcon = styled(Icon)(({ theme: { headerPrimary } }) => ({
-  color: headerPrimary,
+const StyledIcon = styled(Icon)(({ theme: { headerPrimaryColor } }) => ({
+  color: headerPrimaryColor,
   fontSize: 24,
 }));
 

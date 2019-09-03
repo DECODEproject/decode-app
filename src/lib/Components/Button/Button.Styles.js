@@ -23,13 +23,15 @@ import styled from 'styled-components/native';
 import { TouchableOpacity, View } from 'react-native';
 import { Icon as CommonIcon, Text } from 'lib/styles';
 
-export const Touchable = styled(TouchableOpacity)(({ featured, theme: { colors } }) => ({
-  backgroundColor: featured ? colors.blueGreen : colors.lightGray,
-  padding: 10,
-  borderWidth: 1,
-  borderColor: featured ? colors.black : colors.blueGreen,
-  marginVertical: 10,
-}));
+export const Touchable = styled(TouchableOpacity)(
+  ({ featured, theme: { primaryColor, secondaryColor, backgroundColor } }) => ({
+    backgroundColor: featured ? secondaryColor : backgroundColor,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: featured ? primaryColor : secondaryColor,
+    marginVertical: 10,
+  }),
+);
 
 export const Wrapper = styled(View)({
   flexDirection: 'row',

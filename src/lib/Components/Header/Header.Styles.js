@@ -26,17 +26,16 @@ import { Icon as CommonIcon, Text } from 'lib/styles';
 export const Wrapper = styled(View)({
   flexDirection: 'row',
   alignItems: 'center',
-  backgroundColor: '#333',
 });
 
-export const Icon = styled(CommonIcon)(({ theme: { headerPrimary, fontSizeTitle } }) => ({
-  color: headerPrimary,
+export const Icon = styled(CommonIcon)(({ theme: { headerPrimaryColor, fontSizeTitle } }) => ({
+  color: headerPrimaryColor,
   paddingHorizontal: 5,
   fontSize: fontSizeTitle,
 }));
 
-export const Title = styled(Text)(({ theme: { headerPrimary, fontSizeTitle } }) => ({
-  color: headerPrimary,
+export const Title = styled(Text)(({ theme: { headerPrimaryColor, fontSizeTitle } }) => ({
+  color: headerPrimaryColor,
   fontWeight: 'bold',
   fontSize: fontSizeTitle,
   paddingHorizontal: 5,
