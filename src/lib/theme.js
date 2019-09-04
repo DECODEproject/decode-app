@@ -28,7 +28,7 @@ const colors = {
   darkYellow: '#f6d820',
   turquoise: '#00afab',
   green: '#33e986',
-  orange: 'f05d00',
+  orange: '#f05d00',
 };
 
 const theme = {
