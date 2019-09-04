@@ -22,10 +22,12 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { getSharedAttributes } from 'redux/modules/attributes';
+import { getAllCertificates } from 'redux/modules/applications';
 import Component from './BCNNow.Component';
 
 const mapStateToProps = createStructuredSelector({
   sharedAttributes: getSharedAttributes('bcnnow'),
+  certificates: getAllCertificates,
 });
 
 const ConnectedComponent = connect(mapStateToProps, null)(Component);

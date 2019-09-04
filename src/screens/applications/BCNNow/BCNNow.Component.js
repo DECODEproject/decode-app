@@ -20,20 +20,41 @@
  */
 
 import React from 'react';
+import { SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Screen from 'lib/Components/Screen';
+import { isEmpty } from 'ramda';
 import Header from 'lib/Components/Header';
+import Button from 'lib/Components/Button';
+import CertificateList from 'lib/Components/CertificateList';
 import { getDisplayValue } from 'lib/utils';
-import { Heading, Line as Text } from './BCNNow.Styles';
+import { ApplicationImage, Text } from 'lib/styles';
+import { getApplication, getImage } from 'api/atlas-client';
+import Message from './Message';
+import { Heading, Wrapper, Section } from './BCNNow.Styles';
 
 
-const BCNNow = ({ navigation: { getParam }, sharedAttributes }) => {
+const BCNNow = ({ navigation: { getParam }, sharedAttributes, certificates }) => {
   const bcnnowUrl = getParam('bcnnowUrl');
   const sessionId = getParam('sessionId');
-  const { t } = useTranslation('attributes');
+  const { t } = useTranslation('applications');
+  const { image, activationMsg, actionMsg } = getApplication('bcnnow');
   return (
-    <Screen>
+    <SafeAreaView>
+      <Wrapper nestedScrollEnabled={false}>
+        <ApplicationImage source={getImage(image)} resizeMode="contain" />
+        <Text>{t(activationMsg)}</Text>
+        {
+          isEmpty(certificates) ? (
+            <Message msg={t('bcnnowEmpty')} />
+          ) : (
+            <Section>
+              <CertificateList certificates={certificates} />
+              <Button featured icon="sign-in" title={t(actionMsg)} onPress={Function.prototype} />
+            </Section>
+          )
+        }
+      </Wrapper>
       <Heading>BCNNow login starts here</Heading>
       <Text>{`BCNNow URL: ${bcnnowUrl}`}</Text>
       <Text>{`Session id: ${sessionId}`}</Text>
@@ -43,7 +64,7 @@ const BCNNow = ({ navigation: { getParam }, sharedAttributes }) => {
           <Text key={name}>{`${name}: ${getDisplayValue(type, value, t)}`}</Text>
         ))
       }
-    </Screen>
+    </SafeAreaView>
   );
 };
 
@@ -59,6 +80,7 @@ BCNNow.propTypes = {
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
   }).isRequired,
+  certificates: PropTypes.object.isRequired,
 };
 
 export default BCNNow;

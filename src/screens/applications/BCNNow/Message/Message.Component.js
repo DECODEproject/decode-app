@@ -1,4 +1,3 @@
-
 /*
  * DECODE App – A mobile app to control your personal data
  *
@@ -20,27 +19,26 @@
  * email: info@dribia.com
  */
 
-import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper, Msg, Detail } from './Message.Styles';
 
-export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
-  paddingHorizontal: 16,
-  backgroundColor,
-}));
+const Message = ({ msg, detail }) => (
+  <Wrapper>
+    <Msg>{msg}</Msg>
+    {
+      detail ? <Detail>{detail}</Detail> : null
+    }
+  </Wrapper>
+);
 
-export const Section = styled.View({
-  marginTop: 10,
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-});
+Message.defaultProps = {
+  detail: null,
+};
 
-export const Heading = styled(CommonHeading)({
-  margin: 10,
-});
+Message.propTypes = {
+  msg: PropTypes.string.isRequired,
+  detail: PropTypes.string,
+};
 
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
-  textAlign: 'center',
-  color: primaryColor,
-  margin: 5,
-}));
+export default Message;

@@ -25,7 +25,7 @@ import { FlatList } from 'react-native';
 import { values, prop } from 'ramda';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { getLanguage } from 'lib/utils';
-import { Text } from './DDDC.Styles';
+import { Text } from 'lib/styles';
 
 const CertificateList = ({ certificates }) => (
   <FlatList

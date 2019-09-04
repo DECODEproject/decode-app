@@ -140,9 +140,9 @@ const DummyStack = createStackNavigator({
   defaultNavigationOptions,
 });
 
-const DDDCTestStack = createStackNavigator({
+const BCNNowTestStack = createStackNavigator({
   dddc: {
-    screen: DDDC,
+    screen: BCNNow,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),
@@ -196,10 +196,10 @@ const DrawerNavigator = createDrawerNavigator({
       drawerLabel: 'Test Dummy Screen',
     }),
   },
-  DDDCStack: {
-    screen: DDDCTestStack,
+  BCNNowStack: {
+    screen: BCNNowTestStack,
     navigationOptions: () => ({
-      drawerLabel: 'Test DDDC',
+      drawerLabel: 'Test BCNNow',
     }),
   },
 },

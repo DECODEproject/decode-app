@@ -60,7 +60,6 @@ export default {
   },
   applications: {
     activate: 'Activar servei via QR',
-    activated: 'Has activat l\'app de DECODE per a signar una petició a DDDC',
     available: 'Aplicacions',
     averageUse: 'Promig',
     cancel: 'Cancel·lar',
@@ -75,7 +74,6 @@ export default {
     month: 'mes',
     more: '+ informació',
     sharedData: 'Dades compartides',
-    sign: 'Signar',
     times: '1 cop per {{ unit }}',
     times_interval: '(0){Menys d\'un cop per {{ unit }}};(1-inf){{{ count }} cops per {{ unit }}}',
     times_plural: '{{ count }} cops per {{ unit }}',

@@ -21,7 +21,7 @@
 
 import moment from 'moment';
 import i18n from 'i18n';
-import reducer, { getApplicationStats, calculateAverage } from 'redux/modules/applications';
+import reducer, { getApplicationStats, calculateAverage, getAllCertificates } from 'redux/modules/applications';
 import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
 import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
 import { getImage } from 'api/atlas-client';
@@ -40,6 +40,8 @@ const baseFinalState = [{
   description: 'dddcDesc',
   usageCount: 0,
   numCertificates: 0,
+  actionMsg: 'dddcSign',
+  activationMsg: 'dddcActivation',
 },
 {
   id: 'bcnnow',
@@ -50,6 +52,8 @@ const baseFinalState = [{
   description: 'bcnnowDesc',
   usageCount: 0,
   numCertificates: 0,
+  actionMsg: 'bcnnowLogin',
+  activationMsg: 'bcnnowActivation',
 },
 ];
 
@@ -275,6 +279,60 @@ describe('Application tests', () => {
         count: 0,
         unit: 'año',
       })).toEqual('Menos de una vez por año');
+    });
+  });
+
+  test('Get all certificates', () => {
+    const nowForTest = moment('2019-04-30');
+    moment.now = () => nowForTest;
+    expect(
+      getAllCertificates({
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+            certificates: {
+              aaa111: {},
+              aaa222: {},
+            },
+          },
+          bcnnow: {
+            ...bcnnowInitialState,
+            certificates: {
+              bbb111: {},
+              bbb222: {},
+            },
+          },
+        },
+      }),
+    ).toEqual({
+      aaa111: {},
+      aaa222: {},
+      bbb111: {},
+      bbb222: {},
+    });
+  });
+
+  test('Get all certificates - with empty', () => {
+    const nowForTest = moment('2019-04-30');
+    moment.now = () => nowForTest;
+    expect(
+      getAllCertificates({
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+            certificates: {
+              aaa111: {},
+              aaa222: {},
+            },
+          },
+          bcnnow: {
+            ...bcnnowInitialState,
+          },
+        },
+      }),
+    ).toEqual({
+      aaa111: {},
+      aaa222: {},
     });
   });
 });

@@ -37,6 +37,8 @@ import {
   values,
   mapObjIndexed,
   keys,
+  pluck,
+  mergeAll,
 } from 'ramda';
 import moment from 'moment';
 import { listApplications } from 'api/atlas-client';
@@ -122,6 +124,15 @@ export const getApplicationStats = createSelector(
   usageStats => map(
     ({ id, sharedAttributes, ...rest }) => merge({ id, ...rest }, usageStats[id] || defaultStats),
     values(atlasApplications),
+  ),
+);
+
+export const getAllCertificates = createSelector(
+  getStoreBranch,
+  compose(
+    mergeAll,
+    values,
+    pluck('certificates'),
   ),
 );
 

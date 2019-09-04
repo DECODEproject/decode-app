@@ -60,7 +60,6 @@ export default {
   },
   applications: {
     activate: 'Activar servicio vía QR',
-    activated: 'Has activado la app de DECODE para frimar una petición en DDDC',
     available: 'Aplicaciones',
     averageUse: 'Promedio',
     cancel: 'Cancelar',
@@ -75,7 +74,6 @@ export default {
     month: 'mes',
     more: '+ información',
     sharedData: 'Datos compartidos',
-    sign: 'Firmar',
     times: '1 vez por {{ unit }}',
     times_interval: '(0){Menos de una vez por {{ unit }}};(1-inf){{{ count }} veces por {{ unit }}}',
     times_plural: '{{ count }} veces por {{ unit }}',

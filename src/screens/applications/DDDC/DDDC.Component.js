@@ -27,11 +27,11 @@ import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Header from 'lib/Components/Header';
 import Button from 'lib/Components/Button';
+import CertificateList from 'lib/Components/CertificateList';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
 import { Wrapper, Heading, Text, Section } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
-import CertificateList from './CertificateList';
 
 const prepare = compose(
   pluck('value'),
@@ -56,7 +56,7 @@ const DDDC = ({
   const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
   const petitionId = getParam('petitionId') || '2';
   const { t } = useTranslation('applications');
-  const { image } = getApplication('dddc');
+  const { image, activationMsg, actionMsg } = getApplication('dddc');
   useEffect(
     () => {
       fetchPetition(dddcUrl, petitionId);
@@ -69,7 +69,7 @@ const DDDC = ({
         <Wrapper nestedScrollEnabled={false}>
           <Spinner visible={loading} />
           <ApplicationImage source={getImage(image)} resizeMode="contain" />
-          <Text>{t('activated')}</Text>
+          <Text>{t(activationMsg)}</Text>
           {
             petition ? (
               <Heading>{petition.title}</Heading>
@@ -92,7 +92,7 @@ const DDDC = ({
             ) : (
               <Section>
                 <CertificateList certificates={certificates} />
-                <Button featured icon="pencil-square-o" title={t('sign')} onPress={() => signPetition(petition, certificates[petition.id])} />
+                <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
               </Section>
             )
           }
