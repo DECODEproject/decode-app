@@ -19,51 +19,103 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { isEmpty } from 'ramda';
+import { isEmpty, values, head, map, isNil, compose, pluck, indexBy, prop, filter } from 'ramda';
+import Spinner from 'react-native-loading-spinner-overlay';
 import Header from 'lib/Components/Header';
 import Button from 'lib/Components/Button';
 import CertificateList from 'lib/Components/CertificateList';
+import CheckList from 'lib/Components/CheckList';
+import { ApplicationImage } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
-import { ApplicationImage, Text } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
 import Message from './Message';
-import { Heading, Wrapper, Section } from './BCNNow.Styles';
+import { Wrapper, Section, Subheading, Text, Buttons } from './BCNNow.Styles';
 
+const prepare = compose(
+  pluck('value'),
+  indexBy(prop('name')),
+  filter(attr => attr.selected === true),
+);
 
-const BCNNow = ({ navigation: { getParam }, sharedAttributes, certificates }) => {
-  const bcnnowUrl = getParam('bcnnowUrl');
-  const sessionId = getParam('sessionId');
+const BCNNow = ({
+  navigation: { getParam, navigate, addListener },
+  sharedAttributes,
+  certificates,
+  login,
+  loading,
+  error,
+  loggedIn,
+  toggleSelectedAttribute,
+  cleanupState,
+}) => {
+  const bcnnowUrl = getParam('bcnnowUrl') || 'http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback';
+  const sessionId = getParam('sessionId') || '7d9f3fa8a57911e9b12a005056833c52';
   const { t } = useTranslation('applications');
+  const { t: attributesT } = useTranslation('attributes');
   const { image, activationMsg, actionMsg } = getApplication('bcnnow');
+  useEffect(
+    () => {
+      cleanupState();
+      const listener = addListener('willFocus', () => cleanupState());
+      return () => {
+        listener.remove();
+      };
+    },
+    [],
+  );
+
   return (
     <SafeAreaView>
+      <Spinner visible={loading} />
       <Wrapper nestedScrollEnabled={false}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <Text>{t(activationMsg)}</Text>
+        {
+          error ? (
+            <Message
+              msg={error === 'timeout' ? t('bcnnowTimeout') : t('bcnnowFailed')}
+              detail={error === 'timeout' ? null : error}
+            />
+          ) : null
+        }
+        {
+          loggedIn ? <Message msg={t('bcnnowSuccess')} detail={t('bcnnowRefresh')} /> : null
+        }
         {
           isEmpty(certificates) ? (
             <Message msg={t('bcnnowEmpty')} />
           ) : (
             <Section>
               <CertificateList certificates={certificates} />
-              <Button featured icon="sign-in" title={t(actionMsg)} onPress={Function.prototype} />
+              <Subheading>{t('sharedData')}</Subheading>
+              <CheckList items={map(({ name, type, value, selected }) => ({
+                label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
+                checked: selected,
+                onSwitch: () => toggleSelectedAttribute(name),
+              }), sharedAttributes)}
+              />
+              <Buttons>
+                <Button title={t('manageData')} onPress={() => navigate('AttributeList')} />
+                <Button
+                  featured
+                  icon="sign-in"
+                  title={t(actionMsg)}
+                  onPress={() => login(
+                    bcnnowUrl,
+                    sessionId,
+                    head(values(certificates)),
+                    prepare(sharedAttributes),
+                  )}
+                />
+              </Buttons>
             </Section>
           )
         }
       </Wrapper>
-      <Heading>BCNNow login starts here</Heading>
-      <Text>{`BCNNow URL: ${bcnnowUrl}`}</Text>
-      <Text>{`Session id: ${sessionId}`}</Text>
-      <Heading>Will share this data</Heading>
-      {
-        sharedAttributes.map(({ name, value, type }) => (
-          <Text key={name}>{`${name}: ${getDisplayValue(type, value, t)}`}</Text>
-        ))
-      }
     </SafeAreaView>
   );
 };
@@ -72,15 +124,26 @@ BCNNow.navigationOptions = ({ screenProps: { t } }) => ({
   headerTitle: <Header title={t('applications:bcnnowName')} icon="th-large" />,
 });
 
+BCNNow.defaultProps = {
+  error: null,
+  sharedAttributes: [],
+};
+
 BCNNow.propTypes = {
   sharedAttributes: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
+    value: PropTypes.string,
+  })),
   navigation: PropTypes.shape({
     getParam: PropTypes.func.isRequired,
   }).isRequired,
   certificates: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  loggedIn: PropTypes.bool.isRequired,
+  toggleSelectedAttribute: PropTypes.func.isRequired,
+  cleanupState: PropTypes.func.isRequired,
 };
 
 export default BCNNow;

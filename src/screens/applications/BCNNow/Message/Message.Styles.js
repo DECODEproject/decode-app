@@ -28,4 +28,6 @@ export const Wrapper = styled.View({
 
 export const Msg = styled(Heading)({});
 
-export const Detail = styled(Text)({});
+export const Detail = styled(Text)({
+  textAlign: 'center',
+});

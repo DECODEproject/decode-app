@@ -21,7 +21,7 @@
  */
 
 import styled from 'styled-components/native';
-import { Heading as CommonHeading } from 'lib/styles';
+import { Text as CommonText } from 'lib/styles';
 
 export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
   paddingHorizontal: 16,
@@ -29,18 +29,27 @@ export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
 }));
 
 export const Section = styled.View({
-  marginTop: 10,
   flexDirection: 'column',
   justifyContent: 'flex-start',
-  alignItems: 'center',
 });
 
-export const Heading = styled(CommonHeading)({
-  margin: 10,
+export const Subheading = styled(CommonText)(({ theme: { primaryColor, fontSizeTitle } }) => ({
+  color: primaryColor,
+  fontSize: fontSizeTitle,
+  fontWeight: 'bold',
+  marginTop: 10,
+}));
+
+export const Container = styled.View({
+  padding: 16,
 });
 
-export const Line = styled.Text(({ theme: { primaryColor } }) => ({
+export const Text = styled(CommonText)(({ theme: { primaryColor } }) => ({
   textAlign: 'center',
   color: primaryColor,
   margin: 5,
 }));
+
+export const Buttons = styled.View({
+  alignItems: 'center',
+});

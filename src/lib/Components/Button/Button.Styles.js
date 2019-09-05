@@ -24,13 +24,23 @@ import { TouchableOpacity, View } from 'react-native';
 import { Icon as CommonIcon, Text } from 'lib/styles';
 
 export const Touchable = styled(TouchableOpacity)(
-  ({ featured, theme: { primaryColor, secondaryColor, backgroundColor } }) => ({
-    backgroundColor: featured ? secondaryColor : backgroundColor,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: featured ? primaryColor : secondaryColor,
-    marginVertical: 10,
-  }),
+  ({
+    featured,
+    disabled,
+    theme: { primaryColor, secondaryColor, backgroundColor, disabledTextColor },
+  }) => {
+    let color;
+    if (disabled) color = disabledTextColor;
+    else if (featured) color = secondaryColor;
+    else color = backgroundColor;
+    return {
+      backgroundColor: color,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: featured ? primaryColor : secondaryColor,
+      marginVertical: 10,
+    };
+  },
 );
 
 export const Wrapper = styled(View)({

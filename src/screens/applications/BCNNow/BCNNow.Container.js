@@ -21,16 +21,25 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getSharedAttributes } from 'redux/modules/attributes';
 import { getAllCertificates } from 'redux/modules/applications';
+import { login, getLoading, getLoggedIn, getError, getSharedAttributes, toggleSelectedAttribute, cleanupState } from 'redux/modules/applications/bcnnow';
 import Component from './BCNNow.Component';
 
 const mapStateToProps = createStructuredSelector({
-  sharedAttributes: getSharedAttributes('bcnnow'),
+  sharedAttributes: getSharedAttributes,
   certificates: getAllCertificates,
+  loading: getLoading,
+  loggedIn: getLoggedIn,
+  error: getError,
 });
 
-const ConnectedComponent = connect(mapStateToProps, null)(Component);
+const mapDispatchToProps = {
+  login,
+  toggleSelectedAttribute,
+  cleanupState,
+};
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 ConnectedComponent.navigationOptions = Component.navigationOptions;
 

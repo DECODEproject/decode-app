@@ -183,6 +183,7 @@ export const callCredentialIssuer = (
       issuerVerifyKeypair,
       credential,
       blindProofCredential,
+      credentialIssuerUrl: url,
     });
   } catch (error) {
     debugLog('Error calling credential issuer: ', JSON.stringify(error));
@@ -338,6 +339,7 @@ export default (state = initialState, action) => {
         credential,
         blindProofCredential,
         credentialName,
+        credentialIssuerUrl,
       } = action;
       const { certificates } = state;
       return {
@@ -354,6 +356,7 @@ export default (state = initialState, action) => {
             blindProofCredential,
             credentialName,
             attributeId,
+            credentialIssuerUrl,
           },
         },
       };

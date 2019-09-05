@@ -38,7 +38,7 @@ module.exports = {
       {
         'consistent': true,
         'multiline': true,
-        "minProperties": 10,
+        "minProperties": 12,
       }
     ],
     'curly': ["error", "multi"],

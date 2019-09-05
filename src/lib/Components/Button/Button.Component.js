@@ -23,8 +23,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Touchable, Wrapper, Label, Icon } from './Button.Styles';
 
-const Button = ({ title, onPress, icon, featured }) => (
-  <Touchable onPress={onPress} featured={featured}>
+const Button = ({ title, onPress, icon, featured, ...rest }) => (
+  <Touchable onPress={onPress} featured={featured} {...rest}>
     <Wrapper>
       {icon ? (
         <Icon name={icon} featured={featured} />

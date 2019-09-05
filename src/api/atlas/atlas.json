@@ -67,7 +67,8 @@
         "address": "Adreça",
         "addressDesc": "Troba la teva adreça en un mapa",
         "string": "Text",
-        "age": "Edat"
+        "age": "Edat",
+        "ageRange": "Edat"
       },
       "es": {
         "gender": "Género",
@@ -80,7 +81,8 @@
         "address": "Dirección",
         "addressDesc": "Encuentra tu dirección en un mapa",
         "string": "Texto",
-        "age": "Edad"
+        "age": "Edad",
+        "ageRange": "Edad"
       },
       "en": {
         "gender": "Gender",
@@ -93,7 +95,8 @@
         "address": "Address",
         "addressDesc": "Find your address in a map",
         "string": "Text",
-        "age": "Age"
+        "age": "Age",
+        "ageRange": "Age"
       }
     },
     "applications": {
@@ -108,7 +111,11 @@
         "bcnnowDesc": "BCNNow permet entrar a la plataforma de manera anonimitzada, pero compartint algunes dades per a obtenir visualitzacions personalitzades.",
         "bcnnowActivation": "Has activat l'app de DECODE per a entrar a BCNNow",
         "bcnnowLogin": "Accedir",
-        "bcnnowEmpty": "No teniu certificats que es puguin fer servir per accedir-hi"
+        "bcnnowEmpty": "No teniu certificats que es puguin fer servir per accedir-hi",
+        "bcnnowFailed": "La vostra petició no s'ha pogut processar",
+        "bcnnowSuccess": "Connectat correctament",
+        "bcnnowTimeout": "Temps d'espera excedit. Si us plau reintenteu",
+        "bcnnowRefresh": "Torneu al vostre navegador i si cal refresqueu la pàgina"
       },
       "es": {
         "dddcName": "DDDC",
@@ -121,7 +128,11 @@
         "bcnnowDesc": "BCNNow permite entrar en la plataforma de manera anonimizada, pero compartiendo algunos datos para obtener visualizaciones personalizadas.",
         "bcnnowActivation": "Has activado la app de DECODE para entrar en BCNNow",
         "bcnnowLogin": "Acceder",
-        "bcnnowEmpty": "No tienes certificados que se puedan usar para acceder."
+        "bcnnowEmpty": "No tienes certificados que se puedan usar para acceder.",
+        "bcnnowFailed": "Tu petición no se ha podido procesar",
+        "bcnnowSuccess": "Conectado correctamente",
+        "bcnnowTimeout": "Tiempo de espera excedido. Por favor reintenta",
+        "bcnnowRefresh": "Vuelve a tu navegador y refresca la página si es necesario"
       },
       "en": {
         "dddcName": "DDDC",
@@ -134,7 +145,11 @@
         "bcnnowDesc": "BCNNow allows to enter the platform in an anonymous way, but sharing some data to obtain personalized visualizations.",
         "bcnnowActivation": "You have activated the DECODE App to log into BCNNow",
         "bcnnowLogin": "Login",
-        "bcnnowEmpty": "You don't have any certificate that can be used to log in"
+        "bcnnowEmpty": "You don't have any certificate that can be used to log in",
+        "bcnnowFailed": "Your request couldn't be processed",
+        "bcnnowSuccess": "Successfully logged in",
+        "bcnnowTimeout": "Timeout exceeded. Please retry",
+        "bcnnowRefresh": "Go back to your browser and refresh the page if needed"
       }
     }
   }

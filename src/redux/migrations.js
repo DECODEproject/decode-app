@@ -34,6 +34,7 @@ const migrations = {
     applications: migrateV2Applications,
     ...rest,
   }),
+  3: omit(['applications']),
 };
 
 export default migrations;
