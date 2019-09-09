@@ -48,8 +48,8 @@ export const Icon = styled(FAIcon)((
 
 export const ApplicationImage = styled.Image({
   marginVertical: 10,
-  maxWidth: '95%',
-  maxHeight: Dimensions.get('window').height / 4,
+  width: '100%',
+  height: Dimensions.get('window').height / 4,
 });
 
 export const TextInput = styled(RNTextInput)(

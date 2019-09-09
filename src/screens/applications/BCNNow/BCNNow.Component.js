@@ -66,9 +66,9 @@ const BCNNow = ({
   );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Spinner visible={loading} />
-      <Wrapper nestedScrollEnabled={false}>
+      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <Text>{t(activationMsg)}</Text>
         {
