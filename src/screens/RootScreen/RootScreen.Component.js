@@ -20,6 +20,7 @@
  */
 
 import React, { useContext } from 'react';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
@@ -206,7 +207,7 @@ const DrawerNavigator = createDrawerNavigator({
     drawerLockMode: 'locked-closed',
   }),
   initialRouteName: 'ApplicationStack',
-  hideStatusBar: false,
+  hideStatusBar: Platform.OS === 'ios',
   drawerBackgroundColor: commonTheme.menuBackgroundColor,
   contentOptions: {
     activeTintColor: commonTheme.headerSecondaryColor,

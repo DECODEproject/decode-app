@@ -20,6 +20,7 @@
  */
 
 import React from 'react';
+import { View, StatusBar } from 'react-native';
 import PropTypes from 'prop-types';
 import Onboarding from 'react-native-onboarding-swiper';
 import { useTranslation } from 'react-i18next';
@@ -33,45 +34,49 @@ const img4 = require('./images/image04.png');
 const Carousel = ({ onDone }) => {
   const { t } = useTranslation('carousel');
   return (
-    <Onboarding
-      onSkip={onDone}
-      onDone={onDone}
-      containerStyles={{
-        alignItems: 'center',
-      }}
-      imageContainerStyles={{
-        paddingBottom: 0,
-      }}
-      skipLabel={t('skip')}
-      nextLabel={t('next')}
-      pages={[
-        {
-          backgroundColor: '#0575e5',
-          image: <CarouselImage source={img1} resizeMode="contain" />,
-          title: <Title>{t('title')}</Title>,
-          subtitle: <Subtitle>{t('txt1')}</Subtitle>,
-        },
-        {
-          backgroundColor: '#fd56ac',
-          image: <CarouselImage source={img2} resizeMode="contain" />,
-          title: '',
-          subtitle: <Subtitle>{t('txt2')}</Subtitle>,
-        },
-        {
-          backgroundColor: '#37bdc2',
-          image: <CarouselImage source={img3} resizeMode="contain" />,
-          title: '',
-          subtitle: <Subtitle>{t('txt3')}</Subtitle>,
-        },
-        {
-          backgroundColor: '#0475e5',
-          image: <CarouselImage source={img4} resizeMode="contain" />,
-          title: '',
-          subtitle: <Subtitle>{t('txt4')}</Subtitle>,
-        },
-      ]}
-      bottomBarHighlight={false}
-    />
+    <View style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" />
+      <Onboarding
+        onSkip={onDone}
+        onDone={onDone}
+        containerStyles={{
+          alignItems: 'center',
+        }}
+        imageContainerStyles={{
+          paddingBottom: 0,
+        }}
+        skipLabel={t('skip')}
+        nextLabel={t('next')}
+        pages={[
+          {
+            backgroundColor: '#0575e5',
+            image: <CarouselImage source={img1} resizeMode="contain" />,
+            title: <Title>{t('title')}</Title>,
+            subtitle: <Subtitle>{t('txt1')}</Subtitle>,
+          },
+          {
+            backgroundColor: '#fd56ac',
+            image: <CarouselImage source={img2} resizeMode="contain" />,
+            title: '',
+            subtitle: <Subtitle>{t('txt2')}</Subtitle>,
+          },
+          {
+            backgroundColor: '#37bdc2',
+            image: <CarouselImage source={img3} resizeMode="contain" />,
+            title: '',
+            subtitle: <Subtitle>{t('txt3')}</Subtitle>,
+          },
+          {
+            backgroundColor: '#0475e5',
+            image: <CarouselImage source={img4} resizeMode="contain" />,
+            title: '',
+            subtitle: <Subtitle>{t('txt4')}</Subtitle>,
+          },
+        ]}
+        bottomBarHighlight={false}
+        controlStatusBar={false}
+      />
+    </View>
   );
 };
 
