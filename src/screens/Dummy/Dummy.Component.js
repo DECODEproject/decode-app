@@ -27,10 +27,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
-import WalkthroughStep from 'lib/Components/WalkthroughStep';
-import Button from 'lib/Components/Button';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
+import { WalkthroughStep, Button, Screen, Header } from 'lib/Components';
 import { Heading, Line } from './Dummy.Styles';
 
 const Dummy = ({

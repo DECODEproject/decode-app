@@ -24,10 +24,7 @@ import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
-import EmptyList from 'lib/Components/EmptyList';
-import Screen from 'lib/Components/Screen';
-import ListItem from 'lib/Components/ListItem';
-import Header from 'lib/Components/Header';
+import { EmptyList, Screen, ListItem, Header } from 'lib/Components';
 import { Wrapper, Separator } from '../AttributeList.Styles';
 
 const AtlasList = ({ attributes, navigation: { navigate } }) => {

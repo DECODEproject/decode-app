@@ -23,8 +23,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavigationEvents } from 'react-navigation';
 import { Text } from 'react-native';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
+import { Screen, Header } from 'lib/Components';
 import { parseQRCode } from 'lib/utils';
 import { Camera } from './Scanner.Styles';
 

@@ -22,7 +22,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
-import Screen from 'lib/Components/Screen';
+import { Screen } from 'lib/Components';
 import image from './empty.png';
 import { Text } from './EmptyList.Styles';
 

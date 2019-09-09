@@ -26,11 +26,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
 import { parseQRCode } from 'lib/utils';
-import EmptyList from 'lib/Components/EmptyList';
-import ListItem from 'lib/Components/ListItem';
-import Header from 'lib/Components/Header';
-import Screen from 'lib/Components/Screen';
-import Button from 'lib/Components/Button';
+import { EmptyList, ListItem, Header, Screen, Button } from 'lib/Components';
 import { Wrapper, Separator } from './ApplicationList.Styles';
 
 const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {

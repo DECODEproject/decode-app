@@ -23,9 +23,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Linking, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
-import Button from 'lib/Components/Button';
+import { Screen, Header, Button } from 'lib/Components';
 import { Description, Line } from './ApplicationDetails.Styles';
 
 const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {

@@ -25,10 +25,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
 import i18n from 'i18n';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
-import Button from 'lib/Components/Button';
-import EnumPicker from 'lib/Components/Picker';
+import { Screen, Header, Button, Picker as EnumPicker } from 'lib/Components';
 import { Text, TextInput } from 'lib/styles';
 import { Wrapper } from './EditAttribute.Styles';
 

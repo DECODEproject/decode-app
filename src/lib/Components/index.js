@@ -19,33 +19,16 @@
  * email: info@dribia.com
  */
 
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { WalkthroughStep, Button, Screen, Header } from 'lib/Components';
-import { Heading } from 'lib/styles';
-
-const pleaseCrash = () => {
-  throw new Error('This is a crash test');
-};
-
-const DummyNext = () => {
-  const { t } = useTranslation();
-  return (
-    <Screen centerAligned>
-      <Heading>{t('second')}</Heading>
-      <WalkthroughStep screen="dummyNext" id="crash">
-        <Button
-          featured
-          title="Crash, please"
-          onPress={pleaseCrash}
-        />
-      </WalkthroughStep>
-    </Screen>
-  );
-};
-
-DummyNext.navigationOptions = ({ screenProps: { t } }) => ({
-  headerTitle: <Header title={t('next')} />,
-});
-
-export default DummyNext;
+export Button from './Button';
+export Carousel from './Carousel';
+export CertificateList from './CertificateList';
+export CheckList from './CheckList';
+export EmptyList from './EmptyList';
+export Header from './Header';
+export ListItem from './ListItem';
+export MenuIcon from './MenuIcon';
+export Picker from './Picker';
+export Screen from './Screen';
+export Switch from './Switch';
+export WalkthroughStep from './WalkthroughStep';
+export Warning from './Warning';

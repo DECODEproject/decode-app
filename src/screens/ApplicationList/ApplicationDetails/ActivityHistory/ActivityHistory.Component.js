@@ -25,8 +25,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import { map } from 'ramda';
 import { Text } from 'lib/styles';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
+import { Screen, Header } from 'lib/Components';
 import CheckList from 'lib/Components/CheckList';
 import { Section, Label } from './ActivityHistory.Styles';
 

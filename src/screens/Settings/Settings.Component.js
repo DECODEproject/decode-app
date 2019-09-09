@@ -22,9 +22,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Button from 'lib/Components/Button';
-import Screen from 'lib/Components/Screen';
-import Header from 'lib/Components/Header';
+import { Button, Screen, Header } from 'lib/Components';
 
 const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
   const { t } = useTranslation('settings');

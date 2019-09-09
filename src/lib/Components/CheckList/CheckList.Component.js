@@ -24,7 +24,7 @@ import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 import { prop, isNil } from 'ramda';
 import { Text } from 'lib/styles';
-import Switch from 'lib/Components/Switch';
+import { Switch } from 'lib/Components';
 import { Wrapper, RowWrapper, Check, CheckWrapper, LabelWrapper, SwitchWrapper } from './CheckList.Styles';
 
 const CheckList = ({ items }) => (
