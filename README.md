@@ -191,4 +191,6 @@ The lib/theme.js file contain common style variables as a centralized place for 
 
 The lib/styles.js file contains common styles, based on the theme variables, that are reused in any part of the app, perhaps slightly modified. Examples of styles are Heading or Screen (so that every screen uses the same heading style or layout)
 
+The lib/Components folder contains more complext common components, also having styles based on the theme variables, that are reused in any part of the app. Examples of components are CheckList, CertificateList, and Warning
+
 The default font is the Montserrat Google Font. It has been downloaded in its Regular and Bold weights, and included under different file names depending on the OS, so that using fontFamily and fontWeight in the code works the same in both platforms
