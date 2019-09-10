@@ -24,9 +24,20 @@ import styled from 'styled-components/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Heading as CommonHeading, Text as CommonText } from 'lib/styles';
 
+const actionStyles = backgroundColor => ({
+  marginHorizontal: -16,
+  paddingHorizontal: 32,
+  paddingVertical: 16,
+  backgroundColor,
+});
+
 export const Wrapper = styled(KeyboardAwareScrollView)(({ theme: { backgroundColor } }) => ({
   paddingHorizontal: 16,
   backgroundColor,
+}));
+
+export const List = styled.FlatList(({ theme: { backgroundColorAction } }) => ({
+  ...actionStyles(backgroundColorAction),
 }));
 
 export const Section = styled.View({
@@ -34,6 +45,10 @@ export const Section = styled.View({
   justifyContent: 'flex-start',
   alignItems: 'center',
 });
+
+export const SignSection = styled(Section)(({ theme: { backgroundColorAction } }) => ({
+  ...actionStyles(backgroundColorAction),
+}));
 
 export const Heading = styled(CommonHeading)({
   margin: 10,
@@ -45,9 +60,9 @@ export const Subheading = styled(CommonText)(({ theme: { primaryColor, fontSizeT
   fontWeight: 'bold',
 }));
 
-export const Container = styled.View({
-  padding: 16,
-});
+export const Container = styled.View(({ theme: { backgroundColorAction } }) => ({
+  ...actionStyles(backgroundColorAction),
+}));
 
 export const Text = styled(CommonText)(({ theme: { primaryColor } }) => ({
   textAlign: 'center',

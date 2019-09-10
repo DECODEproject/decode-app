@@ -23,15 +23,23 @@
 import styled from 'styled-components/native';
 import { Text as CommonText } from 'lib/styles';
 
+const actionStyles = backgroundColor => ({
+  marginHorizontal: -16,
+  paddingHorizontal: 32,
+  paddingVertical: 16,
+  backgroundColor,
+});
+
 export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
   paddingHorizontal: 16,
   backgroundColor,
 }));
 
-export const Section = styled.View({
+export const Section = styled.View(({ theme: { backgroundColorAction } }) => ({
   flexDirection: 'column',
   justifyContent: 'flex-start',
-});
+  ...actionStyles(backgroundColorAction),
+}));
 
 export const Subheading = styled(CommonText)(({ theme: { primaryColor, fontSizeTitle } }) => ({
   color: primaryColor,

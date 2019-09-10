@@ -21,12 +21,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, FlatList } from 'react-native';
+import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, map, isNil } from 'ramda';
 import { Button, CheckList } from 'lib/Components';
 import { getDisplayValue } from 'lib/utils';
-import { Subheading, Text, Container, Section } from './DDDC.Styles';
+import { Subheading, Text, Container, Section, List } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
 
 const CertificateRequest = (
@@ -49,7 +49,7 @@ const CertificateRequest = (
       </Section>
       {
         isEmpty(verificationCodes) ? null : (
-          <FlatList
+          <List
             data={verificationCodes}
             keyExtractor={code => code.id}
             renderItem={

@@ -23,19 +23,22 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Button, Screen, Header } from 'lib/Components';
+import { Wrapper } from './Settings.Styles';
 
 const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) => {
   const { t } = useTranslation('settings');
   return (
-    <Screen centerAligned>
-      <Button title={t('review')} onPress={onReviewWalkthrough} />
-      <Button
-        title={t('reset')}
-        onPress={() => navigate('Warning', {
-          message: t('warning'),
-          onConfirm: onReset,
-        })}
-      />
+    <Screen>
+      <Wrapper>
+        <Button title={t('review')} onPress={onReviewWalkthrough} />
+        <Button
+          title={t('reset')}
+          onPress={() => navigate('Warning', {
+            message: t('warning'),
+            onConfirm: onReset,
+          })}
+        />
+      </Wrapper>
     </Screen>
   );
 };

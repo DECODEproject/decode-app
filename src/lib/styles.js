@@ -23,6 +23,10 @@ import { Text as RNText, TextInput as RNTextInput, Dimensions } from 'react-nati
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import styled from 'styled-components/native';
 
+export const ActionWrapper = styled.View(({ theme: { backgroundColorAction } }) => ({
+  backgroundColor: backgroundColorAction,
+}));
+
 export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) => ({
   color: primaryColor,
   fontSize: 20,

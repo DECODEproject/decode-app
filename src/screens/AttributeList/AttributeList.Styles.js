@@ -21,12 +21,13 @@
 
 import styled from 'styled-components/native';
 
-export const Wrapper = styled.View({
+export const Wrapper = styled.View(({ theme: { backgroundColorAction } }) => ({
   flex: 1,
   justifyContent: 'flex-start',
   paddingHorizontal: 32,
   paddingVertical: 16,
-});
+  backgroundColor: backgroundColorAction,
+}));
 
 export const Separator = styled.View({
   height: 16,

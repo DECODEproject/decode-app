@@ -28,7 +28,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { Header, Button, CertificateList } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Heading, Text, Section } from './DDDC.Styles';
+import { Wrapper, Heading, Text, SignSection } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 
 const prepare = compose(
@@ -87,10 +87,10 @@ const DDDC = ({
               empty={all(isEmpty)(values(verification))}
             />
           ) : (
-            <Section>
+            <SignSection>
               <CertificateList certificates={certificates} />
               <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
-            </Section>
+            </SignSection>
           )
         }
         {

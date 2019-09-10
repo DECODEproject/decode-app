@@ -24,31 +24,33 @@ import PropTypes from 'prop-types';
 import { Linking, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Screen, Header, Button } from 'lib/Components';
-import { Description, Line } from './ApplicationDetails.Styles';
+import { Description, Line, Actions } from './ApplicationDetails.Styles';
 
 const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
   const { t } = useTranslation('applications');
   return (
-    <Screen topJustified centerAligned image={getParam('image')}>
+    <Screen topJustified image={getParam('image')}>
       <ScrollView>
         <Description>
           <Line>{getParam('description')}</Line>
           <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
         </Description>
       </ScrollView>
-      <Button featured icon="qrcode" title={t('activate')} onPress={() => navigate('Scanner')} />
-      { getParam('showHistory')
-        ? (
-          <Button
-            icon="history"
-            title={t('history')}
-            onPress={() => navigate('ActivityHistory', {
-              stats: getParam('stats'),
-              image: getParam('image'),
-            })}
-          />
-        )
-        : null}
+      <Actions>
+        <Button featured icon="qrcode" title={t('activate')} onPress={() => navigate('Scanner')} />
+        { getParam('showHistory')
+          ? (
+            <Button
+              icon="history"
+              title={t('history')}
+              onPress={() => navigate('ActivityHistory', {
+                stats: getParam('stats'),
+                image: getParam('image'),
+              })}
+            />
+          )
+          : null}
+      </Actions>
     </Screen>
   );
 };

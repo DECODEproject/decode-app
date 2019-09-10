@@ -23,7 +23,7 @@ import styled from 'styled-components/native';
 import { Text } from 'lib/styles';
 
 export const Description = styled.View({
-  padding: 40,
+  padding: 16,
   alignItems: 'center',
 });
 
@@ -31,3 +31,11 @@ export const Line = styled(Text)({
   textAlign: 'center',
   padding: 5,
 });
+
+export const Actions = styled.View(({ theme: { backgroundColorAction } }) => ({
+  marginHorizontal: -16,
+  paddingHorizontal: 32,
+  paddingVertical: 16,
+  backgroundColor: backgroundColorAction,
+  alignItems: 'center',
+}));

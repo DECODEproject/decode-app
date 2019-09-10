@@ -23,7 +23,6 @@ import styled from 'styled-components/native';
 import { Text, TextInput } from 'lib/styles';
 
 export const Container = styled.View({
-  padding: 16,
   flex: 1,
   flexDirection: 'column',
 });
