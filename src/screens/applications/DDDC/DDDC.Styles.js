@@ -21,9 +21,10 @@
  */
 
 import styled from 'styled-components/native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Heading as CommonHeading, Text as CommonText } from 'lib/styles';
 
-export const Wrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
+export const Wrapper = styled(KeyboardAwareScrollView)(({ theme: { backgroundColor } }) => ({
   paddingHorizontal: 16,
   backgroundColor,
 }));

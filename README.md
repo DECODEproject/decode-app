@@ -31,6 +31,7 @@ The DECODE App is developed in React Native, with the following side technologie
 - react-native-date-picker as cross platform component for date selection
 - react-native-render-html to support HTML coming from application description fields
 - react-native-loading-spinner-overlay as loading indicator
+- react-native-keyboard-aware-scroll-view to fix layout issues when a KeyboardAwareView has a ScrollView inside 
 
 Development dependencies:
 - yarn for dependency management

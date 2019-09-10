@@ -20,7 +20,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
@@ -62,46 +62,44 @@ const DDDC = ({
     [petitionId],
   );
   return (
-    <SafeAreaView>
-      <KeyboardAvoidingView behavior="position">
-        <Wrapper nestedScrollEnabled={false}>
-          <Spinner visible={loading} />
-          <ApplicationImage source={getImage(image)} resizeMode="contain" />
-          <Text>{t(activationMsg)}</Text>
-          {
-            petition ? (
-              <Heading>{petition.title}</Heading>
-            ) : null
-          }
-          {
-            isEmpty(certificates) ? (
-              <CertificateRequest
-                verificationCodes={petition.verificationCodes}
-                sharedAttributes={sharedAttributes}
-                onManageAttributes={() => navigate('AttributeList')}
-                onSubmit={() => callCredentialIssuer(
-                  verification,
-                  prepare(sharedAttributes),
-                  petition,
-                )}
-                toggleSelected={toggleSelectedAttribute}
-                empty={all(isEmpty)(values(verification))}
-              />
-            ) : (
-              <Section>
-                <CertificateList certificates={certificates} />
-                <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
-              </Section>
-            )
-          }
-          {
-            error ? <Text>{error}</Text> : null
-          }
-          {
-            signed ? <Text>Signed!</Text> : null
-          }
-        </Wrapper>
-      </KeyboardAvoidingView>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Spinner visible={loading} />
+      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }} extraScrollHeight={20}>
+        <ApplicationImage source={getImage(image)} resizeMode="contain" />
+        <Text>{t(activationMsg)}</Text>
+        {
+          petition ? (
+            <Heading>{petition.title}</Heading>
+          ) : null
+        }
+        {
+          isEmpty(certificates) ? (
+            <CertificateRequest
+              verificationCodes={petition.verificationCodes}
+              sharedAttributes={sharedAttributes}
+              onManageAttributes={() => navigate('AttributeList')}
+              onSubmit={() => callCredentialIssuer(
+                verification,
+                prepare(sharedAttributes),
+                petition,
+              )}
+              toggleSelected={toggleSelectedAttribute}
+              empty={all(isEmpty)(values(verification))}
+            />
+          ) : (
+            <Section>
+              <CertificateList certificates={certificates} />
+              <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
+            </Section>
+          )
+        }
+        {
+          error ? <Text>{error}</Text> : null
+        }
+        {
+          signed ? <Text>Signed!</Text> : null
+        }
+      </Wrapper>
     </SafeAreaView>
   );
 };
