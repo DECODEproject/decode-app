@@ -35,18 +35,18 @@ export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) 
   fontWeight: 'bold',
 }));
 
-export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSize } }) => ({
+export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSizeText } }) => ({
   color: primaryColor,
   textAlign: 'left',
   fontFamily,
-  fontSize,
+  fontSize: fontSizeText,
   fontWeight: 'normal',
 }));
 
 export const Icon = styled(FAIcon)((
-  { theme: { fontSize, primaryColor } },
+  { theme: { fontSizeTitle, primaryColor } },
 ) => ({
-  fontSize,
+  fontSize: fontSizeTitle,
   color: primaryColor,
 }));
 
@@ -57,9 +57,9 @@ export const ApplicationImage = styled.Image({
 });
 
 export const TextInput = styled(RNTextInput)(
-  ({ theme: { secondaryColor, fontFamily, fontSize } }) => ({
+  ({ theme: { secondaryColor, fontFamily, fontSizeText } }) => ({
     fontFamily,
-    fontSize,
+    fontSize: fontSizeText,
     borderColor: secondaryColor,
     borderWidth: 1,
     padding: 10,
