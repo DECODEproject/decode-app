@@ -65,6 +65,7 @@ export default {
     cancel: 'Cancel·lar',
     certificateRequestButton: 'Obtenir certificat',
     certificateRequired: 'Per a signar necessites que et sigui lliurat un certificat',
+    certificates: 'Certificats',
     day: 'dia',
     empty: 'No hi ha aplicacions disponibles',
     firstUse: 'Primer ús',

@@ -82,7 +82,7 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
                 disabled={usageCount === 0}
                 id={id}
                 name={t(title)}
-                description={`uses: ${usageCount}, certificates: ${numCertificates}`}
+                description={`${t('usageCount')}: ${usageCount}, ${t('certificates')}: ${numCertificates}`}
                 onPress={
                   () => navigate(
                     'ApplicationDetails', {

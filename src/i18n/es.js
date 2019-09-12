@@ -65,6 +65,7 @@ export default {
     cancel: 'Cancelar',
     certificateRequestButton: 'Obtener certificado',
     certificateRequired: 'Para firmar necesitas que te sea emitido un certificado',
+    certificates: 'Certificados',
     day: 'día',
     empty: 'No hay aplicaciones disponibles',
     firstUse: 'Primer uso',

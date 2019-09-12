@@ -65,6 +65,7 @@ export default {
     cancel: 'Cancel',
     certificateRequestButton: 'Get certificate',
     certificateRequired: 'You need to have been issued a certificate in order to sign',
+    certificates: 'Certificates',
     day: 'day',
     empty: 'There are no applications available',
     firstUse: 'First use',
