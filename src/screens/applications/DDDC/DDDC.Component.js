@@ -28,7 +28,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { Header, Button, CertificateList, Message, ProgressBar } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Heading, Text, SignSection } from './DDDC.Styles';
+import { Wrapper, Heading, Text, ActionSection } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 
 const prepare = compose(
@@ -67,31 +67,33 @@ const DDDC = ({
   if (signed) innerComponent = (
     <React.Fragment>
       <Message msg={t('dddcSuccess')} />
-      <SignSection>
+      <ActionSection>
         <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
         <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
-      </SignSection>
+      </ActionSection>
     </React.Fragment>
   );
   else if (isEmpty(certificates)) innerComponent = (
-    <CertificateRequest
-      verificationCodes={petition.verificationCodes}
-      sharedAttributes={sharedAttributes}
-      onManageAttributes={() => navigate('AttributeList')}
-      onSubmit={() => callCredentialIssuer(
-        verification,
-        prepare(sharedAttributes),
-        petition,
-      )}
-      toggleSelected={toggleSelectedAttribute}
-      empty={all(isEmpty)(values(verification))}
-    />
+    <ActionSection>
+      <CertificateRequest
+        verificationCodes={petition.verificationCodes}
+        sharedAttributes={sharedAttributes}
+        onManageAttributes={() => navigate('AttributeList')}
+        onSubmit={() => callCredentialIssuer(
+          verification,
+          prepare(sharedAttributes),
+          petition,
+        )}
+        toggleSelected={toggleSelectedAttribute}
+        empty={all(isEmpty)(values(verification))}
+      />
+    </ActionSection>
   );
   else innerComponent = (
-    <SignSection>
+    <ActionSection>
       <CertificateList certificates={certificates} />
       <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
-    </SignSection>
+    </ActionSection>
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
