@@ -20,11 +20,9 @@
  */
 
 import { createSelector } from 'reselect';
-import { path, prop, indexBy, assoc, includes, map, values, merge } from 'ramda';
+import { path, prop } from 'ramda';
 import { toggle } from 'lib/utils';
 import loginApi from 'api/login-client';
-import { getApplication } from 'api/atlas-client';
-import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
 
 export const initialState = {
   loading: false,
@@ -90,25 +88,6 @@ export const getLoggedIn = createSelector(
 export const getError = createSelector(
   getBranch,
   prop('error'),
-);
-
-const getSelectedAttributes = createSelector(
-  getBranch,
-  prop('selectedAttributes'),
-);
-
-export const getSharedAttributes = createSelector(
-  [getSharedAttributesFromAtlas('bcnnow'), getSelectedAttributes],
-  (sharedAttributes, selectedAttributes) => {
-    const applicationAttributes = indexBy(prop('name'), map(item => ({ name: item }), getApplication('bcnnow').sharedAttributes));
-    const userAttributes = indexBy(prop('name'))(
-      map(
-        attr => (assoc('selected', includes(attr.name, selectedAttributes), attr)),
-        sharedAttributes,
-      ),
-    );
-    return values(merge(applicationAttributes, userAttributes));
-  },
 );
 
 export default (state = initialState, action) => {

@@ -21,10 +21,17 @@
 
 import moment from 'moment';
 import i18n from 'i18n';
-import reducer, { getApplicationStats, calculateAverage, getAllCertificates } from 'redux/modules/applications';
+import { pluck } from 'ramda';
+import reducer, {
+  getApplicationStats,
+  calculateAverage,
+  getAllCertificates,
+  getSharedAttributes,
+} from 'redux/modules/applications';
 import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
 import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
 import { getImage } from 'api/atlas-client';
+import { encrypt } from 'lib/utils';
 
 const initialState = {
   dddc: dddcInitialState,
@@ -334,5 +341,56 @@ describe('Application tests', () => {
       aaa111: {},
       aaa222: {},
     });
+  });
+
+  test('Get shared attributes - sort', () => {
+    expect(
+      pluck('name', getSharedAttributes('dddc')({
+        attributes: {
+          birthDate: encrypt('birthDate-value'),
+          address: encrypt('address-value'),
+        },
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+          },
+          bcnnow: {
+            ...bcnnowInitialState,
+          },
+        },
+      })),
+    ).toEqual(['age', 'address', 'gender']);
+    expect(
+      pluck('name', getSharedAttributes('dddc')({
+        attributes: {
+          gender: encrypt('gender-value'),
+          address: encrypt('address-value'),
+        },
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+          },
+          bcnnow: {
+            ...bcnnowInitialState,
+          },
+        },
+      })),
+    ).toEqual(['gender', 'address', 'age']);
+    expect(
+      pluck('name', getSharedAttributes('bcnnow')({
+        attributes: {
+          birthDate: encrypt('birthDate-value'),
+          address: encrypt('address-value'),
+        },
+        applications: {
+          dddc: {
+            ...dddcInitialState,
+          },
+          bcnnow: {
+            ...bcnnowInitialState,
+          },
+        },
+      })),
+    ).toEqual(['ageRange', 'address', 'gender']);
   });
 });

@@ -39,9 +39,16 @@ import {
   keys,
   pluck,
   mergeAll,
+  indexBy,
+  assoc,
+  includes,
+  sort,
+  descend,
+  has,
 } from 'ramda';
 import moment from 'moment';
-import { listApplications } from 'api/atlas-client';
+import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
+import { listApplications, getApplication } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
 import dddc from './dddc';
 import bcnnow from './bcnnow';
@@ -134,6 +141,32 @@ export const getAllCertificates = createSelector(
     values,
     pluck('certificates'),
   ),
+);
+
+const getSelectedAttributes = applicationId => createSelector(
+  getStoreBranch,
+  compose(
+    prop('selectedAttributes'),
+    prop(applicationId),
+  ),
+);
+
+export const getSharedAttributes = applicationId => createSelector(
+  [getSharedAttributesFromAtlas(applicationId), getSelectedAttributes(applicationId)],
+  (sharedAttributes, selectedAttributes) => {
+    const applicationAttributes = indexBy(prop('name'), map(item => ({ name: item }), getApplication(applicationId).sharedAttributes));
+    const userAttributes = indexBy(prop('name'))(
+      map(
+        attr => (assoc('selected', includes(attr.name, selectedAttributes), attr)),
+        sharedAttributes,
+      ),
+    );
+    return compose(
+      sort(descend(has('selected'))),
+      values,
+      merge(applicationAttributes),
+    )(userAttributes);
+  },
 );
 
 export default combineReducers({

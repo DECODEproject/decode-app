@@ -21,12 +21,10 @@
 
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { path, prop, append, map, assoc, includes, indexBy, merge, values } from 'ramda';
+import { path, prop, append } from 'ramda';
 import uuid from 'uuid/v4';
-import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
 import { toggle, debugLog } from 'lib/utils';
 import isJson from 'lib/is-json';
-import { getApplication } from 'api/atlas-client';
 import zenroom from 'api/zenroom-client';
 import contract01 from 'api/zenroom/01-CITIZEN-credential-keygen.zencode';
 import contract02 from 'api/zenroom/02-CITIZEN-credential-request.zencode';
@@ -259,25 +257,6 @@ export const getVerification = createSelector(
 export const getCertificates = createSelector(
   getBranch,
   prop('certificates'),
-);
-
-const getSelectedAttributes = createSelector(
-  getBranch,
-  prop('selectedAttributes'),
-);
-
-export const getSharedAttributes = createSelector(
-  [getSharedAttributesFromAtlas('dddc'), getSelectedAttributes],
-  (sharedAttributes, selectedAttributes) => {
-    const applicationAttributes = indexBy(prop('name'), map(item => ({ name: item }), getApplication('dddc').sharedAttributes));
-    const userAttributes = indexBy(prop('name'))(
-      map(
-        attr => (assoc('selected', includes(attr.name, selectedAttributes), attr)),
-        sharedAttributes,
-      ),
-    );
-    return values(merge(applicationAttributes, userAttributes));
-  },
 );
 
 export default (state = initialState, action) => {
