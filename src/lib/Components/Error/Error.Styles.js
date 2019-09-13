@@ -19,17 +19,18 @@
  * email: info@dribia.com
  */
 
-export Button from './Button';
-export Carousel from './Carousel';
-export CertificateList from './CertificateList';
-export CheckList from './CheckList';
-export EmptyList from './EmptyList';
-export Error from './Error';
-export Header from './Header';
-export ListItem from './ListItem';
-export MenuIcon from './MenuIcon';
-export Picker from './Picker';
-export Screen from './Screen';
-export Switch from './Switch';
-export WalkthroughStep from './WalkthroughStep';
-export Warning from './Warning';
+import styled from 'styled-components/native';
+
+export const MessageContainer = styled.View({
+  flex: 0.5,
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  padding: 20,
+});
+
+export const Buttons = styled.View({
+  flex: 0.5,
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+  alignItems: 'center',
+});

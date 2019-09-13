@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext } from 'styled-components';
-import { Carousel, MenuIcon, Warning } from 'lib/Components';
+import { Carousel, MenuIcon, Warning, Error } from 'lib/Components';
 import { Icon } from 'lib/styles';
 import commonTheme from 'lib/theme';
 import Dummy from 'screens/Dummy';
@@ -228,6 +228,9 @@ const RootNavigation = createStackNavigator({
   },
   Warning: {
     screen: Warning,
+  },
+  Error: {
+    screen: Error,
   },
 },
 {

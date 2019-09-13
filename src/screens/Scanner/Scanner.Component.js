@@ -23,6 +23,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavigationEvents } from 'react-navigation';
 import { Text } from 'react-native';
+import { withTranslation } from 'react-i18next';
 import { Screen, Header } from 'lib/Components';
 import { parseQRCode } from 'lib/utils';
 import { Camera } from './Scanner.Styles';
@@ -52,7 +53,7 @@ class Scanner extends React.Component {
 
   render() {
     const { isFocused, qrcode } = this.state;
-    const { navigation } = this.props;
+    const { navigation, t } = this.props;
     return (
       <Screen>
         <NavigationEvents
@@ -66,8 +67,9 @@ class Scanner extends React.Component {
               <Camera
                 captureAudio={false}
                 onBarCodeRead={(ev) => {
-                  const { application, ...rest } = parseQRCode(ev.data);
+                  const { error, application, ...rest } = parseQRCode(ev.data);
                   if (application) navigation.navigate(application, { application, ...rest });
+                  if (error) navigation.navigate('Error', { message: t('error'), detail: error });
                   this.setState(prevState => ({
                     ...prevState,
                     qrcode: ev.data,
@@ -90,6 +92,7 @@ Scanner.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-export default Scanner;
+export default withTranslation()(Scanner);

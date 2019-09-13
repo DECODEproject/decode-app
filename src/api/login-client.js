@@ -43,6 +43,7 @@ const login = async (callback, sessionId, credential, attributes, fail = false) 
     }), attributes)),
   };
   debugLog('JSON data: ', data);
+  debugLog('JSON data as string: ', JSON.stringify(data));
   try {
     const response = await axios.post(callback, data);
     const { data: responseData } = response;

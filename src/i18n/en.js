@@ -98,5 +98,6 @@ export default {
   },
   scanner: {
     title: 'QR scanner',
+    error: 'Could not parse QR code',
   },
 };

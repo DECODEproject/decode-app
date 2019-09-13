@@ -98,5 +98,6 @@ export default {
   },
   scanner: {
     title: 'Escàner QR',
+    error: 'No s\'ha pogut interpretar el codi QR',
   },
 };

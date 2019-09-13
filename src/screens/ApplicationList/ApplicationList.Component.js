@@ -32,7 +32,7 @@ import { Wrapper, Separator } from './ApplicationList.Styles';
 const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {
   const { t } = useTranslation('applications');
   const handleUrl = ({ url }) => {
-    const { application, ...rest } = parseQRCode(url);
+    const { error, application, ...rest } = parseQRCode(url);
     if (application) dispatch(StackActions.reset({
       index: 1,
       actions: [
@@ -46,6 +46,7 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
       ],
       key: 'ApplicationStack',
     }));
+    if (error) navigate('Error', { message: t('scanner:error'), detail: error });
   };
   const removeUrlListener = () => {
     Linking.removeEventListener('url', handleUrl);
@@ -54,8 +55,9 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
     const initialNavigation = async () => {
       const initialUrl = await Linking.getInitialURL();
       if (initialUrl) {
-        const { application, ...rest } = parseQRCode(initialUrl);
+        const { error, application, ...rest } = parseQRCode(initialUrl);
         if (application) navigate(application, { application, ...rest });
+        if (error) navigate('Error', { message: t('scanner:error'), detail: error });
       }
     };
     Linking.addEventListener('url', handleUrl);
