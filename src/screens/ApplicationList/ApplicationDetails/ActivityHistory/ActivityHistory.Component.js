@@ -33,7 +33,7 @@ const ActivityHistory = ({ navigation: { getParam } }) => {
   const { usageCount, firstUse, lastUse, averageUse, sharedData } = getParam('stats');
   const { t } = useTranslation('applications');
   return (
-    <Screen topJustified image={getParam('image')}>
+    <Screen scroll topJustified image={getParam('image')}>
       <Section>
         <Label>
           {`${t('usageCount')}: `}

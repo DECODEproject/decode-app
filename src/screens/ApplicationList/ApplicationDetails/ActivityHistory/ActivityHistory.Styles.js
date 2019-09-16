@@ -22,8 +22,7 @@ import styled from 'styled-components/native';
 import { Text } from 'lib/styles';
 
 export const Section = styled.View({
-  paddingHorizontal: 40,
-  paddingVertical: 16,
+  padding: 16,
 });
 
 export const Label = styled(Text)(({ theme: { fontSizeText } }) => ({

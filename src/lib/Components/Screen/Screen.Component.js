@@ -24,21 +24,37 @@ import PropTypes from 'prop-types';
 import { StatusBar } from 'react-native';
 import { ApplicationImage } from 'lib/styles';
 import { getImage } from 'api/atlas-client';
-import { SafeAreaView } from './Screen.Styles';
+import { SafeAreaView, ScrollWrapper } from './Screen.Styles';
 
-const Screen = ({ children, image, ...rest }) => (
-  <SafeAreaView {...rest}>
-    <StatusBar barStyle="light-content" />
-    { image ? <ApplicationImage source={getImage(image)} resizeMode="contain" /> : null }
-    {children}
-  </SafeAreaView>
-);
+const Screen = ({ children, scroll, image, ...rest }) => {
+  const imageComponent = image ? <ApplicationImage source={getImage(image)} resizeMode="contain" /> : null;
+  return (
+    <SafeAreaView {...rest}>
+      <StatusBar barStyle="light-content" />
+      {
+        scroll ? (
+          <ScrollWrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
+            {imageComponent}
+            {children}
+          </ScrollWrapper>
+        ) : (
+          <React.Fragment>
+            {imageComponent}
+            {children}
+          </React.Fragment>
+        )
+      }
+    </SafeAreaView>
+  );
+};
 
 Screen.defaultProps = {
+  scroll: false,
   image: null,
 };
 
 Screen.propTypes = {
+  scroll: PropTypes.bool,
   image: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

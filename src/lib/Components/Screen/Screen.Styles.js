@@ -22,6 +22,10 @@
 import styled from 'styled-components/native';
 import { SafeAreaView as RNSafeAreaView } from 'react-native';
 
+export const ScrollWrapper = styled.ScrollView(({ theme: { backgroundColor } }) => ({
+  backgroundColor,
+}));
+
 export const SafeAreaView = styled(RNSafeAreaView)(
   ({ theme: { backgroundColor }, topJustified = false, centerAligned = false }) => ({
     flex: 1,
