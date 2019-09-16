@@ -16,6 +16,23 @@
       "type": "string",
       "description": "addressDesc"
     },
+    "district": {
+      "name": "district",
+      "type": "enum",
+      "description": "districtDesc",
+      "values": [
+        "Ciutat Vella",
+        "Eixample",
+        "Sants - Montjuïc",
+        "Les Corts",
+        "Sarrià - Sant Gervasi",
+        "Gràcia",
+        "Horta - Guinardó",
+        "Nou Barris",
+        "Sant Andreu",
+        "Sant Martí"
+      ]
+    },
     "age": {
       "name": "age",
       "type": "number",
@@ -38,7 +55,7 @@
       "image": "people",
       "link": "https://dddc.decodeproject.eu",
       "description": "dddcDesc",
-      "sharedAttributes": ["gender", "age", "address"],
+      "sharedAttributes": ["gender", "age", "district"],
       "activationMsg": "dddcActivation",
       "actionMsg": "dddcSign"
     },
@@ -49,7 +66,7 @@
       "image": "city",
       "link": "http://bcnnow.decodeproject.eu",
       "description": "bcnnowDesc",
-      "sharedAttributes": ["gender", "ageRange", "address"],
+      "sharedAttributes": ["gender", "ageRange", "district"],
       "activationMsg": "bcnnowActivation",
       "actionMsg": "bcnnowLogin"
     }
@@ -66,6 +83,8 @@
         "birthDateDesc": "Tria el dia, mes i any que vas néixer",
         "address": "Adreça",
         "addressDesc": "Troba la teva adreça en un mapa",
+        "district": "Districte",
+        "districtDesc": "Tria el teu districte dins de la ciutat de Barcelona",
         "string": "Text",
         "age": "Edat",
         "ageRange": "Edat"
@@ -80,6 +99,8 @@
         "birthDateDesc": "Escoge el día, mes y año en que naciste",
         "address": "Dirección",
         "addressDesc": "Encuentra tu dirección en un mapa",
+        "district": "Distrito",
+        "districtDesc": "Escoge tu distrito dentro de la ciudad de Barcelona",
         "string": "Texto",
         "age": "Edad",
         "ageRange": "Edad"
@@ -94,6 +115,8 @@
         "birthDateDesc": "Choose the day, month and year you were born",
         "address": "Address",
         "addressDesc": "Find your address in a map",
+        "district": "District",
+        "districtDesc": "Choose your district in the city of Barcelona",
         "string": "Text",
         "age": "Age",
         "ageRange": "Age"
