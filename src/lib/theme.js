@@ -45,6 +45,7 @@ const theme = {
   headerPrimaryColor: colors.darkYellow,
   headerSecondaryColor: colors.black,
   okColor: colors.green,
+  errorColor: colors.orange,
 };
 
 export default theme;

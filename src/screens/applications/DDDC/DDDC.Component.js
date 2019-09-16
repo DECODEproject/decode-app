@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Header, Button, CertificateList } from 'lib/Components';
+import { Header, Button, CertificateList, Message } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
 import { Wrapper, Heading, Text, SignSection } from './DDDC.Styles';
@@ -68,9 +68,13 @@ const DDDC = ({
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <Text>{t(activationMsg)}</Text>
         {
-          petition ? (
-            <Heading>{petition.title}</Heading>
-          ) : null
+          petition ? <Heading>{petition.title}</Heading> : null
+        }
+        {
+          error ? <Message error msg={t('error')} detail={error} /> : null
+        }
+        {
+          signed ? <Message msg={t('dddcSuccess')} /> : null
         }
         {
           isEmpty(certificates) ? (
@@ -92,12 +96,6 @@ const DDDC = ({
               <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
             </SignSection>
           )
-        }
-        {
-          error ? <Text>{error}</Text> : null
-        }
-        {
-          signed ? <Text>Signed!</Text> : null
         }
       </Wrapper>
     </SafeAreaView>

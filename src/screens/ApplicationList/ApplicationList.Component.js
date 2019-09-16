@@ -46,7 +46,7 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
       ],
       key: 'ApplicationStack',
     }));
-    if (error) navigate('Error', { message: t('scanner:error'), detail: error });
+    if (error) navigate('Warning', { message: t('scanner:error'), detail: error });
   };
   const removeUrlListener = () => {
     Linking.removeEventListener('url', handleUrl);
@@ -57,7 +57,7 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
       if (initialUrl) {
         const { error, application, ...rest } = parseQRCode(initialUrl);
         if (application) navigate(application, { application, ...rest });
-        if (error) navigate('Error', { message: t('scanner:error'), detail: error });
+        if (error) navigate('Warning', { message: t('scanner:error'), detail: error });
       }
     };
     Linking.addEventListener('url', handleUrl);

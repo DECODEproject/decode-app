@@ -22,32 +22,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Button, Screen } from 'lib/Components';
-import { Heading } from 'lib/styles';
-import { Buttons, MessageContainer } from './Warning.Styles';
+import { Button, Message } from 'lib/Components';
+import { Wrapper, Buttons } from './Warning.Styles';
 
 const Warning = ({ navigation: { goBack, getParam } }) => {
   const { t } = useTranslation();
   const message = getParam('message');
+  const detail = getParam('detail');
   const onConfirm = getParam('onConfirm');
   return (
-    <Screen>
-      <MessageContainer>
-        <Heading>{message}</Heading>
-      </MessageContainer>
+    <Wrapper>
+      <Message error msg={message} detail={detail} />
       <Buttons>
         <Button
           featured
           icon="check"
-          title={t('confirm')}
-          onPress={() => {
-            onConfirm();
+          title={onConfirm ? t('confirm') : t('OK')}
+          onPress={
+          () => {
+            if (onConfirm) onConfirm();
             goBack();
-          }}
+          }
+        }
         />
-        <Button icon="times" title={t('cancel')} onPress={() => goBack()} />
+        {
+          onConfirm ? (
+            <Button icon="times" title={t('cancel')} onPress={() => goBack()} />
+          ) : null
+        }
       </Buttons>
-    </Screen>
+    </Wrapper>
   );
 };
 

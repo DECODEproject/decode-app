@@ -19,4 +19,29 @@
  * email: info@dribia.com
  */
 
-export default from './Error.Component';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper, Msg, Detail, Icon } from './Message.Styles';
+
+const Message = ({ msg, detail, error }) => (
+  <Wrapper error={error}>
+    <Icon error={error} name={error ? 'exclamation-triangle' : 'check'} />
+    <Msg>{msg}</Msg>
+    {
+      detail ? <Detail>{detail}</Detail> : null
+    }
+  </Wrapper>
+);
+
+Message.defaultProps = {
+  detail: null,
+  error: false,
+};
+
+Message.propTypes = {
+  error: PropTypes.bool,
+  msg: PropTypes.string.isRequired,
+  detail: PropTypes.string,
+};
+
+export default Message;

@@ -20,17 +20,21 @@
  */
 
 import styled from 'styled-components/native';
+import { Heading, Text, Icon as CommonIcon } from 'lib/styles';
 
-export const MessageContainer = styled.View({
-  flex: 0.5,
-  justifyContent: 'flex-end',
+export const Wrapper = styled.View(({ error, theme: { errorColor, okColor } }) => ({
+  borderWidth: 1,
+  borderColor: error ? errorColor : okColor,
+  padding: 8,
   alignItems: 'center',
-  padding: 20,
-});
+}));
 
-export const Buttons = styled.View({
-  flex: 0.5,
-  flexDirection: 'row',
-  justifyContent: 'space-around',
-  alignItems: 'center',
+export const Icon = styled(CommonIcon)(({ error, theme: { errorColor, okColor } }) => ({
+  color: error ? errorColor : okColor,
+}));
+
+export const Msg = styled(Heading)({});
+
+export const Detail = styled(Text)({
+  textAlign: 'center',
 });

@@ -68,6 +68,7 @@ export default {
     certificates: 'Certificats',
     day: 'dia',
     empty: 'No hi ha aplicacions disponibles',
+    error: "La vostra petició no s'ha pogut processar",
     firstUse: 'Primer ús',
     history: 'Historial d\'ús',
     lastUse: 'Darrer ús',

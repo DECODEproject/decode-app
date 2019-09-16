@@ -25,11 +25,10 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, values, head, map, isNil, compose, pluck, indexBy, prop, filter } from 'ramda';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Header, Button, CertificateList, CheckList } from 'lib/Components';
+import { Header, Button, CertificateList, CheckList, Message } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { getApplication, getImage } from 'api/atlas-client';
-import Message from './Message';
 import { Wrapper, Section, Subheading, Text, Buttons } from './BCNNow.Styles';
 
 const prepare = compose(
@@ -74,7 +73,8 @@ const BCNNow = ({
         {
           error ? (
             <Message
-              msg={error === 'timeout' ? t('bcnnowTimeout') : t('bcnnowFailed')}
+              error
+              msg={error === 'timeout' ? t('bcnnowTimeout') : t('error')}
               detail={error === 'timeout' ? null : error}
             />
           ) : null
@@ -84,7 +84,7 @@ const BCNNow = ({
         }
         {
           isEmpty(certificates) ? (
-            <Message msg={t('bcnnowEmpty')} />
+            <Message error msg={t('bcnnowEmpty')} />
           ) : (
             <Section>
               <CertificateList certificates={certificates} />

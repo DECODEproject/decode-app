@@ -68,6 +68,7 @@ export default {
     certificates: 'Certificates',
     day: 'day',
     empty: 'There are no applications available',
+    error: 'Your request couldn\'t be processed',
     firstUse: 'First use',
     history: 'Usage history',
     lastUse: 'Last use',

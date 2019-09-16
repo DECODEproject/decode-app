@@ -21,11 +21,10 @@
 
 import styled from 'styled-components/native';
 
-export const MessageContainer = styled.View({
-  flex: 0.5,
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  padding: 20,
+export const Wrapper = styled.View({
+  flex: 1,
+  justifyContent: 'center',
+  padding: 16,
 });
 
 export const Buttons = styled.View({
