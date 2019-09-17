@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getSharedAttributes } from 'redux/modules/applications';
+import { getSharedAttributes, getProgress } from 'redux/modules/applications';
 import {
   fetchPetition,
   getPetition,
@@ -23,6 +23,7 @@ const mapStateToProps = createStructuredSelector({
   error: getError,
   verification: getVerification,
   certificates: getCertificates,
+  progress: getProgress('dddc'),
 });
 
 const mapDispatchToProps = {

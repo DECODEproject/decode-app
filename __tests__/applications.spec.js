@@ -100,7 +100,7 @@ describe('Application tests', () => {
         sharedData: [
           { id: 'gender', shared: true },
           { id: 'age', shared: true },
-          { id: 'address', shared: false },
+          { id: 'district', shared: false },
         ],
         averageUse: [1, 'month'],
       },
@@ -112,7 +112,7 @@ describe('Application tests', () => {
         sharedData: [
           { id: 'gender', shared: false },
           { id: 'ageRange', shared: false },
-          { id: 'address', shared: false },
+          { id: 'district', shared: false },
         ],
       },
     ]);
@@ -143,7 +143,7 @@ describe('Application tests', () => {
         sharedData: [
           { id: 'gender', shared: false },
           { id: 'age', shared: false },
-          { id: 'address', shared: false },
+          { id: 'district', shared: false },
         ],
         numCertificates: 2,
       },
@@ -155,7 +155,7 @@ describe('Application tests', () => {
         sharedData: [
           { id: 'gender', shared: false },
           { id: 'ageRange', shared: false },
-          { id: 'address', shared: false },
+          { id: 'district', shared: false },
         ],
       },
     ]);
@@ -348,7 +348,7 @@ describe('Application tests', () => {
       pluck('name', getSharedAttributes('dddc')({
         attributes: {
           birthDate: encrypt('birthDate-value'),
-          address: encrypt('address-value'),
+          district: encrypt('district-value'),
         },
         applications: {
           dddc: {
@@ -359,12 +359,12 @@ describe('Application tests', () => {
           },
         },
       })),
-    ).toEqual(['age', 'address', 'gender']);
+    ).toEqual(['age', 'district', 'gender']);
     expect(
       pluck('name', getSharedAttributes('dddc')({
         attributes: {
           gender: encrypt('gender-value'),
-          address: encrypt('address-value'),
+          district: encrypt('district-value'),
         },
         applications: {
           dddc: {
@@ -375,12 +375,12 @@ describe('Application tests', () => {
           },
         },
       })),
-    ).toEqual(['gender', 'address', 'age']);
+    ).toEqual(['gender', 'district', 'age']);
     expect(
       pluck('name', getSharedAttributes('bcnnow')({
         attributes: {
           birthDate: encrypt('birthDate-value'),
-          address: encrypt('address-value'),
+          district: encrypt('district-value'),
         },
         applications: {
           dddc: {
@@ -391,6 +391,6 @@ describe('Application tests', () => {
           },
         },
       })),
-    ).toEqual(['ageRange', 'address', 'gender']);
+    ).toEqual(['ageRange', 'district', 'gender']);
   });
 });

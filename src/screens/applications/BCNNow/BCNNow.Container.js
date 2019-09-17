@@ -21,8 +21,8 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getAllCertificates, getSharedAttributes } from 'redux/modules/applications';
-import { login, getLoading, getLoggedIn, getError, toggleSelectedAttribute, cleanupState } from 'redux/modules/applications/bcnnow';
+import { getAllCertificates, getSharedAttributes, getProgress } from 'redux/modules/applications';
+import { login, getLoading, getLoggedIn, getError, toggleSelectedAttribute } from 'redux/modules/applications/bcnnow';
 import Component from './BCNNow.Component';
 
 const mapStateToProps = createStructuredSelector({
@@ -31,12 +31,12 @@ const mapStateToProps = createStructuredSelector({
   loading: getLoading,
   loggedIn: getLoggedIn,
   error: getError,
+  progress: getProgress('bcnnow'),
 });
 
 const mapDispatchToProps = {
   login,
   toggleSelectedAttribute,
-  cleanupState,
 };
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);

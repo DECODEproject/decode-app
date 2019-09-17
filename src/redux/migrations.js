@@ -35,6 +35,7 @@ const migrations = {
     ...rest,
   }),
   3: omit(['applications']),
+  4: omit(['applications']),
 };
 
 export default migrations;

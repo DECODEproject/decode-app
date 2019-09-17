@@ -19,13 +19,13 @@
  * email: info@dribia.com
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, values, head, map, isNil, compose, pluck, indexBy, prop, filter } from 'ramda';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Header, Button, CertificateList, CheckList, Message } from 'lib/Components';
+import { Header, Button, CertificateList, CheckList, Message, ProgressBar } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { getApplication, getImage } from 'api/atlas-client';
@@ -38,7 +38,7 @@ const prepare = compose(
 );
 
 const BCNNow = ({
-  navigation: { getParam, navigate, addListener },
+  navigation: { getParam, navigate },
   sharedAttributes,
   certificates,
   login,
@@ -46,29 +46,20 @@ const BCNNow = ({
   error,
   loggedIn,
   toggleSelectedAttribute,
-  cleanupState,
+  progress: { step, steps },
 }) => {
   const bcnnowUrl = getParam('bcnnowUrl') || 'http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback';
   const sessionId = getParam('sessionId') || '7d9f3fa8a57911e9b12a005056833c52';
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');
   const { image, activationMsg, actionMsg } = getApplication('bcnnow');
-  useEffect(
-    () => {
-      cleanupState();
-      const listener = addListener('willFocus', () => cleanupState());
-      return () => {
-        listener.remove();
-      };
-    },
-    [],
-  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Spinner visible={loading} />
       <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
+        <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>
         {
           error ? (
@@ -140,7 +131,10 @@ BCNNow.propTypes = {
   error: PropTypes.string,
   loggedIn: PropTypes.bool.isRequired,
   toggleSelectedAttribute: PropTypes.func.isRequired,
-  cleanupState: PropTypes.func.isRequired,
+  progress: PropTypes.shape({
+    step: PropTypes.number.isRequired,
+    steps: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default BCNNow;

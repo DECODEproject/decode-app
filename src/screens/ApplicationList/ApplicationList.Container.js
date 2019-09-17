@@ -21,14 +21,18 @@
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { getApplicationStats } from 'redux/modules/applications';
+import { getApplicationStats, initApplication } from 'redux/modules/applications';
 import Component from './ApplicationList.Component';
 
 const mapStateToProps = createStructuredSelector({
   applications: getApplicationStats,
 });
 
-const ConnectedComponent = connect(mapStateToProps, null)(Component);
+const mapDispatchToProps = {
+  initApplication,
+};
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 ConnectedComponent.navigationOptions = Component.navigationOptions;
 

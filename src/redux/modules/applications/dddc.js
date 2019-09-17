@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { path, prop, append } from 'ramda';
+import { path, prop, append, isNil } from 'ramda';
 import uuid from 'uuid/v4';
 import { toggle, debugLog } from 'lib/utils';
 import isJson from 'lib/is-json';
@@ -35,6 +35,7 @@ import contract50 from 'api/zenroom/50-MISC-hashing.zencode';
 import { fetchPetition as fetchPetitionApi } from 'api/dddc-client';
 import CredentialIssuerClient from 'api/credential-issuer-client';
 import PetitionsClient from 'api/petitions-client';
+import { APPLICATION_ACTIONS } from './actions';
 
 const emptyPetition = {
   title: '',
@@ -50,6 +51,8 @@ export const initialState = {
   certificates: {},
   verification: {},
   petition: emptyPetition,
+  steps: 3,
+  step: 1,
 };
 
 export const ACTIONS = {
@@ -261,6 +264,15 @@ export const getCertificates = createSelector(
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case APPLICATION_ACTIONS.INIT_APPLICATION: {
+      if (action.id !== 'dddc') return state;
+      return {
+        ...state,
+        step: 1,
+        signed: false,
+        error: null,
+      };
+    }
     case ACTIONS.FETCH_PETITION_REQUEST: {
       return {
         ...state,
@@ -271,10 +283,12 @@ export default (state = initialState, action) => {
       };
     }
     case ACTIONS.FETCH_PETITION_SUCCESS: {
+      const { certificates } = state;
       return {
         ...state,
         loading: false,
         petition: action.petition,
+        step: isNil(certificates[action.petition.id]) ? 1 : 2,
       };
     }
     case ACTIONS.FETCH_PETITION_FAILURE: {
@@ -324,6 +338,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        step: 2,
         certificates: {
           ...certificates,
           [petitionId]: {
@@ -361,6 +376,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         signed: true,
+        step: 3,
         uses: append({
           date: +moment(),
           sharedData: selectedAttributes,

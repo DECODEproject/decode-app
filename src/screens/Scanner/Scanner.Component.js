@@ -53,7 +53,7 @@ class Scanner extends React.Component {
 
   render() {
     const { isFocused, qrcode } = this.state;
-    const { navigation, t } = this.props;
+    const { navigation, t, initApplication } = this.props;
     return (
       <Screen>
         <NavigationEvents
@@ -68,7 +68,10 @@ class Scanner extends React.Component {
                 captureAudio={false}
                 onBarCodeRead={(ev) => {
                   const { error, application, ...rest } = parseQRCode(ev.data);
-                  if (application) navigation.navigate(application, { application, ...rest });
+                  if (application) {
+                    initApplication(application);
+                    navigation.navigate(application, { application, ...rest });
+                  }
                   if (error) navigation.navigate('Warning', { message: t('error'), detail: error });
                   this.setState(prevState => ({
                     ...prevState,
@@ -89,6 +92,7 @@ Scanner.navigationOptions = ({ screenProps: { t } }) => ({
 });
 
 Scanner.propTypes = {
+  initApplication: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,

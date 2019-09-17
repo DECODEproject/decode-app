@@ -25,7 +25,7 @@ import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Header, Button, CertificateList, Message } from 'lib/Components';
+import { Header, Button, CertificateList, Message, ProgressBar } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
 import { Wrapper, Heading, Text, SignSection } from './DDDC.Styles';
@@ -50,6 +50,7 @@ const DDDC = ({
   error,
   verification,
   toggleSelectedAttribute,
+  progress: { step, steps },
 }) => {
   const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
   const petitionId = getParam('petitionId') || '2';
@@ -66,6 +67,7 @@ const DDDC = ({
       <Spinner visible={loading} />
       <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }} extraScrollHeight={20}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
+        <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>
         {
           petition ? <Heading>{petition.title}</Heading> : null
@@ -129,6 +131,10 @@ DDDC.propTypes = {
   certificates: PropTypes.object.isRequired,
   verification: PropTypes.object.isRequired,
   toggleSelectedAttribute: PropTypes.func.isRequired,
+  progress: PropTypes.shape({
+    step: PropTypes.number.isRequired,
+    steps: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default DDDC;

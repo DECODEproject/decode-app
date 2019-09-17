@@ -19,4 +19,4 @@
  * email: info@dribia.com
  */
 
-export default from './Scanner.Component';
+export default from './Scanner.Container';

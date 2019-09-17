@@ -29,23 +29,26 @@ import { parseQRCode } from 'lib/utils';
 import { EmptyList, ListItem, Header, Screen, Button } from 'lib/Components';
 import { Wrapper, Separator } from './ApplicationList.Styles';
 
-const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) => {
+const ApplicationList = ({ applications, initApplication, navigation: { navigate, dispatch } }) => {
   const { t } = useTranslation('applications');
   const handleUrl = ({ url }) => {
     const { error, application, ...rest } = parseQRCode(url);
-    if (application) dispatch(StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({
-          routeName: 'ApplicationList',
-        }),
-        NavigationActions.navigate({
-          routeName: application,
-          params: { application, ...rest },
-        }),
-      ],
-      key: 'ApplicationStack',
-    }));
+    if (application) {
+      initApplication(application);
+      dispatch(StackActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'ApplicationList',
+          }),
+          NavigationActions.navigate({
+            routeName: application,
+            params: { application, ...rest },
+          }),
+        ],
+        key: 'ApplicationStack',
+      }));
+    }
     if (error) navigate('Warning', { message: t('scanner:error'), detail: error });
   };
   const removeUrlListener = () => {
@@ -56,7 +59,10 @@ const ApplicationList = ({ applications, navigation: { navigate, dispatch } }) =
       const initialUrl = await Linking.getInitialURL();
       if (initialUrl) {
         const { error, application, ...rest } = parseQRCode(initialUrl);
-        if (application) navigate(application, { application, ...rest });
+        if (application) {
+          initApplication(application);
+          navigate(application, { application, ...rest });
+        }
         if (error) navigate('Warning', { message: t('scanner:error'), detail: error });
       }
     };
@@ -139,6 +145,7 @@ ApplicationList.propTypes = {
     navigate: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
   }).isRequired,
+  initApplication: PropTypes.func.isRequired,
 };
 
 ApplicationList.navigationOptions = ({ screenProps: { t } }) => ({

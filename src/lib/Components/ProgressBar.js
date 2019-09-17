@@ -19,18 +19,11 @@
  * email: info@dribia.com
  */
 
-export Button from './Button';
-export Carousel from './Carousel';
-export CertificateList from './CertificateList';
-export CheckList from './CheckList';
-export EmptyList from './EmptyList';
-export Header from './Header';
-export ListItem from './ListItem';
-export MenuIcon from './MenuIcon';
-export Message from './Message';
-export Picker from './Picker';
-export ProgressBar from './ProgressBar';
-export Screen from './Screen';
-export Switch from './Switch';
-export WalkthroughStep from './WalkthroughStep';
-export Warning from './Warning';
+import styled from 'styled-components/native';
+
+export default styled.View(({ theme: { secondaryColor }, step, of }) => ({
+  height: 0,
+  width: `${step / of * 100}%`,
+  borderWidth: 1,
+  borderColor: secondaryColor,
+}));

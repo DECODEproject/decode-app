@@ -23,6 +23,7 @@ import { createSelector } from 'reselect';
 import { path, prop } from 'ramda';
 import { toggle } from 'lib/utils';
 import loginApi from 'api/login-client';
+import { APPLICATION_ACTIONS } from './actions';
 
 export const initialState = {
   loading: false,
@@ -31,6 +32,8 @@ export const initialState = {
   uses: [],
   certificates: {},
   error: null,
+  steps: 2,
+  step: 1,
 };
 
 export const ACTIONS = {
@@ -40,10 +43,6 @@ export const ACTIONS = {
   TOGGLE_SELECTED_ATTRIBUTE: 'TOGGLE_SELECTED_ATTRIBUTE',
   CLEANUP_STATE: 'CLEANUP_STATE',
 };
-
-export const cleanupState = () => ({
-  type: ACTIONS.CLEANUP_STATE,
-});
 
 export const toggleSelectedAttribute = id => ({
   type: ACTIONS.TOGGLE_SELECTED_ATTRIBUTE,
@@ -92,12 +91,14 @@ export const getError = createSelector(
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ACTIONS.CLEANUP_STATE: {
+    case APPLICATION_ACTIONS.INIT_APPLICATION: {
+      if (action.id !== 'bcnnow') return state;
       return {
         ...state,
         loading: false,
         error: null,
         loggedIn: false,
+        step: 1,
       };
     }
     case ACTIONS.LOGIN_REQUEST: {
@@ -113,6 +114,7 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         loggedIn: true,
+        step: 2,
       };
     }
     case ACTIONS.LOGIN_FAILURE: {

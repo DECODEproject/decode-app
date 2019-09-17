@@ -45,6 +45,7 @@ import {
   sort,
   descend,
   has,
+  pick,
 } from 'ramda';
 import moment from 'moment';
 import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
@@ -52,11 +53,17 @@ import { listApplications, getApplication } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
 import dddc from './dddc';
 import bcnnow from './bcnnow';
+import { APPLICATION_ACTIONS } from './actions';
 
 const defaultStats = {
   usageCount: 0,
   numCertificates: 0,
 };
+
+export const initApplication = id => ({
+  type: APPLICATION_ACTIONS.INIT_APPLICATION,
+  id,
+});
 
 const getStoreBranch = prop('applications');
 
@@ -167,6 +174,14 @@ export const getSharedAttributes = applicationId => createSelector(
       merge(applicationAttributes),
     )(userAttributes);
   },
+);
+
+export const getProgress = applicationId => createSelector(
+  getStoreBranch,
+  compose(
+    pick(['step', 'steps']),
+    prop(applicationId),
+  ),
 );
 
 export default combineReducers({
