@@ -70,7 +70,7 @@ const getEditor = (type, value, setValue, getParam) => {
 };
 
 const EditAttribute = ({
-  navigation: { navigate, getParam }, validationError, onSave,
+  navigation: { getParam, goBack }, validationError, onSave,
 }) => {
   const { t } = useTranslation('attributes');
   const type = getParam('type');
@@ -88,7 +88,7 @@ const EditAttribute = ({
           title={t('save')}
           onPress={() => {
             onSave(name, value);
-            navigate('AttributeList');
+            goBack();
           }
         }
         />

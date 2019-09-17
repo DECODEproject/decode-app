@@ -48,7 +48,7 @@ import {
   pick,
 } from 'ramda';
 import moment from 'moment';
-import { getSharedAttributes as getSharedAttributesFromAtlas } from 'redux/modules/attributes';
+import { getSharedAttributes as getSharedAttributesFromAtlas, addAtlasInfo, addBaseAttributeInfo } from 'redux/modules/attributes';
 import { listApplications, getApplication } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
 import dddc from './dddc';
@@ -161,7 +161,11 @@ const getSelectedAttributes = applicationId => createSelector(
 export const getSharedAttributes = applicationId => createSelector(
   [getSharedAttributesFromAtlas(applicationId), getSelectedAttributes(applicationId)],
   (sharedAttributes, selectedAttributes) => {
-    const applicationAttributes = indexBy(prop('name'), map(item => ({ name: item }), getApplication(applicationId).sharedAttributes));
+    const applicationAttributes = compose(
+      indexBy(prop('name')),
+      map(addBaseAttributeInfo),
+      map(item => (addAtlasInfo({ name: item }))),
+    )(getApplication(applicationId).sharedAttributes);
     const userAttributes = indexBy(prop('name'))(
       map(
         attr => (assoc('selected', includes(attr.name, selectedAttributes), attr)),

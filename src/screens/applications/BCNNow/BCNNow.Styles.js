@@ -58,10 +58,6 @@ export const Text = styled(CommonText)(({ theme: { primaryColor } }) => ({
   margin: 5,
 }));
 
-export const Buttons = styled.View({
-  alignItems: 'center',
-});
-
 export const Bottom = styled.View(({ theme: { backgroundColorAction } }) => ({
   backgroundColor: backgroundColorAction,
   paddingVertical: 8,

@@ -38,7 +38,7 @@ const prepare = compose(
 );
 
 const DDDC = ({
-  navigation: { getParam, navigate },
+  navigation: { getParam },
   sharedAttributes,
   fetchPetition,
   callCredentialIssuer,
@@ -71,7 +71,6 @@ const DDDC = ({
           <CertificateRequest
             verificationCodes={petition.verificationCodes}
             sharedAttributes={sharedAttributes}
-            onManageAttributes={() => navigate('AttributeList')}
             onSubmit={() => callCredentialIssuer(
               verification,
               prepare(sharedAttributes),
@@ -127,11 +126,7 @@ const DDDC = ({
   return (
     <Screen>
       <Spinner visible={loading} />
-      <Wrapper
-        nestedScrollEnabled={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-        extraScrollHeight={20}
-      >
+      <Wrapper contentContainerStyle={{ flexGrow: 1 }} extraScrollHeight={20}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>

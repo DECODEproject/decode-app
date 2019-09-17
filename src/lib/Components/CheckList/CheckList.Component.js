@@ -21,48 +21,72 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FlatList } from 'react-native';
-import { prop, isNil } from 'ramda';
-import { Text } from 'lib/styles';
+import { isNil } from 'ramda';
 import { Switch } from 'lib/Components';
-import { Wrapper, RowWrapper, Check, CheckWrapper, LabelWrapper, SwitchWrapper } from './CheckList.Styles';
+import {
+  Wrapper,
+  RowWrapper,
+  Check,
+  CheckWrapper,
+  LabelWrapper,
+  Label,
+  ButtonWrapper,
+  SwitchWrapper,
+  ActionIcon,
+  Empty,
+} from './CheckList.Styles';
+
+const CheckListItem = ({ label, checked, onSwitch, onEdit }, index) => (
+  <RowWrapper key={label} first={index === 0}>
+    <ButtonWrapper onPress={onEdit}>
+      <LabelWrapper>
+        <Label>{label}</Label>
+        {
+          onSwitch ? <ActionIcon name={isNil(checked) && onEdit ? 'plus' : 'pencil'} /> : <Empty />
+        }
+      </LabelWrapper>
+    </ButtonWrapper>
+    {onSwitch ? (
+      <SwitchWrapper>
+        {
+          isNil(checked) ? <Empty /> : <Switch value={checked} onValueChange={onSwitch} />
+        }
+      </SwitchWrapper>
+    ) : (
+      <CheckWrapper>
+        {
+          <Check name={checked ? 'check' : null} />
+        }
+      </CheckWrapper>
+    )
+    }
+  </RowWrapper>
+);
+
 
 const CheckList = ({ items }) => (
   <Wrapper>
-    <FlatList
-      data={items}
-      keyExtractor={prop('label')}
-      renderItem={
-        ({ index, item: { label, checked, onSwitch } }) => (
-          <RowWrapper first={index === 0}>
-            <LabelWrapper>
-              <Text>{label}</Text>
-            </LabelWrapper>
-            {onSwitch ? (
-              <SwitchWrapper>
-                {isNil(checked) ? (<Text> </Text>)
-                  : <Switch value={checked} onValueChange={onSwitch} />
-                }
-              </SwitchWrapper>
-            ) : (
-              <CheckWrapper>
-                <Check name={checked ? 'check' : null} />
-              </CheckWrapper>
-            )
-            }
-          </RowWrapper>
-        )
-      }
-    />
+    {
+      items.map(CheckListItem)
+    }
   </Wrapper>
 );
 
+CheckListItem.defaultProps = {
+  checked: false,
+  onSwitch: null,
+  onEdit: null,
+};
+
+CheckListItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  checked: PropTypes.bool,
+  onSwitch: PropTypes.func,
+  onEdit: PropTypes.func,
+};
+
 CheckList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    checked: PropTypes.bool,
-    onSwitch: PropTypes.func,
-  })).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape(CheckListItem.propTypes)).isRequired,
 };
 
 export default CheckList;

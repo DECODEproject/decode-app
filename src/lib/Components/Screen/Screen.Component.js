@@ -33,7 +33,7 @@ const Screen = ({ children, scroll, image, ...rest }) => {
       <StatusBar barStyle="light-content" />
       {
         scroll ? (
-          <ScrollWrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
+          <ScrollWrapper contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
             {imageComponent}
             {children}
           </ScrollWrapper>

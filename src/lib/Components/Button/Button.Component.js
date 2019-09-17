@@ -29,19 +29,22 @@ const Button = ({ title, onPress, icon, featured, ...rest }) => (
       {icon ? (
         <Icon name={icon} featured={featured} />
       ) : null}
-      <Label featured={featured}>{title}</Label>
+      {title ? (
+        <Label featured={featured}>{title}</Label>
+      ) : null}
     </Wrapper>
   </Touchable>
 );
 
 Button.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onPress: PropTypes.func.isRequired,
   icon: PropTypes.string,
   featured: PropTypes.bool,
 };
 
 Button.defaultProps = {
+  title: null,
   icon: null,
   featured: false,
 };

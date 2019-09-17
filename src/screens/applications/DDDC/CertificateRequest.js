@@ -24,6 +24,7 @@ import PropTypes from 'prop-types';
 import { View, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, map, isNil } from 'ramda';
+import { withNavigation } from 'react-navigation';
 import { Button, CheckList } from 'lib/Components';
 import { getDisplayValue } from 'lib/utils';
 import { Subheading, Text, Section } from './DDDC.Styles';
@@ -33,12 +34,13 @@ const CertificateRequest = (
   {
     verificationCodes,
     sharedAttributes,
-    onManageAttributes,
     toggleSelected,
+    navigation,
   },
 ) => {
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');
+  const { navigate } = navigation;
   return (
     <View>
       {
@@ -66,16 +68,14 @@ const CertificateRequest = (
       <View>
         <Subheading>{t('sharedData')}</Subheading>
         {
-          <CheckList items={map(({ name, type, value, selected }) => ({
+          <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
             label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
             checked: selected,
             onSwitch: () => toggleSelected(name),
+            onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
           }), sharedAttributes)}
           />
       }
-        <Section>
-          <Button title={t('manageData')} onPress={onManageAttributes} />
-        </Section>
       </View>
     </View>
   );
@@ -84,8 +84,10 @@ const CertificateRequest = (
 CertificateRequest.propTypes = {
   verificationCodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   sharedAttributes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onManageAttributes: PropTypes.func.isRequired,
   toggleSelected: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default CertificateRequest;
+export default withNavigation(CertificateRequest);

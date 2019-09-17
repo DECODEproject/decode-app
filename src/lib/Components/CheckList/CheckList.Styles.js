@@ -20,7 +20,7 @@
  */
 
 import styled from 'styled-components/native';
-import { Icon } from 'lib/styles';
+import { Icon, Text } from 'lib/styles';
 
 export const Wrapper = styled.View({
   paddingVertical: 10,
@@ -36,12 +36,26 @@ export const RowWrapper = styled.View(({ first, theme }) => ({
   alignItems: 'stretch',
 }));
 
-export const LabelWrapper = styled.View({
-  flex: 0.9,
-  padding: 10,
-  justifyContent: 'center',
-  alignItems: 'stretch',
+export const ButtonWrapper = styled.TouchableOpacity({
+  flex: 0.8,
 });
+
+export const LabelWrapper = styled.View({
+  flex: 1,
+  flexDirection: 'row',
+  padding: 10,
+  justifyContent: 'space-between',
+  alignItems: 'center',
+});
+
+export const Label = styled(Text)({
+  flex: 0.9,
+});
+
+export const ActionIcon = styled(Icon)(({ theme }) => ({
+  flex: 0.1,
+  fontSize: theme.fontSizeText,
+}));
 
 export const SwitchWrapper = styled.View(({ theme }) => ({
   flex: 0.2,
@@ -53,7 +67,7 @@ export const SwitchWrapper = styled.View(({ theme }) => ({
 }));
 
 export const CheckWrapper = styled.View(({ theme }) => ({
-  flex: 0.1,
+  flex: 0.2,
   padding: 10,
   borderLeftWidth: 1,
   borderColor: theme.secondaryColor,
@@ -63,4 +77,8 @@ export const CheckWrapper = styled.View(({ theme }) => ({
 
 export const Check = styled(Icon)(({ theme }) => ({
   color: theme.okColor,
+}));
+
+export const Empty = styled.View(({ theme }) => ({
+  height: theme.fontSizeText,
 }));

@@ -229,13 +229,14 @@ describe('Attribute tests', () => {
     expect(getAgeRange(+moment('2001-04-29'))).toBeUndefined();
   });
 
-  test('Get application shared attributes - age range', () => {
+  test('Get application shared attributes - age range and include base attribute', () => {
     const nowForTest = moment('2019-04-29');
     moment.now = () => nowForTest;
+    const birthDateForTest = +moment('1969-07-20');
     const sharedAttributes = getSharedAttributes('bcnnow')({
       attributes: {
         gender: encrypt('male'),
-        birthDate: encrypt(+moment('1969-07-20')),
+        birthDate: encrypt(birthDateForTest),
       },
     });
     expect(map(pick(['name', 'value']), sharedAttributes)).toEqual([
@@ -248,5 +249,11 @@ describe('Attribute tests', () => {
         value: JSON.stringify([45, 55]),
       },
     ]);
+    expect(pick(['name', 'value'], sharedAttributes[1].baseAttribute)).toEqual(
+      {
+        name: 'birthDate',
+        value: (birthDateForTest).toString(),
+      },
+    );
   });
 });

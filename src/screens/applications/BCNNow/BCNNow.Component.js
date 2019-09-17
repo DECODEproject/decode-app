@@ -29,7 +29,7 @@ import { Header, Button, CertificateList, CheckList, Message, ProgressBar } from
 import { ApplicationImage } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Section, Subheading, Text, Buttons, Bottom } from './BCNNow.Styles';
+import { Wrapper, Section, Subheading, Text, Bottom } from './BCNNow.Styles';
 
 const prepare = compose(
   pluck('value'),
@@ -53,11 +53,10 @@ const BCNNow = ({
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');
   const { image, activationMsg, actionMsg } = getApplication('bcnnow');
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Spinner visible={loading} />
-      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
+      <Wrapper contentContainerStyle={{ flexGrow: 1 }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>
@@ -80,15 +79,13 @@ const BCNNow = ({
             <Section>
               <CertificateList certificates={certificates} />
               <Subheading>{t('sharedData')}</Subheading>
-              <CheckList items={map(({ name, type, value, selected }) => ({
+              <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
                 label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
                 checked: selected,
                 onSwitch: () => toggleSelectedAttribute(name),
+                onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
               }), sharedAttributes)}
               />
-              <Buttons>
-                <Button title={t('manageData')} onPress={() => navigate('AttributeList')} />
-              </Buttons>
             </Section>
           )
         }

@@ -21,7 +21,7 @@
 
 import moment from 'moment';
 import i18n from 'i18n';
-import { pluck } from 'ramda';
+import { pluck, pick, map } from 'ramda';
 import reducer, {
   getApplicationStats,
   calculateAverage,
@@ -343,6 +343,37 @@ describe('Application tests', () => {
     });
   });
 
+  test('Get shared attributes - shape', () => {
+    const result = getSharedAttributes('dddc')({
+      attributes: {
+        birthDate: encrypt('birthDate-value'),
+        address: encrypt('address-value'),
+      },
+      applications: {
+        dddc: {
+          ...dddcInitialState,
+        },
+        bcnnow: {
+          ...bcnnowInitialState,
+        },
+      },
+    });
+    expect(map(pick(['name', 'type']), result)).toEqual([
+      {
+        name: 'age',
+        type: 'number',
+      },
+      {
+        name: 'gender',
+        type: 'enum',
+      },
+      {
+        name: 'district',
+        type: 'enum',
+      },
+    ]);
+  });
+
   test('Get shared attributes - sort', () => {
     expect(
       pluck('name', getSharedAttributes('dddc')({
@@ -392,5 +423,29 @@ describe('Application tests', () => {
         },
       })),
     ).toEqual(['ageRange', 'district', 'gender']);
+  });
+
+  test('Get shared attributes - values and base attributes', () => {
+    const birthDateForTest = +moment('1997-01-01');
+    const result = getSharedAttributes('dddc')({
+      attributes: {
+        birthDate: encrypt(birthDateForTest),
+        gender: encrypt('male'),
+      },
+      applications: {
+        dddc: {
+          ...dddcInitialState,
+        },
+        bcnnow: {
+          ...bcnnowInitialState,
+        },
+      },
+    });
+    const { name, value, baseAttribute } = result[1];
+    expect(name).toEqual('age');
+    expect(value).toEqual('22');
+    const { value: baseValue, name: baseName } = baseAttribute;
+    expect(baseName).toEqual('birthDate');
+    expect(baseValue).toEqual(birthDateForTest.toString());
   });
 });

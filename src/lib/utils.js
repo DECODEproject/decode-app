@@ -28,6 +28,15 @@ import parseUrl from 'url-parse';
 import moment from 'moment';
 import i18n from 'i18n';
 
+// eslint-disable-next-line no-console
+export const debugLog = (...args) => console.log(...args);
+
+export const debugPipe = label => (item) => {
+  // eslint-disable-next-line no-console
+  console.log(label, item);
+  return item;
+};
+
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const upperFirst = str => str.replace(
@@ -98,6 +107,3 @@ export const getLanguage = () => take(2, i18n.language);
 export const toggle = (item, list) => (includes(item, list)
   ? without(item, list)
   : append(item, list));
-
-// eslint-disable-next-line no-console
-export const debugLog = (...args) => console.log(...args);
