@@ -28,46 +28,54 @@ import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
 import { WalkthroughStep, Button, Screen, Header } from 'lib/Components';
-import { Heading, Line } from './Dummy.Styles';
+import { Wrapper, Heading, Line, Separator } from './Dummy.Styles';
 
 const Dummy = ({
-  total, refresh, date, navigation, loading,
+  total, refresh, date, navigation, loading, data, hashedData, callZenroom,
 }) => {
   const { t } = useTranslation();
   const { width: ww, height: wh } = Dimensions.get('window');
   const { width: sw, height: sh } = Dimensions.get('screen');
   return (
-    <Screen centerAligned>
-      <Heading>{t('greeting')}</Heading>
-      <Line>{`Window dimensions: ${ww} x ${wh}`}</Line>
-      <Line>{`Screen dimensions: ${sw} x ${sh}`}</Line>
-      <Line>{`Pixel ratio: ${PixelRatio.get()}`}</Line>
-      <Line>{`Font scale: ${PixelRatio.getFontScale()}`}</Line>
-      <Line>{t('refreshStats')}</Line>
-      <WalkthroughStep screen="dummy" id="refresh">
-        <Button title={t('refresh')} onPress={refresh} />
-      </WalkthroughStep>
-      <View>
-        {loading ? (
-          <AnimatedView
-            animation="rotate"
-            easing="linear"
-            iterationCount="infinite"
-            useNativeDriver
-          >
-            <Icon name="spinner" />
-          </AnimatedView>
-        ) : <Line>{total}</Line>}
-      </View>
-      <Line>{t('refreshDate', { date })}</Line>
-      <WalkthroughStep screen="dummy" id="next">
-        <Button
-          featured
-          icon="check"
-          title={t('next')}
-          onPress={() => navigation.navigate('DummyNext')}
-        />
-      </WalkthroughStep>
+    <Screen scroll>
+      <Wrapper>
+        <Heading>{t('greeting')}</Heading>
+        <Line>{`Window dimensions: ${ww} x ${wh}`}</Line>
+        <Line>{`Screen dimensions: ${sw} x ${sh}`}</Line>
+        <Line>{`Pixel ratio: ${PixelRatio.get()}`}</Line>
+        <Line>{`Font scale: ${PixelRatio.getFontScale()}`}</Line>
+        <Separator />
+        <Heading>Test Zenroom</Heading>
+        <Line>{`Data: ${data}`}</Line>
+        <Line>{`Hashed: ${loading ? '---' : hashedData}`}</Line>
+        <Button title="Hash with Zenroom" onPress={callZenroom} />
+        <Separator />
+        <Heading>{t('refreshStats')}</Heading>
+        <WalkthroughStep screen="dummy" id="refresh">
+          <Button title={t('refresh')} onPress={refresh} />
+        </WalkthroughStep>
+        <View>
+          {loading ? (
+            <AnimatedView
+              animation="rotate"
+              easing="linear"
+              iterationCount="infinite"
+              useNativeDriver
+            >
+              <Icon name="spinner" />
+            </AnimatedView>
+          ) : <Line>{total}</Line>}
+        </View>
+        <Line>{t('refreshDate', { date })}</Line>
+        <WalkthroughStep screen="dummy" id="next">
+          <Button
+            featured
+            icon="check"
+            title={t('next')}
+            onPress={() => navigation.navigate('DummyNext')}
+          />
+        </WalkthroughStep>
+      </Wrapper>
     </Screen>
   );
 };
@@ -90,6 +98,9 @@ Dummy.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  data: PropTypes.string.isRequired,
+  hashedData: PropTypes.string.isRequired,
+  callZenroom: PropTypes.func.isRequired,
 };
 
 export default Dummy;

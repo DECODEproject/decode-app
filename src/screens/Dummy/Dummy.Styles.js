@@ -30,3 +30,16 @@ export const Line = styled(Text)({
   textAlign: 'center',
   margin: 5,
 });
+
+export const Wrapper = styled.View({
+  padding: 16,
+  alignItems: 'center',
+});
+
+export const Separator = styled.View({
+  width: '100%',
+  height: 0,
+  borderBottomColor: 'black',
+  borderBottomWidth: 1,
+  marginVertical: 10,
+});

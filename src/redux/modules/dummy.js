@@ -21,12 +21,17 @@
 
 import { createSelector } from 'reselect';
 import { prop } from 'ramda';
+import uuid from 'uuid/v4';
 import CredentialIssuerClient from 'api/credential-issuer-client';
+import zenroom from 'api/zenroom-client';
+import contract50 from 'api/zenroom/50-MISC-hashing.zencode';
 
 const initialState = {
   total: '---',
   loading: false,
   date: '---',
+  data: '',
+  hashedData: '',
 };
 
 export const ACTIONS = {
@@ -34,6 +39,30 @@ export const ACTIONS = {
   REFRESH_STATS_SUCCESS: 'REFRESH_STATS_SUCCESS',
   REFRESH_STATS_FAILURE: 'REFRESH_STATS_FAILURE',
   REFRESH_DATE: 'REFRESH_DATE',
+  ZENROOM_REQUEST: 'ZENROOM_REQUEST',
+  ZENROOM_SUCCESS: 'ZENROOM_SUCCESS',
+  ZENROOM_FAILURE: 'ZENROOM_FAILURE',
+};
+
+export const callZenroom = () => async (dispatch) => {
+  const data = uuid();
+  dispatch({
+    type: ACTIONS.ZENROOM_REQUEST,
+    data,
+  });
+  try {
+    const hashedData = await zenroom.execute(contract50, data, '');
+    dispatch({
+      type: ACTIONS.ZENROOM_SUCCESS,
+      data,
+      hashedData,
+    });
+  } catch (e) {
+    dispatch({
+      type: ACTIONS.ZENROOM_FAILURE,
+      error: e.message,
+    });
+  }
 };
 
 export const refreshStats = () => async (dispatch) => {
@@ -77,6 +106,16 @@ export const getLoading = createSelector(
   prop('loading'),
 );
 
+export const getData = createSelector(
+  getDummy,
+  prop('data'),
+);
+
+export const getHashedData = createSelector(
+  getDummy,
+  prop('hashedData'),
+);
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.REFRESH_STATS_REQUEST: {
@@ -105,6 +144,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
         date,
+      };
+    }
+    case ACTIONS.ZENROOM_REQUEST: {
+      const { data } = action;
+      return {
+        ...state,
+        loading: true,
+        data,
+      };
+    }
+    case ACTIONS.ZENROOM_SUCCESS: {
+      const { hashedData } = action;
+      return {
+        ...state,
+        loading: false,
+        hashedData,
+      };
+    }
+    case ACTIONS.ZENROOM_FAILURE: {
+      const { error } = action;
+      return {
+        ...state,
+        loading: false,
+        hashedData: error,
       };
     }
     default:
