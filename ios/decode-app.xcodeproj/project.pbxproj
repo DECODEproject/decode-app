@@ -53,8 +53,10 @@
 		8D17EF7422D734CF002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7222D734CF002BAE7E /* InfoPlist.strings */; };
 		8D17EF7822D734FA002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7622D734FA002BAE7E /* InfoPlist.strings */; };
 		8D17EF7C22D73512002BAE7E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D17EF7A22D73512002BAE7E /* InfoPlist.strings */; };
-		8DE2F5DF230C5F56003658B2 /* zenroom-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */; };
 		8DE2F5E0230C5F57003658B2 /* Zenroom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE2F5DE230C5F56003658B2 /* Zenroom.m */; };
+		8DE8252D23326A2C0075F036 /* zenroom-ios-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE8252A23326A2B0075F036 /* zenroom-ios-x86_64.a */; };
+		8DE8252E23326A2C0075F036 /* zenroom-ios-arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE8252B23326A2C0075F036 /* zenroom-ios-arm64.a */; };
+		8DE8252F23326A2C0075F036 /* zenroom-ios-armv7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE8252C23326A2C0075F036 /* zenroom-ios-armv7.a */; };
 		A76372B75EE74C7CA915C39E /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 882FA1E622F147DABDB36070 /* Octicons.ttf */; };
 		AAA905A4A72041AD8CDA96CF /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDEB6A873064A59809BD532 /* libRNCamera.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -456,9 +458,11 @@
 		8D17EF7722D734FA002BAE7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = InfoPlist.strings; sourceTree = "<group>"; };
 		8D17EF7B22D73512002BAE7E /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = InfoPlist.strings; sourceTree = "<group>"; };
 		8DE2F5DB230C5F56003658B2 /* Zenroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zenroom.h; sourceTree = "<group>"; };
-		8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "zenroom-ios.a"; sourceTree = "<group>"; };
 		8DE2F5DD230C5F56003658B2 /* zenroomInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zenroomInternal.h; sourceTree = "<group>"; };
 		8DE2F5DE230C5F56003658B2 /* Zenroom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zenroom.m; sourceTree = "<group>"; };
+		8DE8252A23326A2B0075F036 /* zenroom-ios-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "zenroom-ios-x86_64.a"; sourceTree = "<group>"; };
+		8DE8252B23326A2C0075F036 /* zenroom-ios-arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "zenroom-ios-arm64.a"; sourceTree = "<group>"; };
+		8DE8252C23326A2C0075F036 /* zenroom-ios-armv7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "zenroom-ios-armv7.a"; sourceTree = "<group>"; };
 		8F6285B177364456B5481F26 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCAsyncStorage.xcodeproj; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; };
 		96D0F5C5CE7340A6B4F309CF /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		993B429360D44BC79D8C9DCD /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -510,7 +514,9 @@
 				43643800A03E49CDA9C008D8 /* libRNCAsyncStorage.a in Frameworks */,
 				AAA905A4A72041AD8CDA96CF /* libRNCamera.a in Frameworks */,
 				51D2C2E6C5A64D60BA9D4B98 /* libRNDatePicker.a in Frameworks */,
-				8DE2F5DF230C5F56003658B2 /* zenroom-ios.a in Frameworks */,
+				8DE8252D23326A2C0075F036 /* zenroom-ios-x86_64.a in Frameworks */,
+				8DE8252E23326A2C0075F036 /* zenroom-ios-arm64.a in Frameworks */,
+				8DE8252F23326A2C0075F036 /* zenroom-ios-armv7.a in Frameworks */,
 				B1FD1B889B054C5FA599AE34 /* libRNSentry.a in Frameworks */,
 				8CE64C338AA6407C98035246 /* libz.tbd in Frameworks */,
 			);
@@ -532,7 +538,6 @@
 				B7A7D1D74A3841989FA01E99 /* libRNDeviceInfo-tvOS.a in Frameworks */,
 				58B88939B02445F0AD9753B1 /* libRNGestureHandler-tvOS.a in Frameworks */,
 				45B7968A90F94B4C9FB0E035 /* libRNVectorIcons-tvOS.a in Frameworks */,
-				0F1B22965E2246939511D128 /* libRNSentry-tvOS.a in Frameworks */,
 				C66CAD64D8D649B495F87F01 /* libRNSentry-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,7 +618,9 @@
 		13B07FAE1A68108700A75B9A /* decode-app */ = {
 			isa = PBXGroup;
 			children = (
-				8DE2F5DC230C5F56003658B2 /* zenroom-ios.a */,
+				8DE8252B23326A2C0075F036 /* zenroom-ios-arm64.a */,
+				8DE8252C23326A2C0075F036 /* zenroom-ios-armv7.a */,
+				8DE8252A23326A2B0075F036 /* zenroom-ios-x86_64.a */,
 				8DE2F5DB230C5F56003658B2 /* Zenroom.h */,
 				8DE2F5DE230C5F56003658B2 /* Zenroom.m */,
 				8DE2F5DD230C5F56003658B2 /* zenroomInternal.h */,
@@ -1591,7 +1598,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"\"$(SRCROOT)/decode-app\"",
-					"\"$(SRCROOT)/decode-app\"",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1628,7 +1634,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"\"$(SRCROOT)/decode-app\"",
 					"\"$(SRCROOT)/decode-app\"",
 				);
 				OTHER_LDFLAGS = (
