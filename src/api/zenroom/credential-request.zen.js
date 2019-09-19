@@ -19,30 +19,16 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import {
-  getTotal, getDate, getLoading, refreshStats, refreshDate, callZenroom, getVerified,
-} from 'redux/modules/dummy';
-import Component from './Dummy.Component';
+export default uniqueId => `
+ZEN:begin(0)
 
-const mapStateToProps = createStructuredSelector({
-  total: getTotal,
-  loading: getLoading,
-  date: getDate,
-  verified: getVerified,
-});
+ZEN:parse([[
+Scenario coconut: create request
+Given that I am known as '${uniqueId}'
+and I have my valid 'credential keypair'
+When I create the credential request
+Then print my 'credential request'
+]])
 
-const mapDispatchToProps = dispatch => ({
-  refresh: () => {
-    dispatch(refreshStats());
-    dispatch(refreshDate());
-  },
-  callZenroom: () => dispatch(callZenroom()),
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-ConnectedComponent.navigationOptions = Component.navigationOptions;
-
-export default ConnectedComponent;
+ZEN:run()
+`;

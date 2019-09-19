@@ -19,30 +19,15 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import {
-  getTotal, getDate, getLoading, refreshStats, refreshDate, callZenroom, getVerified,
-} from 'redux/modules/dummy';
-import Component from './Dummy.Component';
+export default uniqueId => `
+ZEN:begin(0)
 
-const mapStateToProps = createStructuredSelector({
-  total: getTotal,
-  loading: getLoading,
-  date: getDate,
-  verified: getVerified,
-});
+ZEN:parse([[
+Scenario coconut: issuer keygen
+Given that I am known as '${uniqueId}'
+When I create the issuer keypair
+Then print my 'issuer keypair'
+]])
 
-const mapDispatchToProps = dispatch => ({
-  refresh: () => {
-    dispatch(refreshStats());
-    dispatch(refreshDate());
-  },
-  callZenroom: () => dispatch(callZenroom()),
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-ConnectedComponent.navigationOptions = Component.navigationOptions;
-
-export default ConnectedComponent;
+ZEN:run()
+`;
