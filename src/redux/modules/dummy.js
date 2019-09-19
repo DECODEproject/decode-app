@@ -21,17 +21,25 @@
 
 import { createSelector } from 'reselect';
 import { prop } from 'ramda';
-import uuid from 'uuid/v4';
 import CredentialIssuerClient from 'api/credential-issuer-client';
 import zenroom from 'api/zenroom-client';
-import contract50 from 'api/zenroom/50-MISC-hashing.zencode';
+import {
+  credentialKeygen,
+  credentialRequest,
+  issuerKeygen,
+  publishVerifier,
+  issuerSign,
+  aggregateSignature,
+  createProof,
+  verifyProof,
+} from 'api/zenroom';
+import { debugLog } from 'lib/utils';
 
 const initialState = {
   total: '---',
   loading: false,
   date: '---',
-  data: '',
-  hashedData: '',
+  verified: '   ',
 };
 
 export const ACTIONS = {
@@ -45,17 +53,32 @@ export const ACTIONS = {
 };
 
 export const callZenroom = () => async (dispatch) => {
-  const data = uuid();
   dispatch({
     type: ACTIONS.ZENROOM_REQUEST,
-    data,
   });
   try {
-    const hashedData = await zenroom.execute(contract50, data, '');
+    const id = 'Alice';
+    const issuerId = 'Madhatter';
+
+    const keypair = await zenroom.execute(credentialKeygen(id), '', '');
+    debugLog('Keypair: ', keypair);
+    const request = await zenroom.execute(credentialRequest(id), '', keypair);
+    debugLog('Request: ', request);
+    const issuerKeypair = await zenroom.execute(issuerKeygen(issuerId), '', '');
+    debugLog('Issuer keypair: ', issuerKeypair);
+    const verifier = await zenroom.execute(publishVerifier(issuerId), '', issuerKeypair);
+    debugLog('Verifier: ', verifier);
+    const signature = await zenroom.execute(issuerSign(issuerId), request, issuerKeypair);
+    debugLog('Signature: ', signature);
+    const credential = await zenroom.execute(aggregateSignature(id), signature, keypair);
+    debugLog('Credential: ', credential);
+    const proof = await zenroom.execute(createProof(id, issuerId), verifier, credential);
+    debugLog('Proof: ', proof);
+    const verified = await zenroom.execute(verifyProof(issuerId), verifier, proof);
+    debugLog('Verified: ', verified ? 'OK' : 'KO');
+
     dispatch({
-      type: ACTIONS.ZENROOM_SUCCESS,
-      data,
-      hashedData,
+      type: verified ? ACTIONS.ZENROOM_SUCCESS : ACTIONS.ZENROOM_FAILURE,
     });
   } catch (e) {
     dispatch({
@@ -106,14 +129,9 @@ export const getLoading = createSelector(
   prop('loading'),
 );
 
-export const getData = createSelector(
+export const getVerified = createSelector(
   getDummy,
-  prop('data'),
-);
-
-export const getHashedData = createSelector(
-  getDummy,
-  prop('hashedData'),
+  prop('verified'),
 );
 
 export default (state = initialState, action) => {
@@ -147,19 +165,17 @@ export default (state = initialState, action) => {
       };
     }
     case ACTIONS.ZENROOM_REQUEST: {
-      const { data } = action;
       return {
         ...state,
         loading: true,
-        data,
+        verified: '-_-',
       };
     }
     case ACTIONS.ZENROOM_SUCCESS: {
-      const { hashedData } = action;
       return {
         ...state,
         loading: false,
-        hashedData,
+        verified: 'OK',
       };
     }
     case ACTIONS.ZENROOM_FAILURE: {
@@ -167,7 +183,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        hashedData: error,
+        verified: error || 'KO',
       };
     }
     default:

@@ -31,7 +31,7 @@ import { Button, Screen, Header } from 'lib/Components';
 import { Wrapper, Heading, Line, Separator } from './Dummy.Styles';
 
 const Dummy = ({
-  total, refresh, date, navigation, loading, data, hashedData, callZenroom,
+  total, refresh, date, navigation, loading, verified, callZenroom,
 }) => {
   const { t } = useTranslation();
   const { width: ww, height: wh } = Dimensions.get('window');
@@ -46,9 +46,8 @@ const Dummy = ({
         <Line>{`Font scale: ${PixelRatio.getFontScale()}`}</Line>
         <Separator />
         <Heading>Test Zenroom</Heading>
-        <Line>{`Data: ${data}`}</Line>
-        <Line>{`Hashed: ${loading ? '---' : hashedData}`}</Line>
-        <Button title="Hash with Zenroom" onPress={callZenroom} />
+        <Line>{`Verified: ${verified}`}</Line>
+        <Button title="Run Coconut example" onPress={callZenroom} />
         <Separator />
         <Heading>{t('refreshStats')}</Heading>
         <Button title={t('refresh')} onPress={refresh} />
@@ -94,8 +93,7 @@ Dummy.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-  data: PropTypes.string.isRequired,
-  hashedData: PropTypes.string.isRequired,
+  verified: PropTypes.string.isRequired,
   callZenroom: PropTypes.func.isRequired,
 };
 

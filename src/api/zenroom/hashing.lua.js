@@ -19,30 +19,4 @@
  * email: info@dribia.com
  */
 
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import {
-  getTotal, getDate, getLoading, refreshStats, refreshDate, callZenroom, getVerified,
-} from 'redux/modules/dummy';
-import Component from './Dummy.Component';
-
-const mapStateToProps = createStructuredSelector({
-  total: getTotal,
-  loading: getLoading,
-  date: getDate,
-  verified: getVerified,
-});
-
-const mapDispatchToProps = dispatch => ({
-  refresh: () => {
-    dispatch(refreshStats());
-    dispatch(refreshDate());
-  },
-  callZenroom: () => dispatch(callZenroom()),
-});
-
-const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
-
-ConnectedComponent.navigationOptions = Component.navigationOptions;
-
-export default ConnectedComponent;
+export default 'print(ECDH.kdf(HASH.new(\'sha512\'), str(DATA)))';
