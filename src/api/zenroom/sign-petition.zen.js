@@ -19,14 +19,18 @@
  * email: info@dribia.com
  */
 
-export default uniqueId => `-- 0 for silent logging
+export default (uniqueId, issuerId, petitionId) => `-- 0 for silent logging
 ZEN:begin(0)
 
 ZEN:parse([[
-Scenario 'coconut': "To run over the mobile wallet the first time and store the output as keypair.keys"
-Given that I am known as '${uniqueId}'
-When I create my new keypair
-Then print all data
+Scenario coconut: sign petition
+Given I am '${uniqueId}'
+and I have my valid 'credential keypair'
+and I have a valid 'credentials'
+and I have a valid 'verifier' from '${issuerId}'
+When I aggregate the verifiers
+and I create the petition signature '${petitionId}'
+Then print the 'petition signature'
 ]])
 
 ZEN:run()

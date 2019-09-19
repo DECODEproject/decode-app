@@ -10,7 +10,7 @@ import {
   getVerification,
   getCertificates,
   callCredentialIssuer,
-  signPetition,
+  callSignPetition,
   toggleSelectedAttribute,
 } from 'redux/modules/applications/dddc';
 import Component from './DDDC.Component';
@@ -29,7 +29,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchPetition,
   callCredentialIssuer,
-  signPetition,
+  signPetition: callSignPetition,
   toggleSelectedAttribute,
 };
 

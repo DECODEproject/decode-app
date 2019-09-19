@@ -26,12 +26,14 @@ import uuid from 'uuid/v4';
 import { toggle, debugLog } from 'lib/utils';
 import isJson from 'lib/is-json';
 import zenroom from 'api/zenroom-client';
-import contract01 from 'api/zenroom/01-CITIZEN-credential-keygen.zencode';
-import contract02 from 'api/zenroom/02-CITIZEN-credential-request.zencode';
-import contract06 from 'api/zenroom/06-CITIZEN-aggregate-credential-signature.zencode';
-import contract07 from 'api/zenroom/07-CITIZEN-prove-credential.zencode';
-import contract11 from 'api/zenroom/11-CITIZEN-sign-petition.zencode';
-import contract50 from 'api/zenroom/50-MISC-hashing.zencode';
+import {
+  hashing,
+  credentialKeygen,
+  credentialRequest,
+  aggregateSignature,
+  createProof,
+  signPetition,
+} from 'api/zenroom';
 import { fetchPetition as fetchPetitionApi } from 'api/dddc-client';
 import CredentialIssuerClient from 'api/credential-issuer-client';
 import PetitionsClient from 'api/petitions-client';
@@ -111,27 +113,27 @@ export const callCredentialIssuer = (
   debugLog('callCredentialIssuer: ', data, optionalData, url, attributeId);
   const hashedData = { ...data };
   // eslint-disable-next-line no-await-in-loop,no-restricted-syntax,guard-for-in
-  for (const k in hashedData) hashedData[k] = await zenroom.execute(contract50, data[k], '');
+  for (const k in hashedData) hashedData[k] = await zenroom.execute(hashing, data[k], '');
   debugLog('hashedData: ', hashedData);
   const hashedOptionalData = { ...optionalData };
   // eslint-disable-next-line no-await-in-loop,no-restricted-syntax,guard-for-in
-  for (const k in hashedOptionalData) hashedOptionalData[k] = await zenroom.execute(contract50, optionalData[k], '');
+  for (const k in hashedOptionalData) hashedOptionalData[k] = await zenroom.execute(hashing, optionalData[k], '');
   debugLog('hashedOptionalData: ', hashedOptionalData);
   const credentialIssuer = new CredentialIssuerClient(url);
 
   try {
     // CONTRACT 01
     const uniqueId = uuid();
-    debugLog('Going to execute contract01: ', contract01(uniqueId));
-    const keypair = await zenroom.execute(contract01(uniqueId), '', '');
-    debugLog('Response from contract01 (keypair): ', keypair);
+    debugLog('Going to execute credentialKeygen: ', credentialKeygen(uniqueId));
+    const keypair = await zenroom.execute(credentialKeygen(uniqueId), '', '');
+    debugLog('Response from credentialKeygen (keypair): ', keypair);
     if (!isJson(keypair)) throw Error('Invalid response from contract 01');
 
     // CONTRACT 02
-    debugLog('Going to execute contract02: ', contract02(uniqueId));
+    debugLog('Going to execute credentialRequest: ', credentialRequest(uniqueId));
     debugLog('Keys: ', keypair);
-    const blindSignatureReq = await zenroom.execute(contract02(uniqueId), '', keypair);
-    debugLog('Response from contract02 (blindSignatureReq): ', blindSignatureReq);
+    const blindSignatureReq = await zenroom.execute(credentialRequest(uniqueId), '', keypair);
+    debugLog('Response from credentialRequest (blindSignatureReq): ', blindSignatureReq);
     if (!isJson(blindSignatureReq)) throw Error('Invalid response from contract 02');
 
 
@@ -151,8 +153,8 @@ export const callCredentialIssuer = (
     debugLog('Issuer signed credential (contract 05): ', issuerSignedCredential);
 
     // CONTRACT 06
-    const c06 = contract06(uniqueId, issuerId);
-    debugLog('Going to execute contract 06: ', c06);
+    const c06 = aggregateSignature(uniqueId, issuerId);
+    debugLog('Going to execute aggregateSignature: ', c06);
     debugLog('Keys: ', keypair);
     debugLog('Data: ', JSON.stringify(issuerSignedCredential));
     const credential = await zenroom.execute(
@@ -160,11 +162,11 @@ export const callCredentialIssuer = (
       JSON.stringify(issuerSignedCredential),
       keypair,
     );
-    debugLog('Response from contract06', credential);
+    debugLog('Response from aggregateSignature', credential);
 
     // CONTRACT 07
-    const c07 = contract07(uniqueId, issuerId);
-    debugLog('Going to execute contract 07: ', c07);
+    const c07 = createProof(uniqueId, issuerId);
+    debugLog('Going to execute createProof: ', c07);
     debugLog('Keys: ', credential);
     debugLog('Data: ', JSON.stringify(issuerVerifyKeypair));
     const blindProofCredential = await zenroom.execute(
@@ -172,7 +174,7 @@ export const callCredentialIssuer = (
       JSON.stringify(issuerVerifyKeypair),
       credential,
     );
-    debugLog('Response from contract07 (blindProofCredential):', blindProofCredential);
+    debugLog('Response from createProof (blindProofCredential):', blindProofCredential);
 
     dispatch({
       type: ACTIONS.ISSUE_CREDENTIAL_SUCCESS,
@@ -195,7 +197,7 @@ export const callCredentialIssuer = (
   }
 };
 
-export const signPetition = (
+export const callSignPetition = (
   { petitionsUrl },
   { uniqueId, issuerId, attributeId, credential, issuerVerifyKeypair },
 ) => async (dispatch) => {
@@ -203,8 +205,8 @@ export const signPetition = (
     type: ACTIONS.SIGN_REQUEST,
   });
   try {
-    const c11 = contract11(uniqueId, issuerId, attributeId);
-    debugLog('Going to execute contract11: ', c11);
+    const c11 = signPetition(uniqueId, issuerId, attributeId);
+    debugLog('Going to execute signPetition: ', c11);
     debugLog('Keys: ', credential);
     debugLog('Data: ', JSON.stringify(issuerVerifyKeypair));
     const petitionSignature = await zenroom.execute(
@@ -212,7 +214,7 @@ export const signPetition = (
       JSON.stringify(issuerVerifyKeypair),
       credential,
     );
-    debugLog('Response from contract11 (petitionSignature): ', petitionSignature);
+    debugLog('Response from signPetition (petitionSignature): ', petitionSignature);
     if (!isJson(petitionSignature)) throw Error('Unexpected response from contract 11');
 
     // CALL TO PETITIONS SERVICE
