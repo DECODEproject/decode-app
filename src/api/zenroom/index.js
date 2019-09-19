@@ -19,6 +19,7 @@
  * email: info@dribia.com
  */
 
+export hashing from './hashing.lua';
 export credentialKeygen from './credential-keygen.zen';
 export credentialRequest from './credential-request.zen';
 export issuerKeygen from './issuer-keygen.zen';
@@ -27,4 +28,4 @@ export issuerSign from './issuer-sign.zen';
 export aggregateSignature from './aggregate-signature.zen';
 export createProof from './create-proof.zen';
 export verifyProof from './verify-proof.zen';
-export hashing from './hashing.lua';
+export signPetition from './sign-petition.zen';
