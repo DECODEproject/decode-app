@@ -71,7 +71,9 @@ You will also need XCode and Android Studio.
 
 Clone the project and `yarn install`. After that you can follow to the next section.
 
-You need to have a .env file with configuration data that must be kept out of the source code like the encryption key. Use the .env.sample file as a guide. 
+You need to have a .env file with configuration data that must be kept out of the source code like the encryption key. Use the .env.sample file as a guide.
+
+The encryption key must be a hex string of 16,24 or 32 bytes. If you change it, remember to clear the app's data because the encrypted bits won't be understood by the new app. When you run the tests, remember to clear the jest cache (jest --clearCache) so they keep passing. 
 
 If you want to deploy to the test stores using fastlane, which is the recommended way, you need Ruby. Use `rbenv` to install the Ruby version specified in .ruby-version.
 
