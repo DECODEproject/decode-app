@@ -48,8 +48,8 @@ const BCNNow = ({
   toggleSelectedAttribute,
   progress: { step, steps },
 }) => {
-  const bcnnowUrl = getParam('bcnnowUrl') || 'http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback';
-  const sessionId = getParam('sessionId') || '7d9f3fa8a57911e9b12a005056833c52';
+  const bcnnowUrl = getParam('bcnnowUrl');
+  const sessionId = getParam('sessionId');
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');
   const { image, activationMsg, actionMsg } = getApplication('bcnnow');

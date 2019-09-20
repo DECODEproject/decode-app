@@ -20,7 +20,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
@@ -52,15 +52,46 @@ const DDDC = ({
   toggleSelectedAttribute,
   progress: { step, steps },
 }) => {
-  const dddcUrl = getParam('dddcUrl') || 'https://dddc.decodeproject.eu/api';
-  const petitionId = getParam('petitionId') || '2';
+  const dddcApi = getParam('dddcUrl');
+  const petitionId = getParam('petitionId');
   const { t } = useTranslation('applications');
-  const { image, activationMsg, actionMsg } = getApplication('dddc');
+  const { image, activationMsg, actionMsg, link: dddcUrl, name: dddcName } = getApplication('dddc');
+  const { link: bcnnowUrl, name: bcnnowName } = getApplication('bcnnow');
   useEffect(
     () => {
-      fetchPetition(dddcUrl, petitionId);
+      fetchPetition(dddcApi, petitionId);
     },
     [petitionId],
+  );
+  let innerComponent = null;
+  if (signed) innerComponent = (
+    <React.Fragment>
+      <Message msg={t('dddcSuccess')} />
+      <SignSection>
+        <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
+        <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
+      </SignSection>
+    </React.Fragment>
+  );
+  else if (isEmpty(certificates)) innerComponent = (
+    <CertificateRequest
+      verificationCodes={petition.verificationCodes}
+      sharedAttributes={sharedAttributes}
+      onManageAttributes={() => navigate('AttributeList')}
+      onSubmit={() => callCredentialIssuer(
+        verification,
+        prepare(sharedAttributes),
+        petition,
+      )}
+      toggleSelected={toggleSelectedAttribute}
+      empty={all(isEmpty)(values(verification))}
+    />
+  );
+  else innerComponent = (
+    <SignSection>
+      <CertificateList certificates={certificates} />
+      <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
+    </SignSection>
   );
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -76,28 +107,7 @@ const DDDC = ({
           error ? <Message error msg={t('error')} detail={error} /> : null
         }
         {
-          signed ? <Message msg={t('dddcSuccess')} /> : null
-        }
-        {
-          isEmpty(certificates) ? (
-            <CertificateRequest
-              verificationCodes={petition.verificationCodes}
-              sharedAttributes={sharedAttributes}
-              onManageAttributes={() => navigate('AttributeList')}
-              onSubmit={() => callCredentialIssuer(
-                verification,
-                prepare(sharedAttributes),
-                petition,
-              )}
-              toggleSelected={toggleSelectedAttribute}
-              empty={all(isEmpty)(values(verification))}
-            />
-          ) : (
-            <SignSection>
-              <CertificateList certificates={certificates} />
-              <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
-            </SignSection>
-          )
+          innerComponent
         }
       </Wrapper>
     </SafeAreaView>
