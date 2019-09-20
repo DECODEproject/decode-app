@@ -139,20 +139,6 @@ const DummyStack = createStackNavigator({
   defaultNavigationOptions,
 });
 
-const BCNNowTestStack = createStackNavigator({
-  dddc: {
-    screen: BCNNow,
-    navigationOptions: ({ navigation }) => ({
-      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
-    }),
-  },
-  AttributeList,
-  AtlasList,
-  EditAttribute,
-}, {
-  defaultNavigationOptions,
-});
-
 const DrawerNavigator = createDrawerNavigator({
   AttributeStack: {
     screen: AttributeStack,
@@ -195,12 +181,6 @@ const DrawerNavigator = createDrawerNavigator({
       drawerLabel: 'Test Dummy Screen',
     }),
   },
-  BCNNowStack: {
-    screen: BCNNowTestStack,
-    navigationOptions: () => ({
-      drawerLabel: 'Test BCNNow',
-    }),
-  },
 },
 {
   defaultNavigationOptions: () => ({
@@ -218,6 +198,9 @@ const DrawerNavigator = createDrawerNavigator({
     },
     labelStyle: {
       fontFamily: commonTheme.fontFamily,
+    },
+    iconContainerStyle: {
+      marginRight: 0,
     },
   },
 });

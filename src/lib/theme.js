@@ -36,6 +36,7 @@ const theme = {
   fontFamily: 'Montserrat',
   fontSizeText: 14,
   fontSizeTitle: 18,
+  fontSizeIcon: 22,
   primaryColor: colors.black,
   secondaryColor: colors.turquoise,
   disabledTextColor: colors.darkGray,

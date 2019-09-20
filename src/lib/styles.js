@@ -44,9 +44,9 @@ export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSiz
 }));
 
 export const Icon = styled(FAIcon)((
-  { theme: { fontSizeTitle, primaryColor } },
+  { theme: { fontSizeIcon, primaryColor } },
 ) => ({
-  fontSize: fontSizeTitle,
+  fontSize: fontSizeIcon,
   color: primaryColor,
 }));
 
