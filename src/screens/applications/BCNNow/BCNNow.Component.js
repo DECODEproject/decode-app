@@ -29,7 +29,7 @@ import { Header, Button, CertificateList, CheckList, Message, ProgressBar } from
 import { ApplicationImage } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Section, Subheading, Text, Buttons } from './BCNNow.Styles';
+import { Wrapper, Section, Subheading, Text, Buttons, Bottom } from './BCNNow.Styles';
 
 const prepare = compose(
   pluck('value'),
@@ -57,7 +57,7 @@ const BCNNow = ({
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Spinner visible={loading} />
-      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}>
+      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1 }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>
@@ -88,22 +88,28 @@ const BCNNow = ({
               />
               <Buttons>
                 <Button title={t('manageData')} onPress={() => navigate('AttributeList')} />
-                <Button
-                  featured
-                  icon="sign-in"
-                  title={t(actionMsg)}
-                  onPress={() => login(
-                    bcnnowUrl,
-                    sessionId,
-                    head(values(certificates)),
-                    prepare(sharedAttributes),
-                  )}
-                />
               </Buttons>
             </Section>
           )
         }
       </Wrapper>
+      {
+        (loggedIn || isEmpty(certificates)) ? null : (
+          <Bottom>
+            <Button
+              featured
+              icon="sign-in"
+              title={t(actionMsg)}
+              onPress={() => login(
+                bcnnowUrl,
+                sessionId,
+                head(values(certificates)),
+                prepare(sharedAttributes),
+              )}
+            />
+          </Bottom>
+        )
+      }
     </SafeAreaView>
   );
 };

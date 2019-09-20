@@ -26,6 +26,7 @@ export const Wrapper = styled.View(({ error, theme: { errorColor, okColor } }) =
   borderWidth: 1,
   borderColor: error ? errorColor : okColor,
   padding: 8,
+  marginVertical: 4,
   alignItems: 'center',
 }));
 

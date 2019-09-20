@@ -20,15 +20,15 @@
  */
 
 import React, { useEffect } from 'react';
-import { SafeAreaView, Linking } from 'react-native';
+import { Linking } from 'react-native';
 import PropTypes from 'prop-types';
 import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ramda';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
-import { Header, Button, CertificateList, Message, ProgressBar } from 'lib/Components';
+import { Screen, Header, Button, CertificateList, Message, ProgressBar } from 'lib/Components';
 import { ApplicationImage } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Heading, Text, ActionSection } from './DDDC.Styles';
+import { Wrapper, Heading, Text, ActionSection, Bottom } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 
 const prepare = compose(
@@ -46,7 +46,6 @@ const DDDC = ({
   petition,
   certificates,
   loading,
-  signed,
   error,
   verification,
   toggleSelectedAttribute,
@@ -63,42 +62,76 @@ const DDDC = ({
     },
     [petitionId],
   );
-  let innerComponent = null;
-  if (signed) innerComponent = (
-    <React.Fragment>
-      <Message msg={t('dddcSuccess')} />
-      <ActionSection>
-        <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
-        <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
-      </ActionSection>
-    </React.Fragment>
-  );
-  else if (isEmpty(certificates)) innerComponent = (
-    <ActionSection>
-      <CertificateRequest
-        verificationCodes={petition.verificationCodes}
-        sharedAttributes={sharedAttributes}
-        onManageAttributes={() => navigate('AttributeList')}
-        onSubmit={() => callCredentialIssuer(
-          verification,
-          prepare(sharedAttributes),
-          petition,
-        )}
-        toggleSelected={toggleSelectedAttribute}
-        empty={all(isEmpty)(values(verification))}
-      />
-    </ActionSection>
-  );
-  else innerComponent = (
-    <ActionSection>
-      <CertificateList certificates={certificates} />
-      <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
-    </ActionSection>
-  );
+  let mainComponent = null;
+  let bottomComponent = null;
+  switch (step) {
+    case 1:
+      mainComponent = (
+        <ActionSection>
+          <CertificateRequest
+            verificationCodes={petition.verificationCodes}
+            sharedAttributes={sharedAttributes}
+            onManageAttributes={() => navigate('AttributeList')}
+            onSubmit={() => callCredentialIssuer(
+              verification,
+              prepare(sharedAttributes),
+              petition,
+            )}
+            toggleSelected={toggleSelectedAttribute}
+            empty={all(isEmpty)(values(verification))}
+          />
+        </ActionSection>
+      );
+      bottomComponent = (
+        <Bottom>
+          <Button
+            featured
+            title={t('certificateRequestButton')}
+            onPress={() => callCredentialIssuer(
+              verification,
+              prepare(sharedAttributes),
+              petition,
+            )}
+            disabled={all(isEmpty)(values(verification))}
+          />
+        </Bottom>
+      );
+      break;
+    case 2:
+      mainComponent = (
+        <ActionSection>
+          <CertificateList certificates={certificates} />
+        </ActionSection>
+      );
+      bottomComponent = (
+        <Bottom>
+          <Button featured icon="pencil-square-o" title={t(actionMsg)} onPress={() => signPetition(petition, certificates[petition.id])} />
+        </Bottom>
+      );
+      break;
+    case 3:
+      mainComponent = (
+        <React.Fragment>
+          <Message msg={t('dddcSuccess')} />
+          <ActionSection>
+            <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
+            <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
+          </ActionSection>
+        </React.Fragment>
+      );
+      break;
+    default:
+      break;
+  }
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <Screen>
       <Spinner visible={loading} />
-      <Wrapper nestedScrollEnabled={false} contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }} extraScrollHeight={20}>
+      <Wrapper
+        nestedScrollEnabled={false}
+        contentContainerStyle={{ flexGrow: 1 }}
+        extraScrollHeight={20}
+      >
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
         <Text>{t(activationMsg)}</Text>
@@ -109,10 +142,13 @@ const DDDC = ({
           error ? <Message error msg={t('error')} detail={error} /> : null
         }
         {
-          innerComponent
+          mainComponent
         }
       </Wrapper>
-    </SafeAreaView>
+      {
+        bottomComponent
+      }
+    </Screen>
   );
 };
 
@@ -138,7 +174,6 @@ DDDC.propTypes = {
     title: PropTypes.string.isRequired,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
-  signed: PropTypes.bool.isRequired,
   error: PropTypes.string,
   certificates: PropTypes.object.isRequired,
   verification: PropTypes.object.isRequired,

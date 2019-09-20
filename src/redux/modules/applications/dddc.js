@@ -21,7 +21,7 @@
 
 import { createSelector } from 'reselect';
 import moment from 'moment';
-import { path, prop, append, isNil } from 'ramda';
+import { path, prop, append, isNil, isEmpty } from 'ramda';
 import uuid from 'uuid/v4';
 import { toggle, debugLog } from 'lib/utils';
 import isJson from 'lib/is-json';
@@ -266,9 +266,10 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case APPLICATION_ACTIONS.INIT_APPLICATION: {
       if (action.id !== 'dddc') return state;
+      const { certificates } = state;
       return {
         ...state,
-        step: 1,
+        step: isEmpty(certificates) ? 1 : 2,
         signed: false,
         error: null,
       };

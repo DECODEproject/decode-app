@@ -31,11 +31,9 @@ import VerificationCode from './VerificationCode';
 
 const CertificateRequest = (
   {
-    empty,
     verificationCodes,
     sharedAttributes,
     onManageAttributes,
-    onSubmit,
     toggleSelected,
   },
 ) => {
@@ -77,7 +75,6 @@ const CertificateRequest = (
       }
         <Section>
           <Button title={t('manageData')} onPress={onManageAttributes} />
-          <Button featured title={t('certificateRequestButton')} onPress={onSubmit} disabled={empty} />
         </Section>
       </View>
     </View>
@@ -85,11 +82,9 @@ const CertificateRequest = (
 };
 
 CertificateRequest.propTypes = {
-  empty: PropTypes.bool.isRequired,
   verificationCodes: PropTypes.arrayOf(PropTypes.object).isRequired,
   sharedAttributes: PropTypes.arrayOf(PropTypes.object).isRequired,
   onManageAttributes: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   toggleSelected: PropTypes.func.isRequired,
 };
 

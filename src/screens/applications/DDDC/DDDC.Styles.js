@@ -52,8 +52,13 @@ export const Subheading = styled(CommonText)(({ theme: { primaryColor, fontSizeT
   fontWeight: 'bold',
 }));
 
-export const Text = styled(CommonText)(({ theme: { primaryColor } }) => ({
+export const Text = styled(CommonText)({
   textAlign: 'center',
-  color: primaryColor,
-  margin: 5,
+  margin: 4,
+});
+
+export const Bottom = styled.View(({ theme: { backgroundColorAction } }) => ({
+  backgroundColor: backgroundColorAction,
+  paddingVertical: 8,
+  alignItems: 'center',
 }));
