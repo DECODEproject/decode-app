@@ -111,13 +111,13 @@ const DDDC = ({
       break;
     case 3:
       mainComponent = (
-        <React.Fragment>
-          <Message msg={t('dddcSuccess')} />
-          <ActionSection>
-            <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
-            <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
-          </ActionSection>
-        </React.Fragment>
+        <Message msg={t('dddcSuccess')} />
+      );
+      bottomComponent = (
+        <Bottom>
+          <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
+          <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
+        </Bottom>
       );
       break;
     default:

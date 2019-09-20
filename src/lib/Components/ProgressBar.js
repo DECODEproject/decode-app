@@ -26,4 +26,5 @@ export default styled.View(({ theme: { secondaryColor }, step, of }) => ({
   width: `${step / of * 100}%`,
   borderWidth: 1,
   borderColor: secondaryColor,
+  marginVertical: 4,
 }));
