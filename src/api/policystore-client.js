@@ -27,20 +27,20 @@ const prefix = '/twirp/decode.iot.policystore.PolicyStore';
 
 class PolicystoreClient {
   constructor(url = 'https://policystore.decodeproject.eu') {
-    this.url = url;
+    this.url = `${url}${prefix}`;
   }
 
   async listPolicies() {
     try {
-      const url = `${this.url}${prefix}/ListEntitlementPolicies`;
+      const url = `${this.url}/ListEntitlementPolicies`;
       debugLog('Going to call: ', url);
 
-      const { policies } = await axios.post(url, {}, { headers: { 'Content-Type': 'application/json' } });
+      const { data: { policies } } = await axios.post(url, {}, { headers: { 'Content-Type': 'application/json' } });
       debugLog('Response: ', policies);
       return policies;
     } catch (error) {
       debugLog('Error: ', error);
-      const { msg, meta } = error;
+      const { response: { data: { msg, meta } } } = error;
       debugLog('Error data: ', JSON.stringify(meta));
       throw new PolicystoreError(`Error listing policies: ${msg}`);
     }

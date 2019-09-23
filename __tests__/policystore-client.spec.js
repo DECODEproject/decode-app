@@ -22,6 +22,8 @@
 
 import mockAxios from 'axios';
 import PolicystoreClient from 'api/policystore-client';
+import PolicystoreError from '../src/api/errors/policystore-error';
+// import PolicystoreError from 'api/errors/policystore-error';
 
 describe('Policystore client', () => {
   const policystore = new PolicystoreClient('https://policystore.test');
@@ -30,27 +32,29 @@ describe('Policystore client', () => {
     mockAxios.post.mockClear();
   });
 
-  test('should be constructable', () => {
-    expect(policystore.url).toEqual('https://policystore.test');
+  test('should set url prefix when constructed', () => {
+    expect(policystore.url).toEqual('https://policystore.test/twirp/decode.iot.policystore.PolicyStore');
   });
 
   test('should return policies', async () => {
     mockAxios.post.mockImplementationOnce(() => Promise.resolve({
-      policies: [
-        {
-          community_id: 'community-id',
-          label: 'All Public',
-          operations: [],
-          public_key: 'public-key',
-          authorizable_attribute_id: 'authorizable-attribute-id',
-          credential_issuer_endpoint_url: 'https://credentials.decodeproject.eu',
-          descriptions: {
-            ca: 'Una comunitat que comparteix totes les dades.',
-            en: 'A community that shares all data.',
-            es: 'Una comunidad que comparte todos los datos.',
+      data: {
+        policies: [
+          {
+            community_id: 'community-id',
+            label: 'All Public',
+            operations: [],
+            public_key: 'public-key',
+            authorizable_attribute_id: 'authorizable-attribute-id',
+            credential_issuer_endpoint_url: 'https://credentials.decodeproject.eu',
+            descriptions: {
+              ca: 'Una comunitat que comparteix totes les dades.',
+              en: 'A community that shares all data.',
+              es: 'Una comunidad que comparte todos los datos.',
+            },
           },
-        },
-      ],
+        ],
+      },
     }));
 
     const response = await policystore.listPolicies();
@@ -77,5 +81,25 @@ describe('Policystore client', () => {
       },
     );
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
+  });
+
+  test('should return an error', async () => {
+    mockAxios.post.mockRejectedValueOnce({
+      response: {
+        data: {
+          msg: 'An error occurred',
+          meta: {
+            twirp_invalid_route: 'POST /foo',
+          },
+        },
+      },
+    });
+
+    try {
+      await policystore.listPolicies();
+    } catch (e) {
+      expect(e).toBeInstanceOf(PolicystoreError);
+      expect(e.message).toBe('Error listing policies: An error occurred');
+    }
   });
 });
