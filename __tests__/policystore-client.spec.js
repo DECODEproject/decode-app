@@ -19,18 +19,16 @@
  * email: info@dribia.com
  */
 
-
 import mockAxios from 'axios';
 import PolicystoreClient from 'api/policystore-client';
 import PolicystoreError from '../src/api/errors/policystore-error';
-// import PolicystoreError from 'api/errors/policystore-error';
 
 describe('Policystore client', () => {
-  const policystore = new PolicystoreClient('https://policystore.test');
-
   afterEach(() => {
     mockAxios.post.mockClear();
   });
+
+  const policystore = new PolicystoreClient('https://policystore.test');
 
   test('should set url prefix when constructed', () => {
     expect(policystore.url).toEqual('https://policystore.test/twirp/decode.iot.policystore.PolicyStore');
@@ -83,7 +81,7 @@ describe('Policystore client', () => {
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
   });
 
-  test('should return an error', async () => {
+  test('should throw an error on failure', async () => {
     mockAxios.post.mockRejectedValueOnce({
       response: {
         data: {
