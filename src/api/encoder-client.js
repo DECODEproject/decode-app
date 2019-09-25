@@ -26,39 +26,6 @@ import EncoderError from './errors/encoder-error';
 const prefix = '/twirp/decode.iot.encoder.Encoder';
 
 /**
- * @typedef {Object} StreamConfiguration - Object containing the complete
- *     definition of a stream
- * @property {string} device_token - Identifier of a device (supplied when
- *     onboarding)
- * @property {string} community_id - Identifier of the the chosen community
- * @property {string} recipient_public_key - Public key part of the
- *     communities' encryption keypair
- * @property {Object} location - The geographical location of the device
- * @property {number} location.longitude - The decimal longitude of the
- *     location
- * @property {number} location.latitude - The decimal latitude of the location
- * @property {string} exposure - The exposure of the device (one of INDOOR or
- *     OUTDOOR)
- * @property {Object[]} operations - List of operations to apply to the device
- * @property {number} operations[].sensor_id - Numeric identifier of a sensor
- * @property {string} operations[].action - Action to apply to the sensor (one
- *     of SHARE, BIN, MOVING_AVG)
- * @property {number[]} operations[].bins - Array of numbers defining a set of
- *     bins into which values should be classified. Required for BIN, an error if
- *     present for other actions
- * @property {number} operations[].interval - Interval in seconds over which
- *     moving average should be calculated. Required for MOVING_AVG, an error if
- *     present for other actions
- */
-
-/**
- * @typedef {Object} Stream - Object containing the identifier and secret
- *     token for a stream
- * @property {string} stream_uid - Identifier of a stream
- * @property {string} token - Secret token required to delete the stream
- */
-
-/**
  * Client for the IoT Stream Encoder. Exposes methods for creating or deleting
  * encrypted streams on the stream encoder service.
  */
