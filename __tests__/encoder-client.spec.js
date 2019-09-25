@@ -51,6 +51,11 @@ describe('Encoder client', () => {
     expect(encoder.url).toEqual('https://encoder.test/twirp/decode.iot.encoder.Encoder');
   });
 
+  test('should use default base url if none supplied', () => {
+    const defaultEncoder = new EncoderClient();
+    expect(defaultEncoder.url).toEqual('https://encoder.decodeproject.eu/twirp/decode.iot.encoder.Encoder');
+  });
+
   test('should create stream', async () => {
     // define our mocked response
     mockAxios.post.mockImplementationOnce(() => Promise.resolve({
