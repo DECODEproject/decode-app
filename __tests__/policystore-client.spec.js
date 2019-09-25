@@ -34,6 +34,11 @@ describe('Policystore client', () => {
     expect(policystore.url).toEqual('https://policystore.test/twirp/decode.iot.policystore.PolicyStore');
   });
 
+  test('should use default policystore url if none supplied', () => {
+    const defaultPolicystore = new PolicystoreClient();
+    expect(defaultPolicystore.url).toEqual('https://policystore.decodeproject.eu/twirp/decode.iot.policystore.PolicyStore');
+  });
+
   test('should return policies', async () => {
     mockAxios.post.mockImplementationOnce(() => Promise.resolve({
       data: {
