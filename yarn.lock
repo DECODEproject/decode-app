@@ -5705,6 +5705,11 @@ react-devtools-core@^3.6.0:
     shell-quote "^1.6.1"
     ws "^3.3.1"
 
+react-fast-compare@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
+  integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
 react-i18next@^10.11.0:
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-10.11.0.tgz#a6854e556d3aff9f5f161b4aa871d43cfff6bd9b"
@@ -5845,12 +5850,13 @@ react-native-vector-icons@^6.5.0:
     prop-types "^15.6.2"
     yargs "^13.2.2"
 
-react-native-walkthrough-tooltip@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/react-native-walkthrough-tooltip/-/react-native-walkthrough-tooltip-0.5.3.tgz#61ab4ae3e932472e82bc2d59bdb5cc1203e5d854"
-  integrity sha512-05NvUhqN/limYRiEgzwQVWL44uoN0Uz5UiyNJVFNgm8FRTqCTfi7/Li595LEi/GU54AM82bID8BGkPpoRjJP7w==
+react-native-walkthrough-tooltip@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-walkthrough-tooltip/-/react-native-walkthrough-tooltip-1.0.4.tgz#346212e764be11d92b1f1a3da95ac731fe22eb26"
+  integrity sha512-vwyFVDahW9brOPMA1bZXWH17PH09L0QkSD5bBIJ2fY+w4kFZDf1moQWmVst5EvnhKCGq7Bp83r1DaNSyLr6IBw==
   dependencies:
     prop-types "^15.6.1"
+    react-fast-compare "^2.0.4"
 
 react-native@0.59.8:
   version "0.59.8"

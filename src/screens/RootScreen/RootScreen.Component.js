@@ -25,8 +25,8 @@ import PropTypes from 'prop-types';
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { useTranslation } from 'react-i18next';
 import { ThemeContext } from 'styled-components';
-import { Carousel, MenuIcon, Warning } from 'lib/Components';
-import { Icon } from 'lib/styles';
+import { Carousel, MenuIcon, Warning, WalkthroughStep } from 'lib/Components';
+import { Icon, MenuItem } from 'lib/styles';
 import commonTheme from 'lib/theme';
 import Dummy from 'screens/Dummy';
 import DummyNext from 'screens/DummyNext';
@@ -68,7 +68,11 @@ const ApplicationStack = createStackNavigator({
   ApplicationList: {
     screen: ApplicationList,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+      headerLeft: (
+        <WalkthroughStep screen="home" id="menuIcon" placement="bottom" onCloseAction={navigation.openDrawer}>
+          <MenuIcon onPress={() => navigation.toggleDrawer()} />
+        </WalkthroughStep>
+      ),
     }),
   },
   ApplicationDetails,
@@ -143,35 +147,55 @@ const DrawerNavigator = createDrawerNavigator({
   AttributeStack: {
     screen: AttributeStack,
     navigationOptions: ({ screenProps: { t } }) => ({
-      drawerLabel: t('attributes:my'),
+      drawerLabel: (
+        <WalkthroughStep screen="home" id="attributes">
+          <MenuItem>{t('attributes:my')}</MenuItem>
+        </WalkthroughStep>
+      ),
       drawerIcon: <Icon name="user" />,
     }),
   },
   ApplicationStack: {
     screen: ApplicationStack,
     navigationOptions: ({ screenProps: { t } }) => ({
-      drawerLabel: t('applications:available'),
+      drawerLabel: (
+        <WalkthroughStep screen="home" id="applications">
+          <MenuItem>{t('applications:available')}</MenuItem>
+        </WalkthroughStep>
+      ),
       drawerIcon: <Icon name="th-large" />,
     }),
   },
   SettingsStack: {
     screen: SettingsStack,
     navigationOptions: ({ screenProps: { t } }) => ({
-      drawerLabel: t('settings:title'),
+      drawerLabel: (
+        <WalkthroughStep screen="home" id="settings">
+          <MenuItem>{t('settings:title')}</MenuItem>
+        </WalkthroughStep>
+      ),
       drawerIcon: <Icon name="cog" />,
     }),
   },
   AboutStack: {
     screen: AboutStack,
     navigationOptions: ({ screenProps: { t } }) => ({
-      drawerLabel: t('about:title'),
+      drawerLabel: (
+        <WalkthroughStep screen="home" id="about">
+          <MenuItem>{t('about:title')}</MenuItem>
+        </WalkthroughStep>
+      ),
       drawerIcon: <Icon name="info" />,
     }),
   },
   ScannerStack: {
     screen: ScannerStack,
-    navigationOptions: ({ screenProps: { t } }) => ({
-      drawerLabel: t('scanner:title'),
+    navigationOptions: ({ navigation, screenProps: { t } }) => ({
+      drawerLabel: (
+        <WalkthroughStep screen="home" id="scanner" onCloseAction={navigation.closeDrawer}>
+          <MenuItem>{t('scanner:title')}</MenuItem>
+        </WalkthroughStep>
+      ),
       drawerIcon: <Icon name="qrcode" />,
     }),
   },

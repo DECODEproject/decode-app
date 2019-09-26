@@ -50,25 +50,25 @@
   "applications": {
     "dddc": {
       "id": "dddc",
-      "name": "dddcName",
-      "title": "dddcTitle",
+      "name": "dddc.name",
+      "title": "dddc.title",
       "image": "people",
       "link": "https://dddc.decodeproject.eu",
-      "description": "dddcDesc",
+      "description": "dddc.desc",
       "sharedAttributes": ["gender", "age", "district"],
-      "activationMsg": "dddcActivation",
-      "actionMsg": "dddcSign"
+      "activationMsg": "dddc.activation",
+      "actionMsg": "dddc.sign"
     },
     "bcnnow": {
       "id": "bcnnow",
-      "name": "bcnnowName",
-      "title": "bcnnowTitle",
+      "name": "bcnnow.name",
+      "title": "bcnnow.title",
       "image": "city",
       "link": "http://bcnnow.decodeproject.eu",
-      "description": "bcnnowDesc",
+      "description": "bcnnow.desc",
       "sharedAttributes": ["gender", "ageRange", "district"],
-      "activationMsg": "bcnnowActivation",
-      "actionMsg": "bcnnowLogin"
+      "activationMsg": "bcnnow.activation",
+      "actionMsg": "bcnnow.login"
     }
   },
   "translations": {
@@ -124,55 +124,67 @@
     },
     "applications": {
       "ca": {
-        "dddcName": "DDDC",
-        "dddcTitle": "Signar una petició a DDDC",
-        "dddcDesc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura y auditable.",
-        "dddcActivation": "Has activat l'app de DECODE per a signar una petició a DDDC",
-        "dddcSign": "Signar",
-        "dddcSuccess": "Petició signada!",
-        "bcnnowName": "BCNNow",
-        "bcnnowTitle": "Entrar a BCNNow",
-        "bcnnowDesc": "BCNNow permet entrar a la plataforma de manera anonimitzada, pero compartint algunes dades per a obtenir visualitzacions personalitzades.",
-        "bcnnowActivation": "Has activat l'app de DECODE per a entrar a BCNNow",
-        "bcnnowLogin": "Accedir",
-        "bcnnowEmpty": "No teniu certificats que es puguin fer servir per accedir-hi",
-        "bcnnowSuccess": "Connectat correctament",
-        "bcnnowTimeout": "Temps d'espera excedit. Si us plau reintenteu",
-        "bcnnowRefresh": "Torneu al vostre navegador i si cal refresqueu la pàgina"
+        "dddc": {
+          "name": "DDDC",
+          "title": "Signar una petició a DDDC",
+          "desc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura y auditable.",
+          "activation": "Has activat l'app de DECODE per a signar una petició a DDDC",
+          "sign": "Signar",
+          "success": "Petició signada!"
+        },
+        "bcnnow": {
+          "name": "BCNNow",
+          "title": "Entrar a BCNNow",
+          "desc": "BCNNow permet entrar a la plataforma de manera anonimitzada, pero compartint algunes dades per a obtenir visualitzacions personalitzades.",
+          "activation": "Has activat l'app de DECODE per a entrar a BCNNow",
+          "login": "Accedir",
+          "empty": "No teniu certificats que es puguin fer servir per accedir-hi",
+          "success": "Connectat correctament",
+          "timeout": "Temps d'espera excedit. Si us plau reintenteu",
+          "refresh": "Torneu al vostre navegador i si cal refresqueu la pàgina"
+        }
       },
       "es": {
-        "dddcName": "DDDC",
-        "dddcTitle": "Firmar una petición en DDDC",
-        "dddcDesc": "DECODE permite firmar peticiones de la plataforma DDDC de manera anonimizada, segura y auditable.",
-        "dddcActivation": "Has activado la app de DECODE para firmar una petición en DDDC",
-        "dddcSign": "Firmar",
-        "dddcSuccess": "Petición firmada!",
-        "bcnnowName": "BCNNow",
-        "bcnnowTitle": "Entrar en BCNNow",
-        "bcnnowDesc": "BCNNow permite entrar en la plataforma de manera anonimizada, pero compartiendo algunos datos para obtener visualizaciones personalizadas.",
-        "bcnnowActivation": "Has activado la app de DECODE para entrar en BCNNow",
-        "bcnnowLogin": "Acceder",
-        "bcnnowEmpty": "No tienes certificados que se puedan usar para acceder.",
-        "bcnnowSuccess": "Conectado correctamente",
-        "bcnnowTimeout": "Tiempo de espera excedido. Por favor reintenta",
-        "bcnnowRefresh": "Vuelve a tu navegador y refresca la página si es necesario"
+        "dddc": {
+          "name": "DDDC",
+          "title": "Firmar una petición en DDDC",
+          "desc": "DECODE permite firmar peticiones de la plataforma DDDC de manera anonimizada, segura y auditable.",
+          "activation": "Has activado la app de DECODE para firmar una petición en DDDC",
+          "sign": "Firmar",
+          "success": "Petición firmada!"
+        },
+        "bcnnow": {
+          "name": "BCNNow",
+          "title": "Entrar en BCNNow",
+          "desc": "BCNNow permite entrar en la plataforma de manera anonimizada, pero compartiendo algunos datos para obtener visualizaciones personalizadas.",
+          "activation": "Has activado la app de DECODE para entrar en BCNNow",
+          "login": "Acceder",
+          "empty": "No tienes certificados que se puedan usar para acceder.",
+          "success": "Conectado correctamente",
+          "timeout": "Tiempo de espera excedido. Por favor reintenta",
+          "refresh": "Vuelve a tu navegador y refresca la página si es necesario"
+        }
       },
       "en": {
-        "dddcName": "DDDC",
-        "dddcTitle": "Sign a petition in DDDC",
-        "dddcDesc": "DECODE allows to sign petitions of the DDDC platform in an anonymous, safe and auditable way.",
-        "dddcActivation": "You have activated the DECODE app to sign a petition in DDDC",
-        "dddcSign": "Sign",
-        "dddcSuccess": "Petition signed successfully!",
-        "bcnnowName": "BCNNow",
-        "bcnnowTitle": "Enter BCNNow",
-        "bcnnowDesc": "BCNNow allows to enter the platform in an anonymous way, but sharing some data to obtain personalized visualizations.",
-        "bcnnowActivation": "You have activated the DECODE App to log into BCNNow",
-        "bcnnowLogin": "Login",
-        "bcnnowEmpty": "You don't have any certificate that can be used to log in",
-        "bcnnowSuccess": "Successfully logged in",
-        "bcnnowTimeout": "Timeout exceeded. Please retry",
-        "bcnnowRefresh": "Go back to your browser and refresh the page if needed"
+        "dddc": {
+          "name": "DDDC",
+          "title": "Sign a petition in DDDC",
+          "desc": "DECODE allows to sign petitions of the DDDC platform in an anonymous, safe and auditable way.",
+          "activation": "You have activated the DECODE app to sign a petition in DDDC",
+          "sign": "Sign",
+          "success": "Petition signed successfully!"
+        },
+        "bcnnow": {
+          "name": "BCNNow",
+          "title": "Enter BCNNow",
+          "desc": "BCNNow allows to enter the platform in an anonymous way, but sharing some data to obtain personalized visualizations.",
+          "activation": "You have activated the DECODE App to log into BCNNow",
+          "login": "Login",
+          "empty": "You don't have any certificate that can be used to log in",
+          "success": "Successfully logged in",
+          "timeout": "Timeout exceeded. Please retry",
+          "refresh": "Go back to your browser and refresh the page if needed"
+        }
       }
     }
   }

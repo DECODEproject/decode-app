@@ -36,6 +36,7 @@ const migrations = {
   }),
   3: omit(['applications']),
   4: omit(['applications']),
+  5: omit(['walkthrough']),
 };
 
 export default migrations;

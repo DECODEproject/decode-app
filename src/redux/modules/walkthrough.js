@@ -23,11 +23,16 @@ import {
   prop, findIndex, equals, add, compose, head, map,
 } from 'ramda';
 
-const initialState = {
+const tooltips = {
+  home: ['menuIcon', 'attributes', 'applications', 'settings', 'about', 'scanner', 'applicationList'],
+  dddcDetails: ['more'],
+};
+
+export const initialState = {
   firstRun: true,
   showTooltip: {
-    dummy: 'refresh',
-    dummyNext: 'crash',
+    home: 'menuIcon',
+    dddcDetails: 'more',
   },
 };
 
@@ -67,11 +72,6 @@ export const getShowTooltip = screen => createSelector(
   getBaseShowTooltip,
   prop(screen),
 );
-
-const tooltips = {
-  dummy: ['refresh', 'next'],
-  dummyNext: ['crash'],
-};
 
 const nextTooltip = (screen, id) => {
   const nextIndex = compose(

@@ -64,17 +64,17 @@ const BCNNow = ({
           error ? (
             <Message
               error
-              msg={error === 'timeout' ? t('bcnnowTimeout') : t('error')}
+              msg={error === 'timeout' ? t('bcnnow.timeout') : t('error')}
               detail={error === 'timeout' ? null : error}
             />
           ) : null
         }
         {
-          loggedIn ? <Message msg={t('bcnnowSuccess')} detail={t('bcnnowRefresh')} /> : null
+          loggedIn ? <Message msg={t('bcnnow.success')} detail={t('bcnnowRefresh')} /> : null
         }
         {
           isEmpty(certificates) ? (
-            <Message error msg={t('bcnnowEmpty')} />
+            <Message error msg={t('bcnnow.empty')} />
           ) : (
             <Section>
               <CertificateList certificates={certificates} />
@@ -112,7 +112,7 @@ const BCNNow = ({
 };
 
 BCNNow.navigationOptions = ({ screenProps: { t } }) => ({
-  headerTitle: <Header title={t('applications:bcnnowName')} icon="th-large" />,
+  headerTitle: <Header title={t('applications:bcnnow.name')} icon="th-large" />,
 });
 
 BCNNow.defaultProps = {

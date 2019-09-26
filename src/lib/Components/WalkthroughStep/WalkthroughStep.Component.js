@@ -24,32 +24,53 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 import Tooltip from 'react-native-walkthrough-tooltip';
 import { useTranslation } from 'react-i18next';
+import { withNavigation } from 'react-navigation';
 
 const WalkthroughStep = ({
-  screen, id, children, showTooltip, onTooltipClose,
+  application, screen, id, placement, children, showTooltip, onTooltipClose, onCloseAction,
 }) => {
   const { t } = useTranslation();
+  const onClose = () => {
+    onTooltipClose(screen, id);
+    if (onCloseAction) onCloseAction();
+  };
+  const translationKey = application ? `${application}.walkthrough.${id}` : `walkthrough.${id}`;
   return (
     <Tooltip
+      placement={placement}
       isVisible={showTooltip === id}
-      content={<Text>{t(`walkthrough.${id}`)}</Text>}
-      onClose={() => onTooltipClose(screen, id)}
-      onChildPress={() => onTooltipClose(screen, id)}
+      content={<Text>{t(translationKey)}</Text>}
+      showChildInTooltip={false}
+      onClose={onClose}
+      onChildPress={onClose}
+      backgroundColor="rgba(0,0,0,0.3)'"
+      arrowSize={{ width: 8, height: 4 }}
+      displayInsets={{ top: 10, bottom: 10, left: 10, right: 10 }}
     >
       { children }
     </Tooltip>
   );
 };
 
+WalkthroughStep.defaultProps = {
+  application: null,
+  placement: 'bottom',
+  children: null,
+  onCloseAction: null,
+};
+
 WalkthroughStep.propTypes = {
+  application: PropTypes.string,
   screen: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  placement: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]).isRequired,
+  ]),
   showTooltip: PropTypes.string.isRequired,
   onTooltipClose: PropTypes.func.isRequired,
+  onCloseAction: PropTypes.func,
 };
 
-export default WalkthroughStep;
+export default withNavigation(WalkthroughStep);

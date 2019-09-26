@@ -21,6 +21,7 @@
 import reducer, { ACTIONS } from 'redux/reducer';
 import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
 import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
+import { initialState as walkthroughInitialState } from 'redux/modules/walkthrough';
 
 const initialApplications = {
   dddc: dddcInitialState,
@@ -30,13 +31,7 @@ const initialApplications = {
 const initialState = {
   attributes: {},
   applications: initialApplications,
-  walkthrough: {
-    firstRun: true,
-    showTooltip: {
-      dummy: 'refresh',
-      dummyNext: 'crash',
-    },
-  },
+  walkthrough: walkthroughInitialState,
   dummy: {
     total: '---',
     loading: false,

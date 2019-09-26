@@ -27,7 +27,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View as AnimatedView } from 'react-native-animatable';
-import { WalkthroughStep, Button, Screen, Header } from 'lib/Components';
+import { Button, Screen, Header } from 'lib/Components';
 import { Wrapper, Heading, Line, Separator } from './Dummy.Styles';
 
 const Dummy = ({
@@ -51,9 +51,7 @@ const Dummy = ({
         <Button title="Hash with Zenroom" onPress={callZenroom} />
         <Separator />
         <Heading>{t('refreshStats')}</Heading>
-        <WalkthroughStep screen="dummy" id="refresh">
-          <Button title={t('refresh')} onPress={refresh} />
-        </WalkthroughStep>
+        <Button title={t('refresh')} onPress={refresh} />
         <View>
           {loading ? (
             <AnimatedView
@@ -67,14 +65,12 @@ const Dummy = ({
           ) : <Line>{total}</Line>}
         </View>
         <Line>{t('refreshDate', { date })}</Line>
-        <WalkthroughStep screen="dummy" id="next">
-          <Button
-            featured
-            icon="check"
-            title={t('next')}
-            onPress={() => navigation.navigate('DummyNext')}
-          />
-        </WalkthroughStep>
+        <Button
+          featured
+          icon="check"
+          title={t('next')}
+          onPress={() => navigation.navigate('DummyNext')}
+        />
       </Wrapper>
     </Screen>
   );

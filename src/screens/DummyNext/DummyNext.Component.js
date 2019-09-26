@@ -21,7 +21,7 @@
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { WalkthroughStep, Button, Screen, Header } from 'lib/Components';
+import { Button, Screen, Header } from 'lib/Components';
 import { Heading } from 'lib/styles';
 
 const pleaseCrash = () => {
@@ -33,13 +33,11 @@ const DummyNext = () => {
   return (
     <Screen centerAligned>
       <Heading>{t('second')}</Heading>
-      <WalkthroughStep screen="dummyNext" id="crash">
-        <Button
-          featured
-          title="Crash, please"
-          onPress={pleaseCrash}
-        />
-      </WalkthroughStep>
+      <Button
+        featured
+        title="Crash, please"
+        onPress={pleaseCrash}
+      />
     </Screen>
   );
 };

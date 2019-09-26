@@ -110,7 +110,7 @@ const DDDC = ({
       break;
     case 3:
       mainComponent = (
-        <Message msg={t('dddcSuccess')} />
+        <Message msg={t('dddc.success')} />
       );
       bottomComponent = (
         <Bottom>
@@ -148,7 +148,7 @@ const DDDC = ({
 };
 
 DDDC.navigationOptions = ({ screenProps: { t } }) => ({
-  headerTitle: <Header title={t('applications:dddcName')} icon="th-large" />,
+  headerTitle: <Header title={t('applications:dddc.name')} icon="th-large" />,
 });
 
 DDDC.defaultProps = {

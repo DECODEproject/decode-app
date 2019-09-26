@@ -33,9 +33,14 @@ export default {
     refreshDate: 'Actualitzat el {{date, llll}}',
     second: 'Una altra pantalla',
     walkthrough: {
-      refresh: 'Es cridarà l\'API del credential issuer',
-      next: 'Clicar aquí per anar a una altra pantalla',
-      crash: 'Clicar aquí per a provocar un casque',
+      menuIcon: 'Accedir al menú principal',
+      attributes: 'Gestiona aquí les teves dades',
+      applications: 'Fés servir aquí els serveis compatibles amb DECODE',
+      settings: 'Ajusta aquí las opcions de l\'app',
+      about: 'Vols saber més sobre DECODE?',
+      scanner: 'Obre la càmera per a començar a usar DECODE amb codis QR',
+      applicationList: 'Aquí es mostren els serveis compatibles amb DECODE. Toca en un per a gestionar-lo.',
+      more: 'Toca aquí per anar a la web del servei',
     },
   },
   carousel: {

@@ -26,7 +26,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
 import { parseQRCode } from 'lib/utils';
-import { EmptyList, ListItem, Header, Screen, Button } from 'lib/Components';
+import { EmptyList, ListItem, Header, Screen, Button, WalkthroughStep } from 'lib/Components';
 import { Wrapper, Separator } from './ApplicationList.Styles';
 
 const ApplicationList = ({ applications, initApplication, navigation: { navigate, dispatch } }) => {
@@ -75,6 +75,7 @@ const ApplicationList = ({ applications, initApplication, navigation: { navigate
     <Screen>
       {isEmpty(applications) ? (<EmptyList text={t('empty')} />) : (
         <Wrapper>
+          <WalkthroughStep screen="home" id="applicationList" placement="center" />
           <FlatList
             data={applications}
             ItemSeparatorComponent={Separator}

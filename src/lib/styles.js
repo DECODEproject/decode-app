@@ -43,6 +43,11 @@ export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSiz
   fontWeight: 'normal',
 }));
 
+export const MenuItem = styled(Text)({
+  margin: 16,
+  fontWeight: 'bold',
+});
+
 export const Icon = styled(FAIcon)((
   { theme: { fontSizeIcon, primaryColor } },
 ) => ({

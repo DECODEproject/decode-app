@@ -23,7 +23,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Linking, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Screen, Header, Button } from 'lib/Components';
+import { Screen, Header, Button, WalkthroughStep } from 'lib/Components';
 import { Description, Line, Actions } from './ApplicationDetails.Styles';
 
 const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
@@ -33,7 +33,9 @@ const ApplicationDetails = ({ navigation: { navigate, getParam } }) => {
       <ScrollView>
         <Description>
           <Line>{getParam('description')}</Line>
-          <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
+          <WalkthroughStep screen="dddcDetails" id="more" placement="top">
+            <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(getParam('link'))}>{t('more')}</Button>
+          </WalkthroughStep>
         </Description>
       </ScrollView>
       <Actions>

@@ -18,41 +18,35 @@
  *
  * email: info@dribia.com
  */
-import reducer, { ACTIONS } from 'redux/modules/walkthrough';
+import reducer, { ACTIONS, initialState } from 'redux/modules/walkthrough';
 
 describe('Walkthrough tests', () => {
   test('Default state', () => {
-    expect(reducer(undefined, {})).toEqual({
-      firstRun: true,
-      showTooltip: {
-        dummy: 'refresh',
-        dummyNext: 'crash',
-      },
-    });
+    expect(reducer(undefined, {})).toEqual(initialState);
   });
   test('Close first tooltip', () => {
     expect(reducer(undefined, {
       type: ACTIONS.TOOLTIP_SHOWN,
-      id: 'refresh',
-      screen: 'dummy',
+      id: 'menuIcon',
+      screen: 'home',
     })).toEqual({
-      firstRun: true,
+      ...initialState,
       showTooltip: {
-        dummy: 'next',
-        dummyNext: 'crash',
+        ...initialState.showTooltip,
+        home: 'attributes',
       },
     });
   });
   test('Close last tooltip', () => {
     expect(reducer(undefined, {
       type: ACTIONS.TOOLTIP_SHOWN,
-      id: 'next',
-      screen: 'dummy',
+      id: 'more',
+      screen: 'dddcDetails',
     })).toEqual({
-      firstRun: true,
+      ...initialState,
       showTooltip: {
-        dummy: 'none',
-        dummyNext: 'crash',
+        ...initialState.showTooltip,
+        dddcDetails: 'none',
       },
     });
   });
@@ -65,12 +59,6 @@ describe('Walkthrough tests', () => {
       },
     }, {
       type: ACTIONS.REVIEW_WALKTHROUGH,
-    })).toEqual({
-      firstRun: true,
-      showTooltip: {
-        dummy: 'refresh',
-        dummyNext: 'crash',
-      },
-    });
+    })).toEqual(initialState);
   });
 });
