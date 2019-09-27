@@ -14,7 +14,8 @@
     "address": {
       "name": "address",
       "type": "string",
-      "description": "addressDesc"
+      "description": "addressDesc",
+      "hidden": true
     },
     "district": {
       "name": "district",

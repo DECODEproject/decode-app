@@ -32,9 +32,11 @@ import {
   pick,
   contains,
   filter,
+  reject,
   isNil,
   apply,
   assoc,
+  propEq,
 } from 'ramda';
 import { encrypt, decrypt } from 'lib/utils';
 import { listAttributes, getApplication } from 'api/atlas-client';
@@ -68,7 +70,7 @@ export const getAttribute = id => createSelector(
   ),
 );
 
-const allAtlasAttributes = listAttributes();
+const allAtlasAttributes = reject(propEq('hidden', true))(listAttributes());
 
 const isBaseAttribute = compose(isNil, prop('derivedFrom'));
 
