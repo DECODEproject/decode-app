@@ -81,6 +81,7 @@ export default {
     month: 'mes',
     more: '+ información',
     sharedData: 'Datos compartidos',
+    sharedDataDesc: 'Opcionalmente puedes compartir estos datos con la aplicación',
     times: '1 vez por {{ unit }}',
     times_interval: '(0){Menos de una vez por {{ unit }}};(1-inf){{{ count }} veces por {{ unit }}}',
     times_plural: '{{ count }} veces por {{ unit }}',

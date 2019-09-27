@@ -57,7 +57,8 @@
       "description": "dddc.desc",
       "sharedAttributes": ["gender", "age", "district"],
       "activationMsg": "dddc.activation",
-      "actionMsg": "dddc.sign"
+      "actionMsg": "dddc.sign",
+      "linksAfterSign": "dddc.links"
     },
     "bcnnow": {
       "id": "bcnnow",
@@ -130,7 +131,8 @@
           "desc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura i auditable.",
           "activation": "Has activat l'app de DECODE per a signar una petició a DDDC",
           "sign": "Signar",
-          "success": "Petició signada!"
+          "success": "Petició signada!",
+          "links": "Et poden interessar les següents aplicacions compatibles amb DECODE i relacionades amb DDDC"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -151,7 +153,8 @@
           "desc": "DECODE permite firmar peticiones de la plataforma DDDC de manera anonimizada, segura y auditable.",
           "activation": "Has activado la app de DECODE para firmar una petición en DDDC",
           "sign": "Firmar",
-          "success": "Petición firmada!"
+          "success": "Petición firmada!",
+          "links": "Te pueden interesar las siguientes aplicaciones compatibles con DECODE y relacionadas con DDDC"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -172,7 +175,8 @@
           "desc": "DECODE allows you to sign any petition published in the DDDC platform, in an anonymous, secure and auditable way.",
           "activation": "You have activated the DECODE app to sign a petition in DDDC",
           "sign": "Sign",
-          "success": "Petition signed successfully!"
+          "success": "Petition signed successfully!",
+          "links": "You may be interested in the following applications compatible with DECODE and relacted to DDDC"
         },
         "bcnnow": {
           "name": "BCNNow",

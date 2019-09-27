@@ -86,6 +86,7 @@ const BCNNow = ({
                 onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
               }), sharedAttributes)}
               />
+              <Text>{t('sharedDataDesc')}</Text>
             </Section>
           )
         }

@@ -67,15 +67,14 @@ const CertificateRequest = (
       </Section>
       <View>
         <Subheading>{t('sharedData')}</Subheading>
-        {
-          <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
-            label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
-            checked: selected,
-            onSwitch: () => toggleSelected(name),
-            onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
-          }), sharedAttributes)}
-          />
-      }
+        <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
+          label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
+          checked: selected,
+          onSwitch: () => toggleSelected(name),
+          onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
+        }), sharedAttributes)}
+        />
+        <Text>{t('sharedDataDesc')}</Text>
       </View>
     </View>
   );

@@ -54,7 +54,7 @@ const DDDC = ({
   const dddcApi = getParam('dddcUrl');
   const petitionId = getParam('petitionId');
   const { t } = useTranslation('applications');
-  const { image, activationMsg, actionMsg, link: dddcUrl, name: dddcName } = getApplication('dddc');
+  const { image, activationMsg, actionMsg, link: dddcUrl, name: dddcName, linksAfterSign } = getApplication('dddc');
   const { link: bcnnowUrl, name: bcnnowName } = getApplication('bcnnow');
   useEffect(
     () => {
@@ -110,14 +110,16 @@ const DDDC = ({
       break;
     case 3:
       mainComponent = (
-        <Message msg={t('dddc.success')} />
+        <React.Fragment>
+          <Message msg={t('dddc.success')} />
+          <ActionSection>
+            <Text>{t(linksAfterSign)}</Text>
+            <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
+            <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
+          </ActionSection>
+        </React.Fragment>
       );
-      bottomComponent = (
-        <Bottom>
-          <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
-          <Button title={t(bcnnowName)} icon="external-link" onPress={() => Linking.openURL(bcnnowUrl)} />
-        </Bottom>
-      );
+      bottomComponent = null;
       break;
     default:
       break;
