@@ -35,12 +35,12 @@ export default {
     walkthrough: {
       menuIcon: 'Access the main menu',
       attributes: 'Manage here your data',
-      applications: 'Use here the services compatible with DECODE',
+      applications: 'Use here the applications compatible with DECODE',
       settings: 'Set here your app\'s options',
       about: 'Do you want to know more about DECODE?',
       scanner: 'Open your camera and start using DECODE with QR codes',
-      applicationList: 'Here you can see the services that are compatible with DECODE. Touch on one to manage it.',
-      more: 'Touch here to go to the service\'s web site',
+      applicationList: 'Here you can see the applications that are compatible with DECODE. Touch on one to manage it.',
+      more: 'Touch here to go to the application\'s web site',
     },
   },
   carousel: {
@@ -48,7 +48,7 @@ export default {
     txt1: 'your personal data manager',
     txt2: 'Your data has value. It\'s important you have control over it',
     txt3: 'With DECODE, you choose which personal data to share and how it is used',
-    txt4: 'Store your personal data with high security standards',
+    txt4: 'Store your personal data securely',
     done: 'Done',
     skip: 'Skip',
     next: 'Next',
@@ -64,12 +64,12 @@ export default {
     save: 'Save',
   },
   applications: {
-    activate: 'Activate service via QR',
+    activate: 'Activate application via QR',
     available: 'Applications',
     averageUse: 'Average',
     cancel: 'Cancel',
     certificateRequestButton: 'Get certificate',
-    certificateRequired: 'You need to have been issued a certificate in order to sign',
+    certificateRequired: 'You need to have a certificate in order to sign.',
     certificates: 'Certificates',
     day: 'day',
     empty: 'There are no applications available',
@@ -90,7 +90,7 @@ export default {
   },
   settings: {
     title: 'Settings',
-    review: 'Review help',
+    review: 'Help',
     reset: 'Erase all data',
     warning: 'You are going to erase all the app\'s memory (data, certificates,...)\n\n'
     + 'This step has no turning back.\n\n'

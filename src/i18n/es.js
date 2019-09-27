@@ -35,12 +35,12 @@ export default {
     walkthrough: {
       menuIcon: 'Acceder al menú principal',
       attributes: 'Gestiona aquí tus datos',
-      applications: 'Usa aquí los servicios compatibles con DECODE',
+      applications: 'Usa aquí las aplicaciones compatibles con DECODE',
       settings: 'Ajusta aquí las opciones de la app',
       about: 'Quieres saber más sobre DECODE?',
       scanner: 'Abre la cámara para empezar a usar DECODE con códigos QR',
-      applicationList: 'Aquí se muestran los servicios compatibles de DECODE. Toca en uno para gestionarlo.',
-      more: 'Toca aquí para ir a la web del servicio',
+      applicationList: 'Aquí se muestran las aplicaciones compatibles de DECODE. Toca en uno para gestionarlo.',
+      more: 'Toca aquí para ir a la web de la aplicación',
     },
   },
   carousel: {
@@ -48,7 +48,7 @@ export default {
     txt1: 'tu gestor de datos personales',
     txt2: 'Tus datos tienen un valor. Es importante que los controles',
     txt3: 'Con DECODE, tú decides qué datos quieres compartir y cómo son utilizados',
-    txt4: 'Guarda tus datos personales con alta seguridad',
+    txt4: 'Guarda tus datos personales de forma segura',
     done: 'Hecho',
     skip: 'Saltar',
     next: 'Siguiente',
@@ -64,12 +64,12 @@ export default {
     save: 'Guardar',
   },
   applications: {
-    activate: 'Activar servicio vía QR',
+    activate: 'Activar aplicación vía QR',
     available: 'Aplicaciones',
     averageUse: 'Promedio',
     cancel: 'Cancelar',
     certificateRequestButton: 'Obtener certificado',
-    certificateRequired: 'Para firmar necesitas que te sea emitido un certificado',
+    certificateRequired: 'Para firmar necesitas que obtener un certificado',
     certificates: 'Certificados',
     day: 'día',
     empty: 'No hay aplicaciones disponibles',
@@ -89,18 +89,18 @@ export default {
     year: 'año',
   },
   settings: {
-    title: 'Preferencias',
-    review: 'Revisar ayudas',
+    title: 'Ajustes',
+    review: 'Ayuda',
     reset: 'Borrar todo',
     warning: 'Estás a punto de borrar toda la memoria de la app (datos, certificados,...)\n\n'
     + 'Este paso no tiene vuelta atrás.\n\n'
-    + 'Deseas continuar?\n',
+    + '¿Deseas continuar?\n',
   },
   about: {
     title: 'Información',
     text1: 'La app de DECODE forma parte de un proyecto para retornar la <b>soberanía de datos</b> a los ciudadanos y ciudadanas',
     text2: 'Con la app de DECODE puedes <b>compartir tus datos</b> con las <b>aplicaciones compatibles</b> mediante <b>certificados criptográficos</b> de última generación',
-    more: 'Quiero más información!',
+    more: '¡Quiero más información!',
   },
   scanner: {
     title: 'Escáner QR',

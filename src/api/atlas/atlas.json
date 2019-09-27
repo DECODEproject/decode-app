@@ -75,7 +75,7 @@
     "attributes": {
       "ca": {
         "gender": "Gènere",
-        "genderDesc": "Tria el teu gènere d'una llista",
+        "genderDesc": "Tria el teu gènere",
         "female": "Dona",
         "male": "Home",
         "other": "Altre",
@@ -91,7 +91,7 @@
       },
       "es": {
         "gender": "Género",
-        "genderDesc": "Escoge tu género de una lista",
+        "genderDesc": "Escoge tu género",
         "female": "Mujer",
         "male": "Hombre",
         "other": "Otro",
@@ -107,16 +107,16 @@
       },
       "en": {
         "gender": "Gender",
-        "genderDesc": "Choose your gender from a list",
+        "genderDesc": "Pick your gender",
         "female": "Female",
         "male": "Male",
         "other": "Other",
         "birthDate": "Birth date",
-        "birthDateDesc": "Choose the day, month and year you were born",
+        "birthDateDesc": "Pick the day, month and year you were born",
         "address": "Address",
         "addressDesc": "Find your address in a map",
         "district": "District",
-        "districtDesc": "Choose your district in the city of Barcelona",
+        "districtDesc": "Pick your district in the city of Barcelona",
         "string": "Text",
         "age": "Age",
         "ageRange": "Age"
@@ -127,7 +127,7 @@
         "dddc": {
           "name": "DDDC",
           "title": "Signar una petició a DDDC",
-          "desc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura y auditable.",
+          "desc": "DECODE permet signar peticions de la plataforma DDDC de manera anonimitzada, segura i auditable.",
           "activation": "Has activat l'app de DECODE per a signar una petició a DDDC",
           "sign": "Signar",
           "success": "Petició signada!"
@@ -135,7 +135,7 @@
         "bcnnow": {
           "name": "BCNNow",
           "title": "Entrar a BCNNow",
-          "desc": "BCNNow permet entrar a la plataforma de manera anonimitzada, pero compartint algunes dades per a obtenir visualitzacions personalitzades.",
+          "desc": "BCNNow permet entrar a la plataforma de manera anonimitzada, però compartint algunes dades per a obtenir visualitzacions personalitzades.",
           "activation": "Has activat l'app de DECODE per a entrar a BCNNow",
           "login": "Accedir",
           "empty": "No teniu certificats que es puguin fer servir per accedir-hi",
@@ -159,7 +159,7 @@
           "desc": "BCNNow permite entrar en la plataforma de manera anonimizada, pero compartiendo algunos datos para obtener visualizaciones personalizadas.",
           "activation": "Has activado la app de DECODE para entrar en BCNNow",
           "login": "Acceder",
-          "empty": "No tienes certificados que se puedan usar para acceder.",
+          "empty": "No tienes certificados que te permitan acceder a la aplicación.",
           "success": "Conectado correctamente",
           "timeout": "Tiempo de espera excedido. Por favor reintenta",
           "refresh": "Vuelve a tu navegador y refresca la página si es necesario"
@@ -169,15 +169,15 @@
         "dddc": {
           "name": "DDDC",
           "title": "Sign a petition in DDDC",
-          "desc": "DECODE allows to sign petitions of the DDDC platform in an anonymous, safe and auditable way.",
+          "desc": "DECODE allows you to sign any petition published in the DDDC platform, in an anonymous, secure and auditable way.",
           "activation": "You have activated the DECODE app to sign a petition in DDDC",
           "sign": "Sign",
           "success": "Petition signed successfully!"
         },
         "bcnnow": {
           "name": "BCNNow",
-          "title": "Enter BCNNow",
-          "desc": "BCNNow allows to enter the platform in an anonymous way, but sharing some data to obtain personalized visualizations.",
+          "title": "Access the BCNNow website",
+          "desc": "Using the DECODE app you can enter the BCNNow website anonymously and browse the data published there, while sharing some data to obtain personalized views",
           "activation": "You have activated the DECODE App to log into BCNNow",
           "login": "Login",
           "empty": "You don't have any certificate that can be used to log in",

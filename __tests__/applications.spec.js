@@ -218,7 +218,7 @@ describe('Application tests', () => {
 
 
   test('Translations by interval', () => {
-    expect(i18n.t('applications:activate')).toEqual('Activate service via QR');
+    expect(i18n.t('applications:activate')).toEqual('Activate application via QR');
     expect(i18n.t('applications:times_interval', {
       postProcess: 'interval',
       count: 3,
@@ -241,7 +241,7 @@ describe('Application tests', () => {
     })).toEqual('Less than once a year');
     i18n.changeLanguage('ca', (err, t) => {
       if (err) throw err;
-      expect(t('applications:activate')).toEqual('Activar servei via QR');
+      expect(t('applications:activate')).toEqual('Activar aplicació via QR');
       expect(t('applications:times_interval', {
         postProcess: 'interval',
         count: 3,
@@ -265,7 +265,7 @@ describe('Application tests', () => {
     });
     i18n.changeLanguage('es', (err, t) => {
       if (err) throw err;
-      expect(t('applications:activate')).toEqual('Activar servicio vía QR');
+      expect(t('applications:activate')).toEqual('Activar aplicación vía QR');
       expect(t('applications:times_interval', {
         postProcess: 'interval',
         count: 3,
