@@ -137,7 +137,7 @@ describe('Attribute tests', () => {
         gender: encrypt('male'),
         birthDate: encrypt('23/3/99'),
       },
-    }))).toEqual(['address', 'district']);
+    }))).toEqual(['district']);
   });
 
   test('Filter atlas attributes - all', () => {
@@ -154,7 +154,7 @@ describe('Attribute tests', () => {
   test('Filter atlas attributes - none', () => {
     expect(pluck('name')(getFilteredAtlasAttributes({
       attributes: {},
-    }))).toEqual(['gender', 'birthDate', 'address', 'district']);
+    }))).toEqual(['gender', 'birthDate', 'district']);
   });
 
   test('Delete attribute', () => {

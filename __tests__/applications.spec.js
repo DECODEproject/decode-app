@@ -44,6 +44,7 @@ const baseFinalState = [{
   title: 'dddc.title',
   image: 'people',
   link: 'https://dddc.decodeproject.eu',
+  linksAfterSign: 'dddc.links',
   description: 'dddc.desc',
   usageCount: 0,
   numCertificates: 0,
