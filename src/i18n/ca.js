@@ -91,7 +91,7 @@ export default {
   },
   settings: {
     title: 'Ajustos',
-    review: 'Revisar ajudes',
+    review: 'Ajuda',
     reset: 'Esborrar tot',
     warning: 'Ets a punt d\'esborrar tota la memòria de l\'app (dades, certificats,...)\n\n'
     + 'Aquesta passa no té marxa enrere.\n\n'
