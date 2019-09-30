@@ -51,7 +51,7 @@ const DDDC = ({
   toggleSelectedAttribute,
   progress: { step, steps },
 }) => {
-  const dddcApi = getParam('dddcUrl');
+  const dddcApi = getParam('decidimAPIUrl');
   const petitionId = getParam('petitionId');
   const { t } = useTranslation('applications');
   const { image, activationMsg, actionMsg, link: dddcUrl, name: dddcName, linksAfterSign } = getApplication('dddc');

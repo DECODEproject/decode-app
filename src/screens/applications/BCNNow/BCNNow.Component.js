@@ -48,7 +48,7 @@ const BCNNow = ({
   toggleSelectedAttribute,
   progress: { step, steps },
 }) => {
-  const bcnnowUrl = getParam('bcnnowUrl');
+  const bcnnowUrl = getParam('callback');
   const sessionId = getParam('sessionId');
   const { t } = useTranslation('applications');
   const { t: attributesT } = useTranslation('attributes');

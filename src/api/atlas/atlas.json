@@ -50,6 +50,11 @@
   },
   "applications": {
     "dddc": {
+      "urlScheme": {
+        "action": "support",
+        "serviceId": "petitionId",
+        "params": ["decidimAPIUrl", "credentialIssuerEndpointAddress", "authorizableAttributeId"]
+      },
       "id": "dddc",
       "name": "dddc.name",
       "title": "dddc.title",
@@ -62,6 +67,11 @@
       "linksAfterSign": "dddc.links"
     },
     "bcnnow": {
+      "urlScheme": {
+        "action": "login",
+        "serviceId": "sessionId",
+        "params": ["callback"]
+      },
       "id": "bcnnow",
       "name": "bcnnow.name",
       "title": "bcnnow.title",

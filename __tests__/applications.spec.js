@@ -38,33 +38,6 @@ const initialState = {
   bcnnow: bcnnowInitialState,
 };
 
-const baseFinalState = [{
-  id: 'dddc',
-  name: 'dddc.name',
-  title: 'dddc.title',
-  image: 'people',
-  link: 'https://dddc.decodeproject.eu',
-  linksAfterSign: 'dddc.links',
-  description: 'dddc.desc',
-  usageCount: 0,
-  numCertificates: 0,
-  actionMsg: 'dddc.sign',
-  activationMsg: 'dddc.activation',
-},
-{
-  id: 'bcnnow',
-  name: 'bcnnow.name',
-  title: 'bcnnow.title',
-  image: 'city',
-  link: 'http://bcnnow.decodeproject.eu',
-  description: 'bcnnow.desc',
-  usageCount: 0,
-  numCertificates: 0,
-  actionMsg: 'bcnnow.login',
-  activationMsg: 'bcnnow.activation',
-},
-];
-
 describe('Application tests', () => {
   test('Default state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
@@ -73,28 +46,28 @@ describe('Application tests', () => {
   test('Application stats', () => {
     const nowForTest = moment('2019-04-30');
     moment.now = () => nowForTest;
-    expect(
-      getApplicationStats({
-        applications: {
-          dddc: {
-            ...dddcInitialState,
-            uses: [
-              {
-                date: +moment('2019-02-11'),
-                sharedData: ['gender'],
-              },
-              {
-                date: +moment('2019-04-21'),
-                sharedData: ['age'],
-              },
-            ],
-          },
-          bcnnow: bcnnowInitialState,
+    const applicationStats = getApplicationStats({
+      applications: {
+        dddc: {
+          ...dddcInitialState,
+          uses: [
+            {
+              date: +moment('2019-02-11'),
+              sharedData: ['gender'],
+            },
+            {
+              date: +moment('2019-04-21'),
+              sharedData: ['age'],
+            },
+          ],
         },
-      }),
+        bcnnow: bcnnowInitialState,
+      },
+    });
+    expect(
+      map(pick(['usageCount', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), applicationStats),
     ).toEqual([
       {
-        ...baseFinalState[0],
         usageCount: 2,
         firstUse: +moment('2019-02-11'),
         lastUse: +moment('2019-04-21'),
@@ -106,7 +79,6 @@ describe('Application tests', () => {
         averageUse: [1, 'month'],
       },
       {
-        ...baseFinalState[1],
         averageUse: [0, 'year'],
         firstUse: undefined,
         lastUse: undefined,
@@ -115,6 +87,7 @@ describe('Application tests', () => {
           { id: 'ageRange', shared: false },
           { id: 'district', shared: false },
         ],
+        usageCount: 0,
       },
     ]);
   });
@@ -122,22 +95,22 @@ describe('Application tests', () => {
   test('Application stats - count certificates', () => {
     const nowForTest = moment('2019-04-30');
     moment.now = () => nowForTest;
-    expect(
-      getApplicationStats({
-        applications: {
-          dddc: {
-            ...dddcInitialState,
-            certificates: {
-              aaa111: {},
-              aaa222: {},
-            },
+    const applicationStats = getApplicationStats({
+      applications: {
+        dddc: {
+          ...dddcInitialState,
+          certificates: {
+            aaa111: {},
+            aaa222: {},
           },
-          bcnnow: bcnnowInitialState,
         },
-      }),
+        bcnnow: bcnnowInitialState,
+      },
+    });
+    expect(
+      map(pick(['numCertificates', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), applicationStats),
     ).toEqual([
       {
-        ...baseFinalState[0],
         averageUse: [0, 'year'],
         firstUse: undefined,
         lastUse: undefined,
@@ -149,7 +122,6 @@ describe('Application tests', () => {
         numCertificates: 2,
       },
       {
-        ...baseFinalState[1],
         averageUse: [0, 'year'],
         firstUse: undefined,
         lastUse: undefined,
@@ -158,38 +130,59 @@ describe('Application tests', () => {
           { id: 'ageRange', shared: false },
           { id: 'district', shared: false },
         ],
+        numCertificates: 0,
       },
     ]);
   });
 
   test('Application stats - missing user apps', () => {
+    const applicationStats = getApplicationStats({
+      applications: {},
+    });
     expect(
-      getApplicationStats({
-        applications: {},
-      }),
-    ).toEqual(baseFinalState);
+      map(pick(['id', 'name']), applicationStats),
+    ).toEqual([
+      {
+        id: 'dddc',
+        name: 'dddc.name',
+      },
+      {
+        id: 'bcnnow',
+        name: 'bcnnow.name',
+      },
+    ]);
   });
 
   test('Application stats - extra user apps', () => {
-    expect(
-      getApplicationStats({
-        applications: {
-          notSupportedAnymoreApp: {
-            uses: [
-              {
-                date: +moment('2019-03-21'),
-                sharedData: ['gender', 'birthDate'],
-              },
-              {
-                date: +moment('2019-04-21'),
-                sharedData: ['gender', 'birthDate'],
-              },
-            ],
-            numCertificates: 2,
-          },
+    const applicationStats = getApplicationStats({
+      applications: {
+        notSupportedAnymoreApp: {
+          uses: [
+            {
+              date: +moment('2019-03-21'),
+              sharedData: ['gender', 'birthDate'],
+            },
+            {
+              date: +moment('2019-04-21'),
+              sharedData: ['gender', 'birthDate'],
+            },
+          ],
+          numCertificates: 2,
         },
-      }),
-    ).toEqual(baseFinalState);
+      },
+    });
+    expect(
+      map(pick(['id', 'name']), applicationStats),
+    ).toEqual([
+      {
+        id: 'dddc',
+        name: 'dddc.name',
+      },
+      {
+        id: 'bcnnow',
+        name: 'bcnnow.name',
+      },
+    ]);
   });
 
   test('getImage', () => {

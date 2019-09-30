@@ -24,7 +24,6 @@ import PropTypes from 'prop-types';
 import aesjs from 'aes-js';
 import uuid from 'uuid/v4';
 import { STORAGE_KEY } from 'react-native-dotenv';
-import parseUrl from 'url-parse';
 import moment from 'moment';
 import i18n from 'i18n';
 
@@ -70,30 +69,6 @@ export const decrypt = (encryptedHex) => {
   const decryptedStripped = aesjs.padding.pkcs7.strip(decryptedBytes);
   const decryptedText = aesjs.utils.utf8.fromBytes(decryptedStripped);
   return decryptedText;
-};
-
-export const parseQRCode = (url) => {
-  const urlObj = parseUrl(url, true);
-  // Try to interpret as DDDC petition signing request
-  const { query: { decidimAPIUrl: dddcUrl, petitionId } } = urlObj;
-  if (dddcUrl && petitionId) return {
-    application: 'dddc',
-    dddcUrl,
-    petitionId,
-  };
-
-  // Try to interpret as login request to BCNNow
-  const { query: { callback: bcnnowUrl, sessionId }, hostname: action } = urlObj;
-  if (action === 'login') if (bcnnowUrl && sessionId) return {
-    application: 'bcnnow',
-    bcnnowUrl,
-    sessionId,
-  };
-
-  // Don't understand
-  return {
-    error: `Unknown data in QR code: ${url}`,
-  };
 };
 
 export const getDisplayValue = (type, value, t) => {

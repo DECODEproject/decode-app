@@ -25,7 +25,7 @@ import { NavigationEvents } from 'react-navigation';
 import { Text } from 'react-native';
 import { withTranslation } from 'react-i18next';
 import { Screen, Header } from 'lib/Components';
-import { parseQRCode } from 'lib/utils';
+import { parseQRCode } from 'lib/url-scheme';
 import { Camera } from './Scanner.Styles';
 
 class Scanner extends React.Component {

@@ -25,7 +25,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
-import { parseQRCode } from 'lib/utils';
+import { parseQRCode } from 'lib/url-scheme';
 import { EmptyList, ListItem, Header, Screen, Button, WalkthroughStep } from 'lib/Components';
 import { Wrapper, Separator } from './ApplicationList.Styles';
 
