@@ -30,8 +30,9 @@ const Settings = ({ onReviewWalkthrough, onReset, navigation: { navigate } }) =>
   return (
     <Screen>
       <Wrapper>
-        <Button title={t('review')} onPress={onReviewWalkthrough} />
+        <Button icon="question-circle" title={t('review')} onPress={onReviewWalkthrough} />
         <Button
+          icon="trash-o"
           title={t('reset')}
           onPress={() => navigate('Warning', {
             message: t('warning'),
