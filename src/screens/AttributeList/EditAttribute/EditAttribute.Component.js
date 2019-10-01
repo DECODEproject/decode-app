@@ -19,12 +19,13 @@
  * email: info@dribia.com
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Picker } from 'react-native';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-native-date-picker';
 import i18n from 'i18n';
+import { isNil, head } from 'ramda';
 import { Screen, Header, Button, Picker as EnumPicker } from 'lib/Components';
 import { Text, TextInput } from 'lib/styles';
 import { Wrapper } from './EditAttribute.Styles';
@@ -32,6 +33,9 @@ import { Wrapper } from './EditAttribute.Styles';
 const getEditor = (type, value, setValue, getParam) => {
   const { t } = useTranslation('attributes');
   const enumValues = getParam('values');
+  useEffect(() => {
+    if (type === 'enum' && isNil(value)) setValue(head(enumValues));
+  }, []);
   if (type === 'enum') return (
     <EnumPicker
       selectedValue={value}
