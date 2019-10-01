@@ -27,6 +27,17 @@ export const ActionWrapper = styled.View(({ theme: { backgroundColorAction } }) 
   backgroundColor: backgroundColorAction,
 }));
 
+export const Section = styled.View({
+  padding: 16,
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+});
+
+export const ActionSection = styled(Section)(({ theme: { backgroundColorAction } }) => ({
+  flex: 1,
+  backgroundColor: backgroundColorAction,
+}));
+
 export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) => ({
   color: primaryColor,
   fontSize: 20,
@@ -35,9 +46,11 @@ export const Heading = styled(RNText)(({ theme: { primaryColor, fontFamily } }) 
   fontWeight: 'bold',
 }));
 
-export const Text = styled(RNText)(({ theme: { primaryColor, fontFamily, fontSizeText } }) => ({
+export const Text = styled(RNText)((
+  { centered, theme: { primaryColor, fontFamily, fontSizeText } },
+) => ({
   color: primaryColor,
-  textAlign: 'left',
+  textAlign: centered ? 'center' : 'left',
   fontFamily,
   fontSize: fontSizeText,
   fontWeight: 'normal',

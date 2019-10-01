@@ -32,7 +32,7 @@ const CertificateList = ({ certificates }) => (
     data={values(certificates)}
     keyExtractor={prop('attributeId')}
     renderItem={({ item: { credentialName } }) => (
-      <Text>
+      <Text centered>
         <Icon name="check" />
         {` ${credentialName[getLanguage()]}`}
       </Text>

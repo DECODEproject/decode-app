@@ -27,7 +27,8 @@ import { isEmpty, map, isNil } from 'ramda';
 import { withNavigation } from 'react-navigation';
 import { Button, CheckList } from 'lib/Components';
 import { getDisplayValue } from 'lib/utils';
-import { Subheading, Text, Section } from './DDDC.Styles';
+import { Section } from 'lib/styles';
+import { Subheading, Text } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
 
 const CertificateRequest = (

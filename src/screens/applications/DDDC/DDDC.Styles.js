@@ -25,21 +25,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Heading as CommonHeading, Text as CommonText } from 'lib/styles';
 
 export const Wrapper = styled(KeyboardAwareScrollView)(({ theme: { backgroundColor } }) => ({
-  paddingHorizontal: 16,
   backgroundColor,
-}));
-
-export const Section = styled.View({
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-});
-
-export const ActionSection = styled(Section)(({ theme: { backgroundColorAction } }) => ({
-  marginHorizontal: -16,
-  padding: 16,
-  backgroundColor: backgroundColorAction,
-  flex: 1,
 }));
 
 export const Heading = styled(CommonHeading)({

@@ -26,9 +26,9 @@ import { isEmpty, compose, filter, prop, indexBy, pluck, all, values } from 'ram
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Screen, Header, Button, CertificateList, Message, ProgressBar } from 'lib/Components';
-import { ApplicationImage } from 'lib/styles';
+import { ApplicationImage, Section, ActionSection } from 'lib/styles';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Heading, Text, ActionSection, Bottom } from './DDDC.Styles';
+import { Wrapper, Heading, Text, Bottom } from './DDDC.Styles';
 import CertificateRequest from './CertificateRequest';
 
 const prepare = compose(
@@ -111,7 +111,9 @@ const DDDC = ({
     case 3:
       mainComponent = (
         <React.Fragment>
-          <Message msg={t('dddc.success')} />
+          <Section>
+            <Message msg={t('dddc.success')} />
+          </Section>
           <ActionSection>
             <Text>{t(linksAfterSign)}</Text>
             <Button title={t(dddcName)} icon="external-link" onPress={() => Linking.openURL(dddcUrl)} />
@@ -131,19 +133,21 @@ const DDDC = ({
       <Wrapper contentContainerStyle={{ flexGrow: 1 }} extraScrollHeight={20}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
-        <Text>{t(activationMsg)}</Text>
-        {
-          petition ? <Heading>{petition.title}</Heading> : null
-        }
-        {
-          error ? (
-            <Message
-              error
-              msg={error === 'notValid' ? t('dddc.notValid') : t('error')}
-              detail={error === 'notValid' ? null : error}
-            />
-          ) : null
-        }
+        <Section>
+          <Text>{t(activationMsg)}</Text>
+          {
+            petition ? <Heading>{petition.title}</Heading> : null
+          }
+          {
+            error ? (
+              <Message
+                error
+                msg={error === 'notValid' ? t('dddc.notValid') : t('error')}
+                detail={error === 'notValid' ? null : error}
+              />
+            ) : null
+          }
+        </Section>
         {
           mainComponent
         }

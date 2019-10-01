@@ -26,10 +26,10 @@ import { useTranslation } from 'react-i18next';
 import { isEmpty, values, head, map, isNil, compose, pluck, indexBy, prop, filter } from 'ramda';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Header, Button, CertificateList, CheckList, Message, ProgressBar } from 'lib/Components';
-import { ApplicationImage } from 'lib/styles';
+import { ApplicationImage, Section, ActionSection } from 'lib/styles';
 import { getDisplayValue } from 'lib/utils';
 import { getApplication, getImage } from 'api/atlas-client';
-import { Wrapper, Section, Subheading, Text, Bottom } from './BCNNow.Styles';
+import { Wrapper, Subheading, Text, Bottom } from './BCNNow.Styles';
 
 const prepare = compose(
   pluck('value'),
@@ -59,24 +59,28 @@ const BCNNow = ({
       <Wrapper contentContainerStyle={{ flexGrow: 1 }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
-        <Text>{t(activationMsg)}</Text>
-        {
-          error ? (
-            <Message
-              error
-              msg={error === 'timeout' ? t('bcnnow.timeout') : t('error')}
-              detail={error === 'timeout' ? null : error}
-            />
-          ) : null
-        }
-        {
-          loggedIn ? <Message msg={t('bcnnow.success')} detail={t('bcnnowRefresh')} /> : null
-        }
+        <Section>
+          <Text>{t(activationMsg)}</Text>
+          {
+            error ? (
+              <Message
+                error
+                msg={error === 'timeout' ? t('bcnnow.timeout') : t('error')}
+                detail={error === 'timeout' ? null : error}
+              />
+            ) : null
+          }
+          {
+            loggedIn ? <Message msg={t('bcnnow.success')} detail={t('bcnnowRefresh')} /> : null
+          }
+        </Section>
         {
           isEmpty(certificates) ? (
-            <Message error msg={t('bcnnow.empty')} />
-          ) : (
             <Section>
+              <Message error msg={t('bcnnow.empty')} />
+            </Section>
+          ) : (
+            <ActionSection>
               <CertificateList certificates={certificates} />
               <Subheading>{t('sharedData')}</Subheading>
               <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
@@ -87,7 +91,7 @@ const BCNNow = ({
               }), sharedAttributes)}
               />
               <Text>{t('sharedDataDesc')}</Text>
-            </Section>
+            </ActionSection>
           )
         }
       </Wrapper>

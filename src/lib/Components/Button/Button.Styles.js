@@ -27,6 +27,7 @@ export const Touchable = styled(TouchableOpacity)(
   ({
     featured,
     disabled,
+    fullWidth,
     theme: { primaryColor, secondaryColor, backgroundColor, disabledTextColor },
   }) => {
     let color;
@@ -39,6 +40,7 @@ export const Touchable = styled(TouchableOpacity)(
       borderWidth: 1,
       borderColor: featured ? primaryColor : secondaryColor,
       marginVertical: 10,
+      alignSelf: fullWidth ? 'stretch' : 'center',
     };
   },
 );
