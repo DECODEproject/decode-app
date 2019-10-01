@@ -23,7 +23,7 @@ import theme from 'lib/theme';
 
 export const pickerStyles = {
   height: 200,
-  width: 200,
+  width: 300,
 };
 
 export const itemStyles = {

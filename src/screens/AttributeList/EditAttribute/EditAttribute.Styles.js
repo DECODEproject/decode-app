@@ -22,10 +22,9 @@
 import styled from 'styled-components/native';
 
 export const Wrapper = styled.View(({ theme: { backgroundColorAction } }) => ({
-  paddingHorizontal: 32,
-  paddingVertical: 16,
-  alignItems: 'center',
+  padding: 16,
   backgroundColor: backgroundColorAction,
   flex: 1,
   justifyContent: 'center',
+  alignItems: 'center',
 }));
