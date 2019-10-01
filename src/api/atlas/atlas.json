@@ -143,7 +143,8 @@
           "activation": "Has activat l'app de DECODE per a signar una petició a DDDC",
           "sign": "Signar",
           "success": "Petició signada!",
-          "links": "Et poden interessar les següents aplicacions compatibles amb DECODE i relacionades amb DDDC"
+          "links": "Et poden interessar les següents aplicacions compatibles amb DECODE i relacionades amb DDDC",
+          "notValid": "El codi introduït no és vàlid"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -165,7 +166,8 @@
           "activation": "Has activado la app de DECODE para firmar una petición en DDDC",
           "sign": "Firmar",
           "success": "Petición firmada!",
-          "links": "Te pueden interesar las siguientes aplicaciones compatibles con DECODE y relacionadas con DDDC"
+          "links": "Te pueden interesar las siguientes aplicaciones compatibles con DECODE y relacionadas con DDDC",
+          "notValid": "El código introducido no es válido"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -187,7 +189,8 @@
           "activation": "You have activated the DECODE app to sign a petition in DDDC",
           "sign": "Sign",
           "success": "Petition signed successfully!",
-          "links": "You may be interested in the following applications compatible with DECODE and relacted to DDDC"
+          "links": "You may be interested in the following applications compatible with DECODE and relacted to DDDC",
+          "notValid": "The code you entered is not valid"
         },
         "bcnnow": {
           "name": "BCNNow",

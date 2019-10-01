@@ -136,7 +136,13 @@ const DDDC = ({
           petition ? <Heading>{petition.title}</Heading> : null
         }
         {
-          error ? <Message error msg={t('error')} detail={error} /> : null
+          error ? (
+            <Message
+              error
+              msg={error === 'notValid' ? t('dddc.notValid') : t('error')}
+              detail={error === 'notValid' ? null : error}
+            />
+          ) : null
         }
         {
           mainComponent
