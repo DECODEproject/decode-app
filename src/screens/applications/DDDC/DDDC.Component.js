@@ -38,7 +38,7 @@ const prepare = compose(
 );
 
 const DDDC = ({
-  navigation: { getParam },
+  navigation: { getParam, navigate },
   sharedAttributes,
   fetchPetition,
   callCredentialIssuer,
@@ -130,13 +130,18 @@ const DDDC = ({
   return (
     <Screen>
       <Spinner visible={loading} />
-      <Wrapper contentContainerStyle={{ flexGrow: 1 }} extraScrollHeight={20}>
+      <Wrapper contentContainerStyle={{ flexGrow: 1 }}>
         <ApplicationImage source={getImage(image)} resizeMode="contain" />
         <ProgressBar step={step} of={steps} />
         <Section>
           <Text>{t(activationMsg)}</Text>
           {
-            petition ? <Heading>{petition.title}</Heading> : null
+            petition ? (
+              <React.Fragment>
+                <Heading>{petition.title}</Heading>
+                <Button title={t('dddc.fullText')} onPress={() => navigate('PetitionText', { title: petition.title, html: petition.description })} />
+              </React.Fragment>
+            ) : null
           }
           {
             error ? (

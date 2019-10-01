@@ -39,8 +39,8 @@ import ActivityHistory from 'screens/ApplicationList/ApplicationDetails/Activity
 import Settings from 'screens/Settings';
 import About from 'screens/About';
 import Scanner from 'screens/Scanner';
-import DDDC from 'screens/applications/DDDC';
-import BCNNow from 'screens/applications/BCNNow';
+import dddcScreens from 'screens/applications/DDDC';
+import bcnnowScreens from 'screens/applications/BCNNow';
 
 const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
   headerBackTitle: null,
@@ -78,12 +78,8 @@ const ApplicationStack = createStackNavigator({
   ApplicationDetails,
   ActivityHistory,
   Scanner,
-  dddc: {
-    screen: DDDC,
-  },
-  bcnnow: {
-    screen: BCNNow,
-  },
+  ...dddcScreens,
+  ...bcnnowScreens,
   AttributeList,
   AtlasList,
   EditAttribute,
@@ -110,12 +106,8 @@ const ScannerStack = createStackNavigator({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),
   },
-  dddc: {
-    screen: DDDC,
-  },
-  bcnnow: {
-    screen: BCNNow,
-  },
+  ...dddcScreens,
+  ...bcnnowScreens,
 }, {
   defaultNavigationOptions,
 });

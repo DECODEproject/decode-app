@@ -18,5 +18,12 @@
  *
  * email: info@dribia.com
  */
+import PetitionText from './PetitionText';
+import DDDC from './DDDC.Container';
 
-export default from './DDDC.Container';
+export default {
+  dddc: {
+    screen: DDDC,
+  },
+  PetitionText,
+};

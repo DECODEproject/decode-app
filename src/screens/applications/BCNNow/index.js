@@ -19,4 +19,10 @@
  * email: info@dribia.com
  */
 
-export default from './BCNNow.Container';
+import BCNNow from './BCNNow.Container';
+
+export default {
+  bcnnow: {
+    screen: BCNNow,
+  },
+};

@@ -144,7 +144,8 @@
           "sign": "Signar",
           "success": "Petició signada!",
           "links": "Et poden interessar les següents aplicacions compatibles amb DECODE i relacionades amb DDDC",
-          "notValid": "El codi introduït no és vàlid"
+          "notValid": "El codi introduït no és vàlid",
+          "fullText": "Llegeix el text complet"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -167,7 +168,8 @@
           "sign": "Firmar",
           "success": "Petición firmada!",
           "links": "Te pueden interesar las siguientes aplicaciones compatibles con DECODE y relacionadas con DDDC",
-          "notValid": "El código introducido no es válido"
+          "notValid": "El código introducido no es válido",
+          "fullText": "Lee el texto completo"
         },
         "bcnnow": {
           "name": "BCNNow",
@@ -190,7 +192,8 @@
           "sign": "Sign",
           "success": "Petition signed successfully!",
           "links": "You may be interested in the following applications compatible with DECODE and relacted to DDDC",
-          "notValid": "The code you entered is not valid"
+          "notValid": "The code you entered is not valid",
+          "fullText": "Read the full text"
         },
         "bcnnow": {
           "name": "BCNNow",
