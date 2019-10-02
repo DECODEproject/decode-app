@@ -4,6 +4,7 @@
 - [Starting a development environment](#starting-a-development-environment)
 - [Available scripts](#available-scripts)
 - [Attributes and applications](#attributes-and-applications)
+- [Extending the app and technical docs](#extending-docs)
 - [Implementation notes](#implementation-notes)
 
 ## The DECODE App
@@ -130,6 +131,11 @@ For instance, the age attribute uses the age converter, which calculates the age
 
 On the other hand, the ageRange attribute still uses the same birthDate base attribute, and a configuration object with an array of age ranges.
 
+## Extending the app and technical docs
+
+If you are interested in adding your service to the app, jump directly to [the extension tutorial](./docs/extending.md).
+
+If you want to know more about the inner technical workings of the app, proceed to the [docs folder](https://github.com/DECODEproject/decodev2/tree/master/docs).
 
 ## Implementation notes
 
