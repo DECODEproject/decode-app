@@ -4,10 +4,11 @@
 - [Starting a development environment](#starting-a-development-environment)
 - [Available scripts](#available-scripts)
 - [Attributes and applications](#attributes-and-applications)
+- [Extending the app and technical docs](#extending-docs)
 - [Implementation notes](#implementation-notes)
 
 ## The DECODE App
-This app provides a platform where people can control their personal data, choosing where and how to share it. It allows users to input their data and keep it saved on their phone for future use. It is part of the [DECODE project](https://decodeproject.eu)
+This app provides a platform where people can control their personal data, choosing where and how to share it. It allows users to input their data and keep it saved on their phone for future use. It is part of the [DECODE project](https://decodeproject.eu).
 
 The DECODE App is developed in React Native, with the following side technologies:
 
@@ -39,7 +40,6 @@ Development dependencies:
 - eslint for code style
 - jest for unit testing
 - fastlane for store deployment automation
-
 
 ## Directory structure
 
@@ -131,13 +131,19 @@ For instance, the age attribute uses the age converter, which calculates the age
 
 On the other hand, the ageRange attribute still uses the same birthDate base attribute, and a configuration object with an array of age ranges.
 
+## Extending the app and technical docs
+
+If you are interested in adding your service to the app, jump directly to [the extension tutorial](./docs/extending.md).
+
+If you want to know more about the inner technical workings of the app, proceed to the [docs folder](https://github.com/DECODEproject/decodev2/tree/master/docs).
+
 ## Implementation notes
 
 ### Redux store structure
 The store has the current state of the app.
 It contains as less information as possible, normalized for efficient access.
 
-The container components connect the store to the presentational components. It makes use of memoized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
+The container components connect the store to the presentational components. It makes use of memorized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
 
 ### Persistence of the store
 The store is persisted to permanent storage using Redux Persist and the AsyncStorage engine, which leaves the information in the following locations:
@@ -146,7 +152,7 @@ The store is persisted to permanent storage using Redux Persist and the AsyncSto
 
 Only strictly needed parts of the store are persisted by configuring blacklists in the persist config object.
 
-The redux/migrations.js file contains the required migration operations every time a persisted data item changes its format. The current version is configured in redux/store.js. See Redux Persist documentation. 
+The redux/migrations.js file contains the required migration operations every time a persisted data item changes its format. The current version is configured in redux/store.js. See [Redux Persist documentation](https://github.com/rt2zz/redux-persist). 
 
 ### Encryption of sensitive data
 Sensitive data is encrypted when saved to the store, and decrypted when retrieved, using functions in lib/utils.js.
@@ -161,14 +167,14 @@ The splash screen has been developed following mostly [this awesome article by S
 The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml.
 
 ### Walkthrough 
-A generic component WalktroughStep has been developed. It wraps the Tooltip component from the React Native Walkthrough Tooltip library, setting common props and simplifying its use.
+A generic component WalktroughStep has been developed. It wraps the Tooltip component from the [React Native Walkthrough Tooltip library](https://github.com/jasongaare/react-native-walkthrough-tooltip), setting common props and simplifying its use.
 
 The WalkthroughStep just needs to wrap the component over which the tooltip has to be shown, and it requires just 2 props: the id of the screen and the id of the tooltip.  
 
 The order of the tooltips to be shown en each screen is specified as a const in the reducer. If a screen has multiple tooltips, they will be shown in that order. When the last tooltip has been shown, 'none' will be stored as the tooltip id and it will never match again, so it won't be shown again.
 
 ### Navigation
-The navigation between screens is based on the React Navigation library. Its API is a little cumbersome so I explain here how it is organized.
+The navigation between screens is based on the [React Navigation library](https://github.com/react-navigation/react-navigation). Its API is a little cumbersome so we explain here how it is organized.
 
 The App.js entry point renders the RootScreen component, where all the navigators are defined.
 
