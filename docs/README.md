@@ -12,5 +12,3 @@ Furthermore, several documents can be browsed:
 - [QR handling](./qr_handling.md): Specs on how to generate QR codes that the app can understand.
 - [Credentials](./credentials.md): Details on how the credential flow works for the existing services.
 - [IoT flow](./iot_flow.md): Details on how the IoT flow works, which is a base example used in the tutorial of extension of the app.
-
-
