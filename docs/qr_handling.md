@@ -1,6 +1,6 @@
 # DECODE QR and URL handling
 
-The DECODE App is putting a lot of effort on stadardizing many of its elements, among the most prominent the data concepts encoded in the [ATLAS reference](https://github.com/DECODEproject/decodev2/blob/master/src/api/atlas/atlas.json).
+The DECODE App is putting a lot of effort on stadardizing many of its elements, among the most prominent the data concepts encoded in the [Atlas reference](https://github.com/DECODEproject/decodev2/blob/master/src/api/atlas/atlas.json).
 
 For the first production ready version of the app, one last standarization effort needs to be undertaken, that of unifying the existing handles to trigger the App.
 
@@ -16,17 +16,23 @@ In this document **we assume** that the service that wants to integrate with DEC
 
 ## Handle syntax
 
-The handle will stay as it is: ```decodeapp://action?param1=value1&param2=value2...```
+The handle will stay as it is: ```decodeapp://action&service=service_name?param1=value1&param2=value2...```
 
 ### Action
 
-The action field **must be defined in the ATLAS** and specifies the type of action being triggered. For each new service, new actions can be defined. For the moment, we have 3 different actions:
+The action field **must be defined in the Atlas** and specifies the type of action being triggered. For each new service, new actions can be defined. For the moment, we have 3 different actions:
 
 - ```$support```: Triggers the support flow for DDDC
 - ```$logIn```: Triggers the log-in of BCNNOW
 - ```$declareSensor```: Triggers the IOT sensor declaration flow
 
 The reason to define actions is that this allows greater modularity and re-usability of components (the most patent example being the log-in action).
+
+Because we want to reuse actions, also on the handle the service name must be declared, and it **also must be defined on the Atlas**. For the moment, the recognized services are:
+
+- ```$bcnnow```
+- ```$dddc```
+- ```$iot```
 
 
 ### Parameters

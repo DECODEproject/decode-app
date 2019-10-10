@@ -1,7 +1,11 @@
 ## Table of contents
-- [DECODE App Objectives and philosophy](#app-philosophy)
-- [DECODE App Taxonomy](#app-taxonomy)
-- [Adding applications to the app](#app-add)
+- [DECODE App Objectives and philosophy](#decode-appobjectives-and-philosophy)
+- [DECODE App Taxonomy](#decode-app-taxonomy)
+- [Adding applications to the app](#adding-applications-to-the-app)
+ - [Simple case: A generic log-in mechanism](#simple-case:-a-generic-log-in mechanism)
+ - [Harder case: The IOT service](#harder-case:the-iot-service)
+
+
 
 ## DECODE App Objectives and philosophy
 
@@ -13,6 +17,7 @@ The DECODE app is intended to be a multilingual piece of software for users to e
 - Customization: The app implements the requirements for usability for two concrete use cases, BCNNow and DDDC in three different languages (Catalan, Spanish and English). Yet, it is designed with the potential to be generalized to other use cases. A fully fledged example on how to do so is included for the IoT case.
 
 In order to achieve this, we present in the following section a general taxonomy of the elements involved in the app together with its practical implementation to the two considered use cases. Any service wishing to integrate DECODE technology, shall need to perform the same mapping here present for its concrete use case (an example for the IoT case is provided in the final part of this document).
+
 
 
 ## DECODE App taxonomy
@@ -55,11 +60,12 @@ Once the user is in possession of the credential, it can use it for two actions 
 
 All those actions can be done via the app, either by clicking on a link with the appropriate handle while being on a mobile environment, or by scanning a QR code that the app can recognize. Below, we provide the technological implementation details that explain the entire process.
 
-## Adding supported applications to the app: DECODE IoT web service example
+## Adding supported applications to the app: 
 
-Given the above description of the DECODE App taxonomy and its relations, we here add an example of integration of a new (existing) app.
 
-All of the below changes can be followed in the branch 'add_iot' of the main repository.
+Given the above description of the DECODE App taxonomy and its relations, we here add two examples of integration of new (existing) apps.
+
+All of the below changes can be followed in the branch 'add_iot' and 'add_login' of the main repository respectively.
 
 Below, we follow all the steps needed to perform a successful integration of the service, starting with a brief description of it.
 
@@ -76,7 +82,56 @@ Below, we follow all the steps needed to perform a successful integration of the
 5. Implementation of QR and handle triggers
 6. Testing
 
-### Introduction: The IOT service
+
+### Simple case: A generic log-in mechanism
+
+In this example, we wish to add a log-in mechanism to a simple website. The website only allows access to users posessing a certain credential (say something that proves that they are "cool"). The website does not care about data on the users that are cool, just the fact that they are. However, the webiste can also handle extra provided data.
+
+#### Existing services and UX
+In this case, our website is a simple Flask application that has a very simple API that can receive JSON-like fields with a single log-in endpoint where credentials can be submitted. If the credential is valid, then log-in is permitted.
+
+#### Taxonomy
+
+In this case no work is needed, as we are just re-implementing the log-in mechanism already present in BCNNow case.
+
+#### Implementation
+
+We are going to implement most of the custom code by hand, however, we are re-using the components related to credential management, data management as well as handle management.
+
+##### Styles declaration
+
+In this case we do not want to customize the theme, so we do not alter the [themes file](../src/lib/theme.js).
+
+##### ATLAS declaration
+
+-> Do and add an extra attribute (modified gender)
+
+##### Converter declaration
+
+-> Implement function
+
+##### API declaration
+
+-> Implement single call login (client and API)
+
+##### Business logic declaration
+
+-> Reuse BCNNow + change endpoints
+
+##### Screen declaration
+
+-> One screen
+
+##### QR & handle trigger declaration
+
+-> Reuse BCNNow
+
+##### Writting test functions
+
+
+
+
+### Harder case: The IOT service
 
 The IoT DECODE service is implemented already in the form of a [web-app](http://iot.decodeproject.eu).
 It provides support to an ongoing pilot in Barcelona part of the decode project, in collaboration with [smartcitizen](http://smartcitizen.me).
@@ -198,6 +253,8 @@ The IoT service uses the same credential issuer as the DDDC service, so no chang
 
 ##### Business logic declaration
 
+
+
 We must add the business logic declaration. To do so, we must add a new file to /src/redux/modules/applications/ called 'iot.js'. 
 
 ```javascript
@@ -293,6 +350,7 @@ In this case, the logic is fairly similar to DDDC. You basically need to:
 
 1. Obtain credential at credential issuer (same as DDDC)[not done yet]
 2. Declare your sensor with this credential by joining a community at the policy store. [not done yet]
+
 ##### Screen declaration
 
 We must now declare the different screens that the app will use. To do so, we head to /src/screens/applications/ and create a new folder 'iot'.
