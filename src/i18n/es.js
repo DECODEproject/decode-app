@@ -22,6 +22,7 @@
 export default {
   translation: {
     back: 'Atrás',
+    banner: 'Este proyecto ha recibido financiación del programa de investigación e innovación Horizon 2020 de la Unión Europea, bajo el acuerdo de subvención núm. 732546',
     cancel: 'Cancelar',
     confirm: 'Confirmar',
     greeting: 'Esta es la app DECODE v2',

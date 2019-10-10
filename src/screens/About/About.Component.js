@@ -23,7 +23,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { split, map, addIndex } from 'ramda';
 import { Linking } from 'react-native';
-import { Screen, Button, Header } from 'lib/Components';
+import { Screen, Button, Header, EUBanner } from 'lib/Components';
 import { aboutHelpUrl } from 'lib/constants';
 import { Paragraph } from './About.Styles';
 
@@ -41,6 +41,7 @@ const About = () => {
       <Paragraph>{formatText(t('text1'))}</Paragraph>
       <Paragraph>{formatText(t('text2'))}</Paragraph>
       <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(aboutHelpUrl)} />
+      <EUBanner />
     </Screen>
   );
 };

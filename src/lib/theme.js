@@ -34,6 +34,7 @@ const colors = {
 const theme = {
   colors,
   fontFamily: 'Montserrat',
+  fontSizeMini: 10,
   fontSizeText: 14,
   fontSizeTitle: 18,
   fontSizeIcon: 22,

@@ -19,19 +19,4 @@
  * email: info@dribia.com
  */
 
-export Button from './Button';
-export Carousel from './Carousel';
-export CertificateList from './CertificateList';
-export CheckList from './CheckList';
-export EUBanner from './EUBanner';
-export EmptyList from './EmptyList';
-export Header from './Header';
-export ListItem from './ListItem';
-export MenuIcon from './MenuIcon';
-export Message from './Message';
-export Picker from './Picker';
-export ProgressBar from './ProgressBar';
-export Screen from './Screen';
-export Switch from './Switch';
-export WalkthroughStep from './WalkthroughStep';
-export Warning from './Warning';
+export default from './EUBanner.Component';

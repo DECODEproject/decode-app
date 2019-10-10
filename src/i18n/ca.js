@@ -22,6 +22,7 @@
 export default {
   translation: {
     back: 'Enrere',
+    banner: 'Aquest projecte ha rebut finançament del programa de recerca i innovació Horizon 2020 de la Unió Europea, sota l\'acord de subvenció núm. 732546',
     cancel: 'Cancel·lar',
     confirm: 'Confirmar',
     greeting: 'Aquesta és l\'app DECODE v2',

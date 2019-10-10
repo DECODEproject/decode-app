@@ -26,7 +26,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, prop } from 'ramda';
 import { parseQRCode } from 'lib/url-scheme';
-import { EmptyList, ListItem, Header, Screen, Button, WalkthroughStep } from 'lib/Components';
+import { EmptyList, ListItem, Header, Screen, Button, WalkthroughStep, EUBanner } from 'lib/Components';
 import { Wrapper, Separator } from './ApplicationList.Styles';
 
 const ApplicationList = ({ applications, initApplication, navigation: { navigate, dispatch } }) => {
@@ -109,6 +109,7 @@ const ApplicationList = ({ applications, initApplication, navigation: { navigate
           }
             keyExtractor={prop('id')}
           />
+          <EUBanner />
           <Button
             title={t('activate')}
             featured
