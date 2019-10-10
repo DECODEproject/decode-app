@@ -12,25 +12,7 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 
 ## References
 
-> TODO: Need to update references
-
-- BCN Pilot partners:
-  - Smart Citizen [website](https://smartcitizen.me/) and [API](https://developer.smartcitizen.me/)
-  - DDDC [website](http://dddc.decodeproject.eu), [repo](https://github.com/alabs/DDDC), [beta site](https://betadddc.alabs.org/) and API (see **GraphQL** section in README of repo).
-- Infrastructure:
-  - Zencode scripts for the COCONUT flow are available here: https://github.com/DECODEproject/dddc-pilot-contracts (**as development evolves really quickly, if you use contracts, do NOT copy them, but link them using `git submodule` trick**).
-  - Zencode contracts with example on coconut credentials: https://github.com/DECODEproject/zenroom/tree/master/examples/zencode_coconut
-  - Credential issuer service API developed by Dyne - https://github.com/DECODEproject/dddc-credential-issuer
-  - BCN dashboard, [repo](https://github.com/DECODEproject/bcnnow) and [link](http://bcnnow.decodeproject.eu)
-  - DECODE Phone-App, [repo](https://github.com/DECODEproject/decodev2) and Google Play and Apple Store (not yet public).
-  - IoT components (policy store, encrypted datastore) developed by Thingful (TH and hosted by Smart Citizen (SC)
-  	- Encrypted datastore (persists encrypted messages to database, exposes read/write API) - https://github.com/decodeproject/iotstore
-  - Stream encoder (subscribes to SC MQTT broker, processes and encrypts data) - https://github.com/decodeproject/iotencoder
-  - Policystore (exposes API for "policies", coordinates onboarding with SC onboarding application, including setting up Coconut credentials in the Decode app) - https://github.com/DECODEproject/iotpolicystore
-  - DECODE specific IoT-Web-App - https://github.com/thingful/decode-demo
-
-
----
+-------
 
 ## Pilot common structure:
 - Admin (DDDC or Smart Citizen) which is in charge of setting up both `BCNNOW` and the `CREDENTIAL ISSUER API SERVICE` following the rules accorded with the respective users in off-line sessions. This admin needs a `$bcnnow-api-token` and a `$ci-api-token` to communicate securely with the respective APIs. Additionally, for the case of the IoT, SC admin also needs to be able to communicate securely with the `POLICY STORE`.
@@ -47,7 +29,6 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
   - DDDC: "I have right to participate in petition `$petition_id`".
   - IoT: "I belong to community `$community_id`.
   > Note that the mapping `$community_id-$petition_id-$authorizable_attribute_id`is ONE TO ONE. In those notes, we will use `$authorizable_attribute_id` for generality.
-  > Note also that those sentences need be added by **string replacement** hardcoded on the zenroom codes by the app at the start of the coconut flow.
 - The `CREDENTIAL` will be used for login into the `BCNNOW DASHBOARD` as well as to decide eligibility to participate in pilot:
   - DDDC: Right to sign petition in ledger for petition `$petition_id`
   - IoT: Right to submit data to the encrypted data store for community `$community_id` and the right to access a dashboard to read all data collected for the community `$community_id`
@@ -71,11 +52,7 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 
 1. `PILOT ADMIN` defines an `ATTRIBUTE` via the set (variable) `$authorizable_attribute_info` for which the credential issuer will be able to issue a `CREDENTIAL` confirming their validity for a participant in the Pilot. The `CREDENTIAL` will validate the `ATTRIBUTE` defined above for each pilot.
 
-2. `PILOT ADMIN` receives a `$credential_issuer_authorization_token` which allows them to issue data creation requests to the credential issuer API service (defined by `$credential_issuer_endpoint_address`).
-
-> @Rohit Set here the step where PILOT ADMIN gets a token to communicate with Dashboard. 
-@Ula this is not needed anymore. Step 6 is first interaction of PILOT ADMIN With BCNNow
-
+2. `PILOT ADMIN` receives a `$credential_issuer_authorization_token` which allows them to issue data creation requests to the credential issuer API service (defined by `$credential_issuer_endpoint_address`). It also receives a token to communicate with the BCNNow dashboard.
 
 3. `PILOT ADMIN` makes a POST call, including the `$credential_issuer_authorization_token` as an Authorization header to create a new `AUTHORIZABLE_ATTRIBUTE` sending over the defined attributes via a data structure called `$authorizable_attribute_info`. An `AUTHORIZABLE_ATTRIBUTE` is a record stored by the credential issuer that defines the `ATTRIBUTES` for which the credential issuer will issue credentials. The API returns a `$authorizable_attribute_id` that will be use to identify the credential associated with the attribute issued by this credential issuer. The request must include a special field `$authorizable_attribute_unique` which is a boolean value specifying if the credential issuer must keep track or not of the provided credentials (see below). **For IoT case `$authorizable_attribute_unique=False` and for DDDC case `$authorizable_attribute_unique=True`**.
 
@@ -93,7 +70,7 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
   - ~~ IoT: Dashboard links it to `$authorizable_attribute_id` number and gives public key back to community admin and a `$bcn_now_community_id` (for internal mapping to the attribute_id).~~ 
   - DDDC: Dashboard links it to `$authorizable_attribute_id` number and a `$bcn_now_community_id`. 
 
-  > TO NOTE: A given `$community_id/petition_id` can be associated to one and only one `$authorizable_attribute_id`. Any service should be able to store and make this mapping (`$community_id/petition_id` to `$policy_id` [IOT case] to `authorizable_attribute_id` to `bcn_now_dashboard_id` with a DB via a many to one relationship table or something of the sort.
+  > TO NOTE: A given `$community_id/petition_id` can be associated to one and only one `$authorizable_attribute_id`. Any service should be able to store and make this mapping (`$community_id/petition_id` to `$policy_id`  **IOT case** to `authorizable_attribute_id` to `bcn_now_dashboard_id` with a DB via a many to one relationship table or something of the sort.
 
 9. (**DDDC specific**) Upon receiving a request, the `BCNNOW DASHBOARD` parses the (authorized) request, and generates a `$bcn_now_dashboard_id` mapped to each `$community_id/petition_id` which is mapped also to the `$authorizable_attribute_id`. It then queries the `$credential_issuer_endpoint_address/$authorizable_attribute_id` to obtain the public keys needed to verify credentials for the given petition/community. 
 
@@ -105,9 +82,7 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 2. In the middle of the onboarding, user is prompted to install DECODE app as will be needed to complete flow.
 3. Onboarding application generates QR code containing the device token, geolocation and exposure and `$action=iot-onboarding` so the APP knows what screen to show.
 
-> _@ULA could you check this is ok?_ Example QR Code URI: 
-		`decodeapp://?action=iot-onboarding&device_token=1f5e66&exposure=indoor&lat=41.396867&lng=2.194351`
-    Looks good to me. Should be validated by @jordi / @sam.
+> Please see the [QR handling notes](./qr_handling.md) for details on the speciffics of QR codes for DECODE project.
 
 4. App queries policystore for list of `$community_config` values, that specify the available communities.The returned list contains the community description, a list of its operations and importantly the `$credential_issuer_endpoint_address` and the `$authorizable_attribute_id`.
 5. The user chooses a community to join with their device via app UI.
@@ -124,7 +99,8 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 10. App makes call to stream encoder component to create the new encrypted stream (as per existing IoT pilot flow)
 
 #### DDDC
-> For earlier notes and considerations, see [pad](./legacy/dddc_earlier.md).
+
+> For earlier notes and considerations, see [legacy doc](./legacy/dddc_earlier.md)
 
 1. User installs DECODE App and sets up desired data.
 2. User goes to DDDC website visits petition she is interested in signing. Clicks on the link (mobile navigation) or scans QR (desktop navitaion).
@@ -155,18 +131,17 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 4. The app displays a UI where the user can confirm they wish to share their credentials (each of which is associated with a `$authorizable_attribute_id`) with the dashboard from a list of credentials. The user can also choose which data he/she wants to share with the dashboard to personalize her experience.
 5. If the user agrees, then the app sends a POST request back to the callback URL containing the previously created blind proof credential to the dashboard, as well as the reference `$authorizable_attribute_id` and `$credential_issuer_endpoint_address`. It also contains extra information in a JSON file that allows to personalize the view.
 
-> Json structure to be shared by App team. The current API call and json structure is [here](./legacy/BCNNow_dashboard_call.md)
-> PLEASE agree in unified vision and open a repo and document there.
-
-> ROHIT please make this call asynchronous (get the keys and all of that)
 6. The dashboard queries or gets from internal DB the credential issuer public keys associated with a given `$authorizable_attribute_id` from the provided `$credential_issuer_endpoint_address`. The dashboard executes the Zencode script (08-VERIFIER-verify-blind-proof-credential.zencode), which is able to check that the blind credential is valid. This script requires a `$authorizable_attribute_id` passed earlier by the app. The dashboard then queries the `$credential_issuer_endpoint_address` and asks for the `$validation_keys` that are the input of the needed script to validate the credentials.
 
 7. If the credential is valid then the dashboard creates a new session for the user, and logs them in, redirecting to the requested dashboard. Either on the same device (if it is on the phone) or via callback on the browser
 
-> Potentially add step 8. for log-in using a PC browser and an aPP to notify user all is good. @Jordi?
-
 
 ![flow_image](./images/BCNNOW_login.png)
+
+<media-tag src="/blob/6b/6b25946cba8ae40167ce06749a56a2c73c07e21610eb0049" data-crypto-key="cryptpad:7ED5IPQKTJyrZ3z51xD8CbRmDoxrqnSZzmo453eJWHQ="></media-tag>
+
+[Source](https://docs.google.com/presentation/d/1UVeYiP4KQ2yFgUq6O2Y0NwE_g7kZfCKb6THeb3vYajg/edit)
+
 
 # Credits
 
