@@ -51,14 +51,10 @@
 2. `CIT` uses the `ONBOARDING_APP` in order to configure their physical device and supplies some information on the location and exposure of the device.
 3. `ONBOARDING_APP` shows a page which allows the `CIT` to add their device to DECODE. This page shows a QR code (with corresponding short form URL) which encodes the following properties: `$device_token`, `$device_location`, and `$device_exposure`
 
-> (Ula): It should also contain a handle with a `$context=IoT` or something similar right?
-
 4. `CIT` uses their `Decode App` to scan the QR code (or manually enters the URL in their browser), which captures this information into the `Decode App`.
 5. The `Decode App` presents a UI to the user which is the mechanism by which they will be able to add their device to DECODE.
 6. The `Decode App` sends a POST request to the [`$policystore_list_policies` endpoint](https://decodeproject.github.io/iot-policystore-docs/#tag/List-Policies) which returns a list of all available community policies.
 7. The `Decode App` presents a UI which shows this list of available community policies.
-
-> (Ula) At this point the user needs to be well informed of the communities. Will need to work on the UX here.
 
 8. `CIT` chooses which community they wish to join, so then the `Decode App` executes the credential issuing steps defined in the [Credential Issuing document](https://pad.dyne.org/code/#/2/code/edit/qA7Pf4d+sQYBP2MqYgOU0isN/) to create a blind credential for the specified `$authorizable_attribute_id`.
 9. The `Decode App` then sends a POST request to the [`$encoder_create_stream` endpoint](https://decodeproject.github.io/iot-encoder-docs/#tag/Create-Stream) which creates a new stream for the specified device. This new stream causes encrypted data to be written to the encrypted datastore via the [`$encrypted_datastore_write` endpoint](https://decodeproject.github.io/iot-datastore-docs/#tag/Write-Events)
@@ -71,20 +67,20 @@
 
 ### 4. User authentication
 
-> (Rohit) Please rewrite, as I think this goes differently: Dashboard first generates QR, user decides credential to show, user is redirected.
-
 1. A `CIT` wishes to view the communities dataset via the `DASHBOARD`, so they open the `DASHBOARD` url and attempt to open the specified dashboard.
 
 2. The `DASHBOARD` knows the requested dashboard is protected so rather than showing to the `CIT` it instead presents a login page containing a QR code (and a short form URL). This QR code encodes a login link which the wallet must be able to scan to initiate the Coconut blind credential login flow.
 
   The link the dashboard should send to is: https://iot.decodeproject.eu/#/login?sessionId=abc123&callback=http://93ff8837.ngrok.io/oauth/iot_login_callback
 
+  See the [QR handling notes](./qr_handling.md) for reference.
+
 
 3. The `Decode App` after scanning the code (or entering the short form) displays a UI which prompts the user as to whether they wish to share their blind proof for the community with the dashboard. If the user agrees, the app creates a `$login_request` containing their blind proof as well as some additional metadata back to the `DASHBOARD's` login URL (TODO: document this method)
 
-> (Ula) Up to here. It is documented on the credential issuing notes.
 
 4. The `DASHBOARD` parses the incoming `$login_request`, and then sends a request to the `$credential_issuer_endpoint_address` to obtain a public verification key for the specified `$authorizable_attribute_id`. 
+
 5. The `DASHBOARD` then executes the Coconut script to verify the blind credential, and if the credential _is_ valid, creates a new session for the `CIT`, i.e. logging them into the requested dashboard, and then redirects the user to that page.
 
 ## Credits

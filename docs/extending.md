@@ -4,6 +4,9 @@
 - [Adding applications to the app](#adding-applications-to-the-app)
  - [Simple case: A generic log-in mechanism](#simple-case:-a-generic-log-in mechanism)
  - [Harder case: The IOT service](#harder-case:the-iot-service)
+
+
+
 ## DECODE App Objectives and philosophy
 
 The DECODE app is intended to be a multilingual piece of software for users to easily use DECODE functionality. It represents the merging point of the diverses DECODE researched technologies, such as cryptographic languages ([Zenroom](wwww.zenroom.org)), schemes ([COCONUT](https://arxiv.org/pdf/1802.07344.pdf)), [credential management APIs](https://github.com/DECODEproject/credential-issuer) as well as distributed enhanced services (such as [petitions API](https://github.com/DECODEproject/dddc-petition-api) and [IoT encoder](https://github.com/DECODEproject/iotencoder)). It is built based on four core principles.
@@ -14,6 +17,7 @@ The DECODE app is intended to be a multilingual piece of software for users to e
 - Customization: The app implements the requirements for usability for two concrete use cases, BCNNow and DDDC in three different languages (Catalan, Spanish and English). Yet, it is designed with the potential to be generalized to other use cases. A fully fledged example on how to do so is included for the IoT case.
 
 In order to achieve this, we present in the following section a general taxonomy of the elements involved in the app together with its practical implementation to the two considered use cases. Any service wishing to integrate DECODE technology, shall need to perform the same mapping here present for its concrete use case (an example for the IoT case is provided in the final part of this document).
+
 
 
 ## DECODE App taxonomy
