@@ -12,12 +12,7 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 
 ## References
 
-<<<<<<< HEAD
-
----
-=======
 -------
->>>>>>> better_docs
 
 ## Pilot common structure:
 - Admin (DDDC or Smart Citizen) which is in charge of setting up both `BCNNOW` and the `CREDENTIAL ISSUER API SERVICE` following the rules accorded with the respective users in off-line sessions. This admin needs a `$bcnnow-api-token` and a `$ci-api-token` to communicate securely with the respective APIs. Additionally, for the case of the IoT, SC admin also needs to be able to communicate securely with the `POLICY STORE`.
@@ -104,12 +99,8 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 10. App makes call to stream encoder component to create the new encrypted stream (as per existing IoT pilot flow)
 
 #### DDDC
-<<<<<<< HEAD
-> For earlier notes and considerations, see [credentials doc](./credentials.md).
-=======
 
 > For earlier notes and considerations, see [legacy doc](./legacy/dddc_earlier.md)
->>>>>>> better_docs
 
 1. User installs DECODE App and sets up desired data.
 2. User goes to DDDC website visits petition she is interested in signing. Clicks on the link (mobile navigation) or scans QR (desktop navitaion).
@@ -150,12 +141,8 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 ![flow_image](./images/BCNNOW_login.png)
 
 <media-tag src="/blob/6b/6b25946cba8ae40167ce06749a56a2c73c07e21610eb0049" data-crypto-key="cryptpad:7ED5IPQKTJyrZ3z51xD8CbRmDoxrqnSZzmo453eJWHQ="></media-tag>
-<<<<<<< HEAD
-Source: https://docs.google.com/presentation/d/1UVeYiP4KQ2yFgUq6O2Y0NwE_g7kZfCKb6THeb3vYajg/edit
-=======
 
 [Source](https://docs.google.com/presentation/d/1UVeYiP4KQ2yFgUq6O2Y0NwE_g7kZfCKb6THeb3vYajg/edit)
->>>>>>> better_docs
 
 
 # Credits
