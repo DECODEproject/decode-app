@@ -21,13 +21,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { isEmpty, map, isNil } from 'ramda';
 import { withNavigation } from 'react-navigation';
 import { Button, CheckList } from 'lib/Components';
 import { getDisplayValue } from 'lib/utils';
 import { Section } from 'lib/styles';
+import { credentialHelpUrl } from 'lib/constants';
 import { Subheading, Text } from './DDDC.Styles';
 import VerificationCode from './VerificationCode';
 
@@ -64,7 +65,7 @@ const CertificateRequest = (
       }
       <Section>
         <Text>{t('certificateRequired')}</Text>
-        <Button icon="external-link" title={t('more')} onPress={Function.prototype} />
+        <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(credentialHelpUrl)} />
       </Section>
       <View>
         <Subheading>{t('sharedData')}</Subheading>
