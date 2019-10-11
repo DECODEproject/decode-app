@@ -51,8 +51,8 @@ import moment from 'moment';
 import { getSharedAttributes as getSharedAttributesFromAtlas, addAtlasInfo, addBaseAttributeInfo } from 'redux/modules/attributes';
 import { listApplications, getApplication } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
-import dddc from './dddc';
-import bcnnow from './bcnnow';
+import dddc, { initialState as dddcInitialState } from './dddc';
+import bcnnow, { initialState as bcnnowInitialState } from './bcnnow';
 import { APPLICATION_ACTIONS } from './actions';
 
 const defaultStats = {
@@ -187,6 +187,11 @@ export const getProgress = applicationId => createSelector(
     prop(applicationId),
   ),
 );
+
+export const initialApplicationState = {
+  dddc: dddcInitialState,
+  bcnnow: bcnnowInitialState,
+};
 
 export default combineReducers({
   dddc,

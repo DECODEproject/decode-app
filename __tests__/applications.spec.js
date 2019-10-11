@@ -21,22 +21,16 @@
 
 import moment from 'moment';
 import i18n from 'i18n';
-import { pluck, pick, map } from 'ramda';
+import { pluck, pick, map, take, contains } from 'ramda';
 import reducer, {
   getApplicationStats,
   calculateAverage,
   getAllCertificates,
   getSharedAttributes,
+  initialApplicationState as initialState,
 } from 'redux/modules/applications';
-import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
-import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
 import { getImage } from 'api/atlas-client';
 import { encrypt } from 'lib/utils';
-
-const initialState = {
-  dddc: dddcInitialState,
-  bcnnow: bcnnowInitialState,
-};
 
 describe('Application tests', () => {
   test('Default state', () => {
@@ -49,7 +43,7 @@ describe('Application tests', () => {
     const applicationStats = getApplicationStats({
       applications: {
         dddc: {
-          ...dddcInitialState,
+          ...initialState.dddc,
           uses: [
             {
               date: +moment('2019-02-11'),
@@ -61,11 +55,11 @@ describe('Application tests', () => {
             },
           ],
         },
-        bcnnow: bcnnowInitialState,
+        bcnnow: initialState.bcnnow,
       },
     });
     expect(
-      map(pick(['usageCount', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), applicationStats),
+      map(pick(['usageCount', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), take(2, applicationStats)),
     ).toEqual([
       {
         usageCount: 2,
@@ -98,17 +92,17 @@ describe('Application tests', () => {
     const applicationStats = getApplicationStats({
       applications: {
         dddc: {
-          ...dddcInitialState,
+          ...initialState.dddc,
           certificates: {
             aaa111: {},
             aaa222: {},
           },
         },
-        bcnnow: bcnnowInitialState,
+        bcnnow: initialState.bcnnow,
       },
     });
     expect(
-      map(pick(['numCertificates', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), applicationStats),
+      map(pick(['numCertificates', 'firstUse', 'lastUse', 'averageUse', 'sharedData']), take(2, applicationStats)),
     ).toEqual([
       {
         averageUse: [0, 'year'],
@@ -140,7 +134,7 @@ describe('Application tests', () => {
       applications: {},
     });
     expect(
-      map(pick(['id', 'name']), applicationStats),
+      map(pick(['id', 'name']), take(2, applicationStats)),
     ).toEqual([
       {
         id: 'dddc',
@@ -172,7 +166,7 @@ describe('Application tests', () => {
       },
     });
     expect(
-      map(pick(['id', 'name']), applicationStats),
+      map(pick(['id', 'name']), take(2, applicationStats)),
     ).toEqual([
       {
         id: 'dddc',
@@ -183,6 +177,7 @@ describe('Application tests', () => {
         name: 'bcnnow.name',
       },
     ]);
+    expect(contains('notSupportedAnymoreApp', pluck('id', applicationStats))).toBe(false);
   });
 
   test('getImage', () => {
@@ -290,14 +285,14 @@ describe('Application tests', () => {
       getAllCertificates({
         applications: {
           dddc: {
-            ...dddcInitialState,
+            ...initialState.dddc,
             certificates: {
               aaa111: {},
               aaa222: {},
             },
           },
           bcnnow: {
-            ...bcnnowInitialState,
+            ...initialState.bcnnow,
             certificates: {
               bbb111: {},
               bbb222: {},
@@ -320,14 +315,14 @@ describe('Application tests', () => {
       getAllCertificates({
         applications: {
           dddc: {
-            ...dddcInitialState,
+            ...initialState.dddc,
             certificates: {
               aaa111: {},
               aaa222: {},
             },
           },
           bcnnow: {
-            ...bcnnowInitialState,
+            ...initialState.bcnnow,
           },
         },
       }),
@@ -343,14 +338,7 @@ describe('Application tests', () => {
         birthDate: encrypt('birthDate-value'),
         address: encrypt('address-value'),
       },
-      applications: {
-        dddc: {
-          ...dddcInitialState,
-        },
-        bcnnow: {
-          ...bcnnowInitialState,
-        },
-      },
+      applications: initialState,
     });
     expect(map(pick(['name', 'type']), result)).toEqual([
       {
@@ -375,14 +363,7 @@ describe('Application tests', () => {
           birthDate: encrypt('birthDate-value'),
           district: encrypt('district-value'),
         },
-        applications: {
-          dddc: {
-            ...dddcInitialState,
-          },
-          bcnnow: {
-            ...bcnnowInitialState,
-          },
-        },
+        applications: initialState,
       })),
     ).toEqual(['age', 'district', 'gender']);
     expect(
@@ -391,14 +372,7 @@ describe('Application tests', () => {
           gender: encrypt('gender-value'),
           district: encrypt('district-value'),
         },
-        applications: {
-          dddc: {
-            ...dddcInitialState,
-          },
-          bcnnow: {
-            ...bcnnowInitialState,
-          },
-        },
+        applications: initialState,
       })),
     ).toEqual(['gender', 'district', 'age']);
     expect(
@@ -407,14 +381,7 @@ describe('Application tests', () => {
           birthDate: encrypt('birthDate-value'),
           district: encrypt('district-value'),
         },
-        applications: {
-          dddc: {
-            ...dddcInitialState,
-          },
-          bcnnow: {
-            ...bcnnowInitialState,
-          },
-        },
+        applications: initialState,
       })),
     ).toEqual(['ageRange', 'district', 'gender']);
   });
@@ -426,14 +393,7 @@ describe('Application tests', () => {
         birthDate: encrypt(birthDateForTest),
         gender: encrypt('male'),
       },
-      applications: {
-        dddc: {
-          ...dddcInitialState,
-        },
-        bcnnow: {
-          ...bcnnowInitialState,
-        },
-      },
+      applications: initialState,
     });
     const { name, value, baseAttribute } = result[1];
     expect(name).toEqual('age');

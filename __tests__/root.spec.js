@@ -19,14 +19,8 @@
  * email: info@dribia.com
  */
 import reducer, { ACTIONS } from 'redux/reducer';
-import { initialState as dddcInitialState } from 'redux/modules/applications/dddc';
-import { initialState as bcnnowInitialState } from 'redux/modules/applications/bcnnow';
+import { initialApplicationState as initialApplications } from 'redux/modules/applications';
 import { initialState as walkthroughInitialState } from 'redux/modules/walkthrough';
-
-const initialApplications = {
-  dddc: dddcInitialState,
-  bcnnow: bcnnowInitialState,
-};
 
 const initialState = {
   attributes: {},
