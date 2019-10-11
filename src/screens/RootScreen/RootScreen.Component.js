@@ -41,6 +41,7 @@ import About from 'screens/About';
 import Scanner from 'screens/Scanner';
 import dddcScreens from 'screens/applications/DDDC';
 import bcnnowScreens from 'screens/applications/BCNNow';
+import exampleScreens from 'screens/applications/Example';
 
 const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
   headerBackTitle: null,
@@ -80,6 +81,7 @@ const ApplicationStack = createStackNavigator({
   Scanner,
   ...dddcScreens,
   ...bcnnowScreens,
+  ...exampleScreens,
   AttributeList,
   AtlasList,
   EditAttribute,
@@ -108,6 +110,7 @@ const ScannerStack = createStackNavigator({
   },
   ...dddcScreens,
   ...bcnnowScreens,
+  ...exampleScreens,
 }, {
   defaultNavigationOptions,
 });

@@ -81,6 +81,22 @@
       "sharedAttributes": ["gender", "ageRange", "district"],
       "activationMsg": "bcnnow.activation",
       "actionMsg": "bcnnow.login"
+    },
+    "example": {
+      "urlScheme": {
+        "action": "example",
+        "serviceId": "sessionId",
+        "params": ["callback"]
+      },
+      "id": "example",
+      "name": "example.name",
+      "title": "example.title",
+      "image": "city",
+      "link": "http://app.decodeproject.eu/#examples_example",
+      "description": "example.desc",
+      "sharedAttributes": ["gender", "ageRange", "district"],
+      "activationMsg": "example.activation",
+      "actionMsg": "example.login"
     }
   },
   "translations": {
@@ -157,6 +173,17 @@
           "success": "Connectat correctament",
           "timeout": "Temps d'espera excedit. Si us plau reintenteu",
           "refresh": "Torneu al vostre navegador i si cal refresqueu la pàgina"
+        },
+        "example": {
+          "name": "Example",
+          "title": "Entrar a aplicació d'exemple",
+          "desc": "L'aplicació d'exemple simula un login fet amb l'app de DECODE de manera anonimitzada i compartint les dades que es vulgui",
+          "activation": "Has activat l'app de DECODE per a entrar a Example",
+          "login": "Accedir",
+          "empty": "No teniu certificats que es puguin fer servir per accedir-hi",
+          "success": "Connectat correctament",
+          "timeout": "Temps d'espera excedit. Si us plau reintenteu",
+          "refresh": "Torneu al vostre navegador i si cal refresqueu la pàgina"
         }
       },
       "es": {
@@ -181,6 +208,17 @@
           "success": "Conectado correctamente",
           "timeout": "Tiempo de espera excedido. Por favor reintenta",
           "refresh": "Vuelve a tu navegador y refresca la página si es necesario"
+        },
+        "example": {
+          "name": "Example",
+          "title": "Entrar en aplicación de ejemplo",
+          "desc": "La aplicación de ejemplo simula un login hecho con la app de DECODE de manera anonimizada y compartiendo los datos que se quiera",
+          "activation": "Has activado la app de DECODE para entrar en Example",
+          "login": "Acceder",
+          "empty": "No tienes certificados que te permitan acceder a la aplicación.",
+          "success": "Conectado correctamente",
+          "timeout": "Tiempo de espera excedido. Por favor reintenta",
+          "refresh": "Vuelve a tu navegador y refresca la página si es necesario"
         }
       },
       "en": {
@@ -200,6 +238,17 @@
           "title": "Access the BCNNow website",
           "desc": "Using the DECODE app you can enter the BCNNow website anonymously and browse the data published there, while sharing some data to obtain personalized views",
           "activation": "You have activated the DECODE App to log into BCNNow",
+          "login": "Login",
+          "empty": "You don't have any certificate that can be used to log in",
+          "success": "Successfully logged in",
+          "timeout": "Timeout exceeded. Please retry",
+          "refresh": "Go back to your browser and refresh the page if needed"
+        },
+        "example": {
+          "name": "Example",
+          "title": "Access the Example application",
+          "desc": "The example application simulates a login made with the DECODE app anonymously and sharing selected data",
+          "activation": "You have activated the DECODE App to log into Example",
           "login": "Login",
           "empty": "You don't have any certificate that can be used to log in",
           "success": "Successfully logged in",
