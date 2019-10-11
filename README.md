@@ -87,7 +87,10 @@ Starts the Metro bundler to serve the Javascript code in the development environ
 
 ### `yarn run-ios`
 
-Compile a native iOS app, start an iOS emulator and deploy the app. The Javascript code will be served by the Metro bundler.
+Compile a native iOS app, start an iOS simulator and deploy the app. The Javascript code will be served by the Metro bundler.
+
+The default simulator hardcoded in React Native is the iPhone X, be sure to have it installed in your XCode or use the --simulator parameter to specify another:
+`yarn run-ios --simulator "iPhone 11 Pro Max"`
 
 ### `yarn run-android`
 
