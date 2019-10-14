@@ -1,4 +1,6 @@
 rootProject.name = 'decode-app'
+include ':@sentry_react-native'
+project(':@sentry_react-native').projectDir = new File(rootProject.projectDir, '../node_modules/@sentry/react-native/android')
 include ':react-native-date-picker'
 project(':react-native-date-picker').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-date-picker/android')
 include ':react-native-camera'
@@ -7,8 +9,6 @@ include ':@react-native-community_async-storage'
 project(':@react-native-community_async-storage').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/async-storage/android')
 include ':react-native-splash-screen'
 project(':react-native-splash-screen').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-splash-screen/android')
-include ':react-native-sentry'
-project(':react-native-sentry').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sentry/android')
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
 include ':react-native-gesture-handler'

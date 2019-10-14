@@ -3,11 +3,11 @@ package com.dribia.decodeapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.sentry.RNSentryPackage;
 import com.henninghall.date_picker.DatePickerPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
-import io.sentry.RNSentryPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -33,11 +33,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSentryPackage(),
             new DatePickerPackage(),
             new RNCameraPackage(),
             new AsyncStoragePackage(),
             new SplashScreenReactPackage(),
-            new RNSentryPackage(),
             new VectorIconsPackage(),
             new RNGestureHandlerPackage(),
             new RNDeviceInfo(true),
