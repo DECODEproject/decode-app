@@ -30,8 +30,7 @@ const initialState = {
     total: '---',
     loading: false,
     date: '---',
-    data: '',
-    hashedData: '',
+    verified: '   ',
   },
 };
 
