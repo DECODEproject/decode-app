@@ -12,4 +12,5 @@ Furthermore, several documents can be browsed:
 - [Extending the app](./extending.md): Tutorial with a couple of examples on how to extend the app for more services.
 - [QR handling](./qr_handling.md): Specs on how to generate QR codes and URL handles that the app can understand.
 - [Credentials](./credentials.md): Details on how the credential flow works for the existing services.
+- [Atlas standard](./atlas.md): Standard of ATLAS
 - [IoT flow](./iot_flow.md): Details on how the IoT flow works, which is a base example used in the tutorial of extension of the app.

@@ -123,6 +123,8 @@ This document tries to summarize the use of the credentials in the BCN pilots, c
 
 ### Dashboard log-in (both pilots)
 
+> For some extra earlier considerations see [BCNNow flow docs](https://github.com/DECODEproject/decodev2/blob/master/docs/legacy/BCNNow_dashboard_call.md)
+
 1. The user goes to the BCNNow dashboard and attempts to access a restricted dashboard.
 2. The BCNNow app knows the dashboard is restricted, so instead of showing the dashboard, redirects the user to a login screen that shows a QR code and has a message instructing the user to scan the QR code in order to login. This QR code defines a URL of the following form: `decodeapp://?sessionId=9876&callback=http://bcnnow.decodeproject.eu/wallet-login&action=login`. If user is accessing from Mobile, the QR is a button with the same link. `$sessionId` would be a  unique ID generated for every call to Login.
 
