@@ -23,7 +23,7 @@ The handle will stay as it is: ```decodeapp://action&service=service_name?param1
 The action field **must be defined in the Atlas** and specifies the type of action being triggered. For each new service, new actions can be defined. For the moment, we have 3 different actions:
 
 - ```$support```: Triggers the support flow for DDDC
-- ```$logIn```: Triggers the log-in of BCNNOW
+- ```$login```: Triggers the log-in of BCNNOW
 - ```$declareSensor```: Triggers the IOT sensor declaration flow
 
 The reason to define actions is that this allows greater modularity and re-usability of components (the most patent example being the log-in action).
@@ -41,22 +41,22 @@ There are two types of parameters, one being optional and the other compulsory. 
 
 Compulsory params:
  - ```$serviceId```: ID that identifies the object of the action (for log-in is the session id, for support its the petition id and for declare_sensor the sensor id).
- - ```$credentialIssuerData```: The endpoint where the valid credential info is stored (see credential issuer DOCS). If not provided, falls back to the default specified in ATLAS. (list)
 
 Optional params:
- - ```$mobile```: True or false if coming from mobile or web navigation.
- - Additional parameters can be added to the call. Those parameters are NOT free, and should be defined prior in the ATLAS.
+ - Additional parameters can be added to the call. Those parameters are NOT free, and should be defined prior in the ATLAS. See the `applications.<applicationId>.urlScheme` keys in the [Atlas reference](https://github.com/DECODEproject/decodev2/blob/master/src/api/atlas/atlas.json).
+   - Support: 
+     - ```$decidimAPIUrl``` gives the URL of the back-end service API that supports this decidim version.
+     - ```$authorizableAttributeId```: The credential ID that identifies the needed credential in the Credential Issuer service.
+     - ```$credentialIssuerEndpointAddress```: gives the URL of the Credential Issuer service API.
    - Log-in: 
-     - ```$callback``` gives the callback trigger once succesfull authorization has been performed.
-   - Support: ```$decidimAPIUrl``` gives the URL of the back-end service API that supports this decidim version.
-     - ```$authorizableAttributeId```: The credential ID that identifies the needed credential in the Credential Issuer service
+     - ```$callback``` gives the callback trigger once succesfull authorization has been performed.     
 
 ### Examples
 
 The examples of the calls for the different services are shown below:
 
-- Log-in: ```decodeapp://support?mobile=true&decidimAPIUrl=https://dddc.decodeproject.eu/api/&serviceId=2&credentialIssuerEndpointAddress=http://credentials.decodeproject.eu/&authorizableAttributeId=2```
-- Support: ```decodeapp://logIn?&serviceId=cad57a42d5fa11e9b12a005056833c52&callback=http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback&credentialIssuerEndpointAddress=http://credentials.decodeproject.eu/```
+- Support: ```decodeapp://support?&decidimAPIUrl=https://dddc.decodeproject.eu/api/&serviceId=2&credentialIssuerEndpointAddress=http://credentials.decodeproject.eu/&authorizableAttributeId=2```
+- Log in: ```decodeapp://login?&serviceId=cad57a42d5fa11e9b12a005056833c52&callback=http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback```
 
 ## Credits
 
