@@ -41,8 +41,9 @@ class CredentialIssuerClient {
 
   async getIssuerId() {
     try {
-      debugLog('Going to call: ', `${this.url}/uid`);
-      const { data } = await axios.get(`${this.url}/uid`);
+      const url = `${this.url.replace(/\/$/, '')}/uid`;
+      debugLog('Going to call: ', url);
+      const { data } = await axios.get(url);
       debugLog('Response from credential issuer: ', data);
       const { credential_issuer_id: credentialIssuerId } = data;
       if (credentialIssuerId) return credentialIssuerId;
@@ -55,8 +56,9 @@ class CredentialIssuerClient {
   async getIssuerVerifier(authorizableAttributeId) {
     let message = '';
     try {
-      debugLog('Going to call: ', `${this.url}/authorizable_attribute/${authorizableAttributeId}`);
-      const { data, status } = await axios.get(`${this.url}/authorizable_attribute/${authorizableAttributeId}`);
+      const url = `${this.url.replace(/\/$/, '')}/authorizable_attribute/${authorizableAttributeId}`;
+      debugLog('Going to call: ', url);
+      const { data, status } = await axios.get(url);
       debugLog('Response from credential issuer: ', status, data);
       if (status === 200) {
         const { verification_key: verificationKey } = data;
@@ -93,16 +95,20 @@ class CredentialIssuerClient {
       values,
       optional_values: optionalValues,
     };
-    debugLog('Going to call: ', `${this.url}/credential`);
-    debugLog('JSON body: ', jsonBody);
+    const url = `${this.url.replace(/\/$/, '')}/credential`;
+    debugLog('Going to call: ', url);
+    debugLog('JSON body: ', JSON.stringify(jsonBody));
 
     try {
-      response = await axios.post(`${this.url}/credential/`, jsonBody);
+      response = await axios.post(url, jsonBody);
       const { data } = response;
       debugLog('Response from credential issuer: ', data);
       return data;
     } catch (error) {
-      const { response: { status, data: { detail } } } = error;
+      debugLog('Error from credential issuer: ', error);
+      const { response: { status, data } } = error;
+      debugLog('Error data: ', status, data);
+      const { detail = 'No detail given' } = data;
       if (status === 412) if (detail === 'Credential already issued') {
         throw new CredentialIssuerError(errors.ALREADY_ISSUED);
       } else if (detail === 'Values mismatch not in Authorizable Attribute') {
@@ -114,6 +120,7 @@ class CredentialIssuerClient {
       } else {
         throw new CredentialIssuerError(`Error calling credential issuer: ${error}`);
       }
+      // status !== 412
       else throw new CredentialIssuerError(`Error calling credential issuer: ${error} | ${JSON.stringify(detail)}`);
     }
   }
