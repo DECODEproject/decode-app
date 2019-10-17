@@ -71,14 +71,14 @@ export const ACTIONS = {
   TOGGLE_SELECTED_ATTRIBUTE: 'TOGGLE_SELECTED_ATTRIBUTE',
 };
 
-export const fetchPetition = (url, id) => async (dispatch) => {
+export const fetchPetition = (url, id, attributeId, credentialIssuerUrl) => async (dispatch) => {
   dispatch({
     type: ACTIONS.FETCH_PETITION_REQUEST,
     url,
     id,
   });
   try {
-    const petition = await fetchPetitionApi(url, id);
+    const petition = await fetchPetitionApi(url, id, attributeId, credentialIssuerUrl);
     dispatch({
       type: ACTIONS.FETCH_PETITION_SUCCESS,
       petition,

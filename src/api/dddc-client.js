@@ -31,6 +31,10 @@ const throwParseError = (details) => {
   throw new Error(`Could not parse response from DDDC(${details})`);
 };
 
+const throwMissingParameter = (details) => {
+  throw new Error(`Missing parameter for DDDC(${details})`);
+};
+
 const parseResponse = (
   {
     data: {
@@ -46,7 +50,6 @@ const parseResponse = (
   if (isNil(provenance) || isEmpty(provenance)) throwParseError('provenance');
   if (isNil(credentialName) || isEmpty(credentialName)) throwParseError('name');
   const { url: credentialIssuerUrl, petitionsUrl } = provenance;
-  if (isNil(attributeId)) throwParseError('attributeId');
   return ({
     id: petitionId,
     title: title[getLanguage()] || title.es,
@@ -88,4 +91,28 @@ const makeApiCall = async (url, petitionId) => {
   return throwError(response);
 };
 
-export const fetchPetition = (url, petitionId) => makeApiCall(url, petitionId);
+export const fetchPetition = async (
+  url,
+  petitionId,
+  attributeIdFromQR,
+  credentialIssuerUrlFromQR,
+) => {
+  // Attribute id and credential issuer URL can come in the QR code or the graphQL API.
+  // None can be missing from both sources
+  // QR code takes precedence.
+  const responseFromApi = await makeApiCall(url, petitionId);
+  const {
+    credentialIssuerUrl: credentialIssuerUrlFromApi,
+    attributeId: attributeIdFromApi,
+    ...restFromApi
+  } = responseFromApi;
+  const credentialIssuerUrl = credentialIssuerUrlFromQR || credentialIssuerUrlFromApi;
+  const attributeId = attributeIdFromQR || attributeIdFromApi;
+  if (isNil(attributeId)) throwMissingParameter('attributeId');
+  if (isNil(credentialIssuerUrl)) throwMissingParameter('credentialIssuerUrl');
+  return {
+    credentialIssuerUrl,
+    attributeId,
+    ...restFromApi,
+  };
+};

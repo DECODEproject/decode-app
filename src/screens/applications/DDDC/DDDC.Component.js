@@ -53,12 +53,14 @@ const DDDC = ({
 }) => {
   const dddcApi = getParam('decidimAPIUrl');
   const petitionId = getParam('petitionId');
+  const attributeId = getParam('authorizableAttributeId');
+  const credentialIssuerUrl = getParam('credentialIssuerEndpointAddress');
   const { t } = useTranslation('applications');
   const { image, activationMsg, actionMsg, link: dddcUrl, name: dddcName, linksAfterSign } = getApplication('dddc');
   const { link: bcnnowUrl, name: bcnnowName } = getApplication('bcnnow');
   useEffect(
     () => {
-      fetchPetition(dddcApi, petitionId);
+      fetchPetition(dddcApi, petitionId, attributeId, credentialIssuerUrl);
     },
     [petitionId],
   );
