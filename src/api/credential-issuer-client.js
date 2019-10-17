@@ -64,7 +64,7 @@ class CredentialIssuerClient {
         const { verification_key: verificationKey } = data;
         if (verificationKey) return verificationKey;
       } else {
-        const { detail } = data;
+        const { detail = 'Attribute not found' } = data;
         message = `Error getting credential issuer verifier: ${detail}`;
       }
     } catch (error) {
