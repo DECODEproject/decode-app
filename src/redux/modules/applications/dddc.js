@@ -39,6 +39,12 @@ import CredentialIssuerClient from 'api/credential-issuer-client';
 import PetitionsClient from 'api/petitions-client';
 import { APPLICATION_ACTIONS } from './actions';
 
+const zenroomHash = async (str) => {
+  const zenroomOutput = await zenroom.execute(hashing, str, '');
+  // Zenroom adds a newline, but this is not a json and must be stripped off
+  return zenroomOutput.replace(/\n$/, '');
+};
+
 const emptyPetition = {
   title: '',
   description: '<p>',
@@ -113,11 +119,11 @@ export const callCredentialIssuer = (
   debugLog('callCredentialIssuer: ', data, optionalData, url, attributeId);
   const hashedData = { ...data };
   // eslint-disable-next-line no-await-in-loop,no-restricted-syntax,guard-for-in
-  for (const k in hashedData) hashedData[k] = await zenroom.execute(hashing, data[k], '');
+  for (const k in hashedData) hashedData[k] = await zenroomHash(data[k]);
   debugLog('hashedData: ', hashedData);
   const hashedOptionalData = { ...optionalData };
   // eslint-disable-next-line no-await-in-loop,no-restricted-syntax,guard-for-in
-  for (const k in hashedOptionalData) hashedOptionalData[k] = await zenroom.execute(hashing, optionalData[k], '');
+  for (const k in hashedOptionalData) hashedOptionalData[k] = await zenroomHash(optionalData[k]);
   debugLog('hashedOptionalData: ', hashedOptionalData);
   const credentialIssuer = new CredentialIssuerClient(url);
 
