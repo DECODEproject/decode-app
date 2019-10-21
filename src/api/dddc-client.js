@@ -35,13 +35,9 @@ const throwMissingParameter = (details) => {
   throw new Error(`Missing parameter for DDDC(${details})`);
 };
 
-const parseResponse = (
-  {
-    data: {
-      petition: { id: petitionId, title, description, jsonSchema, attributeId },
-    },
-  },
-) => {
+const parseResponse = ({ data: { petition } }) => {
+  if (isNil(petition)) throwParseError('petition');
+  const { id: petitionId, title, description, jsonSchema, attributeId } = petition;
   const { mandatory } = jsonSchema;
   if (isNil(mandatory) || isEmpty(mandatory)) throwParseError('mandatory');
   const credentialSpec = mandatory[0];
