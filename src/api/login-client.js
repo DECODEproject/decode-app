@@ -29,7 +29,7 @@ const login = async (callback, sessionId, credential, attributes, fail = false) 
   debugLog('Credential: ', credential);
   debugLog('Attributes: ', attributes);
   const { blindProofCredential, attributeId, credentialIssuerUrl } = credential;
-  const { proof } = JSON.parse(blindProofCredential);
+  const { credential_proof: proof } = JSON.parse(blindProofCredential);
   const data = {
     sessionId,
     credential: {
