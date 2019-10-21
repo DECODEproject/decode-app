@@ -95,7 +95,7 @@ class CredentialIssuerClient {
       values,
       optional_values: optionalValues,
     };
-    const url = `${this.url.replace(/\/$/, '')}/credential`;
+    const url = `${this.url.replace(/\/$/, '')}/credential/`;
     debugLog('Going to call: ', url);
     debugLog('JSON body: ', JSON.stringify(jsonBody));
 
