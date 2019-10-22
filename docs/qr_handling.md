@@ -55,7 +55,7 @@ Optional params:
 
 The examples of the calls for the different services are shown below:
 
-- Support: ```decodeapp://support?&decidimAPIUrl=https://dddc.decodeproject.eu/api/&serviceId=2&credentialIssuerEndpointAddress=http://credentials.decodeproject.eu/&authorizableAttributeId=2```
+- Support: ```decodeapp://support?&decidimAPIUrl=https://dddc.decodeproject.eu/api/&serviceId=2&credentialIssuerEndpointAddress=http://credentials.decodeproject.eu/&authorizableAttributeId=Daegah5wCahn3Vai```
 - Log in: ```decodeapp://login?&serviceId=cad57a42d5fa11e9b12a005056833c52&callback=http://bcnnow.decodeproject.eu:9530/oauth/iot_login_callback```
 
 ## Credits
