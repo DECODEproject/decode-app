@@ -45,6 +45,21 @@ const CertificateRequest = (
   const { navigate } = navigation;
   return (
     <View>
+      <Section>
+        <Text>{t('certificateRequired')}</Text>
+        <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(credentialHelpUrl)} />
+        <Text>{t('sharedDataDesc')}</Text>
+      </Section>
+      <View>
+        <Subheading>{t('sharedData')}</Subheading>
+        <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
+          label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
+          checked: selected,
+          onSwitch: () => toggleSelected(name),
+          onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
+        }), sharedAttributes)}
+        />
+      </View>
       {
         isEmpty(verificationCodes) ? null : (
           <View style={{ flex: 1 }}>
@@ -63,21 +78,6 @@ const CertificateRequest = (
           </View>
         )
       }
-      <Section>
-        <Text>{t('certificateRequired')}</Text>
-        <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(credentialHelpUrl)} />
-      </Section>
-      <View>
-        <Subheading>{t('sharedData')}</Subheading>
-        <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
-          label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
-          checked: selected,
-          onSwitch: () => toggleSelected(name),
-          onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
-        }), sharedAttributes)}
-        />
-        <Text>{t('sharedDataDesc')}</Text>
-      </View>
     </View>
   );
 };

@@ -82,7 +82,7 @@ export default {
     month: 'mes',
     more: '+ informació',
     sharedData: 'Dades compartides',
-    sharedDataDesc: 'Opcionalment pots compartir aquestes dades amb l\'aplicació',
+    sharedDataDesc: 'Tria quines dades vols (opcionalment) compartir i entra un codi vàlid',
     times: '1 cop per {{ unit }}',
     times_interval: '(0){Menys d\'un cop per {{ unit }}};(1-inf){{{ count }} cops per {{ unit }}}',
     times_plural: '{{ count }} cops per {{ unit }}',
