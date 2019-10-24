@@ -48,7 +48,7 @@ const CertificateRequest = (
       <Section>
         <Text>{t('certificateRequired')}</Text>
         <Button icon="external-link" title={t('more')} onPress={() => Linking.openURL(credentialHelpUrl)} />
-        <Text>{t('sharedDataDesc')}</Text>
+        <Text>{t('sharedDataKeyDesc')}</Text>
       </Section>
       <View>
         <Subheading>{t('sharedData')}</Subheading>
