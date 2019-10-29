@@ -20,7 +20,9 @@
  */
 
 import { createSelector } from 'reselect';
-import { path, prop } from 'ramda';
+import { path, prop, append } from 'ramda';
+import moment from 'moment';
+import uuid from 'uuid/v4';
 import { toggle } from 'lib/utils';
 import loginApi from 'api/login-client';
 import { APPLICATION_ACTIONS } from './actions';
@@ -63,6 +65,7 @@ export const login = (bcnnowUrl, sessionId, certificate, attributes) => async (d
     dispatch({
       type: ACTIONS.LOGIN_SUCCESS,
       loginResponse,
+      certificate,
     });
   } catch (error) {
     dispatch({
@@ -110,11 +113,23 @@ export default (state = initialState, action) => {
       };
     }
     case ACTIONS.LOGIN_SUCCESS: {
+      const { certificate } = action;
+      const { petitionId = uuid() } = certificate;
+      const { uses, selectedAttributes, certificates } = state;
       return {
         ...state,
         loading: false,
         loggedIn: true,
         step: 2,
+        uses: append({
+          date: +moment(),
+          sharedData: selectedAttributes,
+        },
+        uses),
+        certificates: {
+          ...certificates,
+          [petitionId]: certificate,
+        },
       };
     }
     case ACTIONS.LOGIN_FAILURE: {
