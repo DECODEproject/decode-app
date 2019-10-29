@@ -71,28 +71,37 @@ const BCNNow = ({
             ) : null
           }
           {
-            loggedIn ? <Message msg={t('bcnnow.success')} detail={t('bcnnowRefresh')} /> : null
+            loggedIn ? <Message msg={t('bcnnow.success')} detail={t('bcnnow.refresh')} /> : null
           }
         </Section>
         {
-          isEmpty(certificates) ? (
-            <Section>
-              <Message error msg={t('bcnnow.empty')} />
-            </Section>
-          ) : (
-            <ActionSection>
-              <CertificateList certificates={certificates} />
-              <Subheading>{t('sharedData')}</Subheading>
-              <CheckList items={map(({ name, type, value, selected, baseAttribute, ...rest }) => ({
-                label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
-                checked: selected,
-                onSwitch: () => toggleSelectedAttribute(name),
-                onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
-              }), sharedAttributes)}
-              />
-              <Text>{t('sharedDataDesc')}</Text>
-            </ActionSection>
-          )
+          // eslint-disable-next-line no-nested-ternary
+          loggedIn ? null
+            : isEmpty(certificates) ? (
+              <Section>
+                <Message error msg={t('bcnnow.empty')} />
+              </Section>
+            ) : (
+              <ActionSection>
+                <CertificateList certificates={certificates} />
+                <Subheading>{t('sharedData')}</Subheading>
+                <CheckList items={map(({
+                  name,
+                  type,
+                  value,
+                  selected,
+                  baseAttribute,
+                  ...rest
+                }) => ({
+                  label: isNil(value) ? attributesT(name) : `${attributesT(name)}: ${getDisplayValue(type, value, attributesT)}`,
+                  checked: selected,
+                  onSwitch: () => toggleSelectedAttribute(name),
+                  onEdit: () => navigate('EditAttribute', baseAttribute || { name, type, value, ...rest }),
+                }), sharedAttributes)}
+                />
+                <Text>{t('sharedDataDesc')}</Text>
+              </ActionSection>
+            )
         }
       </Wrapper>
       {
