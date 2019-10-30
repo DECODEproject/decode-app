@@ -191,12 +191,13 @@ const DrawerNavigator = createDrawerNavigator({
       drawerIcon: <Icon name="qrcode" />,
     }),
   },
-  DummyStack: {
-    screen: DummyStack,
-    navigationOptions: () => ({
-      drawerLabel: 'Test Dummy Screen',
-    }),
-  },
+  // Uncomment to have a testing screen on the menu
+  // DummyStack: {
+  //   screen: DummyStack,
+  //   navigationOptions: () => ({
+  //     drawerLabel: 'Test Dummy Screen',
+  //   }),
+  // },
 },
 {
   defaultNavigationOptions: () => ({
