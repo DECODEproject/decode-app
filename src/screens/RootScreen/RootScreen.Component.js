@@ -123,6 +123,7 @@ const AboutStack = createStackNavigator({
   defaultNavigationOptions,
 });
 
+// eslint-disable-next-line no-unused-vars
 const DummyStack = createStackNavigator({
   Dummy: {
     screen: Dummy,
