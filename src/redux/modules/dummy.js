@@ -2,6 +2,7 @@
  * DECODE App – A mobile app to control your personal data
  *
  * Copyright (C) 2019 – DRIBIA Data Research S.L.
+ * Copyright (C) 2020 - Dyne.org
  *
  * DECODE App is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@ import {
   aggregateSignature,
   createProof,
   verifyProof,
+  dp3t,
 } from 'api/zenroom';
 import { debugLog } from 'lib/utils';
 
@@ -40,6 +42,7 @@ const initialState = {
   loading: false,
   date: '---',
   verified: '   ',
+  secret: '*******',
 };
 
 export const ACTIONS = {
@@ -50,7 +53,24 @@ export const ACTIONS = {
   ZENROOM_REQUEST: 'ZENROOM_REQUEST',
   ZENROOM_SUCCESS: 'ZENROOM_SUCCESS',
   ZENROOM_FAILURE: 'ZENROOM_FAILURE',
+  REFRESH_SECRET: 'REFRESH_SECRET'
 };
+
+export const callDp3t = () => async (dispatch) => {
+  try {
+    const result = await zenroom.execute(dp3t(), '', '');
+    const secret = JSON.parse(result)['secret_day_key'][0]
+    dispatch({
+      type: ACTIONS.REFRESH_SECRET,
+      secret: secret
+    })
+  } catch (e) {
+    dispatch({
+      type: ACTIONS.ZENROOM_FAILURE,
+      error: e.message,
+    });
+  }
+}
 
 export const callZenroom = () => async (dispatch) => {
   dispatch({
@@ -134,6 +154,11 @@ export const getVerified = createSelector(
   prop('verified'),
 );
 
+export const getSecret = createSelector(
+  getDummy,
+  prop('secret'),
+);
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.REFRESH_STATS_REQUEST: {
@@ -162,6 +187,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         date,
+      };
+    }
+    case ACTIONS.REFRESH_SECRET: {
+      const { secret } = action;
+      return {
+        ...state,
+        secret,
       };
     }
     case ACTIONS.ZENROOM_REQUEST: {

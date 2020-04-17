@@ -193,12 +193,12 @@ const DrawerNavigator = createDrawerNavigator({
     }),
   },
   // Uncomment to have a testing screen on the menu
-  // DummyStack: {
-  //   screen: DummyStack,
-  //   navigationOptions: () => ({
-  //     drawerLabel: 'Test Dummy Screen',
-  //   }),
-  // },
+  DummyStack: {
+    screen: DummyStack,
+    navigationOptions: () => ({
+      drawerLabel: 'Test Dummy Screen',
+    }),
+  },
 },
 {
   defaultNavigationOptions: () => ({

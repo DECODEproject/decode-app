@@ -29,3 +29,4 @@ export aggregateSignature from './aggregate-signature.zen';
 export createProof from './create-proof.zen';
 export verifyProof from './verify-proof.zen';
 export signPetition from './sign-petition.zen';
+export dp3t from './dp3t.zen';

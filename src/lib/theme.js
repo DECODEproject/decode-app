@@ -39,7 +39,7 @@ const theme = {
   fontSizeTitle: 18,
   fontSizeIcon: 22,
   primaryColor: colors.black,
-  secondaryColor: colors.turquoise,
+  secondaryColor: colors.orange,
   disabledTextColor: colors.darkGray,
   backgroundColor: colors.white,
   backgroundColorAction: colors.lightGray,
