@@ -31,7 +31,7 @@ import { Button, Screen, Header } from 'lib/Components';
 import { Wrapper, Heading, Line, Separator } from './Dummy.Styles';
 
 const Dummy = ({
-  total, refresh, date, navigation, loading, verified, secret, callZenroom, callDp3t
+  total, refresh, date, navigation, loading, verified, callZenroom,
 }) => {
   const { t } = useTranslation();
   const { width: ww, height: wh } = Dimensions.get('window');
@@ -48,9 +48,6 @@ const Dummy = ({
         <Heading>Test Zenroom</Heading>
         <Line>{`Verified: ${verified}`}</Line>
         <Button title="Run Coconut example" onPress={callZenroom} />
-        <Separator />
-        <Line>{`SECRET: ${secret}`}</Line>
-        <Button title="Run DP3T example" onPress={callDp3t} />
         <Separator />
         <Heading>{t('refreshStats')}</Heading>
         <Button title={t('refresh')} onPress={refresh} />
@@ -98,8 +95,6 @@ Dummy.propTypes = {
   }).isRequired,
   verified: PropTypes.string.isRequired,
   callZenroom: PropTypes.func.isRequired,
-  callDp3t: PropTypes.func.isRequired,
-  secret: PropTypes.string.isRequired,
 };
 
 export default Dummy;

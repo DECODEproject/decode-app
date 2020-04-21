@@ -23,7 +23,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import {
   getTotal, getDate, getLoading, refreshStats, refreshDate, callZenroom, getVerified,
-  callDp3t, getSecret
 } from 'redux/modules/dummy';
 import Component from './Dummy.Component';
 
@@ -32,7 +31,6 @@ const mapStateToProps = createStructuredSelector({
   loading: getLoading,
   date: getDate,
   verified: getVerified,
-  secret: getSecret
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -41,7 +39,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(refreshDate());
   },
   callZenroom: () => dispatch(callZenroom()),
-  callDp3t: () => dispatch(callDp3t()),
 });
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);

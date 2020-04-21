@@ -53,6 +53,7 @@ import { listApplications, getApplication } from 'api/atlas-client';
 import { upperFirst } from 'lib/utils';
 import dddc, { initialState as dddcInitialState } from './dddc';
 import bcnnow, { initialState as bcnnowInitialState } from './bcnnow';
+import covid, { initialState as covidInitialState } from './covid';
 import { APPLICATION_ACTIONS } from './actions';
 
 const defaultStats = {
@@ -191,9 +192,11 @@ export const getProgress = applicationId => createSelector(
 export const initialApplicationState = {
   dddc: dddcInitialState,
   bcnnow: bcnnowInitialState,
+  covid: covidInitialState,
 };
 
 export default combineReducers({
   dddc,
   bcnnow,
+  covid,
 });
