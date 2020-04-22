@@ -1,7 +1,7 @@
 /*
- * DECODE Proximity App
+ * DECODE App – A mobile app to control your personal data
  *
- * Copyright (C) 2019 – Dyne.org
+ * Copyright (C) 2019 – DRIBIA Data Research S.L.
  *
  * DECODE App is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,13 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
+ * email: info@dribia.com
  */
 
-export default () => `
-rule check version 1.0.0
-Scenario simple: Generate a random password
-Given nothing
-When I create the array of '1' random objects of '256' bits
-and I rename the 'array' to 'secret day key'
-Then print the 'secret day key'
-`;
+import styled from 'styled-components/native';
+import { Heading as CommonHeading, Text } from 'lib/styles';
+
+export const Heading = styled(CommonHeading)({
+  margin: 10,
+});
+
+export const Line = styled(Text)({
+  textAlign: 'center',
+  margin: 5,
+});
+
+export const Wrapper = styled.View({
+  padding: 16,
+  alignItems: 'center',
+});
+
+export const Separator = styled.View({
+  width: '100%',
+  height: 0,
+  borderBottomColor: 'black',
+  borderBottomWidth: 1,
+  marginVertical: 10,
+});

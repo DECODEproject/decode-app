@@ -41,6 +41,7 @@ import About from 'screens/About';
 import Scanner from 'screens/Scanner';
 import dddcScreens from 'screens/applications/DDDC';
 import bcnnowScreens from 'screens/applications/BCNNow';
+import CovidScreen from 'screens/applications/Covid';
 
 const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
   headerBackTitle: null,
@@ -136,6 +137,17 @@ const DummyStack = createStackNavigator({
   defaultNavigationOptions,
 });
 
+const CovidStack = createStackNavigator({
+  Covid: {
+    screen: CovidScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions,
+});
+
 const DrawerNavigator = createDrawerNavigator({
   AttributeStack: {
     screen: AttributeStack,
@@ -192,36 +204,42 @@ const DrawerNavigator = createDrawerNavigator({
       drawerIcon: <Icon name="qrcode" />,
     }),
   },
-  // Uncomment to have a testing screen on the menu
-  DummyStack: {
-    screen: DummyStack,
+  CovidStack: {
+    screen: CovidStack,
     navigationOptions: () => ({
-      drawerLabel: 'Test Dummy Screen',
+      drawerLabel: 'Covid Test',
     }),
   },
+  // Uncomment to have a testing screen on the menu
+  // DummyStack: {
+  //   screen: DummyStack,
+  //   navigationOptions: () => ({
+  //     drawerLabel: 'Test Dummy Screen',
+  //   }),
+  // },
 },
-{
-  defaultNavigationOptions: () => ({
-    drawerLockMode: 'locked-closed',
-  }),
-  initialRouteName: 'ApplicationStack',
-  hideStatusBar: Platform.OS === 'ios',
-  drawerBackgroundColor: commonTheme.menuBackgroundColor,
-  contentOptions: {
-    activeTintColor: commonTheme.headerSecondaryColor,
-    inactiveTintColor: commonTheme.headerSecondaryColor,
-    itemStyle: {
-      borderBottomWidth: 1,
-      borderBottomColor: commonTheme.headerSecondaryColor,
+  {
+    defaultNavigationOptions: () => ({
+      drawerLockMode: 'locked-closed',
+    }),
+    initialRouteName: 'ApplicationStack',
+    hideStatusBar: Platform.OS === 'ios',
+    drawerBackgroundColor: commonTheme.menuBackgroundColor,
+    contentOptions: {
+      activeTintColor: commonTheme.headerSecondaryColor,
+      inactiveTintColor: commonTheme.headerSecondaryColor,
+      itemStyle: {
+        borderBottomWidth: 1,
+        borderBottomColor: commonTheme.headerSecondaryColor,
+      },
+      labelStyle: {
+        fontFamily: commonTheme.fontFamily,
+      },
+      iconContainerStyle: {
+        marginRight: 0,
+      },
     },
-    labelStyle: {
-      fontFamily: commonTheme.fontFamily,
-    },
-    iconContainerStyle: {
-      marginRight: 0,
-    },
-  },
-});
+  });
 
 const RootNavigation = createStackNavigator({
   Main: {
@@ -231,11 +249,11 @@ const RootNavigation = createStackNavigator({
     screen: Warning,
   },
 },
-{
-  initialRouteName: 'Main',
-  mode: 'modal',
-  headerMode: 'none',
-});
+  {
+    initialRouteName: 'Main',
+    mode: 'modal',
+    headerMode: 'none',
+  });
 
 const AppContainer = createAppContainer(RootNavigation);
 

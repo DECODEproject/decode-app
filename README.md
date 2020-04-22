@@ -1,67 +1,71 @@
-<h1 align="center">
-  DECODE Proximity app</br>
-  <sub>Enhanced privacy proximity tracing</sub>
-</h1>
+## Table of contents
+- [The DECODE App](#the-decode-app)
+- [Directory structure](#directory-structure)
+- [Starting a development environment](#starting-a-development-environment)
+- [Available scripts](#available-scripts)
+- [Attributes and applications](#attributes-and-applications)
+- [Extending the app and technical docs](#extending-docs)
+- [Implementation notes](#implementation-notes)
 
-<p align="center">
-  <a href="https://dyne.org">
-    <img src="https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%9D%A4%20by-Dyne.org-blue.svg" alt="Dyne.org">
-  </a>
-</p>
+## The DECODE App
+This app provides a platform where people can control their personal data, choosing where and how to share it. It allows users to input their data and keep it saved on their phone for future use. It is part of the [DECODE project](https://decodeproject.eu).
 
-<br><br>
+The DECODE App is developed in React Native, with the following side technologies:
 
-<h4 align="center">
-  <a href="#-install">💾 Install</a>
-  <span> • </span>
-  <a href="#-project-structure">🏗️ Project structure</a>
-  <span> • </span>
-  <a href="#-customization">🎭 Customization</a>
-  <span> • </span>
-  <a href="#-acknowledgements">😍 Acknowledgements</a>
-  <span> • </span>
-  <a href="#-links">🌐 Links</a>
-  <span> • </span>
-  <a href="#-contributing">👤 Contributing</a>
-  <span> • </span>
-  <a href="#-license">💼 License</a>
-</h4>
+- Redux for state management
+- Reselect for cacheable (memoized) access to the state
+- Redux Thunk for asynchronous action dispatching
+- Redux Persist for saving state to permanent storage
+- AsyncStorage from React Native Community for native key-value permanent storage
+- Plain Fetch API for communication with services
+- React Navigation for navigation between screens and menus
+- React Native Vector Icons as icon library set
+- Styled Components for styling and theming
+- Ramda for utilities
+- moment for date & time handling
+- react-i18next for multilanguage
+- react-native-sentry for sending crash logs (requires a Sentry server)
+- react-native-splash-screen to maintain the splash screen while JS is loading
+- react-native-onboarding-swiper for the app intro caroussel
+- react-native-walkthrough-tooltip for the screen tooltips walkthrough
+- react-native-camera for QR scanning
+- react-native-date-picker as cross platform component for date selection
+- react-native-render-html to support HTML coming from application description fields
+- react-native-loading-spinner-overlay as loading indicator
+- react-native-keyboard-aware-scroll-view to fix layout issues when a KeyboardAwareView has a ScrollView inside 
 
-<br><br>
+Development dependencies:
+- yarn for dependency management
+- babel for code transpiling
+- eslint for code style
+- jest for unit testing
+- fastlane for store deployment automation
 
-DECODE proximity app is a mobile application to offer an alternative to the Dutch #coronaApp that is privacy-preserving and decentralized.
-It will adhere to the technological demands of the [‘Veilig tegen corona’ manifesto](https://www.veiligtegencorona.nl/)
+## Directory structure
 
-The `decode-proximity-app` provides virus tracking and a warning system with a proximity alert. 
+- android: Native Android source code and build folder
+- ios: Native iOS source code and build folder
+- src: JavaScript source code, having the following structure:
+    - api: The clients for the external services and APIs
+    - i18n: Configuration of the i18n library and language files
+    - lib: Commonly used functions and constants
+    - lib/components: Reusable presentational components
+    - redux: The Redux store setup and the reducers
+    - redux/modules: Reducers are organized in modules
+    - redux/modules/applications: Applications add their reducers in this folder
+    - redux/transformers: Functions for calculating derived attributes
+    - screens: The UI components
+    - screens/applications: The UI components for each application
+    - App.js: The entry point, where the high level building blocks are combined
 
-Every device broadcasts its proximity to other devices, privately recording when two people have been close (only the device owners know!)
+UI Components are developed following the stateless functional component approach. Each component is a pure function returning something to render based solely on its received props.
+Each component is spread over 3 files:
+- A Component file with the presentational features
+- A Container file with the connection to the Redux store
+- A Styles file with the CSS information
 
-If a user gets an alert from the device they can request a test for a corona diagnosis. If positive they can scan a QRCode from the GGD to anonymously upload a notice for all other users that have been close to them, to let them know of the risk
+## Starting a development environment
 
-**Please note** there are **NO** personal data stored on the central server. The secret key and the ephemeral ids can **NOT** be traced to identifiable people.
-
-We are also developing a hardware port [decode-proximity-hw](https://github.com/dyne/decode-proximity-hw) to allow usage as a keyring and without a mobile phone.
-
-For more information look at recent blogposts by @jaromil inspiring this project https://medium.com/@jaromil as well the Privacy-Preserving Proximity Tracing Pan-European initiative https://www.pepp-pt.org/
-
-
-🚧 is a software in **Beta stage** and are part of the [DECODE project](https://decodeproject.eu) about data-ownership and [technological sovereignty](https://www.youtube.com/watch?v=RvBRbwBm_nQ). Our effort is that of improving people's awareness of how their data is processed by algorithms, as well facilitate the work of developers to create along [privacy by design principles](https://decodeproject.eu/publications/privacy-design-strategies-decode-architecture) using algorithms that can be deployed in any situation without any change.
-
-
-<details id="toc">
- <summary><strong>🚩 Table of Contents</strong> (click to expand)</summary>
-
-* [Install](#-install)
-* [Project structure](#-project-structure)
-* [Customization](#-customization)
-* [Acknowledgements](#-acknowledgements)
-* [Links](#-links)
-* [Contributing](#-contributing)
-* [License](#-license)
-</details>
-
-***
-## 💾 Install
 You need to have git and yarn installed.
 You will also need XCode and Android Studio. 
 
@@ -71,7 +75,9 @@ You need to have a .env file with configuration data that must be kept out of th
 
 The encryption key must be a hex string of 16,24 or 32 bytes. If you change it, remember to clear the app's data because the encrypted bits won't be understood by the new app. When you run the tests, remember to clear the jest cache (jest --clearCache) so they keep passing. 
 
-If you want to deploy to the test stores using fastlane, which is the recommended way, you need Ruby. Use `rbenv` to install the Ruby version specified in `.ruby-version`.
+If you want to deploy to the test stores using fastlane, which is the recommended way, you need Ruby. Use `rbenv` to install the Ruby version specified in .ruby-version.
+
+## Available Scripts
 
 In the project directory, you can run:
 
@@ -104,67 +110,7 @@ Deploys the app to the Apple Store as a new build downloadable with the TestFlig
 
 Deploys the app to the Google Play store, to an internal test track.
 
-**[🔝 back to top](#toc)**
-
-***
-
-## 🏗️ Project structure
-
-The DECODE Proximity App is developed in React Native, with the following side technologies:
-
-- Redux for state management
-- Reselect for cacheable (memoized) access to the state
-- Redux Thunk for asynchronous action dispatching
-- Redux Persist for saving state to permanent storage
-- AsyncStorage from React Native Community for native key-value permanent storage
-- Plain Fetch API for communication with services
-- React Navigation for navigation between screens and menus
-- React Native Vector Icons as icon library set
-- Styled Components for styling and theming
-- Ramda for utilities
-- moment for date & time handling
-- react-i18next for multilanguage
-- react-native-sentry for sending crash logs (requires a Sentry server)
-- react-native-splash-screen to maintain the splash screen while JS is loading
-- react-native-onboarding-swiper for the app intro caroussel
-- react-native-walkthrough-tooltip for the screen tooltips walkthrough
-- react-native-camera for QR scanning
-- react-native-date-picker as cross platform component for date selection
-- react-native-render-html to support HTML coming from application description fields
-- react-native-loading-spinner-overlay as loading indicator
-- react-native-keyboard-aware-scroll-view to fix layout issues when a KeyboardAwareView has a ScrollView inside 
-
-Development dependencies:
-- yarn for dependency management
-- babel for code transpiling
-- eslint for code style
-- jest for unit testing
-- fastlane for store deployment automation
-
-### Directory structure
-
-- android: Native Android source code and build folder
-- ios: Native iOS source code and build folder
-- src: JavaScript source code, having the following structure:
-    - api: The clients for the external services and APIs
-    - i18n: Configuration of the i18n library and language files
-    - lib: Commonly used functions and constants
-    - lib/components: Reusable presentational components
-    - redux: The Redux store setup and the reducers
-    - redux/modules: Reducers are organized in modules
-    - redux/modules/applications: Applications add their reducers in this folder
-    - redux/transformers: Functions for calculating derived attributes
-    - screens: The UI components
-    - screens/applications: The UI components for each application
-    - App.js: The entry point, where the high level building blocks are combined
-
-UI Components are developed following the stateless functional component approach. Each component is a pure function returning something to render based solely on its received props.
-Each component is spread over 3 files:
-- A Component file with the presentational features
-- A Container file with the connection to the Redux store
-- A Styles file with the CSS information
-
-### Attributes and applications
+## Attributes and applications
 
 Attributes (names, types, conversion functions) and applications (description, link, image, shared attributes) are conteptually defined in an artifact we call the Atlas. They can be retrieved using the listAttributes() and listApplications() functions of atlas-client.
 As a first basic implementation, a simple atlas.json file serves as the main repository for the Atlas.
@@ -188,27 +134,21 @@ For instance, the age attribute uses the age converter, which calculates the age
 
 On the other hand, the ageRange attribute still uses the same birthDate base attribute, and a configuration object with an array of age ranges.
 
-**[🔝 back to top](#toc)**
-
-***
-
-## 🎭 Customization
-
-The DECODE Proximity app is thought with modularity in mind and capable to be a White-Label product. So it's customizable in it's components and in theming.
+## Extending the app and technical docs
 
 If you are interested in adding your service to the app, jump directly to [the extension tutorial](./docs/extending.md).
 
-If you want to know more about the inner technical workings of the app, proceed to the [docs folder](./docs).
+If you want to know more about the inner technical workings of the app, proceed to the [docs folder](https://github.com/DECODEproject/decodev2/tree/master/docs).
 
-### Implementation notes
+## Implementation notes
 
-#### Redux store structure
+### Redux store structure
 The store has the current state of the app.
 It contains as less information as possible, normalized for efficient access.
 
 The container components connect the store to the presentational components. It makes use of memoized selectors from the reselect library to retrieve data from the store and transform it to the shape that is more convenient to the presentational components.
 
-#### Persistence of the store
+### Persistence of the store
 The store is persisted to permanent storage using Redux Persist and the AsyncStorage engine, which leaves the information in the following locations:
 - iOS: The private Documents directory of the app
 - Android: The private SQLite database of the app
@@ -217,26 +157,26 @@ Only strictly needed parts of the store are persisted by configuring blacklists 
 
 The redux/migrations.js file contains the required migration operations every time a persisted data item changes its format. The current version is configured in redux/store.js. See [Redux Persist documentation](https://github.com/rt2zz/redux-persist). 
 
-#### Encryption of sensitive data
+### Encryption of sensitive data
 Sensitive data is encrypted when saved to the store, and decrypted when retrieved, using functions in lib/utils.js.
 
 AES with 128-bit key and CBC mode is used. The initialization vector is generated on every encrypt operation using UUID v4 and stored in front of the encrypted text. 
 
 The encryption key is in a .env file outside of the source code, only accessible in a build environment.
 
-#### Splash screen
+### Splash screen
 The splash screen has been developed following mostly [this awesome article by Spencer Carli](https://medium.com/handlebar-labs/how-to-add-a-splash-screen-to-a-react-native-app-ios-and-android-30a3cec835ae)
 
 The color of the Android status bar during the JS loading stage has been set by hand to #777777 in colors.xml.
 
-#### Walkthrough 
+### Walkthrough 
 A generic component WalktroughStep has been developed. It wraps the Tooltip component from the [React Native Walkthrough Tooltip library](https://github.com/jasongaare/react-native-walkthrough-tooltip), setting common props and simplifying its use.
 
 The WalkthroughStep just needs to wrap the component over which the tooltip has to be shown, and it requires just 2 props: the id of the screen and the id of the tooltip.  
 
 The order of the tooltips to be shown en each screen is specified as a const in the reducer. If a screen has multiple tooltips, they will be shown in that order. When the last tooltip has been shown, 'none' will be stored as the tooltip id and it will never match again, so it won't be shown again.
 
-#### Navigation
+### Navigation
 The navigation between screens is based on the [React Navigation library](https://github.com/react-navigation/react-navigation). Its API is a little cumbersome so we explain here how it is organized.
 
 The App.js entry point renders the RootScreen component, where all the navigators are defined.
@@ -249,7 +189,7 @@ The Main screen is a DrawerNavigator, which defines all the menu items accessibl
 
 Each screen in the drawer is a StackNavigator, with screens that can go either forwards via links in the screen, or backwards via the back button. Some stacks have a single screen so the only way to get out of them is via the menu. The first screen in a stack always has the menu button at the header top left, while the other screens have the back button.
 
-#### Initial Navigation
+### Initial Navigation
 When the app is first started, the RootNavigator navigates to the ApplicationStack, and then to the ApplicationList.
 
 The ApplicationList is the equivalent to the Home page in a web application. For this reason it has a couple of extra features to handle deep linking to specific screens from other apps:
@@ -258,7 +198,7 @@ The ApplicationList is the equivalent to the Home page in a web application. For
 - The hook also registers an event listener, and returns a function to deregister it as required by the React hooks specification.
 - The event listener will fire every time **a decodeapp:// link is followed while the app is open**, and it will reset the navigation from wherever it was to the ApplicationStack and to the first screen of the application found in the URL.
  
-#### Theme and common styles
+### Theme and common styles
 The lib/theme.js file contain common style variables as a centralized place for declaring colors, sizes, fonts, etc
 
 The lib/styles.js file contains common styles, based on the theme variables, that are reused in any part of the app, perhaps slightly modified. Examples of styles are Heading or Screen (so that every screen uses the same heading style or layout)
@@ -266,59 +206,3 @@ The lib/styles.js file contains common styles, based on the theme variables, tha
 The lib/Components folder contains more complex common components, also having styles based on the theme variables, that are reused in any part of the app. Examples of components are CheckList, CertificateList, and Warning
 
 The default font is the Montserrat Google Font. It has been downloaded in its Regular and Bold weights, and included under different file names depending on the OS, so that using fontFamily and fontWeight in the code works the same in both platforms
-
-**[🔝 back to top](#toc)**
-
-***
-
-## 😍 Acknowledgements
-
-Copyright © 2020 by [Dyne.org](https://www.dyne.org) foundation, Amsterdam
-
-**[🔝 back to top](#toc)**
-
-***
-
-## 🌐 Links
-
-https://dyne.org/
-
-https://www.decodeproject.eu/
-
-**[🔝 back to top](#toc)**
-
-***
-
-## 👤 Contributing
-
-Please first take a look at the [Dyne.org - Contributor License Agreement](CONTRIBUTING.md) then
-
-1.  🔀 [FORK IT](../../fork)
-2.  Create your feature branch `git checkout -b feature/branch`
-3.  Commit your changes `git commit -am 'Add some fooBar'`
-4.  Push to the branch `git push origin feature/branch`
-5.  Create a new Pull Request
-6.  🙏 Thank you
-
-
-**[🔝 back to top](#toc)**
-
-***
-
-## 💼 License
-    DECODE Proximity app
-    Copyright (c) 2019 Dyne.org foundation, Amsterdam
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
-**[🔝 back to top](#toc)**
