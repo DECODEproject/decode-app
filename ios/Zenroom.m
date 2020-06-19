@@ -41,7 +41,7 @@ RCT_EXPORT_METHOD(execute:(NSString *)contract data:(NSString *)data key:(NSStri
     size_t errorSize = 1024 * 128;
     char *z_error = (char*)malloc(errorSize * sizeof(char));
     
-    zenroom_exec_tobuf(c, NULL, k, d, 3, z_output, outputSize, z_error, errorSize);
+    zenroom_exec_tobuf(c, NULL, k, d, z_output, outputSize, z_error, errorSize);
     
     NSLog(@"output: %s", z_output);
     NSLog(@"error: %s", z_error);
