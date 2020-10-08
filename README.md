@@ -79,11 +79,19 @@ If you want to deploy to the test stores using fastlane, which is the recommende
 
 ## Available Scripts
 
+If you are rebuilding the app, you may want to clean the cache and remove the **node_modules** folder: 
+
+### `yarn cache clean`
+
+And if you are on Linux, do:
+
+### `rm -rf node_modules`
+
 In the project directory, you can run:
 
 ### `yarn start`
 
-Starts the Metro bundler to serve the Javascript code in the development environment.
+Starts the Metro bundler to serve the Javascript code in the development environment. Then in a different terminal, run one of the following:
 
 ### `yarn run-ios`
 
