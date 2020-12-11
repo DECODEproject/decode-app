@@ -19,8 +19,27 @@
  * email: info@dribia.com
  */
 
-export * as attributes from './attributes';
-export * as applications from './applications';
-export * as walkthrough from './walkthrough';
-export * as dummy from './dummy';
-export * as webinar from './webinar';
+import styled from 'styled-components/native';
+import { Heading as CommonHeading, Text } from 'lib/styles';
+
+export const Heading = styled(CommonHeading)({
+  margin: 10,
+});
+
+export const Line = styled(Text)({
+  textAlign: 'center',
+  margin: 5,
+});
+
+export const Wrapper = styled.View({
+  padding: 16,
+  alignItems: 'center',
+});
+
+export const Separator = styled.View({
+  width: '100%',
+  height: 0,
+  borderBottomColor: 'black',
+  borderBottomWidth: 1,
+  marginVertical: 10,
+});

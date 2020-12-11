@@ -42,6 +42,7 @@ import Scanner from 'screens/Scanner';
 import dddcScreens from 'screens/applications/DDDC';
 import bcnnowScreens from 'screens/applications/BCNNow';
 import CovidScreen from 'screens/applications/Covid';
+import WebinarScreen from 'screens/Webinar';
 
 const defaultNavigationOptions = ({ screenProps: { theme } }) => ({
   headerBackTitle: null,
@@ -148,6 +149,17 @@ const CovidStack = createStackNavigator({
   defaultNavigationOptions,
 });
 
+const WebinarStack = createStackNavigator({
+  Webinar: {
+    screen: Webinar,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
+    }),
+  },
+}, {
+  defaultNavigationOptions,
+});
+
 const DrawerNavigator = createDrawerNavigator({
   AttributeStack: {
     screen: AttributeStack,
@@ -208,6 +220,12 @@ const DrawerNavigator = createDrawerNavigator({
     screen: CovidStack,
     navigationOptions: () => ({
       drawerLabel: 'Covid Test',
+    }),
+  },
+  WebinarStack: {
+    screen: WebinarStack,
+    navigationOptions: () => ({
+      drawerLabel: 'Webinar Test',
     }),
   },
   // Uncomment to have a testing screen on the menu

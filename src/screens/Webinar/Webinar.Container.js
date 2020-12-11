@@ -19,8 +19,24 @@
  * email: info@dribia.com
  */
 
-export * as attributes from './attributes';
-export * as applications from './applications';
-export * as walkthrough from './walkthrough';
-export * as dummy from './dummy';
-export * as webinar from './webinar';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import {
+    getResult, callZenroom
+} from 'redux/modules/webinar';
+import Component from './Webinar.Component';
+
+const mapStateToProps = createStructuredSelector({
+  result: getResult
+});
+
+const mapDispatchToProps = dispatch => ({
+    callZenroom: dispatch(callZenroom())
+  }
+);
+
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
+
+ConnectedComponent.navigationOptions = Component.navigationOptions;
+
+export default ConnectedComponent;
