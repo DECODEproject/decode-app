@@ -151,7 +151,7 @@ const CovidStack = createStackNavigator({
 
 const WebinarStack = createStackNavigator({
   Webinar: {
-    screen: Webinar,
+    screen: WebinarScreen,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <MenuIcon onPress={() => navigation.toggleDrawer()} />,
     }),

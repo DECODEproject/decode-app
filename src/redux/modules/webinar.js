@@ -38,25 +38,16 @@ export const ACTIONS = {
 };
 
 export const callZenroom = () => async (dispatch) => {
-  dispatch({
-    type: ACTIONS.ZENROOM_REQUEST,
-  });
   let result;
   try {
-    const id = 'Alice';
-    const issuerId = 'Madhatter';
-
     result = await zenroom.execute(keypairGen(), '', '');
-    dispatch({
-      type: ACTIONS.ZENROOM_EXECUTION,
-      result
-    });
   } catch (e) {
-    dispatch({
-      type: ACTIONS.ZENROOM_EXECUTION,
-      result
-    });
+    debugLog('Something went wrong in webinar zenroom.')
   }
+  dispatch({
+    type: ACTIONS.ZENROOM_EXECUTION,
+    result
+  });
 }
 
 const getWebinar = prop('webinar');

@@ -30,10 +30,10 @@ const mapStateToProps = createStructuredSelector({
   result: getResult
 });
 
-const mapDispatchToProps = dispatch => ({
-    callZenroom: dispatch(callZenroom())
-  }
-);
+const mapDispatchToProps = {
+  callZenroom
+};
+
 
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Component);
 

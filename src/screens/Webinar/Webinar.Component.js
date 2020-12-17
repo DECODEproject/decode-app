@@ -12,7 +12,7 @@ const Webinar = ({
             <Wrapper>
                 <Line>{'Webinar Example'}</Line>
                 <Line>{"Show result"}</Line>
-                <Button title="Execute zenroom" onPress={getGeneratedSK1} />
+                <Button title="Execute zenroom" onPress={callZenroom} />
                 <Separator />
                 <Line>{'The result'}</Line>
                 <Line>{result}</Line>
